@@ -7,6 +7,6 @@ const orgSchema = new Schema({
     OrgDescription: String
 });
 
-const User = model('Organization', orgSchema);
+const Organization = model('Organization', orgSchema);
 
 export default Organization;
