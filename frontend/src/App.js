@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import FormUser from './Componentes/FormularioUsuario/formUser';
 
 function App() {
   return (
     <div>
-      Your app here
+      <FormUser/>
     </div>
   );
 }
