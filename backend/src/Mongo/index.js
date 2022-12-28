@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-mongoose.connect('mongodb+srv://SkuadLack:tOBlTJq3tFofFwPa@skuadlack.zvlzpow.mongodb.net/?retryWrites=true&w=majority');
+dotenv.config();
 
+const mongoUrl = process.env.Mongo_URL;
+mongoose.connect(mongoUrl)
 
 const mongo = mongoose.connection;
 mongo.on('error', (error) => console.error(error));
