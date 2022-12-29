@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./formUser.module.css"
 
 const FormUser = (props) =>{
-    [username, setUsername] = useState("")
-    [email, setEmail] = useState("")
-    [name, setName] = useState("")
-    [lastname, setLastname] = useState("")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
+    const [lastname, setLastname] = useState("")
 
     const getUsername = (event) =>{
         setUsername(event.target.value)
