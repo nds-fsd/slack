@@ -1,9 +1,9 @@
-const express = require('express');
-const { default: User } = require('../Schemas/user');
-const userRouter = express.Router();
+import express from 'express';
+import User from '../Schemas/user'
+const routerUsers = express.Router();
 
 
-userRouter.get('/user/:id', async (req,res)=>{
+routerUsers.get('/user/:id', async (req,res)=>{
     const id = req.params.id
     try{
     const user = await User.findById(id)
@@ -16,7 +16,7 @@ userRouter.get('/user/:id', async (req,res)=>{
     }
 });
 
-userRouter.post('/user', async(req,res)=> {
+routerUsers.post('/user', async(req,res)=> {
     try{
     const body = req.body;
     const data = {
@@ -33,7 +33,7 @@ userRouter.post('/user', async(req,res)=> {
 }
 });
 
-userRouter.patch('/user/:id', async(req,res)=>{
+routerUsers.patch('/user/:id', async(req,res)=>{
     try{
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if(userModified){
@@ -46,7 +46,7 @@ userRouter.patch('/user/:id', async(req,res)=>{
     }
 });
 
-userRouter.delete('/user/:id', async(req,res)=>{
+routerUsers.delete('/user/:id', async(req,res)=>{
     const id = req.params.id
     try{
         const userDelete = await User.findByIdAndDelete(id)
@@ -55,3 +55,5 @@ userRouter.delete('/user/:id', async(req,res)=>{
         res.status(500).json(error)
     }
 });
+
+export default routerUsers;
