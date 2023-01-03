@@ -69,7 +69,6 @@ const FormUser = (props) =>{
                    <input id="name" type="text" required onChange={getName}/>
                    <p>Identificate con tu verdadero nombre.</p>
                 </label>
-                <button type="submit" onClick={postUser}>Enviar</button>
                 <label for="lastName">
                    last name 
                    <input id="lastName" type="text" required onChange={getLastname}/>
