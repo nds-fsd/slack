@@ -30,10 +30,10 @@ routerUsers.post('/user', async(req,res)=> {
     try{
     const body = req.body;
     const data = {
-        userName: body.username,
+        userName: body.userName,
         email: body.email,
         name: body.name,
-        lastName: body.lastname
+        lastName: body.lastName
     }
     const user = new User(data);
     await user.save();
