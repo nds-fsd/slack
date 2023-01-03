@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../Schemas/user'
+import User from '../Schemas/user.js'
 const routerUsers = express.Router();
 
 
