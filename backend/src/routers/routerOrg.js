@@ -57,7 +57,7 @@ routerOrg.delete('/organizacion/:id', async(req,res)=>{
     const id = req.params.id
     try{
         const organizacionDelete = await Organizacion.findByIdAndDelete(id)
-        res.status(204).send('Organizacion eliminada')
+        res.status(204).send("Deleted")
     }catch(error){
         res.status(500).json(error)
     }
