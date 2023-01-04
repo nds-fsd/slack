@@ -8,7 +8,9 @@ function App() {
 
   return (
     <div>
-      Your app here
+      <FormUser/>
+      <FormOrganizacion/>
+
     </div>
   );
 }
