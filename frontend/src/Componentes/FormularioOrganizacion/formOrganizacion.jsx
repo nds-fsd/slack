@@ -22,9 +22,9 @@ const FormOrganizacion = () =>{
     const postOrganizaciones = () =>{
         const url = "http://localhost:3001/organizacion";
         const body ={
-            email: email,
-            titulo: titulo,
-            trabajoActual: trabajoActual
+            OrgMail: email,
+            OrgMail: titulo,
+            OrgDescription: trabajoActual
             //Saber exactamente las nomenclaturas del backend
 
         };
