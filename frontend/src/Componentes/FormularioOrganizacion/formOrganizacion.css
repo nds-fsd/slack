@@ -26,9 +26,6 @@
     background-color: #CEAD6D;
 }
 
-#butFormOrg{
-    background-color: #9e9b98;
-}
 
 .inputFormOrg{
     padding: 1.5rem 3rem 1.5rem 3rem;
@@ -41,8 +38,8 @@
     padding: 1rem 1rem 1rem 1rem;
     margin: 1rem 1rem 1rem 1rem;
     border-radius: 1rem;
-    background-color: #BACBDB;
+    background-color: #E1DCE0;
 }
-#ButFormOrg{
+#butFormOrg{
     background-color: #BACBDB;
 }
