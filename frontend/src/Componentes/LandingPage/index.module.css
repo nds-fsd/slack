@@ -1,0 +1,39 @@
+
+*{
+    background-color: blue;
+    font-family: 'Roboto Mono', monospace;
+
+}
+
+
+.seccion{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+    
+}
+
+.navBar{
+    background-color: bisque;
+}
+
+.seccion1{
+    background-color:chocolate;
+}
+
+
+.seccion2{
+    background-color: red;
+}
+.seccion3{
+    background-color:aqua;
+}
+.seccion4{
+    background-color:blueviolet;
+}
+.seccion5{
+    background-color:chartreuse;
+}
