@@ -30,8 +30,8 @@
 .inputFormOrg{
     padding: 1.5rem 3rem 1.5rem 3rem;
     border-radius: 1rem;
-    margin: 0.75rem;
-    width: 15rem;
+    margin: 5%;
+    width: 65%;
 }
 
 .button{
@@ -42,4 +42,14 @@
 }
 #butFormOrg{
     background-color: #BACBDB;
+}
+
+*p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.comentarioCorreo{
+    text-align: center;
 }
