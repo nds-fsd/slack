@@ -1,0 +1,55 @@
+*{
+    font-family: 'Roboto Mono', monospace;
+    background-color: #E1DCE0;
+}
+
+#formOrg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #CEAD6D;
+    margin:10% 10% 10% 10%;
+    border-radius: 2rem;
+    
+}
+
+.tituloFormOrg{
+    background-color: #CEAD6D;
+    border-radius: 15px;
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.comentarioCorreo{
+    background-color: #CEAD6D;
+}
+
+
+.inputFormOrg{
+    padding: 1.5rem 3rem 1.5rem 3rem;
+    border-radius: 1rem;
+    margin: 5%;
+    width: 65%;
+}
+
+.button{
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 1rem 1rem;
+    border-radius: 1rem;
+    background-color: #E1DCE0;
+}
+#butFormOrg{
+    background-color: #BACBDB;
+}
+
+*p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.comentarioCorreo{
+    text-align: center;
+}
