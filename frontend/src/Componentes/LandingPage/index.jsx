@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./index.module.css"
+import video from '../../Assets/480_verde.mp4'
 
 
 const LandingPage = () =>{
@@ -12,8 +13,7 @@ const LandingPage = () =>{
             <div className={styles.navBar}>Barra de navegación superior</div>
             
             <div className={styles.seccion1}>
-                <video src="/Users/gercaba/Documents/Nuclio/skuadlack/slack/frontend/src/Componentes/Media/480_verde.mov" loop={true} autoPlay > </video>
-            
+                <video src={video} type="video/mp4" autoPlay loop/> 
             
             </div>
 
