@@ -32,7 +32,7 @@ const LandingPage = () =>{
                     <p> <b>SkuadLack es gratuíto</b> y no se cambiarán las políticas de precios como hace Movistar</p>
                 </div>
                 <div className={styles.contenedorVideo}>
-                    <video className={styles.video} src={videoMarron} type="video/mp4" autoPlay loop muted/> 
+                    <video className={styles.video} src={videoVerde} type="video/mp4" autoPlay loop muted/> 
                 </div>
             </div>
 
