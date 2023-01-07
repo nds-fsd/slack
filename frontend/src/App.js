@@ -6,6 +6,7 @@ import {Routes, Route, Link} from "react-router-dom"
 import styles from "./Styles/App.module.css"
 import logo from "./Assets/logo.png"
 import DashboardUser from './Componentes/DashboardUsuario/dashboardUser';
+import NotFound from './Componentes/NotFound/notFound';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/user" element={<FormUser/>}>  </Route>
         <Route path="/" element={<LandingPage/>}></Route>
         <Route path="/user/:id" element={<DashboardUser/>}>  </Route>
+        <Route path="*" element={<NotFound/>}/>
 
       </Routes>
 
