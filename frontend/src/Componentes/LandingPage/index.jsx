@@ -14,8 +14,7 @@ const LandingPage = () =>{
     return (
 
         <div>
-
-                      
+      
             <div className={styles.seccion1}>
                 <div className={styles.seccion1_1}> 
                     <h1>Una aplicación para tomarte las cosas con calma</h1>
@@ -38,10 +37,6 @@ const LandingPage = () =>{
             <div className={styles.seccion3}>sección 3</div>
             <div className={styles.seccion4}>sección 4</div>
             <div className={styles.seccion5}>sección 5</div>
-
-            <Routes>
-                <Route path="/user" element={<FormUser/>}></Route>
-            </Routes>
 
         </div> 
     
