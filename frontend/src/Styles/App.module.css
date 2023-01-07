@@ -16,6 +16,7 @@
     margin-right: 10px;
     box-shadow: 0px -3px 5px 0px #9E9B98;
     color: #E1DCE0;
+    
 }
 
 .navBar a{
@@ -27,6 +28,7 @@
     font-size: 15px;
     padding: auto;
     margin-right: 20px;
+    color:#E1DCE0
 }
 
 .navBar a:hover{
@@ -40,11 +42,6 @@
     z-index: 999;
     margin-left: 20px;
   }
-  Link{
-    color: #E1DCE0;
-  }
-  .link{
-    color: #E1DCE0;
-  }
+
 
   

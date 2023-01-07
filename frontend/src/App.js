@@ -1,10 +1,10 @@
 import './App.css';
 import FormUser from './Componentes/FormularioUsuario/formUser';
 import FormOrganizacion from './Componentes/FormularioOrganizacion/formOrganizacion.jsx';
-import LandingPage from './Componentes/LandingPage';
+import LandingPage from './Componentes/LandingPage/LandingPage';
 import {Routes, Route, Link} from "react-router-dom"
 import styles from "./Styles/App.module.css"
-import logo from "./Assets/logo.png"
+import logo from "./Assets/logo-SkuadLack.png"
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
