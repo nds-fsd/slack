@@ -8,7 +8,7 @@
     height: 40px;
     position:fixed;
     top:0;
-    z-index: 1;
+    z-index: 999;
     padding: 5px 5px 5px 5px;
     border-radius: 15px;
     margin-top: 10px;
@@ -16,7 +16,6 @@
     margin-right: 10px;
     box-shadow: 0px -3px 5px 0px #9E9B98;
     color: #E1DCE0;
-    
 }
 
 .navBar a{
@@ -31,12 +30,7 @@
 }
 
 .navBar a:hover{
-    text-decoration:underline;
-    
-}
-.navBar a.active{
-    background-color: chartreuse;
-    color: hotpink;
+    text-decoration:underline;  
 }
 
 .logo{
@@ -46,3 +40,11 @@
     z-index: 999;
     margin-left: 20px;
   }
+  Link{
+    color: #E1DCE0;
+  }
+  .link{
+    color: #E1DCE0;
+  }
+
+  

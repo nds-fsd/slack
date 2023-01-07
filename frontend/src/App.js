@@ -15,13 +15,13 @@ function App() {
       <div className={styles.navBar}>
 
                     <Link to="/"><img className={styles.logo} src={logo} alt='logo'/></Link>
-                    <Link to="/"> SkuadLack</Link>
+                    <Link to="/" className='link'> <a>SkuadLack</a></Link>
                     <a> Producto</a>
                     <a> Enterprise</a>
                     <a> Recurso</a>
                     <a> Precios</a> 
-                    <Link to="/user"> Log in</Link> 
-                    <Link to='/organizacion'> Crear organización</Link>
+                    <Link to="/user" className='link'><a> Log in</a></Link> 
+                    <Link to='/organizacion' className='link'> <a>Crear organización</a></Link>
                
             </div>
 
