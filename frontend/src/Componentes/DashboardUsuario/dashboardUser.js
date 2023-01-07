@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import NotFound from "../NotFound/notFound";
 import styles from './dashboard.module.css';
 
 
@@ -15,7 +16,26 @@ const DashboardUser = () =>{
         setUser(res);
     });
 }, [params.id]);
-
+    
+    const deleteUser = () =>{
+  const url = "http://localhost:3001/user/" + params.id;
+  const options = {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    }
+  };
+  fetch(url, options)
+    .then((res) => {
+      res.json();
+    })
+    .then((data) => {
+      console.log(data)
+    });
+    }
+ if(!user) return(<div><NotFound/></div>)
     
     return(
         <div>
@@ -45,7 +65,7 @@ const DashboardUser = () =>{
             <button type="submit">Editar</button>
           </div>  
           <div className={styles.buttondelete}>
-            <button type="submit">Eliminar</button>
+            <button type="submit" onClick={deleteUser}>Eliminar</button>
           </div>
           </div> 
         </div>
