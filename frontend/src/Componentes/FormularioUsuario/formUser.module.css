@@ -1,13 +1,14 @@
 .card{
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #CEAD6D;
 }
 
-.form{
+.button{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
