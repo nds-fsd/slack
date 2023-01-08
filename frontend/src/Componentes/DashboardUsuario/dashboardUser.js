@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound/notFound";
 import styles from './dashboard.module.css';
 
 
 const DashboardUser = () =>{
+    const navigate = useNavigate()
     let params = useParams()
     const [user, setUser] = useState("")
+
     useEffect(() => {
     fetch("http://localhost:3001/user/" + params.id)
     .then((res)=>{
@@ -31,8 +33,9 @@ const DashboardUser = () =>{
     .then((res) => {
       res.json();
     })
-    .then((data) => {
-      console.log(data)
+    .then(() => {
+      alert(`Usuario ${user.userName} eliminado.`)
+      navigate('/')
     });
     }
  if(!user) return(<div><NotFound/></div>)
