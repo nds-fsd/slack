@@ -26,7 +26,7 @@ const DashboardUser = () =>{
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     }
   };
   fetch(url, options)
