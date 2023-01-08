@@ -30,11 +30,11 @@ const LandingPage = () =>{
 
             <div className={styles.seccion2}>
                 <h2>Empresas y personas de todo el mundo confían en SkuadLack</h2>
-                <div className={styles.seccion2_1}>sección 2.1
-                    <img src={logoNasa}></img>
-                    <img src={logoMundoToday}></img>
-                    <img src={logoAirbnb}></img>
-                    <img src={logoMrBean}></img>
+                <div className={styles.seccion2_1}>
+                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa}/>
+                    <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday}/>
+                    <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb}/>
+                    <img id={styles.logoMrBean} className={styles.logos} src={logoMrBean}/>
                 </div>
                 <div>sección 2.2</div>
                 <div>sección 2.3</div>
