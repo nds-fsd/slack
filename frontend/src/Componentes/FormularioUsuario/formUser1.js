@@ -10,7 +10,7 @@ const FormUser1 = () =>{
  const { register, handleSubmit, formState:{errors}} = useForm()
  const onDataSubmit2 = (data) => {
   postToMongo("user", data).then((dataServer) => {
-    console.log(dataServer)
+    alert(`el usuario ${dataServer.userName} ha sido creado.`)
     navigate(`/user/${dataServer._id}`)
      })
  }
