@@ -16,14 +16,19 @@ const FormUser1 = () =>{
  }
     return (
         <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
-            <input placeholder='Coloca tu nombre de Usuario.' {...register("userName" , {required: true})} />
-            {errors.userName && <span>si no sabes tu nombre tienes un problema.</span>}
-            <input placeholder='Coloca tu email.' {...register("email" , {required: true})} />
-            {errors.email && <span>si no sabes tu email tienes un problema.</span>}
-            <input placeholder='Coloca tu nombre.' {...register("name" , {required: true})} />
-            {errors.name && <span>si no sabes tu email tienes un problema.</span>}
-            <input placeholder='Coloca tu apellido.' {...register("lastName" , {required: true})} />
-            {errors.lastName && <span>si no sabes tu email tienes un problema.</span>}
+            <h3>Rellena el siguiente campo con tu nombre usuario, este sera el visible.</h3>
+            <input placeholder='Nombre de Usuario.' {...register("userName" , {required: true})} />
+            {errors.userName && <span>❌campo obligatorio❗❗</span>}
+            <h3>Rellena el siguiente campo con tu email.</h3>
+            <input placeholder='email.' {...register("email" , {required: true})} />
+            {errors.email && <span>❌campo obligatorio❗❗</span>}
+            <h3>Rellena el siguiente campo con tu nombre.</h3>
+            <input placeholder='Nombre.' {...register("name" , {required: true})} />
+            {errors.name && <span>❌campo obligatorio❗❗</span>}
+            <h3>Rellena el siguiente campo con tu apellido.</h3>
+            <input placeholder='Apellido.' {...register("lastName" , {required: true})} />
+            {errors.lastName && <span>❌campo obligatorio❗❗</span>}
+            <br/>
             <input type="submit"/>
         </form>
     )
