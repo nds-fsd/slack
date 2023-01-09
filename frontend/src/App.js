@@ -40,7 +40,7 @@ function App() {
         <Route path="/user" element={<FormUser1/>}>  </Route>
         <Route path="/user/:id" element={<DashboardUser/>}>  </Route>
         <Route path="/user/undefined" element={<NotFound/>}/>
-        {/* <Route path="/*" element={<NotFound/>}/> */}
+        <Route path="/*" element={<NotFound/>}/>
       </Routes>
 
       </div>
