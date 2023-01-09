@@ -15,6 +15,10 @@ const FormUser1 = () =>{
      })
  }
     return (
+        <>
+        <div className={styles.title}>
+        <h1>Bienvenido a SkuadLack </h1>
+        </div>
         <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
             <h3>Rellena el siguiente campo con tu nombre usuario, este sera el visible.</h3>
             <input placeholder='Nombre de Usuario.' {...register("userName" , {required: true})} />
@@ -31,6 +35,8 @@ const FormUser1 = () =>{
             <br/>
             <input type="submit"/>
         </form>
+        </>
+
     )
 }
 
