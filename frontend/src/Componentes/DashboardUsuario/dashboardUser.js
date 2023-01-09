@@ -8,7 +8,9 @@ const DashboardUser = () =>{
     const navigate = useNavigate()
     let params = useParams()
     const [user, setUser] = useState("")
-
+  const navigatePath = ()=>{
+    navigate(`/editUser/${user._id}`)
+  }
     useEffect(() => {
     fetch("http://localhost:3001/user/" + params.id)
     .then((res)=>{
@@ -65,7 +67,7 @@ const DashboardUser = () =>{
           <div className={styles.containerbutton}>
             
           <div className={styles.buttonedit}>
-            <button type="submit">Editar</button>
+           <button onClick={navigatePath} type="submit">Editar</button>
           </div>  
           <div className={styles.buttondelete}>
             <button type="submit" onClick={deleteUser}>Eliminar</button>
