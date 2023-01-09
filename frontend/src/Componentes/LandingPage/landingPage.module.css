@@ -1,15 +1,11 @@
 
-*{
-    font-family: 'Roboto Mono', monospace;
-}
-
 .seccion1{
     background-color:#E1DCE0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 600px;
-    width: 100%;
+    height: 50vh;
+    width: 100vw;
     overflow: hidden;
 
 }
@@ -22,12 +18,12 @@
     margin: 40px 50px 40px 50px;
 }
 .seccion1 button{
-    width: 500px;
-    height: 60px;
+    width: 40vw;
+    height: 4vh;
     background-color: #BACBDB;
     color: #686461;
     font-weight:bold;
-    font-size: 15px;
+    font-size: 1rem;
     border: none;
     border-radius: 10px;
 }
@@ -40,13 +36,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 2vw;
+    
 }
 
 .video{
-    width: 400px;
-    height: 600px;
+    width: 40vw;
     overflow: hidden;
-    margin: 15px;
+    margin-left: 10vw;
+    margin-right: 10vw;
     border-radius: 30px;
     position: absolute;
 }
@@ -59,7 +57,7 @@
     align-content: center;
     justify-content: center;
     justify-items: center;
-    width: 800px;
+    width: 75vw;
     overflow: hidden;
     margin: 30px;
             
@@ -73,7 +71,7 @@
 .seccion2_1{
     display: flex;
     flex-direction: row;
-    align-items:start;
+    align-items:flex-start;
     justify-content: space-between;
 }
 #logoMundoToday{
@@ -87,16 +85,16 @@
 }
 .seccion3{
     background-color:aqua;
-    height: 600px;
+    height: 50vh;;
     width: 100%;
 }
 .seccion4{
     background-color:blueviolet;
-    height: 600px;
+    height: 50vh;;
     width: 100%;
 }
 .seccion5{
     background-color:chartreuse;
-    height: 600px;
+    height: 50vh;;
     width: 100%;
 }

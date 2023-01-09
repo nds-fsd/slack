@@ -1,5 +1,6 @@
 import React from "react";
-import Styles from "./user.module.css"
+import styles from "./user.module.css"
+
 
 const User = (props)=>{
 
@@ -8,16 +9,41 @@ const User = (props)=>{
     const lastName = props.lastName
     const idUser=props.id
    
-
     return(
+        
+        //<TablaUser data = {data}/>
 
-        <div className={Styles.user}>
-            <input type="text" className={Styles.inputUser}/><label>Nombre de usuario: {userName}</label><br></br>
-            <input type="text" className={Styles.inputEmail}/><label>Email: {email}</label><br></br>
-            <input type="text" className={Styles.inputLastName}/><label>Apellido: {lastName}</label><br></br>
-            <input type="text" className={Styles.inputLastName}/><label>id: {idUser}</label><br></br>
-        </div>
+        <table className={styles.tablaUser}>
+        
+            <tr>
+                <td>{userName}</td>
+                <td>{email}</td>
+                <td>{lastName}</td>
+                <td>{idUser}</td>
+                
+            
+            </tr>
+            
 
+        </table>
 )}
 
 export default User
+
+//propiedad reset Hook Forms
+
+ /*<div className={styles.user}>
+            <div className={styles.infoUser}>
+            <h2 type="text" className={styles.inputUser}/>Nombre de usuario: {userName}<br></br>
+            <h2 type="text" className={styles.inputEmail}/>Email: {email}<br></br>
+            <h2 type="text" className={styles.inputLastName}/>Apellido: {lastName}<br></br>
+            <h2 type="text" className={styles.inputLastName}/>id: {idUser}<br></br>
+            </div>
+            <div className={styles.flex}>
+                <button>Update user</button>
+                <button>Delete user</button>
+            </div>
+        </div>
+
+        https://www.w3schools.com/howto/howto_css_flip_card.asp
+        */

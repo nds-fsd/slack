@@ -12,18 +12,18 @@ import logo from "./Assets/logo-SkuadLack.png"
 function App() {
 
   return (
-    <div>
+    <div className={styles.contenedorPrincipal}>
       <div className={styles.navBar}>
 
                     <Link to="/"><img className={styles.logo} src={logo} alt='logo'/></Link>
-                    <Link to="/" className='link'> <a>SkuadLack</a></Link>
+                    <Link to="/" className='link'> SkuadLack</Link>
                     <a> Producto</a>
                     <a> Enterprise</a>
                     <a> Recurso</a>
                     <a> Precios</a> 
-                    <Link to="/user" className='link'><a>Regístrate</a></Link> 
-                    <Link to='/organizacion' className='link'> <a>Crear organización</a></Link>
-                    <Link to='/users'><a>Admin</a></Link>               
+                    <Link to="/user" className='link'>Regístrate</Link> 
+                    <Link to='/organizacion' className='link'> Crear organización</Link>
+                    <Link to='/users'>Admin</Link>               
             </div>
 
       

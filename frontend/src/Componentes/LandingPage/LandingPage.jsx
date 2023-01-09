@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./landingPage.module.css";
 import videoVerde from '../../Assets/480_verde.mp4';
-import {Routes, Route, Link} from "react-router-dom"
+import {Link} from "react-router-dom"
 import logoNasa from '../../Assets/logo-nasa.png'
 import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../Assets/airbnb-logo.png'
-import logoMrBean from '../../Assets/mrBean.png'
 
 
 const LandingPage = () =>{
-
 
 
     return (
@@ -31,14 +29,15 @@ const LandingPage = () =>{
             <div className={styles.seccion2}>
                 <h2>Empresas y personas de todo el mundo confían en SkuadLack</h2>
                 <div className={styles.seccion2_1}>
-                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa}/>
-                    <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday}/>
-                    <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb}/>
-                    <img id={styles.logoMrBean} className={styles.logos} src={logoMrBean}/>
+                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa"/>
+                    <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday} alt="Logo Mundo Today"/>
+                    <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
                 </div>
+                
                 <div>sección 2.2</div>
                 <div>sección 2.3</div>
                 <div>sección 2.4</div>
+
             </div>
             <div className={styles.seccion3}>sección 3</div>
             <div className={styles.seccion4}>sección 4</div>

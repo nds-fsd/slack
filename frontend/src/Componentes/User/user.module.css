@@ -1,4 +1,22 @@
 .user{
     margin:40px;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 2vh;
+}
+.infoUser{
+    display: flex;
+    flex-direction: column;
+   
+}
+.tablaUser{
     font-size: 1rem;
+    border-color: black;
 }

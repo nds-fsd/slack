@@ -22,9 +22,28 @@ const ListUsers = ()=>{
     return(
 
         <div className={styles.listado}>
-            <h1>
-            {list && list.map((users)=> <User key={users._id} id={users._id} userName = {users.userName} email = {users.email} lastName={users.lastName}/> )}
-            </h1>
+            <table>
+            <tr>
+                <th>Id</th>
+                <th>Nombre de usuario</th>
+                <th>Email</th>
+                <th>Apellido</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+          </tr>
+          <tr>
+            
+            <td>{list && list.map((users)=> <User key={users._id} id={users._id} /> )}</td>
+            <td>{list && list.map((users)=> <User key={users._id} userName = {users.userName} /> )}</td>
+            <td>{list && list.map((users)=> <User key={users._id} email = {users.email} /> )}</td>
+            <td>{list && list.map((users)=> <User key={users._id} lastName={users.lastName}/> )}</td>
+            <td><button>Edit</button></td>
+            <td><button>Eliminar</button></td>
+            
+          
+            
+            </tr>
+            </table>
         </div>
 
 )}
