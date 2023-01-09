@@ -20,3 +20,18 @@ export const getFromMongo = async(path) => {
     const data = response.json()
     return data 
 }
+
+export const patchToMongo = async( path, data ) => {
+    const url = `http://localhost:3001/${path}`
+    const response = await fetch(url,{
+        method: "PATCH", // metodo 
+        mode: "cors", // salvarnos de cors
+        headers: {
+            "Content-Type": "application/json", // que tipo de dato se manda
+            "Accept": "application/json", // que tiene que aceptar
+        }, 
+        body: JSON.stringify(data), // pasamos a sting por que http no permite mandar JSON
+    } )
+    const dataServer = await response.json()
+    return dataServer
+}
