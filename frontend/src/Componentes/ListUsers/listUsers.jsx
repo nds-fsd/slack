@@ -26,8 +26,8 @@ const ListUsers = ()=>{
                     <th>Nombre de usuario</th>
                     <th>Email</th>
                     <th>Apellido</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th className={styles.thBotones}>Editar</th>
+                    <th className={styles.thBotones}>Eliminar</th>
                 </tr>  
           
                {list && list.map((datosTabla)=>( 
@@ -37,8 +37,8 @@ const ListUsers = ()=>{
                     <td> {datosTabla.userName}</td>
                     <td> {datosTabla.email}</td>
                     <td> {datosTabla.lastName}</td>
-                    <td><button>Editar</button></td>
-                    <td><button>Eliminar</button></td>
+                    <td className={styles.botones}><button className={styles.butEdit}>Editar</button></td>
+                    <td className={styles.botones}><button className={styles.butEliminar}>Eliminar</button></td>
 
              </tr>   
                 
