@@ -45,7 +45,7 @@ export const BarraNav = () => {
                 </NavDropdown>
                 
                 <Nav.Link href="#action2"><Button as="a" variant="success">Sign In</Button ></Nav.Link>
-                <Nav.Link href="#action6"><Button as="a" variant="primary">Log In</Button ></Nav.Link>
+                <Nav.Link href="#action6"><Button as="a" variant="primary">Sign Up</Button ></Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
