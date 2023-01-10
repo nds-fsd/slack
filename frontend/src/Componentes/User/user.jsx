@@ -21,6 +21,7 @@ const User = (props)=>{
                 <td>{lastName}</td>
                 <td>{idUser}</td>
                 
+                
             
             </tr>
             

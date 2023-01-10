@@ -40,8 +40,6 @@ const ListUsers = ()=>{
             <td><button>Edit</button></td>
             <td><button>Eliminar</button></td>
             
-          
-            
             </tr>
             </table>
         </div>

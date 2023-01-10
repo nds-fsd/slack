@@ -4,9 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 50vh;
+    height: 60vh;
     width: 100vw;
     overflow: hidden;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
 
 }
 
@@ -19,7 +21,7 @@
 }
 .seccion1 button{
     width: 40vw;
-    height: 4vh;
+    height: 8vh;
     background-color: #BACBDB;
     color: #686461;
     font-weight:bold;
@@ -45,8 +47,10 @@
     overflow: hidden;
     margin-left: 10vw;
     margin-right: 10vw;
+    margin-top: 15vh;
     border-radius: 30px;
     position: absolute;
+    box-shadow: 0px -3px 5px 0px #9E9B98;
 }
 
 .seccion1_2{
@@ -59,7 +63,7 @@
     justify-items: center;
     width: 75vw;
     overflow: hidden;
-    margin: 30px;
+   
             
 }
 .seccion2{
@@ -71,12 +75,21 @@
 .seccion2_1{
     display: flex;
     flex-direction: row;
-    align-items:flex-start;
-    justify-content: space-between;
+    align-items:center;
+    justify-content: center;
 }
+.logos{
+   margin-left: 4vw;
+   margin-right: 4vw;
+}
+
 #logoMundoToday{
-    height: 40px;
-    width: 40px;
+    height: 3vh;
+    width: 8vw;
+}
+#logoSlack{
+    height: 10vh;
+    width: 8vw;
 }
 
 .seccion2 h2{

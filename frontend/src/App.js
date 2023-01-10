@@ -27,7 +27,7 @@ function App() {
             </div>
 
       
-    <div className='main-router'>
+    <div className={styles.mainRouter}>
       
       <Routes>
 

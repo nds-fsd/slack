@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 import logoNasa from '../../Assets/logo-nasa.png'
 import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../Assets/airbnb-logo.png'
+import slackLogo from '../../Assets/slackLogo.png'
 
 
 const LandingPage = () =>{
@@ -32,6 +33,7 @@ const LandingPage = () =>{
                     <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa"/>
                     <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday} alt="Logo Mundo Today"/>
                     <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
+                    <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
                 </div>
                 
                 <div>sección 2.2</div>
