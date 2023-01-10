@@ -14,15 +14,21 @@ const User = (props)=>{
         //<TablaUser data = {data}/>
 
         <table className={styles.tablaUser}>
-        
+          <tr>
+                    <th>Id</th>
+                    <th>Nombre de usuario</th>
+                    <th>Email</th>
+                    <th>Apellido</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+            </tr>
+ 
             <tr>
+                <td>{idUser}</td>
                 <td>{userName}</td>
                 <td>{email}</td>
                 <td>{lastName}</td>
-                <td>{idUser}</td>
                 
-                
-            
             </tr>
             
 
