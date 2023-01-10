@@ -13,7 +13,10 @@ export const BarraNav = () => {
     <div>
       <Navbar key="md" variant="dark" expand="md" className="mb-3">
         <Container fluid>
-          <Navbar.Brand href="#"><h1>SkuadLack</h1></Navbar.Brand>
+          <img className="logoimg" src="https://cdn-icons-png.flaticon.com/512/2174/2174076.png" alt=""/>
+          <Navbar.Brand href="#">
+            <h1>SkuadLack</h1>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
           <Navbar.Offcanvas 
             id={`offcanvasNavbar-expand-md`}
@@ -58,6 +61,11 @@ const NavBarStyle= styled.div`
 margin: .3rem;
 padding-bottom: 4.5rem;
 
+.logoimg{
+  width: 2.4rem;
+  height: 2rem;
+  padding-right : .4rem;
+}
 
 .mb-3 {
   position: fixed;
@@ -73,9 +81,9 @@ padding-bottom: 4.5rem;
 
 }
 p{
-    padding-top: .3rem;
+    padding-top: .4rem;
 }
 #offcanvasNavbarDropdown-expand-md{
-    padding-top: .8rem;
+    padding-top: .9rem;
 }
 `
