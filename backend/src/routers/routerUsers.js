@@ -10,16 +10,6 @@ routerUsers.get('/user',async(req,res)=>{
           res.status(500).json(error)
         }
       });
-      
-routerUsers.get('/users',async(req,res)=>{
-    try{
-        const allUsers = await User.find();
-        res.status(200).json(allUsers);
-        }catch(error){
-            res.status(500).json(error)
-        }
-});
-
 
 routerUsers.get('/user/:id', async (req,res)=>{
     const id = req.params.id
