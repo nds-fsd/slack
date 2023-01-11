@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import styles from "./index.module.css";
+import React from "react";
+import styles from "./landingPage.module.css";
 import videoVerde from '../../Assets/480_verde.mp4';
-import videoMarron from '../../Assets/480_marron.mp4';
-import logo from '../../Assets/logo.png';
-import {Routes, Route, Link} from "react-router-dom"
-import FormOrganizacion from "../FormularioOrganizacion/formOrganizacion";
-import FormUser from "../FormularioUsuario/formUser";
+import {Link} from "react-router-dom"
+import logoNasa from '../../Assets/logo-nasa.png'
+import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
+import logoAirbnb from '../../Assets/airbnb-logo.png'
+import slackLogo from '../../Assets/slackLogo.png'
+
 
 const LandingPage = () =>{
-
 
 
     return (
 
         <div>
-
-                      
+      
             <div className={styles.seccion1}>
                 <div className={styles.seccion1_1}> 
                     <h1>Una aplicación para tomarte las cosas con calma</h1>
@@ -23,25 +22,28 @@ const LandingPage = () =>{
                     <Link to="/user"><button type="submit" to="/user">Regístrate con un correo</button></Link>
                     <p> <b>SkuadLack es gratuíto</b> y no se cambiarán las políticas de precios como hace Movistar</p>
                 </div>
-                <div className={styles.contenedorVideo}>
+                <div className={styles.seccion1_2}>
                     <video className={styles.video} src={videoVerde} type="video/mp4" autoPlay loop muted/> 
                 </div>
             </div>
 
             <div className={styles.seccion2}>
-                sección 2
-                <div>sección 2.1</div>
+                <h2>Empresas y personas de todo el mundo confían en SkuadLack</h2>
+                <div className={styles.seccion2_1}>
+                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa"/>
+                    <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday} alt="Logo Mundo Today"/>
+                    <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
+                    <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
+                </div>
+                
                 <div>sección 2.2</div>
                 <div>sección 2.3</div>
                 <div>sección 2.4</div>
+
             </div>
             <div className={styles.seccion3}>sección 3</div>
             <div className={styles.seccion4}>sección 4</div>
             <div className={styles.seccion5}>sección 5</div>
-
-            <Routes>
-                <Route path="/user" element={<FormUser/>}></Route>
-            </Routes>
 
         </div> 
     
@@ -49,3 +51,9 @@ const LandingPage = () =>{
 
 
 export default LandingPage
+
+/* Temas pendientes:
+
+1. Hacerlo responsive
+2. Fondo hay una línea blanca que no consigo eliminar
+*/

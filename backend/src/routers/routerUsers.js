@@ -11,8 +11,6 @@ routerUsers.get('/user',async(req,res)=>{
         }
       });
 
-
-
 routerUsers.get('/user/:id', async (req,res)=>{
     const id = req.params.id
     try{
