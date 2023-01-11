@@ -13,7 +13,7 @@ export const BarraNav = () => {
     <div>
       <Navbar key="md" variant="dark" expand="md" className="mb-3">
         <Container fluid>
-          <img className="logoimg" src="https://cdn-icons-png.flaticon.com/512/2174/2174076.png" alt=""/>
+          <img className="logoimg" src={require("./img/Png  logo.png")} alt=""/>
           <Navbar.Brand href="#">
             <h1>SkuadLack</h1>
           </Navbar.Brand>
@@ -63,7 +63,7 @@ padding-bottom: 4.5rem;
 
 .logoimg{
   width: 2.4rem;
-  height: 2rem;
+  height: 2.4rem;
   padding-right : .4rem;
 }
 
@@ -85,5 +85,8 @@ p{
 }
 #offcanvasNavbarDropdown-expand-md{
     padding-top: .9rem;
+}
+.offcanvas-body{
+  margin-top: .3rem;
 }
 `
