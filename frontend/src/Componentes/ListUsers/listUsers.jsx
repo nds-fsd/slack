@@ -39,7 +39,7 @@ const ListUsers = ()=>{
                     <td> {datosTabla.lastName}</td>
                     <td className={styles.botones}><button className={styles.butEdit}>Editar</button></td>
                     <td className={styles.botones}><button className={styles.butEliminar}>Eliminar</button></td>
-             </tr>   
+                </tr>   
                 
                 ))}
 
@@ -49,3 +49,13 @@ const ListUsers = ()=>{
 )}
 
 export default ListUsers
+
+/*
+Pendiente:
+1. Hacer que el scroll de la tabla no supere el encabezado. Es decir que no puedean subir las filas por encima del encabezado
+2. Poner bordes al encabezado cuando haga scroll.
+3. Añadir la funcionalidad de edición y borrado de un usuario
+4. Aplicar la misma lógica a organizaciones
+5. Meter ambas funcionalidades en un menú lateral que definal las acciones que puede realizar el admin
+
+*/

@@ -3,9 +3,10 @@
     padding: 10vh;
 
 }
-
 table{
     width: 80vw;
+    position: sticky;
+    top:10vh;
    
     border-collapse: collapse;
 }
@@ -13,11 +14,13 @@ th, td{
     border: 1px solid black;
     text-align: left;
 }
-
 th{
     color: #E1DCE0;
     font-size: 1.2rem;
-   
+    position: sticky;
+    top:10vh;
+    background-color: #9E9B90;
+    border-color: black;
 }
 
 tr:nth-child(odd) {
