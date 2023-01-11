@@ -39,7 +39,6 @@ const ListUsers = ()=>{
                     <td> {datosTabla.lastName}</td>
                     <td className={styles.botones}><button className={styles.butEdit}>Editar</button></td>
                     <td className={styles.botones}><button className={styles.butEliminar}>Eliminar</button></td>
-
              </tr>   
                 
                 ))}
