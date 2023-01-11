@@ -6,7 +6,7 @@ const ListUsers = ()=>{
     const [list, setList]=useState([]);
 
     useEffect (()=> {
-        fetch("http://localhost:3001/users")
+        fetch("http://localhost:3001/user")
             .then((response)=>{
                 return response.json();
             })

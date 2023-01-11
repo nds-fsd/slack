@@ -56,5 +56,4 @@ export default LandingPage
 
 1. Hacerlo responsive
 2. Fondo hay una línea blanca que no consigo eliminar
-
 */
