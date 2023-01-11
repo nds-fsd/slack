@@ -53,7 +53,8 @@ const LandingPage = () =>{
 export default LandingPage
 
 /* Temas pendientes:
-1. Alinear correctamente la barra de navegación. No está perfectamente centrada
-2. El video no soy capaz de darle bordes redondeados y sobras. El <video> ocupa toda el espacio vertical sin saber muy bien el porqué
-3. Hacerlo responsive
+
+1. Hacerlo responsive
+2. Fondo hay una línea blanca que no consigo eliminar
+
 */

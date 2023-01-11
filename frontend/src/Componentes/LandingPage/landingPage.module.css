@@ -11,7 +11,6 @@
     padding-bottom: 10vh;
 
 }
-
 .seccion1 h1{
     text-align: center;
 }
@@ -29,7 +28,6 @@
     border: none;
     border-radius: 10px;
 }
-
 .seccion1 button:hover {
     box-shadow: 0px -3px 5px 0px #9E9B98;
     text-decoration:underline;
@@ -45,7 +43,6 @@
     height: 90%;
     
 }
-
 .video{
     width: 40vw;
     overflow: hidden;
@@ -56,7 +53,6 @@
     position: absolute;
     box-shadow: 0px -3px 5px 0px #9E9B98;
 }
-
 .seccion1_2{
    
     display: flex;
@@ -66,16 +62,13 @@
     justify-content: center;
     justify-items: center;
     width: 75vw;
-    overflow: hidden;
-   
-            
+    overflow: hidden;         
 }
 .seccion2{
     background-color: #CEAD6D;
     height: 600px;
     width: 100%;
 }
-
 .seccion2_1{
     display: flex;
     flex-direction: row;
@@ -86,7 +79,6 @@
    margin-left: 4vw;
    margin-right: 4vw;
 }
-
 #logoMundoToday{
     height: 3vh;
     width: 12vw;
@@ -95,7 +87,6 @@
     height: 10vh;
     width: 11vw;
 }
-
 .seccion2 h2{
     text-align: center;
     padding:20px;

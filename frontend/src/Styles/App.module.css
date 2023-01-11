@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
 }
-
 .navBar{
     display: flex;
     align-items: center;
@@ -21,10 +20,8 @@
     margin-right: 1vw;
     margin-bottom: 4vh;
     box-shadow: 0px -3px 5px 0px #9E9B98;
-    color: #E1DCE0;
-    
+    color: #E1DCE0; 
 }
-
 .navBar a{
     float: left;
     display: block;
@@ -36,11 +33,9 @@
     margin-right: 2vw;
     color:#E1DCE0
 }
-
 .navBar a:hover{
     text-decoration:underline;  
 }
-
 .logo{
     height: 3vh;
     width: 3vh;
