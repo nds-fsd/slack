@@ -42,6 +42,9 @@ function App() {
           <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
           <Route path="/user" element={<FormUser />}>  </Route>
           <Route path="/" element={<LandingPage />}></Route>
+         <Route path="/users" element={<ListUsers/>}></Route>
+         <Route path='/*' element={<NotFound/>}/>
+          
 
         </Routes>
 
