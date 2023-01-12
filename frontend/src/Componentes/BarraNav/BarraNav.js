@@ -14,7 +14,7 @@ export const BarraNav = () => {
     <div>
       <Navbar key="xxl" variant="dark" expand="md" className="mb-3">
         <Container fluid>
-          <img className="logoimg" src={require("./img/Png  logo.png")} alt=""/>
+          <img className="logoimg" src={require("../../Assets/Png  logo.png")} alt=""/>
           <Navbar.Brand href="/">
             <h1>SkuadLack</h1>
           </Navbar.Brand>
@@ -74,8 +74,8 @@ const NavBarStyle= styled.div`
 
 
 .logoimg{
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 3.4rem;
+  height: 3.4rem;
   padding-right : .4rem;
 }
 
