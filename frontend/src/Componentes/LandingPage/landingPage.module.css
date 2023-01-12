@@ -9,10 +9,12 @@ body{
     height: 80vh;
     width: 100vw;
     overflow: hidden;
-    padding-top: 10vh;
+    padding-top: 7.5vh;
+    color: white;
 
 }
 .seccion1 h1{
+    margin-top: 5.5rem;
     text-align: center;
 }
 
