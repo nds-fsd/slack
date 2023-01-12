@@ -14,7 +14,6 @@ const LandingPage = () =>{
     return (
 
         <div>
-      
             <div className={styles.seccion1}>
                 <div className={styles.seccion1_1}> 
                     <h1>Una aplicación para tomarte las cosas con calma</h1>

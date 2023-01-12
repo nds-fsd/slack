@@ -1,9 +1,15 @@
+body{
+    background-color: #E1DCE0;
+ }   
 .card{
-        display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #CEAD6D;
+    width: 100vw;
+    
+    
     
 }
 
@@ -21,4 +27,5 @@
     align-items: center;
     margin-top: 3rem;
     background-color: #e1dce0;
+    margin-top: 7rem
 }

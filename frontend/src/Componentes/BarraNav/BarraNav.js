@@ -6,12 +6,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
 
 export const BarraNav = () => {
   return (
     <NavBarStyle>
     <div>
-      <Navbar key="md" variant="dark" expand="md" className="mb-3">
+      <Navbar key="xxl" variant="dark" expand="md" className="mb-3">
         <Container fluid>
           <img className="logoimg" src={require("./img/Png  logo.png")} alt=""/>
           <Navbar.Brand href="#">
@@ -30,22 +31,35 @@ export const BarraNav = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3" >
-                <Nav.Link href="#action1"><p>Home Page</p></Nav.Link>
+                <Nav.Link as={Link} to="/"><p >Home Page</p></Nav.Link>
                 <NavDropdown
                   title="About Us"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action4">What is SkuadLack?</NavDropdown.Item>
-                  <NavDropdown.Item href="#action3">Why SkuadLack?</NavDropdown.Item>
-                  <NavDropdown.Item href="#action7">User/Organizations</NavDropdown.Item>
+
+                    <NavDropdown.Item href="#action4" >
+                      <Nav.Link className="dropdownlinks" as={Link} to="/">Que es SkuadLack?</Nav.Link>
+                    </NavDropdown.Item>
+
+                    <NavDropdown.Item href="#action3">
+                      <Nav.Link className="dropdownlinks" as={Link} to="/">Porque SkuadLack?</Nav.Link>
+                    </NavDropdown.Item>
+
+                    <NavDropdown.Item href="#action2">
+                      <Nav.Link className="dropdownlinks" as={Link} to="/organizacion">Crear Organizacion</Nav.Link>
+                    </NavDropdown.Item>
 
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
-                  <NavDropdown.Item href="#action5">Contact Us! :)</NavDropdown.Item>
-                </NavDropdown>
-                
-                <Nav.Link href="#action2"><Button as="a" variant="success">Sign In</Button ></Nav.Link>
-                <Nav.Link href="#action6"><Button as="a" variant="primary">Sign Up</Button ></Nav.Link>
+                    <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
+                    <NavDropdown.Item href="#action5">Contact Us! :)</NavDropdown.Item>
+                  </NavDropdown>
+              
+                <Nav.Link as={Link} to="/users"><Button variant="danger">Admin Mode</Button ></Nav.Link>
+
+                <Nav.Link as={Link} to="/user"><Button variant="success">Regístrate</Button ></Nav.Link>
+               
+               
+                <Nav.Link as={Link} to="/perdido"><Button variant="primary">Log In</Button ></Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
@@ -58,8 +72,6 @@ export const BarraNav = () => {
 
 const NavBarStyle= styled.div`
 
-margin: .3rem;
-padding-bottom: 4.5rem;
 
 .logoimg{
   width: 2.4rem;
@@ -75,9 +87,10 @@ padding-bottom: 4.5rem;
   border-radius: 2rem;
   padding-left: 2rem;
   padding: .1rem;
-  margin: .1rem;
+  margin: 1%;
   text-align: center;
   justify-content: baseline;
+  z-index: 100;
 
 }
 p{
@@ -88,5 +101,9 @@ p{
 }
 .offcanvas-body{
   margin-top: .3rem;
+}
+.dropdownlinks{
+  color: #686461;
+  font-weight: bolder;
 }
 `
