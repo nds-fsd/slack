@@ -6,11 +6,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80vh;
+    min-height: 80vh;
+    max-height: max-content;
     width: 100%;
     overflow: hidden;
     padding-top: 7.5vh;
     color: white;
+    
 
 }
 .seccion1 h1{

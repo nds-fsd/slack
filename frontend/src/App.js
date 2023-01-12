@@ -9,6 +9,7 @@ import DashboardUser from './Componentes/DashboardUsuario/dashboardUser';
 import NotFound from './Componentes/NotFound/notFound';
 import FormUser1 from './Componentes/FormularioUsuario/formUser1';
 import EditUser from './Componentes/editUser.js/editUser';
+import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
@@ -27,6 +28,7 @@ function App() {
           <Route path="/user" element={<FormUser1 />}>  </Route>
           <Route path="/user/:id" element={<DashboardUser />}>  </Route>
           <Route path="/editUser/:id" element={<EditUser />}>  </Route>
+          <Route path="/InfoSlack" element={<InfoSlack/>} >  </Route>
 
           <Route path="/users" element={<ListUsers />}></Route>
           <Route path='/*' element={<NotFound />} />

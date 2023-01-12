@@ -7,12 +7,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
+import { MdAccountBox } from 'react-icons/md';
+
 
 export const BarraNav = () => {
   return (
     <NavBarStyle>
     <div>
-      <Navbar key="xxl" variant="dark" expand="md" className="mb-3">
+      <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
         <Container fluid>
           <img className="logoimg" src={require("../../Assets/Png  logo.png")} alt=""/>
           <Navbar.Brand href="/">
@@ -31,18 +33,18 @@ export const BarraNav = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3" >
-                <Nav.Link as={Link} to="/"><p >Home Page</p></Nav.Link>
+                <Nav.Link as={Link} to="/"><p>Home Page</p></Nav.Link>
                 <NavDropdown
                   title="About Us"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
 
                     <NavDropdown.Item href="#action4" >
-                      <Nav.Link className="dropdownlinks" as={Link} to="/">Que es SkuadLack?</Nav.Link>
+                      <Nav.Link className="dropdownlinks" as={Link} to="/infoSlack">Que es SkuadLack?</Nav.Link>
                     </NavDropdown.Item>
 
                     <NavDropdown.Item href="#action3">
-                      <Nav.Link className="dropdownlinks" as={Link} to="/">Porque SkuadLack?</Nav.Link>
+                      <Nav.Link className="dropdownlinks" as={Link} to="/infoSlack">Porque SkuadLack?</Nav.Link>
                     </NavDropdown.Item>
 
                     <NavDropdown.Item href="#action2">
@@ -59,7 +61,7 @@ export const BarraNav = () => {
                 <Nav.Link as={Link} to="/user"><Button variant="success">Regístrate</Button ></Nav.Link>
                
                
-                <Nav.Link as={Link} to="/login"><Button variant="primary">Log In</Button ></Nav.Link>
+                <Nav.Link as={Link} to="/login"><Button variant="primary"><MdAccountBox className="a"/>Log In</Button ></Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
@@ -72,7 +74,10 @@ export const BarraNav = () => {
 
 const NavBarStyle= styled.div`
 
-
+.a{
+  padding-bottom: .1rem;
+  font-size: larger;
+}
 .logoimg{
   width: 3.4rem;
   height: 3.4rem;
