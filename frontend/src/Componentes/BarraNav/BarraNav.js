@@ -59,7 +59,7 @@ export const BarraNav = () => {
                 <Nav.Link as={Link} to="/user"><Button variant="success">Regístrate</Button ></Nav.Link>
                
                
-                <Nav.Link as={Link} to="/perdido"><Button variant="primary">Log In</Button ></Nav.Link>
+                <Nav.Link as={Link} to="/login"><Button variant="primary">Log In</Button ></Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
