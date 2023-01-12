@@ -1,10 +1,11 @@
 .listadoTabla{
- 
+    
     padding: 10vh;
 
 }
 table{
-    width: 80vw;
+  margin-top: 3rem;
+    width: 90vw;
     position: sticky;
     top:10vh;
    

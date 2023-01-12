@@ -16,8 +16,8 @@ import { BarraNav } from './Componentes/BarraNav/BarraNav';
 function App() {
 
   return (
-    <div className={styles.contenedorPrincipal}>
-      
+
+     <>
       <BarraNav />
       <div className={styles.mainRouter}>
 
@@ -35,8 +35,8 @@ function App() {
         </Routes>
 
       </div>
+      </> 
 
-    </div>
   );
 }
 

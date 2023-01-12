@@ -49,7 +49,7 @@ const DashboardUser = () =>{
         </div>
         <div className={styles.container}>
           <div>
-            <h3>Nombre de Usuario</h3>
+            <h3>Username</h3>
             <input value={user.userName}/>
           </div>
           <div>

@@ -52,7 +52,8 @@ const FormOrganizacion = () =>{
 
     return(
 
-        <div id='formOrg'>
+        <div >
+            <div id='formOrg'>
             <h1 className="tituloFormOrg" id="tituloCorreo">Primero, introduce tu correo electrónico</h1>
             <p className="comentarioCorreo">Te sugerimos que uses la<b className="comentarioCorreo"> dirección de correo electrónico que usas en el trabajo</b></p>
             <input className="inputFormOrg" id = "inputCorreo" type = "text" placeholder="nombre@work-email.com"  required onChange={getEmail}></input>
@@ -64,7 +65,7 @@ const FormOrganizacion = () =>{
             <input className="inputFormOrg" id = "inputTrabajoActual" type = "text" placeholder="Ocupados salvando al mundo" required onChange={getTrabajoActual}></input>
 
             <button type="submit" className="button" id='butFormOrg' onClick={postOrganizaciones}>Continuar</button>
-            
+            </div>
         </div>
         
  

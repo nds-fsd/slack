@@ -1,8 +1,8 @@
 body{
-    background-color: #E1DCE0;
+    background-color: #686461;
 }
 .seccion1{
-    background-color:#E1DCE0;
+    background-color:#686461;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,7 +66,7 @@ body{
 }
 .seccion2{
     background-color: #CEAD6D;
-    height: 100vh;
+    height: 50vh;
     width: 100%;
 }
 .seccion2_1{

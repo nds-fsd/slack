@@ -7,7 +7,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #CEAD6D;
-    width: 100vw;
+   
     
     
     
@@ -25,7 +25,8 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+   
     background-color: #e1dce0;
-    margin-top: 7rem
+    padding-top: 8rem;
+    
 }

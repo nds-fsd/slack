@@ -1,16 +1,22 @@
 
 
 #formOrg{
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #CEAD6D;
-    margin:10% 10% 10% 10%;
+    margin: 0 10% 10% 10%;
     border-radius: 2rem;
+    padding-top: 7rem;
+    
+    
+    
     
 }
 
 .tituloFormOrg{
+   
     background-color: #CEAD6D;
     border-radius: 15px;
     padding: 1rem 1rem 1rem 1rem;

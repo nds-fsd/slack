@@ -3,11 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
     background-color: #e1dce0;
+   padding-top: 8rem;
+   
+
 }
 .container{
-    
     background-color: #CEAD6D;
     display: flex;
     flex-direction: column;
@@ -22,6 +23,7 @@
     margin-top: 1.5rem;
     align-items: center;
     justify-content: center;
+
 }
 
 .buttondelete{

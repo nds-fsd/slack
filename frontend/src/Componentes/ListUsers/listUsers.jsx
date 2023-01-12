@@ -14,7 +14,7 @@ const ListUsers = ()=>{
                 setList(res);
             })
             console.log('Acabado el fetch');
-    },[])
+    },[list])
 
     return(
 
