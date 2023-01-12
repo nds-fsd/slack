@@ -1,0 +1,53 @@
+.listadoTabla{
+ 
+    padding: 10vh;
+
+}
+table{
+    width: 80vw;
+    position: sticky;
+    top:10vh;
+   
+    border-collapse: collapse;
+}
+th, td{
+    border: 1px solid black;
+    text-align: left;
+}
+th{
+    color: #E1DCE0;
+    font-size: 1.2rem;
+    position: sticky;
+    top:10vh;
+    background-color: #9E9B90;
+    border-color: black;
+}
+
+tr:nth-child(odd) {
+    background-color: #9E9B90;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #E1DCE0;
+  }
+
+  .butEdit{
+    background-color: #BACBDB;
+    border-radius: 10px;
+    width: 80%;
+  }
+
+  .butEliminar{
+    background-color: #CEAD6D;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.botones{
+text-align: center;  
+    
+}
+
+.thBotones{
+    text-align: center;
+}

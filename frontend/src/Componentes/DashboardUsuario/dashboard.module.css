@@ -1,0 +1,31 @@
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    background-color: #e1dce0;
+}
+.container{
+    
+    background-color: #CEAD6D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containerbutton{
+    background-color: #CEAD6D;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    margin-top: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttondelete{
+    margin-left: 10px;
+}
+
+

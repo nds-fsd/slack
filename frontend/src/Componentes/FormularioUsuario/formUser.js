@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./formUser.module.css"
 
 const FormUser = (props) =>{
@@ -6,6 +7,7 @@ const FormUser = (props) =>{
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [lastname, setLastname] = useState("")
+    const navigate = useNavigate();
 
     const getUsername = (event) =>{
         setUsername(event.target.value)
@@ -35,17 +37,19 @@ const FormUser = (props) =>{
             mode: "cors",
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
+              "Accept": "application/json",
             },
             body: JSON.stringify(body),
           };
+          
           fetch(url,options)
           .then((res)=>{
-            res.json();
+           return res.json();
           })
           .then((data)=>{
             console.log(data)//aqui entiendo que cuando se cree el homepage de user habra que
-                            //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
+            alert(`el usuario ${data.userName}`)  
+            navigate('/')            //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
           })
     }
     return(
@@ -74,7 +78,7 @@ const FormUser = (props) =>{
                    <input id="lastName" type="text" required onChange={getLastname}/>
                    <p>Identificate con tu verdadero apellido.</p>
                 </label>
-                <button type="submit" onClick={postUser}>Enviar</button>
+                <button  onClick={postUser}>Enviar</button>
 
             </form>
         </div>

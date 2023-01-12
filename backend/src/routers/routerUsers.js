@@ -11,8 +11,6 @@ routerUsers.get('/user',async(req,res)=>{
         }
       });
 
-
-
 routerUsers.get('/user/:id', async (req,res)=>{
     const id = req.params.id
     try{
@@ -37,7 +35,7 @@ routerUsers.post('/user', async(req,res)=> {
     }
     const user = new User(data);
     await user.save();
-    res.status(201).json(user)
+    res.status(201).send(user)
 }catch(error){
     res.status(500).json(error)
 }
