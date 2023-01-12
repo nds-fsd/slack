@@ -52,6 +52,7 @@ const ListUsers = ()=>{
                     <th>Id</th>
                     <th>Nombre de usuario</th>
                     <th>Email</th>
+                    <th>Nombre</th>
                     <th>Apellido</th>
                     <th className={styles.thBotones}>Editar</th>
                     <th className={styles.thBotones}>Eliminar</th>
@@ -63,6 +64,7 @@ const ListUsers = ()=>{
                     <td> {datosTabla._id}</td>
                     <td> {datosTabla.userName}</td>
                     <td> {datosTabla.email}</td>
+                    <td> {datosTabla.name}</td>
                     <td> {datosTabla.lastName}</td>
                     <td className={styles.botones}><Link to={`../user/${datosTabla._id}`}><button className={styles.butEdit}>Editar</button></Link></td>
                     <td className={styles.botones}><button className={styles.butEliminar}>Eliminar</button></td>
