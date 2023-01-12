@@ -15,7 +15,7 @@ export const BarraNav = () => {
       <Navbar key="xxl" variant="dark" expand="md" className="mb-3">
         <Container fluid>
           <img className="logoimg" src={require("./img/Png  logo.png")} alt=""/>
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/">
             <h1>SkuadLack</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
