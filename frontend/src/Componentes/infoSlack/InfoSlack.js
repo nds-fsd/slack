@@ -40,7 +40,7 @@ export const InfoSlack = () => {
           <Card border='primary' bg='light' text='dark' style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title><h1><MdSecurity/></h1></Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Seguridad</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted" >Seguridad</Card.Subtitle>
               <Card.Text>
                 Proteger tus datos en cada capa es la base del funcionamiento de SkuadLack.
               </Card.Text>
@@ -69,10 +69,12 @@ const InfoStyle= styled.div`
   padding-top: 8rem;
 
 }
+
 h2{
-  font-size: 2rem;
+  font-size: 3rem;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  padding-left: 10rem;
+  padding: 0;
+  margin: 0;
   width: 100%;
   text-shadow: 2px 2px #fff;
   color: #686461;
@@ -86,6 +88,10 @@ h2{
 
 }
 .subtitulo{
-  width: 50vw;
+  
+  width: 60vw;
+  font-weight: bold;
+  font-size: 1.5rem;
+  
 }
 `
