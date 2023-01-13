@@ -85,6 +85,7 @@ h2{
   padding: 1rem;
   justify-content: space-between;
   width: 90%;
+  flex-wrap: wrap;
 
 }
 .subtitulo{
