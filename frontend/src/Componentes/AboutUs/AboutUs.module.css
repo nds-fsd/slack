@@ -1,6 +1,5 @@
-
-.seccion1{
-    background-color:#E1DCE0;
+.seccion1 {
+    background-color: #E1DCE0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,28 +9,33 @@
     padding-top: 10vh;
 
 }
-.seccion1 h1{
+
+.seccion1 h1 {
     text-align: center;
 }
-.seccion1 p{
+
+.seccion1 p {
     text-align: center;
     margin: 40px 50px 40px 50px;
 }
-.seccion1 button{
+
+.seccion1 button {
     width: 40vw;
     height: 8vh;
     background-color: #BACBDB;
     color: #686461;
-    font-weight:bold;
+    font-weight: bold;
     font-size: 1rem;
     border: none;
     border-radius: 10px;
 }
+
 .seccion1 button:hover {
     box-shadow: 0px -3px 5px 0px #9E9B98;
-    text-decoration:underline;
+    text-decoration: underline;
 }
-.seccion1_1{
+
+.seccion1_1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,9 +44,10 @@
     margin-left: 5vw;
     width: 77%;
     height: 90%;
-    
+
 }
-.video{
+
+.video {
     width: 40vw;
     overflow: hidden;
     margin-left: 1%;
@@ -51,10 +56,11 @@
     border-radius: 30px;
     position: relative;
     box-shadow: 0px -3px 5px 0px #9E9B98;
-    
+
 }
-.seccion1_2{
-   
+
+.seccion1_2 {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,49 +68,63 @@
     justify-content: center;
     justify-items: center;
     width: 100%;
-    overflow: hidden;         
+    overflow: hidden;
 }
-.seccion2{
+
+.seccion2 {
     background-color: #CEAD6D;
     height: 100vh;
     width: 100%;
     margin-top: -20px;
 }
-.seccion2_1{
+
+.seccion2_1 {
     display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
     justify-content: center;
 }
-.logos{
-   margin-left: 4vw;
-   margin-right: 4vw;
+
+.logos {
+    margin-left: 4vw;
+    margin-right: 4vw;
 }
-#logoMundoToday{
-    height: 3vh;
-    width: 12vw;
+
+.cartas {
+    flex-direction: row;
+
 }
-#logoSlack{
-    height: 10vh;
-    width: 11vw;
+
+#fotos { 
+    display: flex;
+    align-content: center;
+    height: 30vh;
+    width: 15vw;
 }
-.seccion2 h2{
+
+.seccion2 h2 {
     text-align: center;
-    padding:20px;
-    
+    padding: 20px;
+
 }
-.seccion3{
-    background-color:aqua;
-    height: 50vh;;
+
+.seccion3 {
+    background-color: aqua;
+    height: 50vh;
+    ;
     width: 100%;
 }
-.seccion4{
-    background-color:blueviolet;
-    height: 50vh;;
+
+.seccion4 {
+    background-color: blueviolet;
+    height: 50vh;
+    ;
     width: 100%;
 }
-.seccion5{
-    background-color:chartreuse;
-    height: 50vh;;
+
+.seccion5 {
+    background-color: chartreuse;
+    height: 50vh;
+    ;
     width: 100%;
 }
