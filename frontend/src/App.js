@@ -10,6 +10,8 @@ import DashboardUser from './Componentes/DashboardUsuario/dashboardUser';
 import NotFound from './Componentes/NotFound/notFound';
 import FormUser1 from './Componentes/FormularioUsuario/formUser1';
 import EditUser from './Componentes/editUser.js/editUser';
+import AboutUs from './Componentes/AboutUs/AboutUs';
+
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -22,7 +24,7 @@ function App() {
         <Link to="/"><img className={styles.logo} src={logo} alt='logo' /></Link>
         <Link to="/" className='link'>SkuadLack</Link>
         <Link to="/producto" className='link'> Producto</Link>
-        <Link to="/enterprise" className='link'> Enterprise</Link>
+        <Link to="/AboutUs" className='link'> Enterprise</Link>
         <Link to="/recurso" className='link'>Recurso</Link>
         <Link to="/precios" className='link'>Precios</Link>
         {/* <a> Producto</a>
@@ -43,7 +45,7 @@ function App() {
           <Route path="/user" element={<FormUser1 />}>  </Route>
           <Route path="/user/:id" element={<DashboardUser />}>  </Route>
           <Route path="/editUser/:id" element={<EditUser />}>  </Route>
-
+          <Route path="/AboutUs" element={<AboutUs />}> </Route>
           <Route path="/users" element={<ListUsers />}></Route>
           <Route path='/*' element={<NotFound />} />
 
@@ -51,6 +53,7 @@ function App() {
         </Routes>
 
       </div>
+
 
     </div>
   );
