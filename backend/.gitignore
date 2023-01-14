@@ -1,2 +1,4 @@
 "Aqui va el .env"
 node_modules
+.env
+env

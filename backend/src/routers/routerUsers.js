@@ -1,6 +1,8 @@
 import express from 'express';
-import User from '../Schemas/user.js'
+import User from '../Schemas/user.js';
 const routerUsers = express.Router();
+import jwt from 'jsonwebtoken';
+const jwtSecret = process.env.JWT_SECRET;
 
 routerUsers.get('/user',async(req,res)=>{
     try{
@@ -26,20 +28,44 @@ routerUsers.get('/user/:id', async (req,res)=>{
 
 routerUsers.post('/user', async(req,res)=> {
     try{
-    const body = req.body;
-    const data = {
-        userName: body.userName,
-        email: body.email,
-        name: body.name,
-        lastName: body.lastName
+        const body = req.body;
+        const data = {
+            userName: body.userName,
+            email: body.email,
+            name: body.name,
+            lastName: body.lastName,
+            password:body.password
+        }
+
+        //Validar que tengamos email
+        if(!email) {
+            return res.status(400).json({ error: { register: "Email not recieved"}});
+        }
+
+        //Validar que el mail no existe
+        User.findOne({email})
+
+        const user = new User(data);
+        await user.save();
+        await  ((createdUser =>{
+            return res.status(201).json({
+                token: createdUser.generateJWT(),
+                user: {
+                    userName:createdUser.userName,
+                    email:createdUser.email,
+                    lastName:createdUser.lastName,
+                    id: createdUser._id,
+
+                },
+            })
+
+        }))
+        //res.status(201).send(user)
+        }catch(error){
+            res.status(500).json(error)
+        }
     }
-    const user = new User(data);
-    await user.save();
-    res.status(201).send(user)
-}catch(error){
-    res.status(500).json(error)
-}
-});
+);
 
 routerUsers.patch('/user/:id', async(req,res)=>{
     try{
