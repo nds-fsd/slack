@@ -9,9 +9,10 @@ const FormUser1 = () =>{
  const navigate = useNavigate();
  const { register, handleSubmit, formState:{errors}} = useForm()
  const onDataSubmit2 = (data) => {
-  postToMongo("user", data).then((dataServer) => {
-    alert(`el usuario ${dataServer.userName} ha sido creado.`)
-    navigate(`/user/${dataServer._id}`)
+  
+    postToMongo("user", data).then((dataServer) => {
+        alert(`el usuario ${dataServer.userName} ha sido creado.`)
+        //navigate(`/user/${dataServer._id}`)
      })
  }
     return (
@@ -32,6 +33,9 @@ const FormUser1 = () =>{
             <h3>Rellena el siguiente campo con tu apellido.</h3>
             <input placeholder='Apellido.' {...register("lastName" , {required: true})} />
             {errors.lastName && <span>❌campo obligatorio❗❗</span>}
+            <h3>Define una contraseña guapa.</h3>
+            <input placeholder='password' {...register("password" , {required: true})} />
+            {errors.password && <span>❌campo obligatorio❗❗</span>}
             <br/>
             <input type="submit"/>
         </form>

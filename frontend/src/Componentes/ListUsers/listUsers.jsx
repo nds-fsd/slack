@@ -50,6 +50,7 @@ const ListUsers = ()=>{
             <table>
                 <tr>
                     <th>Id</th>
+                    <th>Contraseña</th>
                     <th>Nombre de usuario</th>
                     <th>Email</th>
                     <th>Nombre</th>
@@ -62,6 +63,7 @@ const ListUsers = ()=>{
 
                 <tr>
                     <td> {datosTabla._id}</td>
+                    <td> {datosTabla.password}</td>
                     <td> {datosTabla.userName}</td>
                     <td> {datosTabla.email}</td>
                     <td> {datosTabla.name}</td>
