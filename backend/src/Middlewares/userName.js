@@ -1,4 +1,4 @@
-const express = require('express')<
+import express  from "express";
 
 const validateUserName = (req, res, next) => {
     console.log('Request Type:', req.method);
@@ -19,6 +19,4 @@ const validateUserName = (req, res, next) => {
     next();
 };
 
-module.exports = {
-    validateUserName,
-}
+export {validateUserName}
