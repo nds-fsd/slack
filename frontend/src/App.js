@@ -1,7 +1,4 @@
 import './App.css';
-<<<<<<< HEAD
-
-=======
 // import FormUser from './Componentes/FormularioUsuario/formUser';
 import FormOrganizacion from './Componentes/FormularioOrganizacion/formOrganizacion.jsx';
 import LandingPage from './Componentes/LandingPage/LandingPage';
@@ -16,15 +13,10 @@ import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
->>>>>>> sprint1
 
 function App() {
 
   return (
-<<<<<<< HEAD
-    <div>
-=======
->>>>>>> sprint1
 
      <>
       <BarraNav />
