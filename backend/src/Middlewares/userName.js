@@ -1,10 +1,10 @@
-import express  from "express";
+import express from "express";
 
 const validateUserName = (req, res, next) => {
     console.log('Request Type:', req.method);
     const user = req.body;
     
-    if (user.name === undefined || todo.name.length === 0) {
+    if (user.name === undefined || user.name.length === 0) {
         res.status(400).send({message: 'name required'});
         return;
     }
@@ -19,4 +19,4 @@ const validateUserName = (req, res, next) => {
     next();
 };
 
-export {validateUserName}
+export {validateUserName};

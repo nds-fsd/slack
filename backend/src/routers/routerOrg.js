@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { application } from 'express';
 import Organizacion from "../Schemas/organizacion.js";
+import { validateOrgName } from '../Middlewares/orgName.js';
 const routerOrg = express.Router();
 
 routerOrg.get('/organizacion',async(req,res)=>{
@@ -11,7 +12,9 @@ routerOrg.get('/organizacion',async(req,res)=>{
         }
 });
 
-routerOrg.post('/organizacion', async(req,res)=> {
+// app.use(validateOrgName);
+
+routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
@@ -45,7 +48,7 @@ routerOrg.get('/organizacion/:id', async (req,res)=>{
     }
 });
 
-routerOrg.patch('/organizacion/:id', async(req,res)=>{
+routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
     try{
         const organizacionModified = await Organizacion.findByIdAndUpdate(req.params.id, req.body);
         if(organizacionModified){
