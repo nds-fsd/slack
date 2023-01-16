@@ -11,22 +11,13 @@ const ListUsersBootstrap = () => {
     const [list, setList] = useState([]);
     let contador = 0;
 
-    useEffect(() => {
-        fetch("http://localhost:3001/user")
-            .then((response) => {
-                return response.json();
-            })
-            .then((res) => {
-                setList(res);
-            })
-        console.log('Acabado el fetch');
-    }, list)
 
-    const alertBootstap = () =>{
+    const alertBootstap = () => {
+        return(
         <>
-        <Alert variant='danger'>Usuario eliminado con éxito</Alert>
+            <Alert key='danger' variant='danger'>Usuario eliminado con éxito</Alert>
         </>
-    }
+    )}
 
     const deleteUser = (datosTabla) => {
         const url = "http://localhost:3001/user/" + datosTabla
@@ -43,12 +34,21 @@ const ListUsersBootstrap = () => {
                 res.json();
             })
             .then(() => {
-                //alert(`Usuario  eliminado.`)
-                alertBootstap(); //No funciona
-                
-                
+                alert(`Usuario  eliminado.`)
+                //alertBootstap(); //No funciona
             });
     }
+
+    useEffect(() => {
+        fetch("http://localhost:3001/user")
+            .then((response) => {
+                return response.json();
+            })
+            .then((res) => {
+                setList(res);
+            })
+        console.log('Acabado el fetch');
+    }, [])
 
     return (
         <div className={styles.listadoTablaBootstrap}>
