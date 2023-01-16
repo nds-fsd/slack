@@ -1,0 +1,32 @@
+body{
+    background-color: #E1DCE0;
+ }   
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #CEAD6D;
+   
+    
+    
+    
+}
+
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    background-color: #e1dce0;
+    padding-top: 8rem;
+    
+}
