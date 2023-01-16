@@ -12,7 +12,7 @@ const FormUser1 = () => {
 
         postToMongo("user", data).then((dataServer) => {
             alert(`el usuario ${dataServer.userName} ha sido creado.`)
-            //navigate(`/user/${dataServer._id}`)
+            navigate(`/user/${dataServer._id}`)
         })
     }
     return (
