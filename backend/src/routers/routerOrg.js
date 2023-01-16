@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { application } from 'express';
 import Organizacion from "../Schemas/organizacion.js";
 import { validateOrgName } from '../Middlewares/orgName.js';
 const routerOrg = express.Router();
@@ -11,6 +11,8 @@ routerOrg.get('/organizacion',async(req,res)=>{
           res.status(500).json(error)
         }
 });
+
+// app.use(validateOrgName);
 
 routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
     const body = req.body;

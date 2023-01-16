@@ -25,6 +25,8 @@ routerUsers.get('/user/:id', async (req,res)=>{
     }
 });
 
+// app.use(validateUserName);
+
 routerUsers.post('/user',validateUserName, async(req,res)=> {
     try{
     const body = req.body;
