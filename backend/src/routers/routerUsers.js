@@ -40,6 +40,7 @@ routerUsers.post('/user', async(req,res)=> {
         
         const user = new User(req.body)
 
+        //antes de grabarse se ejecuta la función PRE del schema
         const userCreated =  await user.save();
         
         const userToken = generateJWT(userCreated);
