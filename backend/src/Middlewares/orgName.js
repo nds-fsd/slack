@@ -20,6 +20,4 @@ const validateOrgName = (req, res, next) => {
     next();
 };
 
-module.exports = {
-    validateOrgName,
-}
+export {validateOrgName};

@@ -19,4 +19,4 @@ const validateUserName = (req, res, next) => {
     next();
 };
 
-export {validateUserName}
+export {validateUserName};
