@@ -1,8 +1,6 @@
 import express from 'express';
 import User from '../Schemas/user.js';
 const routerUsers = express.Router();
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken';
 import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -28,6 +26,7 @@ routerUsers.get('/user/:id', async (req,res)=>{
     }
 });
 
+//Pendiente cambiar la ruta de /user, tiene que ser /userRegister o algo similar
 routerUsers.post('/user', async(req,res)=> {
     try{
                
