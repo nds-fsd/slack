@@ -16,10 +16,6 @@ const ListUsers = ()=>{
             console.log('Acabado el fetch');
     },[])
     
-   
-      
-    
-    
 
     // const deleteUser = (datosTabla) =>{
     //     const url = "http://localhost:3001/user/" + datosTabla._id
