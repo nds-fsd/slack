@@ -1,7 +1,9 @@
 import express from 'express';
 import User from '../Schemas/user.js';
 const routerUsers = express.Router();
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
+import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 
 routerUsers.get('/user',async(req,res)=>{
@@ -28,44 +30,24 @@ routerUsers.get('/user/:id', async (req,res)=>{
 
 routerUsers.post('/user', async(req,res)=> {
     try{
-        const body = req.body;
-        const data = {
-            userName: body.userName,
-            email: body.email,
-            name: body.name,
-            lastName: body.lastName,
-            password:body.password
-        }
+               
+        const emailExist = await User.findOne({email: req.body.email})
+        const userNameExist = await User.findOne({email: req.body.userName})
 
-        //Validar que tengamos email
-        if(!email) {
-            return res.status(400).json({ error: { register: "Email not recieved"}});
-        }
+        if(!req.body.email) return res.status(404).json({message: "No hay email"}) // Validar que viene un mail en el body
 
-        //Validar que el mail no existe
-        User.findOne({email})
+        if(emailExist) return res.status(400).json({message: "El email ya existe"}) // Comprobar que el mail no existe
+        if(userNameExist) return res.status(400).json({message: "El nombre de usuario ya existe"}) // Comprobar que el userName no existe
+        
+        const user = new User(req.body)
 
-        const user = new User(data);
-        await user.save();
-        await  ((createdUser =>{
-            return res.status(201).json({
-                token: createdUser.generateJWT(),
-                user: {
-                    userName:createdUser.userName,
-                    email:createdUser.email,
-                    lastName:createdUser.lastName,
-                    id: createdUser._id,
+        const userCreated =  await user.save();
+        
+        const userToken = generateJWT(userCreated);
+        return res.status(201).json(userToken)
 
-                },
-            })
-
-        }))
-        //res.status(201).send(user)
-        }catch(error){
-            res.status(500).json(error)
-        }
-    }
-);
+    }catch(e){return res.status(500).json({message: `el error es ${e}`})}
+});
 
 routerUsers.patch('/user/:id', async(req,res)=>{
     try{
