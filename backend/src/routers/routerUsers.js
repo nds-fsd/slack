@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../Schemas/user.js'
+import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
 
 routerUsers.get('/user',async(req,res)=>{
@@ -24,7 +25,9 @@ routerUsers.get('/user/:id', async (req,res)=>{
     }
 });
 
-routerUsers.post('/user', async(req,res)=> {
+// app.use(validateUserName);
+
+routerUsers.post('/user',validateUserName, async(req,res)=> {
     try{
     const body = req.body;
     const data = {
@@ -41,7 +44,7 @@ routerUsers.post('/user', async(req,res)=> {
 }
 });
 
-routerUsers.patch('/user/:id', async(req,res)=>{
+routerUsers.patch('/user/:id',validateUserName, async(req,res)=>{
     try{
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if(userModified){
