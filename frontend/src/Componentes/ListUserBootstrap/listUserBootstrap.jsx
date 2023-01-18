@@ -9,15 +9,17 @@ import Alert from 'react-bootstrap/Alert';
 
 const ListUsersBootstrap = () => {
     const [list, setList] = useState([]);
+    const [refresh, setRefresh] = useState(true);
     let contador = 0;
 
 
     const alertBootstap = () => {
-        return(
-        <>
-            <Alert key='danger' variant='danger'>Usuario eliminado con éxito</Alert>
-        </>
-    )}
+        return (
+            <>
+                <Alert key='danger' variant='danger'>Usuario eliminado con éxito</Alert>
+            </>
+        )
+    }
 
     const deleteUser = (datosTabla) => {
         const url = "http://localhost:3001/user/" + datosTabla
@@ -34,21 +36,26 @@ const ListUsersBootstrap = () => {
                 res.json();
             })
             .then(() => {
-                alert(`Usuario  eliminado.`)
+                setRefresh(true);
+                alert(`Usuario  eliminado.`);
                 //alertBootstap(); //No funciona
             });
     }
 
+
     useEffect(() => {
-        fetch("http://localhost:3001/user")
-            .then((response) => {
-                return response.json();
-            })
-            .then((res) => {
-                setList(res);
-            })
-        console.log('Acabado el fetch');
-    }, [])
+        if (refresh) {
+            fetch("http://localhost:3001/user")
+                .then((response) => {
+                    return response.json();
+                })
+                .then((res) => {
+                    setList(res);
+                    setRefresh(false);
+                })
+            console.log('Acabado el fetch');
+        }
+    }, [refresh])
 
     return (
         <div className={styles.listadoTablaBootstrap}>
