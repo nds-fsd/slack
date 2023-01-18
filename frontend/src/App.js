@@ -26,8 +26,8 @@ function App() {
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
-          <Route path="/user/:id" element={<DashboardUser />}>  </Route>
-          <Route path="/editUser/:id" element={<EditUser />}>  </Route>
+          <Route path="/user/:id" element={<EditUser />}>  </Route>
+          {/* <Route path="/editUser/:id" element=>  </Route> */}
           <Route path="/InfoSlack" element={<InfoSlack/>} >  </Route>
 
           <Route path="/users" element={<ListUsers />}></Route>
