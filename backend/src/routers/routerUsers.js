@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../Schemas/user.js';
+import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
 import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
@@ -26,8 +27,9 @@ routerUsers.get('/user/:id', async (req,res)=>{
     }
 });
 
-//Pendiente cambiar la ruta de /user, tiene que ser /userRegister o algo similar
-routerUsers.post('/user', async(req,res)=> {
+// app.use(validateUserName);
+
+routerUsers.post('/user',validateUserName, async(req,res)=> {
     try{
                
         const emailExist = await User.findOne({email: req.body.email})
@@ -49,7 +51,7 @@ routerUsers.post('/user', async(req,res)=> {
     }catch(e){return res.status(500).json({message: `el error es ${e}`})}
 });
 
-routerUsers.patch('/user/:id', async(req,res)=>{
+routerUsers.patch('/user/:id',validateUserName, async(req,res)=>{
     try{
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if(userModified){
