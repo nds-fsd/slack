@@ -1,3 +1,20 @@
+import { Navigate, Outlet } from "react-router-dom";
+import { getUserToken } from "../../utils/localStorage.utils.js"; //en from falta ruta
+
+// "getUserToken" tiene q venir de local storage para redireccionar las rutas en caso de no coincidir
+
+const PrivateRoutes = () => {
+  if (getUserToken()) {
+    return <Outlet />;
+  } else {
+    return <Navigate to="/" />; //redirigir a login 
+  }
+};
+export default PrivateRoutes;
+/*
+---------------OTRA FORMA QUE QUIERO PROBAR------------      
+
+
 import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
@@ -24,3 +41,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 export default PrivateRoute;
+*/
