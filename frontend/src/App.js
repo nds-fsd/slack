@@ -11,6 +11,7 @@ import FormUser1 from './Componentes/FormularioUsuario/formUser1';
 import EditUser from './Componentes/editUser.js/editUser';
 import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
+import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -30,7 +31,7 @@ function App() {
           <Route path="/editUser/:id" element={<EditUser />}>  </Route>
           <Route path="/InfoSlack" element={<InfoSlack/>} >  </Route>
 
-          <Route path="/users" element={<ListUsers />}></Route>
+          <Route path="/users" element={<ListUserBootstrap />}></Route>
           <Route path='/*' element={<NotFound />} />
 
 

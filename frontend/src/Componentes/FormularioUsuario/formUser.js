@@ -7,6 +7,7 @@ const FormUser = (props) =>{
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [lastname, setLastname] = useState("")
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const getUsername = (event) =>{
@@ -23,6 +24,9 @@ const FormUser = (props) =>{
     const getLastname = (event) =>{
         setLastname(event.target.value)
     }
+    const getPassword = (event) =>{
+        setPassword(event.target.value)
+    }
 
     const postUser = () =>{
         const url = "http://localhost:3001/user";
@@ -30,7 +34,8 @@ const FormUser = (props) =>{
             userName: username,
             email,
             name,
-            lastName: lastname
+            lastName: lastname,
+            password:password
         };
         const options = {
             method: "POST",
@@ -53,6 +58,7 @@ const FormUser = (props) =>{
           })
     }
     return(
+
         <div className={styles.card}>
             <h1>Bienvenido a SKUADLACK</h1>
             <h3>Rellena los siguientes campos para poder dar de alta tu perfil</h3>
@@ -63,21 +69,31 @@ const FormUser = (props) =>{
                    <input id="userName" type="text" required onChange={getUsername}/>
                    <p>Este campo será tu nombre visible en SKUADLACK.</p>
                 </label>
+
                 <label for="email">
                    email 
                 <input id="email" type="text" required onChange={getEmail}/>
                    <p>Te recomendamos que te registres con el email del trabajo.</p>
                 </label>
+
                 <label for="name">
                    name 
                    <input id="name" type="text" required onChange={getName}/>
                    <p>Identificate con tu verdadero nombre.</p>
                 </label>
+
                 <label for="lastName">
                    last name 
                    <input id="lastName" type="text" required onChange={getLastname}/>
                    <p>Identificate con tu verdadero apellido.</p>
                 </label>
+
+                <label for="password">
+                   contraseña
+                   <input id="password" type="text" required onChange={getPassword}/>
+                   <p>Define una contraseña guapa.</p>
+                </label>
+
                 <button  onClick={postUser}>Enviar</button>
 
             </form>
