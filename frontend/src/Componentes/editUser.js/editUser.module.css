@@ -1,27 +1,31 @@
-.card{
+.card {
     display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-background-color: #CEAD6D;
-
-
-
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #CEAD6D;
 }
 
-.button{
-display: flex;
-align-items: center;
-justify-content: center;
-;
+
+.title {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8rem;
+    background-color: #e1dce0;
 }
 
-.title{
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding-top: 8rem;
-background-color: #e1dce0;
+}
+.button2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
 }
