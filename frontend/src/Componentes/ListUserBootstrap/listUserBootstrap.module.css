@@ -1,0 +1,8 @@
+.listadoTablaBootstrap{
+    padding-top: 10%;
+    padding-left: 8%;
+    padding-right: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

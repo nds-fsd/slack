@@ -1,7 +1,9 @@
 import express from 'express';
-import User from '../Schemas/user.js'
+import User from '../Schemas/user.js';
 import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
+import generateJWT from '../Utils/utils.js';
+const jwtSecret = process.env.JWT_SECRET;
 
 routerUsers.get('/user',async(req,res)=>{
     try{
@@ -29,19 +31,24 @@ routerUsers.get('/user/:id', async (req,res)=>{
 
 routerUsers.post('/user',validateUserName, async(req,res)=> {
     try{
-    const body = req.body;
-    const data = {
-        userName: body.userName,
-        email: body.email,
-        name: body.name,
-        lastName: body.lastName
-    }
-    const user = new User(data);
-    await user.save();
-    res.status(201).send(user)
-}catch(error){
-    res.status(500).json(error)
-}
+               
+        const emailExist = await User.findOne({email: req.body.email})
+        const userNameExist = await User.findOne({email: req.body.userName})
+
+        if(!req.body.email) return res.status(404).json({message: "No hay email"}) // Validar que viene un mail en el body
+
+        if(emailExist) return res.status(400).json({message: "El email ya existe"}) // Comprobar que el mail no existe
+        if(userNameExist) return res.status(400).json({message: "El nombre de usuario ya existe"}) // Comprobar que el userName no existe
+        
+        const user = new User(req.body)
+
+        //antes de grabarse se ejecuta la función PRE del schema
+        const userCreated =  await user.save();
+        
+        const userToken = generateJWT(userCreated);
+        return res.status(201).json(userToken)
+
+    }catch(e){return res.status(500).json({message: `el error es ${e}`})}
 });
 
 routerUsers.patch('/user/:id',validateUserName, async(req,res)=>{

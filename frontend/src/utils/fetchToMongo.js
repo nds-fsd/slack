@@ -1,5 +1,5 @@
-
 export const postToMongo = async( path, data ) => {
+    
     const url = `http://localhost:3001/${path}`
     const response = await fetch(url,{
         method: "POST", // metodo 
