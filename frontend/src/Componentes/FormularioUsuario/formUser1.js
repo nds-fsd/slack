@@ -9,10 +9,13 @@ const FormUser1 = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onDataSubmit2 = (data) => {
-        postToMongo("user", data).then((dataServer) => {
-            alert(`el usuario ${dataServer.userName} ha sido creado.`)
-            navigate(`/user/${dataServer._id}`)
-        })
+        postToMongo("user", data)
+            .then((dataServer) => {
+                const user = dataServer.userCreated
+                // console.log("soy token", user.userToken)
+                alert(`el usuario ${user.userName} ha sido creado.`)
+                navigate(`/user/${user._id}`)
+            })
     }
     return (
         <>
@@ -38,6 +41,9 @@ const FormUser1 = () => {
                 <input placeholder='Apellido.' {...register("lastName", { required: true, maxLength: 20 })} />
                 {errors.lastName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
+                <h3>Define una contraseña guapa</h3>
+                <input placeholder='password' {...register("password", { required: true })} />
+                {errors.password && <span>❌campo obligatorio❗❗</span>}
                 <br />
                 <input type="submit" />
             </form>
