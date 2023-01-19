@@ -22,7 +22,7 @@ const ListUsersBootstrap = () => {
     }
 
     const deleteUser = (datosTabla) => {
-        const url = "http://localhost:3001/user/" + datosTabla
+        const url = "http://localhost:3001/user/" + datosTabla._id
         const options = {
             method: "DELETE",
             mode: "cors",
@@ -37,7 +37,7 @@ const ListUsersBootstrap = () => {
             })
             .then(() => {
                 setRefresh(true);
-                alert(`Usuario  eliminado.`);
+                alert(`Usuario ${datosTabla.userName} eliminado.`);
                 //alertBootstap(); //No funciona
             });
     }
@@ -86,7 +86,7 @@ const ListUsersBootstrap = () => {
                             <td> {datosTabla.name}</td>
                             <td> {datosTabla.lastName}</td>
                             <td className={styles.botones}><Link to={`../user/${datosTabla._id}`}><Button variant="light" className={styles.butEdit}>Editar</Button></Link></td>
-                            <td className={styles.botones}><Button variant="danger" onClick={() => deleteUser(datosTabla._id)} className={styles.butEliminar}>Eliminar</Button></td>
+                            <td className={styles.botones}><Button variant="danger" onClick={() => deleteUser(datosTabla)} className={styles.butEliminar}>Eliminar</Button></td>
                         </tr>
 
 
