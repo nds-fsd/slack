@@ -11,6 +11,7 @@ const EditUser = () => {
     const [user, setUser] = useState("")
     const navigate = useNavigate();
     const { setValue, register, handleSubmit, formState: { errors } } = useForm()
+    const [triger, setTriger] = useState(null)
 
     // funciones o efectos
     useEffect(() => {
@@ -26,12 +27,13 @@ const EditUser = () => {
                 setValue("email", res.email)
 
             });
-    }, []);
+    }, [triger]);
 
     const onDataSubmit2 = (data) => {
         patchToMongo(`user/${user._id}`, data).then((dataServer) => {
             alert(`el usuario ${dataServer.userName} ha sido modificado.`)
-            navigate(`/user/${dataServer._id}`)
+            // navigate(`/user/${dataServer._id}`)
+            setTriger(!triger)
         })
 
     }
@@ -81,9 +83,13 @@ const EditUser = () => {
                 {errors.lastName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
                 <br />
-                <button type="submit">Guardar Cambios</button>
-                <button onClick={deleteUser}>Eliminar</button>
+                <div className={styles.button}>
+                    <button type="submit">Guardar Cambios</button>
+                </div>
             </form>
+            <div className={styles.button2}>
+                <button onClick={deleteUser} >Eliminar</button>
+            </div>
         </>
     )
 }
