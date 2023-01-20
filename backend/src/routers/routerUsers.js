@@ -47,7 +47,17 @@ routerUsers.post('/user', validateUserName, async (req, res) => {
         const userCreated = await user.save();
 
         const userToken = generateJWT(userCreated);
-        return res.status(201).json({ userCreated, userToken })
+
+        //Crearmos otro objeto para no enviar la contraseña
+        const resUser = {
+            userName: userCreated.userName,
+            _id:userCreated._id,
+            email: userCreated.email,
+            name: userCreated.name,
+            lastName: userCreated.lastName
+        }
+
+        return res.status(201).json({ resUser, userToken })
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
 });
