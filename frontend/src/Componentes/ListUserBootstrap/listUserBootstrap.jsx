@@ -10,16 +10,7 @@ import Alert from 'react-bootstrap/Alert';
 const ListUsersBootstrap = () => {
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(true);
-    let contador = 0;
 
-
-    const alertBootstap = () => {
-        return (
-            <>
-                <Alert key='danger' variant='danger'>Usuario eliminado con éxito</Alert>
-            </>
-        )
-    }
 
     const deleteUser = (datosTabla) => {
         const url = "http://localhost:3001/user/" + datosTabla._id
@@ -59,12 +50,11 @@ const ListUsersBootstrap = () => {
 
     return (
         <div className={styles.listadoTablaBootstrap}>
-            <Table className={styles.tablaDark} size="sm" triped bordered hover variant="dark">
+            <Table className={styles.tablaDark} size="sm" striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Num</th>
                         <th>Id</th>
-                        <th>Contraseña</th>
                         <th>Nombre de usuario</th>
                         <th>Email</th>
                         <th>Nombre</th>
@@ -75,12 +65,11 @@ const ListUsersBootstrap = () => {
                 </thead>
                 <tbody>
 
-                    {list && list.map((datosTabla) => (
+                    {list && list.map((datosTabla, index) => (
 
-                        <tr>
-                            <td> {contador += 1}</td>
+                        <tr key={datosTabla._id + '_list_user'}>
+                            <td> {index+1}</td>
                             <td> {datosTabla._id}</td>
-                            <td> {datosTabla.password}</td>
                             <td> {datosTabla.userName}</td>
                             <td> {datosTabla.email}</td>
                             <td> {datosTabla.name}</td>

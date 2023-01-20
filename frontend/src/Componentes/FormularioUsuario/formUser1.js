@@ -11,7 +11,7 @@ const FormUser1 = () => {
     const onDataSubmit2 = (data) => {
         postToMongo("user", data)
             .then((dataServer) => {
-                const user = dataServer.userCreated
+                const user = dataServer.resUser
                 // console.log("soy token", user.userToken)
                 alert(`el usuario ${user.userName} ha sido creado.`)
                 navigate(`/user/${user._id}`)

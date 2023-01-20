@@ -21,6 +21,7 @@ const EditUser = () => {
             })
             .then((res) => {
                 setUser(res);
+                
                 setValue("userName", res.userName)
                 setValue("name", res.name)
                 setValue("lastName", res.lastName)
