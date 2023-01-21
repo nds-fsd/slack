@@ -22,7 +22,7 @@ const ModalBase = ( {children, onClose, open }) => {
 
     return (
         <div className={`${styles.backdrop} ${open && styles.open}`}>
-        <div
+          <div
           className={`${styles.modal} ${open && styles.open}`}
           ref={modalReference}
         >
