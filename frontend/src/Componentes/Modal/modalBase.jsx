@@ -1,8 +1,8 @@
 
 import React, { useEffect, useRef } from "react";
-import styles from './modal.module.css'
+import styles from './modalBase.module.css'
 
-const Modal = ( {children, onClose, open }) => {
+const ModalBase = ( {children, onClose, open }) => {
     const modalReference = useRef(null);
 
     useEffect(() => {
@@ -32,3 +32,5 @@ const Modal = ( {children, onClose, open }) => {
 
     )
 }
+
+export default ModalBase

@@ -5,17 +5,21 @@ import { patchToMongo } from "../../utils/fetchToMongo";
 import NotFound from "../NotFound/notFound";
 import styles from "./editUser.module.css"
 
-const EditUser = () => {
+const EditUser = (props) => {
     // Varuiables y estados
     let params = useParams()
     const [user, setUser] = useState("")
     const navigate = useNavigate();
     const { setValue, register, handleSubmit, formState: { errors } } = useForm()
     const [triger, setTriger] = useState(null)
+    const userToEdit = props.userId
 
+   
+   
     // funciones o efectos
     useEffect(() => {
-        fetch("http://localhost:3001/user/" + params.id)
+        fetch("http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id))
+        
             .then((res) => {
                 return res.json();
             })
@@ -26,20 +30,26 @@ const EditUser = () => {
                 setValue("name", res.name)
                 setValue("lastName", res.lastName)
                 setValue("email", res.email)
-
+                
             });
-    }, [triger]);
+    }, [triger,userToEdit]);
 
     const onDataSubmit2 = (data) => {
         patchToMongo(`user/${user._id}`, data).then((dataServer) => {
             alert(`el usuario ${dataServer.userName} ha sido modificado.`)
             // navigate(`/user/${dataServer._id}`)
             setTriger(!triger)
+            //No nos funciona la binaria, no entendemos por qué
+            props.setOpenModal(false)
+            (userToEdit ? props.setRefresh(true) :  setTriger(!triger));
+            //(userToEdit && props.setRefresh(true));
+            //(userToEdit && props.setOpenModal(false));
+               
         })
 
     }
     const deleteUser = () => {
-        const url = "http://localhost:3001/user/" + params.id;
+        const url = "http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id);
         const options = {
             method: "DELETE",
             mode: "cors",
@@ -53,8 +63,13 @@ const EditUser = () => {
                 res.json();
             })
             .then(() => {
-                alert(`Usuario ${user.userName} eliminado.`)
-                navigate('/')
+                alert(`Usuario ${user.userName} eliminado.`);
+                              
+          
+                //si userEdit tiene datos quiere decir que estoy editando desde el admin, si no es que estoy a nivel usuario/cliente
+                (userToEdit ? props.setRefresh(true) : navigate('/'));
+                (userToEdit && props.setOpenModal(false));
+             
             });
     }
     if (!user) return (<div><NotFound /></div>)

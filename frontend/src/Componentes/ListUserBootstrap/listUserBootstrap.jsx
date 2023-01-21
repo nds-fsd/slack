@@ -4,16 +4,20 @@ import styles from "./listUserBootstrap.module.css"
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import ModalEditUser from "../Modal/modalEditUser";
+import EditUser from '../editUser/editUser.js'
 
 
 
 const ListUsersBootstrap = () => {
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
+    const [handleId, setHandleId] = useState('');
 
 
-    const deleteUser = (datosTabla) => {
-        const url = "http://localhost:3001/user/" + datosTabla._id
+    const deleteUser = (datosUser) => {
+        const url = "http://localhost:3001/user/" + datosUser._id
         const options = {
             method: "DELETE",
             mode: "cors",
@@ -28,7 +32,7 @@ const ListUsersBootstrap = () => {
             })
             .then(() => {
                 setRefresh(true);
-                alert(`Usuario ${datosTabla.userName} eliminado.`);
+                alert(`Usuario ${datosUser.userName} eliminado.`);
                 //alertBootstap(); //No funciona
             });
     }
@@ -65,21 +69,32 @@ const ListUsersBootstrap = () => {
                 </thead>
                 <tbody>
 
-                    {list && list.map((datosTabla, index) => (
+                    {list && list.map((datosUser, index) => (
 
-                        <tr key={datosTabla._id + '_list_user'}>
+                        <tr key={datosUser._id + '_list_user'}>
                             <td> {index+1}</td>
-                            <td> {datosTabla._id}</td>
-                            <td> {datosTabla.userName}</td>
-                            <td> {datosTabla.email}</td>
-                            <td> {datosTabla.name}</td>
-                            <td> {datosTabla.lastName}</td>
-                            <td className={styles.botones}><Link to={`../user/${datosTabla._id}`}><Button variant="light" className={styles.butEdit}>Editar</Button></Link></td>
-                            <td className={styles.botones}><Button variant="danger" onClick={() => deleteUser(datosTabla)} className={styles.butEliminar}>Eliminar</Button></td>
+                            <td> {datosUser._id}</td>
+                            <td> {datosUser.userName}</td>
+                            <td> {datosUser.email}</td>
+                            <td> {datosUser.name}</td>
+                            <td> {datosUser.lastName}</td>
+
+                            <td className={styles.botones}><Button onClick={() => {
+                                setOpenModal(true)
+                                setHandleId(datosUser._id)
+                                
+                                }} variant="light" className={styles.butEdit}>Editar</Button>
+                            
+                            </td>
+                            
+                            <td className={styles.botones}><Button variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
                         </tr>
-
-
+                    
                     ))}
+                    {console.log('datos del handleID', handleId)}
+                    <ModalEditUser userId = {handleId} setRefresh= {setRefresh} setOpenModal = {setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
+                   
+
                 </tbody>
 
             </Table>
