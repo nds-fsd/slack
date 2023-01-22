@@ -88,7 +88,7 @@ const NavBarStyle= styled.div`
   position: fixed;
   display: inline;
   width: 98%;
-  background-color: #686461!important;
+  background-color: #4E596F!important;
   border-radius: 2rem;
   padding-left: 2rem;
   padding: .1rem;

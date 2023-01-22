@@ -25,13 +25,14 @@
 
 #botonEnviar {
     color:white;
-    background-color:#E65262 ;
+    background: linear-gradient(to bottom right, #F54864 ,#F78361);
     line-height: 19px;
     border-radius: 10px;
     padding-left: 4%;
     padding-right: 4%;
     padding-top: 2%;
     padding-bottom: 2%;
+
 }
 
 .card{

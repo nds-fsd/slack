@@ -34,7 +34,7 @@
 
 .botonContinuar{
     color:white;
-    background-color:#E65262 ;
+    background: linear-gradient(to bottom right, #F54864 ,#F78361);
     line-height: 19px;
     border-radius: 10px;
     padding-left: 4%;
