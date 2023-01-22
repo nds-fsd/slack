@@ -54,7 +54,7 @@ const ListUsersBootstrap = () => {
 
     return (
         <div className={styles.listadoTablaBootstrap}>
-            <Table className={styles.tablaDark} size="sm" striped bordered hover variant="dark">
+            <Table className={styles.tablaDark} size="sm"  bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Num</th>
@@ -79,7 +79,7 @@ const ListUsersBootstrap = () => {
                             <td> {datosUser.name}</td>
                             <td> {datosUser.lastName}</td>
 
-                            <td className={styles.botones}><Button onClick={() => {
+                            <td className={styles.botones}><Button id={styles.botonEditar} onClick={() => {
                                 setOpenModal(true)
                                 setHandleId(datosUser._id)
                                 
@@ -87,7 +87,7 @@ const ListUsersBootstrap = () => {
                             
                             </td>
                             
-                            <td className={styles.botones}><Button variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
+                            <td className={styles.botones}><Button id={styles.botonEliminar} variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
                         </tr>
                     
                     ))}
