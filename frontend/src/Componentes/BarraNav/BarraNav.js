@@ -96,7 +96,7 @@ const NavBarStyle= styled.div`
   text-align: center;
   justify-content: baseline;
   z-index: 100;
-  box-shadow: 5px 5px 5px 5px #2b2929;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 p{
     padding-top: .4rem;
