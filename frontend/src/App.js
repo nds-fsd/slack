@@ -8,7 +8,7 @@ import styles from "./Styles/App.module.css"
 import DashboardUser from './Componentes/DashboardUsuario/dashboardUser';
 import NotFound from './Componentes/NotFound/notFound';
 import FormUser1 from './Componentes/FormularioUsuario/formUser1';
-import EditUser from './Componentes/editUser.js/editUser';
+import EditUser from './Componentes/editUser/editUser';
 import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
 import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap';
