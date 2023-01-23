@@ -21,13 +21,14 @@
   .modal {
     display: flex;
     justify-content: center;
+    width: auto;
     align-items: center;
     background: #fff;
     padding: 2rem;
-    border-radius: 5px;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s linear 500ms, opacity 500ms;
+    border-radius: 30px;
   }
   
   .open {
@@ -35,3 +36,4 @@
     opacity: 1;
     transition: visibility 0s linear 0s, opacity 500ms;
   }
+

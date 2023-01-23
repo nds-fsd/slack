@@ -75,11 +75,11 @@ const EditUser = (props) => {
     if (!user) return (<div><NotFound /></div>)
 
     return (
-        <div className={styles.contenedor}>
+        <div className={userToEdit? styles.contenedor : styles.contenedorRegister}>
             
            
-            <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
-
+            <form className={userToEdit? styles.card : styles.cardRegister} onSubmit={handleSubmit(onDataSubmit2)}>
+                {!userToEdit && <h1 className={styles.title}>Perfil de <span>{user.userName}</span></h1>}
                 <h3>Nombre de usuario</h3>
                 <input placeholder='Nuevo nombre de usuario.' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
@@ -102,13 +102,14 @@ const EditUser = (props) => {
                 {errors.lastName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
                 <br />
-                <div className={styles.botonGuardar}>
-                    <button type="submit">Guardar</button>
+                <div >
+                    <button className={styles.botonGuardar} type="submit">Guardar</button>
                 </div>
             </form>
-            <div className={styles.botonEliminar}>
-                <button onClick={deleteUser} >Eliminar</button>
-            </div>
+            {!userToEdit && 
+            <div>
+                <button className={styles.botonEliminar} onClick={deleteUser} >Eliminar</button>
+            </div> }
         </div>
     )
 }

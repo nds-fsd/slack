@@ -19,10 +19,11 @@ const FormUser1 = () => {
     }
     return (
         <div className={styles.contenedor}>
-           {/*  <div className={styles.title}>
+            {/* <div className={styles.title}>
                 <h1>Bienvenido a SkuadLack </h1>
             </div> */}
             <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
+            {/* <h1>Bienvenido a SkuadLack </h1> */}
                 <h3>Usuario</h3>
                 <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
