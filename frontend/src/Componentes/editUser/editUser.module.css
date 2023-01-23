@@ -1,31 +1,76 @@
-.card {
+.contenedor{
+    
+    margin-top:20vh;
+    background-color:white ;
+    padding-top: 10%;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #CEAD6D;
+   
 }
 
+.title{
+    background-color:#242A38 ;
+    color: white;
+    width: 50vw;;
+}
+.card input{
+    margin-bottom: 0%;
+}
 
-.title {
+#botonEliminar {
+    color:white;
+    background-color:#E65262 ;
+    line-height: 19px;
+    border-radius: 10px;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
 
+#botonGuardar{
+    color:white;
+    background-color:#4E596F ;
+    line-height: 19px;
+    border-radius: 10px;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.card{
+    width: 40vw;
+    color:white;
+    background-color:#242A38 ;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding-top: 8rem;
-    background-color: #e1dce0;
+    justify-content: center;
+    padding: 2%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 30px;
 }
 
-.button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card h3{
+    margin-top: 20px;;
+}
+
+@media screen and (max-width:600px){
+    .card{
+        margin-top:5%;
+        width: 80vw;
+    }
 
 }
-.button2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
+
+@media screen and (max-width:1490px){
+    .card{
+        margin-top:5%;
+        width: 40vw;
+    }
+
 }

@@ -1,8 +1,35 @@
-.listadoTablaBootstrap{
+.listadoTablaBootstrap {
     padding-top: 10%;
     padding-left: 8%;
     padding-right: 8%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#botonEditar {
+    background: linear-gradient(to bottom right, #4E596F, #202430);
+    background-color: #4E596F;
+    border-color: #4E596F;
+    color: white;
+
+}
+
+#botonEliminar {
+    background: linear-gradient(to bottom right, #F54864, #F78361);
+    border: none;
+    
+}
+
+.tablaDark>tbody>tr:nth-child(odd)>td,.tablaDark>tbody>tr:nth-child(odd)>th {
+    background-color: #202430;
+}
+
+.tablaDark>tbody>tr:nth-child(even)>td, .tablaDark>tbody>tr:nth-child(even)>th {
+    background-color: #202430;
+}
+
+.tablaDark>thead>tr>th {
+    background-color: #D9D9D9;
+    color: black;
 }

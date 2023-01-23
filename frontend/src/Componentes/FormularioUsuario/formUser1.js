@@ -18,36 +18,36 @@ const FormUser1 = () => {
             })
     }
     return (
-        <>
-            <div className={styles.title}>
+        <div className={styles.contenedor}>
+           {/*  <div className={styles.title}>
                 <h1>Bienvenido a SkuadLack </h1>
-            </div>
+            </div> */}
             <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
-                <h3>Rellena el siguiente campo con tu nombre usuario, este sera el visible.</h3>
-                <input placeholder='Nombre de Usuario.' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
+                <h3>Usuario</h3>
+                <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 5 carácteres"}
                 {errors.userName?.type === "maxLength" && "Tu nombre de usuario debe tener máximo 20 carácteres"}
-                <h3>Rellena el siguiente campo con tu email.</h3>
-                <input placeholder='email.' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} />
+                <h3>Email</h3>
+                <input placeholder='email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} />
                 {errors.email?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.email?.type === "pattern" && "Comprueba que sea una direccion de mail válida"}
-                <h3>Rellena el siguiente campo con tu nombre.</h3>
-                <input placeholder='Nombre.' {...register("name", { required: true, minLength: 3, maxLength: 20 })} />
+                <h3>Nombre</h3>
+                <input placeholder='Nombre' {...register("name", { required: true, minLength: 3, maxLength: 20 })} />
                 {errors.name?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.name?.type === "minLength" && "Tu nombre debe tener mínimo 3 carácteres"}
                 {errors.name?.type === "maxLength" && "Tu nombre debe tener máximo 20 carácteres"}
-                <h3>Rellena el siguiente campo con tu apellido.</h3>
-                <input placeholder='Apellido.' {...register("lastName", { required: true, maxLength: 20 })} />
+                <h3>Apellidos</h3>
+                <input placeholder='Apellido' {...register("lastName", { required: true, maxLength: 20 })} />
                 {errors.lastName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
-                <h3>Define una contraseña guapa</h3>
+                <h3>Contraseña</h3>
                 <input placeholder='password' {...register("password", { required: true })} />
                 {errors.password && <span>❌campo obligatorio❗❗</span>}
                 <br />
-                <input type="submit" />
+                <input id = {styles.botonEnviar} type="submit" />
             </form>
-        </>
+        </div>
 
     )
 }
