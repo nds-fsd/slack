@@ -18,13 +18,13 @@ const LandingPage = () =>{
         <div>
             <div className={styles.seccion1}>
                 <div className={styles.seccion1_1}> 
-                    <h1>Una aplicación para tomarte las cosas con calma</h1>
+                    <h2>Una aplicación para tomarte las cosas con <span className={styles.commentRed}>calma.</span></h2>
                     <p> Reúne a tus amigos y compañeros de trabajo y dedica tiempo a todo aquello que sume valor. Reduce las reuniones, mensajes y correos.</p>
                     <Link to="/user"><button type="submit" to="/user">Regístrate con un correo</button></Link>
-                    <p> <b>SkuadLack es gratuíto</b> y no se cambiarán las políticas de precios como hace Movistar</p>
+                    <p> <span className={styles.commentRed}>SkuadLack es gratuíto</span> y no se cambiarán las políticas de precios como hace Movistar</p>
                 </div>
                 <div className={styles.seccion1_2}>
-                    <img className={styles.video} src={imagenChat} /> 
+                    <img className={styles.img} src={imagenChat} /> 
                 </div>
             </div>
 

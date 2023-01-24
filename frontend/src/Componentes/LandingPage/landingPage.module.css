@@ -1,8 +1,9 @@
-body{
+body {
     background-color: #242A38;
 }
-.seccion1{
-    background-color:#242A38;
+
+.seccion1 {
+    background-color: #242A38;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -17,35 +18,40 @@ body{
     flex-wrap: wrap;
     justify-content: center;
 
-    
+
 
 }
-.seccion1 h1{
-    margin-top:3rem;
+
+.seccion1 h1 {
+    margin-top: 3rem;
     text-align: center;
 }
 
-.seccion1 p{
+.seccion1 p {
     text-align: center;
     margin: 40px 50px 40px 50px;
+    font-size: 18px;
 }
-.seccion1 button{
+
+.seccion1 button {
     width: 18rem;
     min-height: 4rem;
     max-height: fit-content;
 
-    background: linear-gradient(to bottom right, #F54864 ,#F78361);
+    background: linear-gradient(to bottom right, #F54864, #F78361);
     color: white;
-    font-weight:bold;
+    font-weight: bold;
     font-size: 1rem;
     border: none;
     border-radius: 10px;
 }
+
 .seccion1 button:hover {
     box-shadow: 0px -3px 5px 0px #9E9B98;
-    text-decoration:underline;
+    text-decoration: underline;
 }
-.seccion1_1{
+
+.seccion1_1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,18 +62,20 @@ body{
     height: 90%;
     justify-content: center;
     text-align: center;
-    
+
 }
-.video{
+
+.img {
     width: 30rem;
     margin: 1%;
     margin-right: 1rem;
     border-radius: 30px;
     box-shadow: 0px -3px 5px 0px #9E9B98;
-    
+
 }
-.seccion1_2{
-   
+
+.seccion1_2 {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,49 +83,67 @@ body{
     justify-content: center;
     justify-items: center;
     width: 35rem;
-    overflow: hidden;   
-    margin-bottom: 2rem;   
+    overflow: hidden;
+    margin-bottom: 2rem;
 }
-.seccion2{
+
+.seccion2 {
     background-color: #D9D9D9;
     height: 50vh;
     width: 100%;
 }
-.seccion2_1{
+
+.seccion2_1 {
     display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
     justify-content: center;
 }
-.logos{
-   margin-left: 4vw;
-   margin-right: 4vw;
+
+.logos {
+    margin-left: 4vw;
+    margin-right: 4vw;
 }
-#logoMundoToday{
+
+#logoMundoToday {
     height: 4rem;
     width: 9rem;
 }
-#logoSlack{
+
+#logoSlack {
     height: 6rem;
     width: 7rem;
 }
-.seccion2 h2{
+
+.seccion2 h2 {
     text-align: center;
-    padding:20px;
-    
+    padding: 20px;
+
 }
-.seccion3{
-    background-color:#242A38;
-    height: 50vh;;
+
+.seccion3 {
+    background-color: #242A38;
+    height: 50vh;
+    ;
     width: 100%;
 }
-.seccion4{
-    background-color:#D9D9D9;
-    height: 50vh;;
+
+.seccion4 {
+    background-color: #D9D9D9;
+    height: 50vh;
+    ;
     width: 100%;
 }
-.seccion5{
-    background-color:#242A38;
-    height: 50vh;;
+
+.seccion5 {
+    background-color: #242A38;
+    height: 50vh;
+    ;
     width: 100%;
+}
+
+.commentRed {
+    color: #E65262;
+    font-weight:bold;
+
 }
