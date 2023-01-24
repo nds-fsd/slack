@@ -5,6 +5,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 80%;
+    max-width: max-content;
+    max-height: max-content;
+    min-height: 80vh;
 }
 
 #botonEditar {

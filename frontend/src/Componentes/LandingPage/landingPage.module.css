@@ -6,7 +6,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 80vh;
+    min-height: fit-content;
     max-height: max-content;
     width: 100%;
     overflow: hidden;
@@ -26,7 +26,9 @@ body{
 }
 .seccion1 button{
     width: 40vw;
-    height: 8vh;
+    max-height: 10vh;
+    max-height: fit-content;
+
     background: linear-gradient(to bottom right, #F54864 ,#F78361);
     color: white;
     font-weight:bold;
@@ -84,8 +86,8 @@ body{
    margin-right: 4vw;
 }
 #logoMundoToday{
-    height: 3vh;
-    width: 12vw;
+    height: 4rem;
+    width: 9rem;
 }
 #logoSlack{
     height: 10vh;
