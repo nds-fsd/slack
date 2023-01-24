@@ -1,12 +1,12 @@
 .seccion1 {
     background-color: #E1DCE0;
-    display: flex;
-    align-items: center;
+    display: inline-block;
     justify-content: space-between;
     height: 60vh;
     width: 100vw;
     overflow: hidden;
     padding-top: 10vh;
+    margin: 0;
 
 }
 
@@ -85,17 +85,8 @@
     justify-content: center;
 }
 
-.logos {
-    margin-left: 4vw;
-    margin-right: 4vw;
-}
 
-.cartas {
-    flex-direction: row;
-
-}
-
-#fotos { 
+#fotos {
     display: flex;
     align-content: center;
     height: 30vh;
@@ -127,4 +118,49 @@
     height: 50vh;
     ;
     width: 100%;
+}
+
+ul,
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+ul li {
+    width: 24%;
+}
+
+ul li figure {
+    padding: 5px;
+    position: relative;
+}
+
+ul li figure:hover figcaption {
+    display: block;
+    height: 135px;
+    width: 142px;
+}
+
+
+ul li figcaption {
+    display: none;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    bottom: 5px;
+    right: 5px;
+    text-align: center;
+    padding: 15px;
+    font: 20px/30px;
+    color: white;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+img {
+    width: 50%;
 }
