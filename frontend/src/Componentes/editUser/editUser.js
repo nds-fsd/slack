@@ -104,7 +104,7 @@ const EditUser = (props) => {
                 <br />
                 <div >
                     <button className={styles.botonGuardar} type="submit">Guardar</button>
-                    <button className={styles.botonEliminar} onClick={deleteUser} >Eliminar</button>
+                    {!userToEdit && <button className={styles.botonEliminar} onClick={deleteUser} >Eliminar</button>}
 
                 </div>
             </form>
