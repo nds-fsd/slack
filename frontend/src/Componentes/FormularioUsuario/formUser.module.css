@@ -5,10 +5,11 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: #D9D9D9;
+    background-color:#242A38 ;
     height: 110vh;
     max-height: 500vh;
     width: 100%;
+
 
    
 }
@@ -18,6 +19,7 @@
     color: white;
 }
 .card input{
+    width: 40%;
     margin-bottom: 0%;
     color: white;
     background-color: #202430;
@@ -47,11 +49,15 @@
     padding: 5% 5%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 30px;
-    max-width: max-content;
+    width: 50%;
     min-width: fit-content;
     max-height: fit-content;
     min-height: min-content;
     margin-top: 3.4rem;
+    box-shadow: 2px 2px 5px #0A0A0B, -2px -2px 5px #445CA3;
+    border-radius: 10px;
+    padding: 1rem;
+    
 
 }
 

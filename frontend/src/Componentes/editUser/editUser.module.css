@@ -7,6 +7,9 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    max-height: fit-content;
+
+
     
    
 }
@@ -19,7 +22,10 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    
+    background-color:#242A38 ;
+    max-height: fit-content;
+
+
    
 }
 
@@ -50,6 +56,7 @@
     margin-bottom: 2%;
     border-radius: 5px;
     margin-bottom: 0%;
+    width: 40%;
 }
 
 .botonEliminar {
@@ -80,7 +87,7 @@
 }
 
 .card{
-    width: 40vw;
+    width: 50%;
     color:white;
     background-color:#242A38 ;
     display: flex;
@@ -89,12 +96,16 @@
     justify-content: center;
     justify-content: center;
     padding: 2%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #0A0A0B, -2px -2px 5px #445CA3;
+    max-height: fit-content;
+
+
+
 }
 
 .cardRegister{
-    width: 80vw;
+    width: 50%;
     color:white;
     background-color:#242A38 ;
     display: flex;
@@ -103,8 +114,11 @@
     justify-content: center;
     justify-content: center;
     padding: 2%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #0A0A0B, -2px -2px 5px #445CA3;
+    max-height: fit-content;
+    margin-bottom: 3%;
+
 }
 
 
