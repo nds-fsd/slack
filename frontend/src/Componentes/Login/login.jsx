@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate()
   // fetch login
   const fakeLogin = () => {
-    fetch("http://localhost:3001/register",{
+    fetch("http://localhost:3001/login",{
         method:'POST',
         headers: {
             Accept: "application/json",
