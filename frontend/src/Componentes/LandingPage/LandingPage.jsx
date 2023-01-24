@@ -1,4 +1,5 @@
-import React from "react";
+//SIN USO
+
 import styles from "./landingPage.module.css";
 import videoVerde from '../../Assets/480_verde.mp4';
 import {Link} from "react-router-dom"

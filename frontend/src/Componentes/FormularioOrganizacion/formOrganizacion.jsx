@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Styles from "./formOrganizacion.css"
-
-
+import styles from "./formOrganizacion.module.css"
 
 const FormOrganizacion = () => {
 
@@ -44,27 +42,23 @@ const FormOrganizacion = () => {
                 console.log(data)//aqui entiendo que cuando se cree el homepage de user habra que
                 //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
             })
-
-
     }
-
-
 
     return (
 
-        <div >
-            <div id='formOrg'>
-                <h1 className="tituloFormOrg" id="tituloCorreo">Primero, introduce tu correo electrónico</h1>
-                <p className="comentarioCorreo">Te sugerimos que uses la<b className="comentarioCorreo"> dirección de correo electrónico que usas en el trabajo</b></p>
-                <input className="inputFormOrg" id="inputCorreo" type="text" placeholder="nombre@work-email.com" required onChange={getEmail}></input>
+        <div className={styles.contenedor}>
+            <div className={styles.formOrg}>
+                <h3 className={styles.tituloFormOrg} id={styles.tituloCorreo}>Correo electrónico</h3>
+                <p className={styles.comentarioCorreo}>Te sugerimos que uses la<b className={styles.comentarioCorreo}> dirección de correo electrónico que usas en el trabajo</b></p>
+                <input className={styles.inputFormOrg} id={styles.inputCorreo} type="text" placeholder="nombre@work-email.com" required onChange={getEmail}></input>
 
-                <h1 className="tituloFormOrg" id="tituloNombreOrg">¿Cómo se llama tu fantástico equipo?</h1>
-                <input className="inputFormOrg" id="inputNombreOrg" type="text" placeholder="Avengers" required onChange={getName} ></input>
+                <h3 className={styles.tituloFormOrg} id={styles.tituloNombreOrg}>¿Cómo se llama tu fantástico equipo?</h3>
+                <input className={styles.inputFormOrg}id={styles.inputNombreOrg} type="text" placeholder="Avengers" required onChange={getName} ></input>
 
-                <h1 className="tituloFormOrg" id="tituloTrabajoActual">¿En qué está trabajando tu equipo actualmente?</h1>
-                <input className="inputFormOrg" id="inputTrabajoActual" type="text" placeholder="Ocupados salvando al mundo" required onChange={getTrabajoActual}></input>
+                <h3 className={styles.tituloFormOrg}id={styles.tituloTrabajoActual}>¿En qué está trabajando tu equipo actualmente?</h3>
+                <input className={styles.inputFormOrg}id={styles.inputTrabajoActual} type="text" placeholder="Ocupados salvando al mundo" required onChange={getTrabajoActual}></input>
 
-                <button type="submit" className="button" id='butFormOrg' onClick={postOrganizaciones}>Continuar</button>
+                <button type="submit" className={styles.botonContinuar} id={styles.butFormOrg} onClick={postOrganizaciones}>Continuar</button>
             </div>
         </div>
 
