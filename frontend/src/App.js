@@ -12,6 +12,7 @@ import EditUser from './Componentes/editUser/editUser';
 import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
 import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap';
+import Login from './Componentes/Login/login';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -33,8 +34,7 @@ function App() {
 
           <Route path="/users" element={<ListUserBootstrap />}></Route>
           <Route path='/*' element={<NotFound />} />
-
-
+          <Route path="/login" element={<Login />} />
         </Routes>
 
       </div>
