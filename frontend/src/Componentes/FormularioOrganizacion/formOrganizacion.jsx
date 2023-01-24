@@ -49,7 +49,7 @@ const FormOrganizacion = () => {
         <div className={styles.contenedor}>
             <div className={styles.formOrg}>
                 <h3 className={styles.tituloFormOrg} id={styles.tituloCorreo}>Correo electrónico</h3>
-                <p className={styles.comentarioCorreo}>Te sugerimos que uses la<b className={styles.comentarioCorreo}> dirección de correo electrónico que usas en el trabajo</b></p>
+                <p className={styles.comentarioCorreo}>Te sugerimos que uses la<span className={styles.spanCorreo}> dirección de correo electrónico que usas en el trabajo.</span></p>
                 <input className={styles.inputFormOrg} id={styles.inputCorreo} type="text" placeholder="nombre@work-email.com" required onChange={getEmail}></input>
 
                 <h3 className={styles.tituloFormOrg} id={styles.tituloNombreOrg}>¿Cómo se llama tu fantástico equipo?</h3>
