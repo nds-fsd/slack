@@ -1,8 +1,8 @@
 body{
-    background-color: #686461;
+    background-color: #242A38;
 }
 .seccion1{
-    background-color:#686461;
+    background-color:#242A38;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,8 +27,8 @@ body{
 .seccion1 button{
     width: 40vw;
     height: 8vh;
-    background-color: #BACBDB;
-    color: #686461;
+    background: linear-gradient(to bottom right, #F54864 ,#F78361);
+    color: white;
     font-weight:bold;
     font-size: 1rem;
     border: none;
@@ -69,7 +69,7 @@ body{
     overflow: hidden;      
 }
 .seccion2{
-    background-color: #CEAD6D;
+    background-color: #D9D9D9;
     height: 50vh;
     width: 100%;
 }
@@ -97,17 +97,17 @@ body{
     
 }
 .seccion3{
-    background-color:aqua;
+    background-color:#242A38;
     height: 50vh;;
     width: 100%;
 }
 .seccion4{
-    background-color:blueviolet;
+    background-color:#D9D9D9;
     height: 50vh;;
     width: 100%;
 }
 .seccion5{
-    background-color:chartreuse;
+    background-color:#242A38;
     height: 50vh;;
     width: 100%;
 }

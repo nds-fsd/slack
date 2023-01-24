@@ -1,3 +1,5 @@
+//SIN USO
+
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound/notFound";
