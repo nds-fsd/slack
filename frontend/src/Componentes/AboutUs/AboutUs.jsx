@@ -5,6 +5,7 @@ import Dani from '../../Assets/Dani.jpg';
 import Jorge from '../../Assets/Jorge.jpeg';
 import German from '../../Assets/German.png';
 
+
 const AboutUs = () => {
   return (
     <div>
