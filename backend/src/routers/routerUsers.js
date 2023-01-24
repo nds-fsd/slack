@@ -4,6 +4,7 @@ import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
 import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
+import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 
 routerUsers.get('/user', async (req, res) => {
     try {
@@ -31,6 +32,38 @@ routerUsers.get('/user/:id', async (req, res) => {
 // app.use(validateUserName);
 
 routerUsers.post('/user', validateUserName, async (req, res) => {
+    try {
+
+        const emailExist = await User.findOne({ email: req.body.email })
+        const userNameExist = await User.findOne({ email: req.body.userName })
+
+        if (!req.body.email) return res.status(404).json({ message: "No hay email" }) // Validar que viene un mail en el body
+
+        if (emailExist) return res.status(400).json({ message: "El email ya existe" }) // Comprobar que el mail no existe
+        if (userNameExist) return res.status(400).json({ message: "El nombre de usuario ya existe" }) // Comprobar que el userName no existe
+
+        const user = new User(req.body)
+
+        //antes de grabarse se ejecuta la función PRE del schema
+        const userCreated = await user.save();
+
+        const userToken = generateJWT(userCreated);
+
+        //Crearmos otro objeto para no enviar la contraseña
+        const resUser = {
+            userName: userCreated.userName,
+            _id:userCreated._id,
+            email: userCreated.email,
+            name: userCreated.name,
+            lastName: userCreated.lastName
+        }
+
+        return res.status(201).json({ resUser, userToken })
+
+    } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
+});
+
+routerUsers.post('/register', validateUserName, async (req, res) => {
     try {
 
         const emailExist = await User.findOne({ email: req.body.email })
