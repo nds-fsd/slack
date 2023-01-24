@@ -128,7 +128,7 @@ routerUsers.post('/login', async (req,res) => {
     })
 })
 
-routerUsers.patch('/user/:id', validateUserName, async (req, res) => {
+routerUsers.patch('/user/:id', validateUserName,jwtMiddleware, async (req, res) => {
     try {
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if (userModified) {
@@ -141,7 +141,7 @@ routerUsers.patch('/user/:id', validateUserName, async (req, res) => {
     }
 });
 
-routerUsers.delete('/user/:id', async (req, res) => {
+routerUsers.delete('/user/:id',jwtMiddleware, async (req, res) => {
     const id = req.params.id
     try {
         const userDelete = await User.findByIdAndDelete(id)
