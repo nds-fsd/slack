@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import mongo from './Mongo/index.js';
+import {connectDB} from './Mongo/index.js';
 import routerUsers from './routers/routerUsers.js';
 import routerOrg from './routers/routerOrg.js';
 
@@ -10,13 +10,29 @@ import routerOrg from './routers/routerOrg.js';
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
+// const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
 app.use(routerUsers);
 app.use(routerOrg)
 
-app.listen(port, () => {
+let port = process.env.PORT;
+
+if(process.env.NODE_ENV !== 'test'){
+    connectDB().then((error) => {
+        if(error){
+            console.log(error);
+        }else{
+            console.log('🏢 Connected to database!');
+        }
+    });
+}else{
+    port = process.env.TEST_PORT
+}
+
+const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
 })
+
+module.exports = {app, server};
