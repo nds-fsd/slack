@@ -9,6 +9,7 @@ const FormUser1 = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onDataSubmit2 = (data) => {
+   
         postToMongo("register", data)
             .then((dataServer) => {
                 const user = dataServer.resUser

@@ -13,8 +13,8 @@ const Login = () => {
     fetch("http://localhost:3001/login",{
         method:'POST',
         headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
+          Accept: "application/json",
+          "Content-type": "application/json",    //revisión
           },
         body:JSON.stringify({
             email,
@@ -27,7 +27,7 @@ const Login = () => {
       }).then((res)=>{
         if(res.token){
             setUserSession(res)
-            navigate('/app')
+            navigate('/')
             
         }
       })
@@ -40,9 +40,9 @@ const Login = () => {
       </div>
       <div>
         <label htmlFor="email">email</label>
-        <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="📧 Email" />
+        <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" />
         <label htmlFor="password">password</label>
-        <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password " />
+        <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" />
         <button onClick={() => fakeLogin()}>Login</button>
       </div>
     </div>
