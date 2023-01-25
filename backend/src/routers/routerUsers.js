@@ -6,6 +6,7 @@ import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
+import jwt from'jsonwebtoken';
 
 routerUsers.get('/user',jwtMiddleware, async (req, res) => {
     try {
