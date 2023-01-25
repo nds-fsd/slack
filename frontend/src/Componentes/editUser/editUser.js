@@ -103,13 +103,12 @@ const EditUser = (props) => {
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
                 <br />
                 <div >
-                    <button className={styles.botonGuardar} type="submit">Guardar</button>
+                    <button className={userToEdit? styles.buttonGuardar : styles.buttonGuardarRegister} type="submit">Guardar</button>
+                    {!userToEdit && <button className={styles.botonEliminar} onClick={deleteUser} >Eliminar</button>}
+
                 </div>
             </form>
-            {!userToEdit && 
-            <div>
-                <button className={styles.botonEliminar} onClick={deleteUser} >Eliminar</button>
-            </div> }
+            
         </div>
     )
 }

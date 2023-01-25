@@ -24,7 +24,7 @@ const FormUser1 = () => {
             </div> */}
             <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
             {/* <h1>Bienvenido a SkuadLack </h1> */}
-                <h3>Usuario</h3>
+                <h3 className={styles.h3Usuario}>Usuario de <span className={styles.h3Span}>SkuadLack</span></h3>
                 <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 5 carácteres"}
