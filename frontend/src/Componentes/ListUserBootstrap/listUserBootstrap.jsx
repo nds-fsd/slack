@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import ModalEditUser from "../Modal/modalEditUser";
 import EditUser from '../editUser/editUser.js'
+import { getUserToken } from "../../utils/localStorageUtils";
 
 
 
@@ -40,7 +41,11 @@ const ListUsersBootstrap = () => {
 
     useEffect(() => {
         if (refresh) {
-            fetch("http://localhost:3001/user")
+            fetch("http://localhost:3001/user",{
+                headers:{
+                    authorization:`Bearer ${getUserToken()}`
+                }
+            })
                 .then((response) => {
                     return response.json();
                 })
