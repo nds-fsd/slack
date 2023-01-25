@@ -1,13 +1,13 @@
 .contenedor{
     background-color:white ;
-    /* padding-top: 1rem; */
+    padding-top: 6rem;  
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     background-color:#242A38 ;
-    height: 100vh;
-    max-height: 500vh;
+    min-height: 80vh;
+    max-height: max-content;
     width: 100%;
  
 }
