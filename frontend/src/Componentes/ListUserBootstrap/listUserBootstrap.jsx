@@ -25,6 +25,7 @@ const ListUsersBootstrap = () => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                authorization:`Bearer ${getUserToken()}`,
             }
         };
         fetch(url, options)
