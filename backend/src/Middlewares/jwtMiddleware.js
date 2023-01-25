@@ -1,4 +1,5 @@
 import express from "express";
+const jwtSecret = process.env.JWT_SECRET; 
 
 const jwtMiddleware = (req, res, next) => {
     // Recogemos el header "Authorization". Sabemos que viene en formato "Bearer XXXXX...",
