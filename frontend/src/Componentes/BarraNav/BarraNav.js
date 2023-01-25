@@ -87,12 +87,9 @@ const NavBarStyle= styled.div`
 .mb-3 {
   position: fixed;
   display: inline;
-  width: 98%;
-  background-color: #202430!important;
-  border-radius: 2rem;
-  padding-left: 2rem;
-  padding: .1rem;
-  margin: 1%;
+  width: 100vw;
+  background-color: #3F485B!important;
+  padding: .rem;
   text-align: center;
   justify-content: baseline;
   z-index: 100;
