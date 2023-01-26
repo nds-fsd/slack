@@ -6,11 +6,14 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox } from 'react-icons/md';
+import {getUserToken, removeSession} from "../../utils/localStorageUtils.js";
 
 
 export const BarraNav = () => {
+  const navigate = useNavigate();
+
   return (
     <NavBarStyle>
     <div>
@@ -55,13 +58,36 @@ export const BarraNav = () => {
                     <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
                     <NavDropdown.Item href="#action5">Contact Us! :)</NavDropdown.Item>
                   </NavDropdown>
-              
-                <Nav.Link as={Link} to="/users"><Button variant="danger">Admin Mode</Button ></Nav.Link>
+
+
+                {!getUserToken() && (
+                <>
 
                 <Nav.Link as={Link} to="/user"><Button variant="success">Regístrate</Button ></Nav.Link>
                
                
                 <Nav.Link as={Link} to="/login"><Button variant="primary"><MdAccountBox className="a"/>Log In</Button ></Nav.Link>
+                
+                </>
+                )}
+
+
+                {getUserToken() && (
+                <>
+                
+                  <Nav.Link>
+              <button onClick={() => {
+                  removeSession();
+                  navigate("/");
+                }}>
+                    Logout
+                  </button>
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/users"><Button variant="danger">Admin Mode</Button ></Nav.Link>
+
+                  </>
+                )}
+               
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
