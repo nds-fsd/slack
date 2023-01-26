@@ -76,12 +76,12 @@ export const BarraNav = () => {
                 <>
                 
                   <Nav.Link>
-              <button onClick={() => {
+              <Button variant="primary" onClick={() => {
                   removeSession();
                   navigate("/");
                 }}>
-                    Logout
-                  </button>
+                    Logout :(
+                  </Button>
                   </Nav.Link>
                   <Nav.Link as={Link} to="/users"><Button variant="danger">Admin Mode</Button ></Nav.Link>
 
