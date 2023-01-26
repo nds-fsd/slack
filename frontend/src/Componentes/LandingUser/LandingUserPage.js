@@ -11,7 +11,7 @@ export const LandingUserPage = () => {
   const params = useParams()
   const [user, setUser] = useState("")
   useEffect(() => {
-    fetch("http://localhost:3001/user/" +params.id,     
+    fetch("http://localhost:3001/user/" + params.id ,     
     {
         headers:{
             authorization:`Bearer ${getUserToken()}`
@@ -64,7 +64,7 @@ export const LandingUserPage = () => {
     </div>
 
     <div className='perfiluser'>
-        <h2><span className='icono'><Link to={`/user/${user._id}`}><MdSettings/></Link></span> Perfil</h2>
+        <h2><Link className='icono' to={`/user/${user._id}`}><MdSettings/></Link> Perfil</h2>
     </div>
     </LUPstyle>
   )
@@ -134,7 +134,8 @@ background-color: #242A38 ;
     align-items: baseline;
     align-content: center;
     align-content: flex-end;
-}
+    text-decoration: none;
+    }
     
 .icono{
     position: relative;
