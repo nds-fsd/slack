@@ -15,7 +15,7 @@ export const LandingUserPage = () => {
     </div>
 
     <div>
-    <Card className='cardstyle' border="warning">
+    <Card className='cardstyle' border="dark">
       <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de "user@mail"</Card.Header>
       <Card.Body>
         <div className='cardtext'>
@@ -31,7 +31,7 @@ export const LandingUserPage = () => {
     </div>
 
     <div>
-    <Card className='cardstyle' border="warning">
+    <Card className='cardstyle' border="dark">
       <Card.Header as="h5" className='cardhead'>Crea tu nueva <span className='rojo'>Organizacion SkuadLack</span></Card.Header>
       <Card.Body>
         <div className='cardtext'>
@@ -80,6 +80,7 @@ background-color: #242A38 ;
     font-weight: bold;
     border-style: double;
 
+
 }
 .cardhead{
     font-weight: bolder;
@@ -91,6 +92,7 @@ background-color: #242A38 ;
     display: flex;
     justify-content: flex-end;
     background-color: #f2f2f2;
+    border-radius: 10px;
 
 
 }
