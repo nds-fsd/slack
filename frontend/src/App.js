@@ -33,7 +33,7 @@ function App() {
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
             <Route path="/user/:id" element={<EditUser />}>  </Route>
-            <Route path="/LUP" element={<LandingUserPage/>} />
+            <Route path="/LUP/:id" element={<LandingUserPage/>} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
           </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
