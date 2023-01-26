@@ -7,7 +7,7 @@ const PrivateRoutes = () => {
   if (getUserToken()) {
     return <Outlet />;
   } else {
-    return <Navigate to="/" />; //redirigir a login 
+    return <Navigate to="/login" />; //redirigir a login 
   }
 };
 export default PrivateRoutes;
