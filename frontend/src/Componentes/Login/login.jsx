@@ -27,7 +27,7 @@ const Login = () => {
       }).then((res) => {
         if (res.token) {
           setUserSession(res)
-          navigate('/LUP')
+          navigate(`/LUP/${res.user.id}`)
 
         }
       })
