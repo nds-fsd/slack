@@ -115,7 +115,7 @@ const NavBarStyle= styled.div`
   display: inline;
   width: 100vw;
   background-color: #3F485B!important;
-  padding: .rem;
+  padding: 0;
   text-align: center;
   justify-content: baseline;
   z-index: 100;
