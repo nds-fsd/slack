@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { MdAccountBox } from "react-icons/md";
+import { MdAccountBox, MdOutlineLogout } from "react-icons/md";
 import { getUserToken, removeSession } from "../../utils/localStorageUtils.js";
 
 export const BarraNav = () => {
@@ -100,20 +100,22 @@ export const BarraNav = () => {
 
                   {getUserToken() && (
                     <>
+                      <Nav.Link as={Link} to="/users">
+                        <Button variant="warning">Admin Mode</Button>
+                      </Nav.Link>
+
                       <Nav.Link>
                         <Button
-                          variant="primary"
+                          variant="danger"
                           onClick={() => {
                             removeSession();
                             navigate("/");
                           }}
                         >
-                          Logout :(
+                          Logout <MdOutlineLogout className="a" />
                         </Button>
                       </Nav.Link>
-                      <Nav.Link as={Link} to="/users">
-                        <Button variant="danger">Admin Mode</Button>
-                      </Nav.Link>
+
                     </>
                   )}
                 </Nav>
@@ -127,6 +129,11 @@ export const BarraNav = () => {
 };
 
 const NavBarStyle = styled.div`
+    font-weight: bold;
+  Button{
+    font-weight: bold;
+
+  }
   .a {
     padding-bottom: 0.1rem;
     font-size: larger;

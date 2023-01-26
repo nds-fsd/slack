@@ -59,6 +59,8 @@ justify-items: center;
 justify-content: center;
 text-align: center;
 padding-top: 5.5rem;
+background-color: #242A38 ;
+
 
 .headtitle{
     text-align: start;
@@ -77,13 +79,20 @@ padding-top: 5.5rem;
     text-align: start;
     font-weight: bold;
     border-style: double;
+
 }
 .cardhead{
     font-weight: bolder;
+    background-color: #fbe2d7;
+    
+
 }
 .card-body{
     display: flex;
     justify-content: flex-end;
+    background-color: #f2f2f2;
+
+
 }
 .btncard{
     display: flex;
