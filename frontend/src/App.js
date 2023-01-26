@@ -14,6 +14,7 @@ import { BarraNav } from './Componentes/BarraNav/BarraNav';
 import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap';
 import Login from './Componentes/Login/login';
 import PrivateRoutes from './Componentes/PrivateRoute/PrivateRouter.js'
+import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
             <Route path="/user/:id" element={<EditUser />}>  </Route>
+            <Route path="/LUP" element={<LandingUserPage/>} />
           </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
@@ -40,6 +42,8 @@ function App() {
           <Route path="/users" element={<ListUserBootstrap />}></Route>
           <Route path='/*' element={<NotFound />} />
           <Route path="/login" element={<Login />} />
+
+
         </Routes>
 
       </div>
