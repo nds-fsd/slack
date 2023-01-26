@@ -13,6 +13,7 @@ import { InfoSlack } from './Componentes/infoSlack/InfoSlack';
 import { BarraNav } from './Componentes/BarraNav/BarraNav';
 import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap';
 import Login from './Componentes/Login/login';
+import PrivateRoutes from './Componentes/PrivateRoute/PrivateRouter.js'
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -26,7 +27,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
-          <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
+          <Route path="/" element={<PrivateRoutes />}>
+            <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
+          </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
           <Route path="/user/:id" element={<EditUser />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
