@@ -41,7 +41,7 @@ export const LandingUserPage = () => {
         </Card.Text>
         </div>
         <div className='btncard'>
-        <Button  variant="secondary">Iniciar "OrgName"</Button>
+        <Button as={Link} to="/skuadlack" variant="secondary">Iniciar "OrgName"</Button>
         </div> 
       </Card.Body>
     </Card>

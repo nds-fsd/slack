@@ -15,6 +15,7 @@ import ListUserBootstrap from './Componentes/ListUserBootstrap/listUserBootstrap
 import Login from './Componentes/Login/login';
 import PrivateRoutes from './Componentes/PrivateRoute/PrivateRouter.js'
 import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
+import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
@@ -35,6 +36,8 @@ function App() {
             <Route path="/user/:id" element={<EditUser />}>  </Route>
             <Route path="/LUP/:id" element={<LandingUserPage/>} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
+            <Route path="/skuadlack" element={<SkuadlackPage />}>  </Route>
+
           </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
