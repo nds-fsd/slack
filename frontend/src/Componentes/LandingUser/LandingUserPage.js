@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { MdWavingHand, MdSettings } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { getUserToken } from '../../utils/localStorageUtils';
 
 
 export const LandingUserPage = () => {
+  const params = useParams()
+  const [user, setUser] = useState("")
+  useEffect(() => {
+    fetch("http://localhost:3001/user/" +params.id,     
+    {
+        headers:{
+            authorization:`Bearer ${getUserToken()}`
+        }
+    }) 
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            setUser(res);
+        });
+}, []);
   return (
     <LUPstyle>
 
     <div>
-        <h1 className='headtitle'>¡Bienvenido user <span className='rojo'>"name"! <MdWavingHand /></span></h1>
+        <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span></h1>
     </div>
 
     <div>
     <Card className='cardstyle' border="dark">
-      <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de "user@mail"</Card.Header>
+      <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.email}</Card.Header>
       <Card.Body>
         <div className='cardtext'>
         <Card.Text>
@@ -47,7 +64,7 @@ export const LandingUserPage = () => {
     </div>
 
     <div className='perfiluser'>
-        <h2><span className='icono'><MdSettings/></span> Perfil</h2>
+        <h2><span className='icono'><Link to={`/user/${user._id}`}><MdSettings/></Link></span> Perfil</h2>
     </div>
     </LUPstyle>
   )
