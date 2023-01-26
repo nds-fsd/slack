@@ -24,7 +24,7 @@ export const LandingUserPage = () => {
         </Card.Text>
         </div>
         <div className='btncard'>
-        <Button  variant="primary">Iniciar "OrgName"</Button>
+        <Button  variant="secondary">Iniciar "OrgName"</Button>
         </div> 
       </Card.Body>
     </Card>
@@ -40,7 +40,7 @@ export const LandingUserPage = () => {
         </Card.Text>
         </div>
         <div className='btncard'>
-        <Button as={Link} to="/organizacion" variant="primary">Crea tu Organizacion</Button>
+        <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
         </div> 
       </Card.Body>
     </Card>
