@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./listUserBootstrap.module.css"
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import ModalEditUser from "../Modal/modalEditUser";
 import EditUser from '../editUser/editUser.js'
-import { getUserToken } from "../../utils/localStorageUtils";
+import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 
 
 
@@ -15,7 +15,7 @@ const ListUsersBootstrap = () => {
     const [refresh, setRefresh] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [handleId, setHandleId] = useState('');
-
+    const navigate = useNavigate()
 
     const deleteUser = (datosUser) => {
         const url = "http://localhost:3001/user/" + datosUser._id
@@ -25,7 +25,7 @@ const ListUsersBootstrap = () => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                authorization:`Bearer ${getUserToken()}`,
+                authorization: `Bearer ${getUserToken()}`,
             }
         };
         fetch(url, options)
@@ -35,6 +35,7 @@ const ListUsersBootstrap = () => {
             .then(() => {
                 setRefresh(true);
                 alert(`Usuario ${datosUser.userName} eliminado.`);
+
                 //alertBootstap(); //No funciona
             });
     }
@@ -42,9 +43,9 @@ const ListUsersBootstrap = () => {
 
     useEffect(() => {
         if (refresh) {
-            fetch("http://localhost:3001/user",{
-                headers:{
-                    authorization:`Bearer ${getUserToken()}`
+            fetch("http://localhost:3001/user", {
+                headers: {
+                    authorization: `Bearer ${getUserToken()}`
                 }
             })
                 .then((response) => {
@@ -60,7 +61,7 @@ const ListUsersBootstrap = () => {
 
     return (
         <div className={styles.listadoTablaBootstrap}>
-            <Table className={styles.tablaDark} size="sm"  bordered hover variant="dark">
+            <Table className={styles.tablaDark} size="sm" bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Num</th>
@@ -69,6 +70,7 @@ const ListUsersBootstrap = () => {
                         <th>Email</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
+                        <th className={styles.thBotones}>View</th>
                         <th className={styles.thBotones}>Editar</th>
                         <th className={styles.thBotones}>Eliminar</th>
                     </tr>
@@ -78,28 +80,29 @@ const ListUsersBootstrap = () => {
                     {list && list.map((datosUser, index) => (
 
                         <tr key={datosUser._id + '_list_user'}>
-                            <td> {index+1}</td>
+                            <td> {index + 1}</td>
                             <td> {datosUser._id}</td>
                             <td> {datosUser.userName}</td>
                             <td> {datosUser.email}</td>
                             <td> {datosUser.name}</td>
                             <td> {datosUser.lastName}</td>
-
+                            <td className={styles.botones}><Button id={styles.botonEditar}
+                                onClick={() => navigate(`../LUP/${datosUser._id}`)}>View</Button>{/* nuevo boton para mostrar landingPageUser*/}                            </td>
                             <td className={styles.botones}><Button id={styles.botonEditar} onClick={() => {
                                 setOpenModal(true)
                                 setHandleId(datosUser._id)
-                                
-                                }} variant="light" className={styles.butEdit}>Editar</Button>
-                            
+
+                            }} variant="light" className={styles.butEdit}>Editar</Button>
+
                             </td>
-                            
+
                             <td className={styles.botones}><Button id={styles.botonEliminar} variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
                         </tr>
-                    
+
                     ))}
                     {console.log('datos del handleID', handleId)}
-                    <ModalEditUser userId = {handleId} setRefresh= {setRefresh} setOpenModal = {setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
-                   
+                    <ModalEditUser userId={handleId} setRefresh={setRefresh} setOpenModal={setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
+
 
                 </tbody>
 

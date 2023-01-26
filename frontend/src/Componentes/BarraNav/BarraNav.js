@@ -100,9 +100,9 @@ export const BarraNav = () => {
 
                   {getUserToken() && (
                     <>
-                      <Nav.Link as={Link} to="/LUP">
+                      {/* <Nav.Link as={Link} to="/LUP">
                         <Button variant="dark">Comienza AHORA</Button>
-                      </Nav.Link>
+                      </Nav.Link> */}
                       <Nav.Link as={Link} to="/users">
                         <Button variant="warning">Admin Mode</Button>
                       </Nav.Link>
