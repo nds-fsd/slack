@@ -1,3 +1,5 @@
+import { getUserToken } from "./localStorageUtils"
+
 export const postToMongo = async( path, data ) => {
     
     const url = `http://localhost:3001/${path}`
@@ -29,6 +31,7 @@ export const patchToMongo = async( path, data ) => {
         headers: {
             "Content-Type": "application/json", // que tipo de dato se manda
             "Accept": "application/json", // que tiene que aceptar
+            authorization:`Bearer ${getUserToken()}`
         }, 
         body: JSON.stringify(data), // pasamos a sting por que http no permite mandar JSON
     } )

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { patchToMongo } from "../../utils/fetchToMongo";
 import NotFound from "../NotFound/notFound";
 import styles from "./editUser.module.css"
+import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 
 const EditUser = (props) => {
     // Varuiables y estados
@@ -18,7 +19,13 @@ const EditUser = (props) => {
 
     // funciones o efectos
     useEffect(() => {
-        fetch("http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id))
+        fetch("http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id),     
+        {
+            headers:{
+                authorization:`Bearer ${getUserToken()}`
+            }
+        }) //REVISAR QUE FUNCIONA LA EDICIÓN
+   
 
             .then((res) => {
                 return res.json();
@@ -54,8 +61,7 @@ const EditUser = (props) => {
             method: "DELETE",
             mode: "cors",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
+                authorization:`Bearer ${getUserToken()}`
             }
         };
         fetch(url, options)
@@ -64,6 +70,7 @@ const EditUser = (props) => {
             })
             .then(() => {
                 alert(`Usuario ${user.userName} eliminado.`);
+                removeSession()
 
 
                 //si userEdit tiene datos quiere decir que estoy editando desde el admin, si no es que estoy a nivel usuario/cliente
