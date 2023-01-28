@@ -32,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/" element={<PrivateRoutes />}>
+            {/*Las siguientes rutas son Outlet de PrivateRoutes*/}
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
             <Route path="/user/:id" element={<EditUser />}>  </Route>
             <Route path="/LUP/:id" element={<LandingUserPage/>} />
