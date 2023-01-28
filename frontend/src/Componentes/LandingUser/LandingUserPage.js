@@ -37,7 +37,7 @@ export const LandingUserPage = () => {
       <Card.Body>
         <div className='cardtext'>
         <Card.Text>
-         <p>Org / Name / Img / Icons</p>
+         {/*<p>{user.organizacion.map((e)=>e.OrgName)}</p>*/}
         </Card.Text>
         </div>
         <div className='btncard'>
