@@ -6,6 +6,7 @@ dotenv.config();
 
 let dbUrl = process.env.Mongo_URL;
 
+let mongod;
 export const connectDB = async() => {
     if (process.env.NODE_ENV === 'test') {
         mongod = await MongoMemoryServer.create();
