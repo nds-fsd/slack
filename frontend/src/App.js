@@ -25,7 +25,7 @@ function App() {
 
   return (
 
-     <>
+    <>
       <BarraNav />
       <div className={styles.mainRouter}>
 
@@ -35,16 +35,16 @@ function App() {
             {/*Las siguientes rutas son Outlet de PrivateRoutes*/}
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
             <Route path="/user/:id" element={<EditUser />}>  </Route>
-            <Route path="/LUP/:id" element={<LandingUserPage/>} />
+            <Route path="/LUP/:id" element={<LandingUserPage />} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
             <Route path="/skuadlack" element={<SkuadlackPage />}>  </Route>
 
           </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
-          <Route path="/InfoSlack" element={<InfoSlack/>} >  </Route>
+          <Route path="/InfoSlack" element={<InfoSlack />} >  </Route>
 
-          
+
           <Route path='/*' element={<NotFound />} />
           <Route path="/login" element={<Login />} />
 
@@ -52,7 +52,7 @@ function App() {
         </Routes>
 
       </div>
-      </> 
+    </>
 
   );
 }
