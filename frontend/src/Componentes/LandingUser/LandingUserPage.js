@@ -35,7 +35,7 @@ export const LandingUserPage = () => {
                 {user.organizacion && user.organizacion.map((e) => (
 
                     <Card className='cardstyle' border="dark">
-                        <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.name}</Card.Header>
+                        <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.email}</Card.Header>
                         <Card.Body>
                             <div className='cardtext'>
                                 <Card.Text>
