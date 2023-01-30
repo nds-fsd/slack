@@ -77,7 +77,7 @@ routerOrg.delete('/organizacion/:id', async(req,res)=>{
   }
 });
 
-routerOrg.post('/organizacion/:id/enrollOrganization', async (req, res) => {
+routerOrg.post('/organizacion/:id/enrollChannel', async (req, res) => {
 
   //:id de la request es el ID de la organización
   //id del body es el ID del canal
