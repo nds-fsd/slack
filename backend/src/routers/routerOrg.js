@@ -77,6 +77,27 @@ routerOrg.delete('/organizacion/:id', async(req,res)=>{
   }
 });
 
+routerOrg.post('/organizacion/:id/enrollOrganization', async (req, res) => {
+
+  //:id de la request es el ID de la organización
+  //id del body es el ID del canal
+  
+  const idOrg = req.params.id
+  const idChannel = req.body._id
+  try {
+      const organizacion = await Organizacion.findById(idOrg)
+      console.log("Canal ENROLADO", organizacion)
+      if (!organizacion) return res.status(404).json({ message: 'No encuentro la organización' })
+      if (organizacion.channel.includes(idChannel)) return res.status(400).json({ message: 'Ya estás en el canal' })
+      organizacion.channel.push(idChannel)
+      await organizacion.save()
+      res.status(201).json(organizacion)
+
+  } catch (error) {
+      res.status(500).json(error)
+  }
+})
+
 
 
 

@@ -80,5 +80,4 @@ routerChannel.delete('/organizacion/:id',jwtMiddleware, async(req,res)=>{
 
 
 
-
 export default routerChannel;
