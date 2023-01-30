@@ -6,9 +6,9 @@ import generateJWT from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
-import jwt from'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-routerUsers.get('/user',jwtMiddleware, async (req, res) => {
+routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
         const allUsers = await User.find();
         res.status(200).json(allUsers);
@@ -17,10 +17,11 @@ routerUsers.get('/user',jwtMiddleware, async (req, res) => {
     }
 });
 
-routerUsers.get('/user/:id',jwtMiddleware, async (req, res) => {
+routerUsers.get('/user/:id', jwtMiddleware, async (req, res) => {
     const id = req.params.id
     try {
-        const user = await User.findById(id)
+        const user = await User.findById(id).populate('organizacion')
+            
         if (user) {
             res.status(200).json(user)
         } else {
@@ -33,7 +34,8 @@ routerUsers.get('/user/:id',jwtMiddleware, async (req, res) => {
 
 // app.use(validateUserName);
 
-routerUsers.post('/user', validateUserName,jwtMiddleware, async (req, res) => {
+
+routerUsers.post('/user', validateUserName, jwtMiddleware, async (req, res) => {
     try {
 
         const emailExist = await User.findOne({ email: req.body.email })
@@ -54,7 +56,7 @@ routerUsers.post('/user', validateUserName,jwtMiddleware, async (req, res) => {
         //Crearmos otro objeto para no enviar la contraseña
         const resUser = {
             userName: userCreated.userName,
-            _id:userCreated._id,
+            _id: userCreated._id,
             email: userCreated.email,
             name: userCreated.name,
             lastName: userCreated.lastName
@@ -64,6 +66,35 @@ routerUsers.post('/user', validateUserName,jwtMiddleware, async (req, res) => {
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
 });
+
+// Añadir organizacion a usuario
+
+routerUsers.post('/user/:id/enrollOrganization', async (req, res) => {
+
+    const id = req.params.id
+    const idOrganizacion = req.body._id
+    try {
+        const user = await User.findById(id)
+        console.log("USUARIO ENROLADO", user)
+        if (!user) return res.status(404).json({ message: 'no encuentro el usuario' })
+        if (user.organizacion.includes(idOrganizacion)) return res.status(400).json({ message: ' ya estas en la organizacion' })
+        user.organizacion.push(idOrganizacion)
+        await user.save()
+        res.status(201).json(user)
+
+        /*
+            Esto deberia devolvernos algo parecido a 
+            {
+                id: 'soiasoaios',
+                name: 'saikjhsikjas,
+                ... y 
+                organization: ObjectiID('aksjkajss)
+            }
+        */
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 routerUsers.post('/register', validateUserName, async (req, res) => {
     try {
@@ -86,7 +117,7 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
         //Crearmos otro objeto para no enviar la contraseña
         const resUser = {
             userName: userCreated.userName,
-            _id:userCreated._id,
+            _id: userCreated._id,
             email: userCreated.email,
             name: userCreated.name,
             lastName: userCreated.lastName
@@ -97,39 +128,39 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
 });
 
-routerUsers.post('/login', async (req,res) => {
+routerUsers.post('/login', async (req, res) => {
     const { email, password } = req.body
     // * Validate, email and password were provided in the request
-    if ( !email || !password) {
-        return res.status(400).json( { error: { login: "Missing email or password"}})
+    if (!email || !password) {
+        return res.status(400).json({ error: { login: "Missing email or password" } })
     }
     User.findOne({ email })
-    .then((foundUser) => {
-        // * Validate user email is already registered
-        if (!foundUser) {
-            return res.status(400).json( { error: { email: "User not found, please Register"}})
-        }
-        // * Validate password with bcrypt library
-         if (!foundUser.comparePassword(password)) {
-       // if (foundUser.password !== password) {
-            return res.status(400).json( { error: { password: "Invalid Password"}})
-        }
-        // * if everything is ok, return the new token and user data
-        return res.status(200).json({
-            token: foundUser.generateJWT(), 
-            user: {
-                 email: foundUser.email,
-                 name: foundUser.name,
-                 id: foundUser._id,
-            },
+        .then((foundUser) => {
+            // * Validate user email is already registered
+            if (!foundUser) {
+                return res.status(400).json({ error: { email: "User not found, please Register" } })
+            }
+            // * Validate password with bcrypt library
+            if (!foundUser.comparePassword(password)) {
+                // if (foundUser.password !== password) {
+                return res.status(400).json({ error: { password: "Invalid Password" } })
+            }
+            // * if everything is ok, return the new token and user data
+            return res.status(200).json({
+                token: foundUser.generateJWT(),
+                user: {
+                    email: foundUser.email,
+                    name: foundUser.name,
+                    id: foundUser._id,
+                },
+            })
         })
-    })
-    .catch((err) => {
-        return res.status(500).json( { error: { register: "Error Login in :(", error: err.message}})
-    })
+        .catch((err) => {
+            return res.status(500).json({ error: { register: "Error Login in :(", error: err.message } })
+        })
 })
 
-routerUsers.patch('/user/:id', validateUserName,jwtMiddleware, async (req, res) => {
+routerUsers.patch('/user/:id', validateUserName, jwtMiddleware, async (req, res) => {
     try {
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if (userModified) {
@@ -142,7 +173,7 @@ routerUsers.patch('/user/:id', validateUserName,jwtMiddleware, async (req, res) 
     }
 });
 
-routerUsers.delete('/user/:id',jwtMiddleware, async (req, res) => {
+routerUsers.delete('/user/:id', jwtMiddleware, async (req, res) => {
     const id = req.params.id
     try {
         const userDelete = await User.findByIdAndDelete(id)

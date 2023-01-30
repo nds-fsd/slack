@@ -8,66 +8,72 @@ import { getUserToken } from '../../utils/localStorageUtils';
 
 
 export const LandingUserPage = () => {
-  const params = useParams()
-  const [user, setUser] = useState("")
-  useEffect(() => {
-    fetch("http://localhost:3001/user/" + params.id ,     
-    {
-        headers:{
-            authorization:`Bearer ${getUserToken()}`
-        }
-    }) 
-        .then((res) => {
-            return res.json();
-        })
-        .then((res) => {
-            setUser(res);
-        });
-}, []);
-  return (
-    <LUPstyle>
+    const params = useParams()
+    const [user, setUser] = useState("")
+    useEffect(() => {
+        fetch("http://localhost:3001/user/" + params.id,
+            {
+                headers: {
+                    authorization: `Bearer ${getUserToken()}`
+                }
+            })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                setUser(res);
+            });
+    }, []);
+    return (
+        <LUPstyle>
 
-    <div>
-        <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span></h1>
-    </div>
+            <div>
+                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span></h1>
+            </div>
 
-    <div>
-    <Card className='cardstyle' border="dark">
-      <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.email}</Card.Header>
-      <Card.Body>
-        <div className='cardtext'>
-        <Card.Text>
-         <p>Org / Name / Img / Icons</p>
-        </Card.Text>
-        </div>
-        <div className='btncard'>
-        <Button as={Link} to="/skuadlack" variant="secondary">Iniciar "OrgName"</Button>
-        </div> 
-      </Card.Body>
-    </Card>
-    </div>
+            <div>
+                {user.organizacion && user.organizacion.map((e) => (
 
-    <div>
-    <Card className='cardstyle' border="dark">
-      <Card.Header as="h5" className='cardhead'>Crea tu nueva <span className='rojo'>Organizacion SkuadLack</span></Card.Header>
-      <Card.Body>
-        <div className='cardtext'>
-        <Card.Text>
-         <p>¿Quieres usar <span className='rojo'>Skuadlack</span> con un equipo distinto?</p>
-        </Card.Text>
-        </div>
-        <div className='btncard'>
-        <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
-        </div> 
-      </Card.Body>
-    </Card>
-    </div>
+                    <Card className='cardstyle' border="dark">
+                        <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.email}</Card.Header>
+                        <Card.Body>
+                            <div className='cardtext'>
+                                <Card.Text>
+                                    <h3>{e.OrgName}</h3>
+                                    <p>{e.OrgDescription}</p>
+                                </Card.Text>
 
-    <div className='perfiluser'>
-        <h2><Link className='icono' to={`/user/${user._id}`}><MdSettings/></Link> Perfil</h2>
-    </div>
-    </LUPstyle>
-  )
+                            </div>
+
+                            <div className='btncard'>
+                                <Button as={Link} to="/skuadlack" variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                ))}
+            </div>
+
+            <div>
+                <Card className='cardstyle' border="dark">
+                    <Card.Header as="h5" className='cardhead'>Crea tu nueva <span className='rojo'>Organizacion SkuadLack</span></Card.Header>
+                    <Card.Body>
+                        <div className='cardtext'>
+                            <Card.Text>
+                                <p>¿Quieres usar <span className='rojo'>Skuadlack</span> con un equipo distinto?</p>
+                            </Card.Text>
+                        </div>
+                        <div className='btncard'>
+                            <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
+                        </div>
+                    </Card.Body>
+                </Card>
+            </div>
+
+            <div className='perfiluser'>
+                <h2><Link className='icono' to={`/user/${user._id}`}><MdSettings /></Link> Perfil</h2>
+            </div>
+        </LUPstyle>
+    )
 }
 const LUPstyle = styled.div`
 display: flex;
