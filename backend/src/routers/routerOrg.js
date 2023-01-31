@@ -34,6 +34,28 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
       res.status(400).send(error.message);
     }
   });
+
+  //router para que cuando se cree la organización automáticamente se asocie al usuario que la crea
+  routerOrg.post('/organizacionToUser',validateOrgName, async(req,res)=> {
+    const body = req.body;
+    const data = {
+      OrgName: body.OrgName,
+      OrgMail: body.OrgMail,
+      OrgDescription: body.OrgDescription
+    };
+  
+    if (!data.OrgName || !data.OrgMail) {
+      return res.status(422).send("Falta el nombre o el correo electrónico de la organización");
+    }
+  
+    try {
+      const organizacion = new Organizacion(data);
+      await organizacion.save();
+      res.status(201).json(organizacion);
+    } catch(error) {
+      res.status(400).send(error.message);
+    }
+  });
   
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id

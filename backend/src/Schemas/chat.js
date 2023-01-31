@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 //se define el esque para que el modelo de fecha sea dd-mm-yyyy
+/*
 const chatSchema = new Schema({
     creationDate: { type: Date,
         required: true,
@@ -16,7 +17,14 @@ const chatSchema = new Schema({
     organizacion: [{type: Schema.ObjectId, ref: 'Organizacion'}],
     user: [{type: Schema.ObjectId, ref: 'User'}]
   });
+  */
 
-  const Chat = model('chat', userSchema);
+const chatSchema = new Schema({
+  creationDate: { type: Date, required: true },
+  organizacion: { type: Schema.ObjectId, ref: "Organizacion" },
+  user: [{ type: Schema.ObjectId, ref: "User" }],
+});
+
+const Chat = model("Chat", chatSchema);
 
 export default Chat;

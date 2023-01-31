@@ -4,7 +4,9 @@ import { Schema, model } from 'mongoose';
 const orgSchema = new Schema({
     OrgName: {type: String, required: true},
     OrgMail: {type: String, required: true},
-    OrgDescription: String
+    OrgDescription: String,
+    user: [{type: Schema.ObjectId, ref: 'User'}],
+    chat: [{type: Schema.ObjectId, ref: 'Chat'}]
 });
 
 const Organizacion = model('Organizacion', orgSchema);

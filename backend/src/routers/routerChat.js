@@ -1,29 +1,39 @@
-import express from 'express';
-import Chat from '../Schemas/chat.js';
+import express from "express";
+import Chat from "../Schemas/chat.js";
 const routerChat = express.Router();
+import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 
+//Crear un chat asociado a un usuario y organización
+routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
+  //Solo puedo crear un chat si he hecho login. En el key de token tengo el id de usuario
 
-routerChat.post('/chat/:id/createChat', async (req, res) => {
+  //El id de organzación es necesario mandarlo con el body
+  const idOrganizacion = req.body._id;
 
+  console.log("idOrganizacion", idOrganizacion);
 
+  //El middleware devuelve el jwtPayload con los datos del payload
+  const idUser = req.jwtPayload.id;
 
-    const id = req.params.id
-    const idOrganizacion = req.body._id
-    try {
-        const chat = await Chat.findById(id)
-        console.log("USUARIO ENROLADO", user)
-        if (!user) return res.status(404).json({ message: 'no encuentro el usuario' })
-        if (user.organizacion.includes(idOrganizacion)) return res.status(400).json({ message: ' ya estas en la organizacion' })
-        user.organizacion.push(idOrganizacion)
-        await user.save()
-        res.status(201).json(user)
+  console.log("idUser", idUser);
 
-     
-    } catch (error) {
-        res.status(500).json(error)
-    }
-})
+  try {
+    const chat = new Chat(req.body);
 
+    console.log("Entidad Chat", chat);
 
+    //La forma de asignar el idOrganización es mediante una equivalencia cuando son dependencias 1 a N (sin array en el schema de Chat)
+    chat.organizacion = idOrganizacion
+    
+    //Esta es la forma de añadir usuarios al chat cuando son equivalencias N a N
+    chat.user.push(idUser);
+  
+    await chat.save();
+
+    res.status(201).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 export default routerChat;
