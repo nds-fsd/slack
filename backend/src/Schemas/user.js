@@ -43,6 +43,6 @@ userSchema.methods.generateJWT = function () {
   });
 };
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 export default User;
