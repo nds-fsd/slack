@@ -79,7 +79,13 @@ export const BarraNav = () => {
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
                     <NavDropdown.Item href="#action5">
-                      Contact Us! :)
+                      <Nav.Link
+                          className="dropdownlinks"
+                          as={Link}
+                          to="/contactUs"
+                        >
+                        Contact Us!
+                      </Nav.Link>
                     </NavDropdown.Item>
                   </NavDropdown>
 
