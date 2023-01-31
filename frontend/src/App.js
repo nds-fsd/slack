@@ -3,7 +3,7 @@ import './App.css';
 import FormOrganizacion from './Componentes/FormularioOrganizacion/formOrganizacion.jsx';
 import LandingPage from './Componentes/LandingPage/LandingPage';
 //import ListUsers from './Componentes/ListUsers/listUsers';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import styles from "./Styles/App.module.css"
 //import DashboardUser from './Componentes/DashboardUsuario/dashboardUser';
 import NotFound from './Componentes/NotFound/notFound';
@@ -23,15 +23,16 @@ import AboutUs from './Componentes/AboutUs/AboutUs';
 //Los imports comentados no se estan utilizando
 
 function App() {
-
+  const location = useLocation();
+  
   return (
-
     <>
-      <BarraNav />
-      <div className={styles.mainRouter}>
+      {location.pathname !== "/skuadlack" && <BarraNav />}      
+        <div className={styles.mainRouter}>
 
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
+
           <Route path="/" element={<PrivateRoutes />}>
             {/*Las siguientes rutas son Outlet de PrivateRoutes*/}
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>
@@ -41,6 +42,8 @@ function App() {
             <Route path="/skuadlack" element={<SkuadlackPage />}>  </Route>
 
           </Route>
+
+          
           <Route path="/user" element={<FormUser1 />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
           <Route path="/InfoSlack" element={<InfoSlack />} >  </Route>
