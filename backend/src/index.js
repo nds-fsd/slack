@@ -9,7 +9,7 @@ import routerOrg from './routers/routerOrg.js';
 
 
 dotenv.config();
-const app = express();
+export const app = express();
 // const port = process.env.PORT;
 
 app.use(cors());
@@ -31,8 +31,8 @@ if(process.env.NODE_ENV !== 'test'){
     port = process.env.TEST_PORT
 }
 
-const server = app.listen(port, () => {
+export const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
 })
 
-module.exports = {app, server};
+// module.exports = {app, server};
