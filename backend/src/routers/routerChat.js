@@ -46,6 +46,18 @@ routerChat.get("/allChats", jwtMiddleware, async (req, res) => {
   }
 });
 
+//Consultar solo un chat
+routerChat.get("/chat/:idChat", jwtMiddleware, async (req, res) => {
+    const idChat = req.params.idChat
+    
+    try {
+      const chat = await Chat.findById(idChat);
+      res.status(200).json(chat);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
 //Añadir user al chat en el cual siempre ya hay mínimo un usuario añadido que es el que crea el chat
 routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
   const idNewUser = req.body.user;
@@ -59,16 +71,70 @@ routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
 
     console.log("chatModificado", chatModified);
 
+    //Validar que el usuario no está registrado ya
     const existingUser = await Chat.findOne({ _id: idChat, user: idNewUser });
 
     if (existingUser)
       return res.status(404).json("El usuario ya existe en el chat");
 
     chatModified.user.push(idNewUser);
+
+    await chatModified.save();
+
     res.status(200).json(chatModified);
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
+//Eliminar un chat al completo
+routerChat.delete("/deleteChat/:idChat", jwtMiddleware, async (req, res) => {
+  const idChat = req.params.idChat;
+
+  try {
+    const chatDelete = await Chat.findByIdAndDelete(idChat);
+    res.status(204).json("Chat eliminado");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//Eliminar un usuario del chat
+routerChat.patch("/deleteUserFromChat/:idChat", jwtMiddleware, async (req, res) => {
+    const idUserToDelete = req.body.user;
+    const idChat = req.params.idChat;
+
+    console.log('userToDelete',idUserToDelete)
+
+    try {
+      // comprobamos que el chat nos lo pasan por parametro de la url
+      if (!idChat) return res.status(404).json("IdChat no existe");
+      // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
+      const chatModified = await Chat.findById(idChat);
+
+      console.log("chatModificado", chatModified);
+    
+      //Buscar el usuario
+      const existingUser = await Chat.findOne({_id: idChat, user: idUserToDelete});
+
+      console.log('existinUser', existingUser);
+
+      //Validar que el usuario está en el chat
+      if (!existingUser) return res.status(404).json("El usuario no existe en el chat");
+
+      //Eliminar el usuario
+      const eliminateUser = await Chat.findOneAndDelete({_id: idChat, user: idUserToDelete});
+
+      console.log('chat ultimo', eliminateUser)
+      
+      await eliminateUser.save();
+
+      res.status(200).json(eliminateUser);
+
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+);
 
 export default routerChat;
