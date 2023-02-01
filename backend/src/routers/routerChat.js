@@ -7,9 +7,11 @@ import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   //Solo puedo crear un chat si he hecho login. En el key de token tengo el id de usuario
 
-  //El id de organzación es necesario mandarlo con el body
-  const idOrganizacion = req.body._id;
+  //El id de organzación y fecha es necesario mandarlo con el body
+  const idOrganizacion = req.body.organizacion;
+  const creationDate = req.body.creationDate;
 
+  console.log("creationDate", creationDate);
   console.log("idOrganizacion", idOrganizacion);
 
   //El middleware devuelve el jwtPayload con los datos del payload
@@ -20,8 +22,6 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   try {
     const chat = new Chat(req.body);
 
-    console.log("Entidad Chat", chat);
-
     //La forma de asignar el idOrganización es mediante una equivalencia cuando son dependencias 1 a N (sin array en el schema de Chat)
     chat.organizacion = idOrganizacion;
 
@@ -29,7 +29,7 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
     chat.user.push(idUser);
 
     await chat.save();
-
+    console.log("Entidad Chat", chat);
     res.status(201).json(chat);
   } catch (error) {
     res.status(500).json(error);
@@ -47,23 +47,25 @@ routerChat.get("/allChats", jwtMiddleware, async (req, res) => {
 });
 
 //Añadir user al chat en el cual siempre ya hay mínimo un usuario añadido que es el que crea el chat
-routerChat.patch("/addUserChat/:id", jwtMiddleware, async (req, res) => {
-  const idNewUser = req.body._id;
-  const idChat = req.params.id;
+routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
+  const idNewUser = req.body.user;
+  const idChat = req.params.idChat;
 
   try {
-    const chatModified = await Chat.findById(idChat); //.populate('User');
+    // comprobamos que el chat nos lo pasan por parametro de la url
+    if (!idChat) return res.status(404).json("IdChat no existe");
+    // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
+    const chatModified = await Chat.findById(idChat);
 
-    const idExist = await Chat.findOne({user: idNewUser}).populate('user');
+    console.log("chatModificado", chatModified);
 
-    console.log('id Existe',idExist);
+    const existingUser = await Chat.findOne({ _id: idChat, user: idNewUser });
 
-    if (chatModified) {
-      chatModified.user.push(idNewUser);
-      res.status(200).json(chatModified);
-    } else {
-      res.status(404).send("Chat no encontrado");
-    }
+    if (existingUser)
+      return res.status(404).json("El usuario ya existe en el chat");
+
+    chatModified.user.push(idNewUser);
+    res.status(200).json(chatModified);
   } catch (error) {
     res.status(500).json(error);
   }
