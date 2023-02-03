@@ -48,15 +48,15 @@ routerChat.get("/allChats", jwtMiddleware, async (req, res) => {
 
 //Consultar solo un chat
 routerChat.get("/chat/:idChat", jwtMiddleware, async (req, res) => {
-    const idChat = req.params.idChat
-    
-    try {
-      const chat = await Chat.findById(idChat);
-      res.status(200).json(chat);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  });
+  const idChat = req.params.idChat;
+
+  try {
+    const chat = await Chat.findById(idChat);
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 //Añadir user al chat en el cual siempre ya hay mínimo un usuario añadido que es el que crea el chat
 routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
@@ -100,36 +100,29 @@ routerChat.delete("/deleteChat/:idChat", jwtMiddleware, async (req, res) => {
 });
 
 //Eliminar un usuario del chat
-routerChat.patch("/deleteUserFromChat/:idChat", jwtMiddleware, async (req, res) => {
+routerChat.patch("/deleteUserFromChat/:idChat",  jwtMiddleware, async (req, res) => {
     const idUserToDelete = req.body.user;
     const idChat = req.params.idChat;
 
-    console.log('userToDelete',idUserToDelete)
-
     try {
       // comprobamos que el chat nos lo pasan por parametro de la url
-      if (!idChat) return res.status(404).json("IdChat no existe");
+      if (!idChat) return res.status(404).json("IdChat no está informado en los params");
+
       // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
-      const chatModified = await Chat.findById(idChat);
+      const chatEncontrado = await Chat.findById(idChat);
 
-      console.log("chatModificado", chatModified);
-    
-      //Buscar el usuario
-      const existingUser = await Chat.findOne({_id: idChat, user: idUserToDelete});
+      //Buscamos el índice del usuario dentro de la matriz user que está dentro del objeto del schema correspondiente al chat
+      const deleteUserIndex = chatEncontrado.user.indexOf(idUserToDelete);
 
-      console.log('existinUser', existingUser);
+      //Si el indexOf es -1 quiere decir que no encuentra el resultado
+      if (deleteUserIndex === -1) return res.status(404).json("Usuario no encontrado en el chat");
 
-      //Validar que el usuario está en el chat
-      if (!existingUser) return res.status(404).json("El usuario no existe en el chat");
+      //Eliminar el usuario en función del índice encontrado. El método splice devuelve el usuario eliminado y altera la matriz que se utiliza el splice
+      const deleteUser = chatEncontrado.user.splice(deleteUserIndex, 1);
+  
+      await chatEncontrado.save();
 
-      //Eliminar el usuario
-      const eliminateUser = await Chat.findOneAndDelete({_id: idChat, user: idUserToDelete});
-
-      console.log('chat ultimo', eliminateUser)
-      
-      await eliminateUser.save();
-
-      res.status(200).json(eliminateUser);
+      res.status(200).json(chatEncontrado);
 
     } catch (error) {
       res.status(500).json(error);
