@@ -131,4 +131,84 @@ routerChat.patch("/deleteUserFromChat/:idChat",  jwtMiddleware, async (req, res)
   }
 );
 
+//MÉTODO AGRUPADO DE AÑADIR Y QUITAR USUARIOS MEDIANTE QUERY PARAMS
+routerChat.patch("/modifyUser/:idChat/",  jwtMiddleware, async (req, res) => {
+  //Definición del query params:
+  // method = a --> add users
+  //method = d --> deleter users
+  //user = 'id' --> usuario a eliminar/añadir
+  //ejemplo query params --> /modifyUser/:idChat?method=a&user=idUser
+
+
+  const method = req.query.method;
+  const idUser = req.query.user;
+  const idChat = req.params.idChat;
+
+  console.log('Método',method)
+  console.log('Users',idUser)
+
+  if (!method) return res.status(404).json('Método no informado en la llamada')
+  if (method !=='a' && method !== 'd') return res.status(404).json('Método con variables incorrectas. Tienen que ser a ó d')
+
+  if (method === 'd'){
+
+  try {
+    // comprobamos que el chat nos lo pasan por parametro de la url
+    if (!idChat) return res.status(404).json("IdChat no está informado en los params");
+
+    // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
+    const chatFound = await Chat.findById(idChat);
+
+    if (!chatFound) return res.status(404).json("Chat no encontrado");
+
+    //Buscamos el índice del usuario dentro de la matriz user que está dentro del objeto del schema correspondiente al chat
+    const deleteUserIndex = chatFound.user.indexOf(idUser);
+    //Si el indexOf es -1 quiere decir que no encuentra el resultado
+    if (deleteUserIndex === -1) return res.status(404).json("Usuario no encontrado en el chat");
+
+    //Eliminar el usuario en función del índice encontrado. El método splice devuelve el usuario eliminado y altera la matriz que se utiliza el splice
+    const deleteUser = chatFound.user.splice(deleteUserIndex, 1);
+
+    await chatFound.save();
+
+    res.status(200).json(chatFound);
+
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
+
+} else if(method === 'a') {
+
+    try {
+      // comprobamos que el chat nos lo pasan por parametro de la url
+      if (!idChat) return res.status(404).json("IdChat no existe");
+      // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
+      const chatModified = await Chat.findById(idChat);
+  
+      console.log("chatModificado", chatModified);
+  
+      //Validar que el usuario no está registrado ya
+      const existingUser = await Chat.findOne({ _id: idChat, user: idUser });
+  
+      if (existingUser) return res.status(404).json("El usuario ya existe en el chat");
+  
+      chatModified.user.push(idUser);
+  
+      await chatModified.save();
+  
+      res.status(200).json(chatModified);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
+
+}else{
+  return res.status(400).json('Method not found')
+}
+
+
+});
+
+
 export default routerChat;
