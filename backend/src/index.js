@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongo from './Mongo/index.js';
 import routerUsers from './routers/routerUsers.js';
 import routerOrg from './routers/routerOrg.js';
+import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use(routerUsers);
 app.use(routerOrg)
+app.use(routerChat)
 app.use(routerMessages)
 
 app.listen(port, () => {
