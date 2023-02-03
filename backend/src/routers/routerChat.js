@@ -11,13 +11,9 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   const idOrganizacion = req.body.organizacion;
   const creationDate = req.body.creationDate;
 
-  console.log("creationDate", creationDate);
-  console.log("idOrganizacion", idOrganizacion);
-
   //El middleware devuelve el jwtPayload con los datos del payload
   const idUser = req.jwtPayload.id;
 
-  console.log("idUser", idUser);
 
   try {
     const chat = new Chat(req.body);
@@ -68,8 +64,6 @@ routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
     if (!idChat) return res.status(404).json("IdChat no existe");
     // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
     const chatModified = await Chat.findById(idChat);
-
-    console.log("chatModificado", chatModified);
 
     //Validar que el usuario no está registrado ya
     const existingUser = await Chat.findOne({ _id: idChat, user: idNewUser });
@@ -134,7 +128,7 @@ routerChat.patch("/deleteUserFromChat/:idChat",  jwtMiddleware, async (req, res)
 //MÉTODO AGRUPADO DE AÑADIR Y QUITAR USUARIOS MEDIANTE QUERY PARAMS
 routerChat.patch("/modifyUser/:idChat/",  jwtMiddleware, async (req, res) => {
   //Definición del query params:
-  // method = a --> add users
+  //method = a --> add users
   //method = d --> deleter users
   //user = 'id' --> usuario a eliminar/añadir
   //ejemplo query params --> /modifyUser/:idChat?method=a&user=idUser
@@ -143,9 +137,6 @@ routerChat.patch("/modifyUser/:idChat/",  jwtMiddleware, async (req, res) => {
   const method = req.query.method;
   const idUser = req.query.user;
   const idChat = req.params.idChat;
-
-  console.log('Método',method)
-  console.log('Users',idUser)
 
   if (!method) return res.status(404).json('Método no informado en la llamada')
   if (method !=='a' && method !== 'd') return res.status(404).json('Método con variables incorrectas. Tienen que ser a ó d')
