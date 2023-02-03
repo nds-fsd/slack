@@ -109,20 +109,21 @@ routerChat.patch("/deleteUserFromChat/:idChat",  jwtMiddleware, async (req, res)
       if (!idChat) return res.status(404).json("IdChat no está informado en los params");
 
       // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
-      const chatEncontrado = await Chat.findById(idChat);
+      const chatFound = await Chat.findById(idChat);
+
+      if (!chatFound) return res.status(404).json("Chat no encontrado");
 
       //Buscamos el índice del usuario dentro de la matriz user que está dentro del objeto del schema correspondiente al chat
-      const deleteUserIndex = chatEncontrado.user.indexOf(idUserToDelete);
-
+      const deleteUserIndex = chatFound.user.indexOf(idUserToDelete);
       //Si el indexOf es -1 quiere decir que no encuentra el resultado
       if (deleteUserIndex === -1) return res.status(404).json("Usuario no encontrado en el chat");
 
       //Eliminar el usuario en función del índice encontrado. El método splice devuelve el usuario eliminado y altera la matriz que se utiliza el splice
-      const deleteUser = chatEncontrado.user.splice(deleteUserIndex, 1);
+      const deleteUser = chatFound.user.splice(deleteUserIndex, 1);
   
-      await chatEncontrado.save();
+      await chatFound.save();
 
-      res.status(200).json(chatEncontrado);
+      res.status(200).json(chatFound);
 
     } catch (error) {
       res.status(500).json(error);
