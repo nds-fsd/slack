@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Search } from './Componets/BarraSuperior/search'
 
 export const SkuadlackPage = () => {
   return (
     <PageStyle>
     <div className='barrasuperior'>
       <div>nombre org</div>
-      <div>buscador canales+chat</div>
+      <div><Search/></div>
       <div>fotoPerfil</div>
 
     </div>
@@ -29,7 +30,7 @@ export const SkuadlackPage = () => {
         <div className='box3'>
 
           <div className='barraSuperiorChat'>
-            <div>nombre chat/user(s) con el que hablas</div>
+            <div>nombre canal/user(s) con el que hablas</div>
             <div>opciones </div>
           </div>
 
@@ -93,7 +94,7 @@ const PageStyle = styled.div `
   .box1{
 
     padding: .3rem;
-    background-color: red;
+    background: #D9D9D9;
     height: 100%;
     width: 5%;
     text-align: center;
@@ -113,9 +114,10 @@ const PageStyle = styled.div `
     }
   }
   .box2{
+    background-color: #3F485B;
     position:static;
-    padding: .1rem;
-    padding-bottom: 0.3rem;
+    padding: .3rem;
+    padding-bottom: 0.2rem;
     height: 100%;
     width: 30%;
     display: flex;
@@ -128,13 +130,17 @@ const PageStyle = styled.div `
       box-shadow: 2px 2px 5px #0A0A0B, -2px -2px 5px #445CA3;
       width: 100%;
       height: 32%;
+      border-radius: 10px;
+      background-color: #202430;
+
 
     }
 
   }
   .box3{
     padding: .2rem;
-    background-color: #f2f2f2;
+    padding-bottom: .3REM;
+    background-color: #3F485B;
     height: 100%;
     width: 65%;
     color: #090a0f;
@@ -145,7 +151,7 @@ const PageStyle = styled.div `
     
     .barraSuperiorChat{
       height: 8vh;
-      background-color: green;
+      background-color: #202430;
       color: #f2f2f2;
       width: 100%;
       display: flex;
@@ -154,10 +160,13 @@ const PageStyle = styled.div `
       overflow: hidden;
       align-items: center;
       padding: 1rem;
+      box-shadow: 2px  #0A0A0B, -2px  #445CA3;
+
     }
     .bodyChat{
-      background-color: yellowgreen;
+      background-color: #3F485B;
       height: 100%;
+      color: #f2f2f2;
 
 
     }
