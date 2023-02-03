@@ -25,7 +25,7 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
     chat.user.push(idUser);
 
     await chat.save();
-    console.log("Entidad Chat", chat);
+   
     res.status(201).json(chat);
   } catch (error) {
     res.status(500).json(error);
