@@ -5,6 +5,7 @@ import mongo from './Mongo/index.js';
 import routerUsers from './routers/routerUsers.js';
 import routerOrg from './routers/routerOrg.js';
 import routerChat from './routers/routerChat.js';
+import routerMessages from './routers/routerMessages.js';
 
 
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(routerUsers);
 app.use(routerOrg)
 app.use(routerChat)
+app.use(routerMessages)
 
 app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
