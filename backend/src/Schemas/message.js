@@ -1,4 +1,4 @@
-import mongoose, { isObjectIdOrHexString, model, Schema } from "mongoose";
+import mongoose, {model, Schema } from "mongoose";
 
 const messageSchema = new Schema({
     date: {type: String, required: true},

@@ -37,7 +37,15 @@ const LandingPage = () =>{
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
                 </div>
                 
-                <div>sección 2.2</div>
+                <div><h2>Chat público para intercambiar puntos de opinión e insultos de forma anónima y segura</h2>
+
+                <div className={styles.contenedorChat}>
+                    
+
+                    
+                </div>
+
+                </div>
                 <div>sección 2.3</div>
                 <div>sección 2.4</div>
 
