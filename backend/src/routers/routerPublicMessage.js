@@ -1,7 +1,7 @@
 import express from "express";
 import PublicMessage from "../Schemas/public-message.js";
 import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
-import socketServer from "Aquí tienes que poner algo";
+import socketServer from "../index";
 const routerPublicMessages = express.Router();
 
 routerPublicMessages.post("/createPublicMessage", async (req, res) => {
@@ -19,6 +19,7 @@ routerPublicMessages.post("/createPublicMessage", async (req, res) => {
     // despues de crear el mensaje de manera exitosa,
     // le decimos al socket que emita un evento
     socketServer.io.emit("NEW_MESSAGE", newMessage);
+    
     return res.status(200).json({
       status: "success",
       messageStored,
