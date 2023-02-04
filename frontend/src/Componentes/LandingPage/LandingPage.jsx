@@ -8,6 +8,7 @@ import logoNasa from '../../Assets/logo-nasa.png'
 import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../Assets/airbnb-logo.png'
 import slackLogo from '../../Assets/slackLogo.png'
+import PublicChat from "../chatPublic/chatPublic";
 
 
 const LandingPage = () =>{
@@ -38,7 +39,7 @@ const LandingPage = () =>{
                 </div>
                 
                 <div><h2>Chat público para intercambiar puntos de opinión e insultos de forma anónima y segura</h2>
-
+                <PublicChat/>
                 <div className={styles.contenedorChat}>
                     
 
