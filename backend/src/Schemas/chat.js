@@ -20,10 +20,10 @@ const chatSchema = new Schema({
   */
 
 const chatSchema = new Schema({
-  creationDate: { type: Date, required: true },
   organizacion: { type: Schema.ObjectId, ref: "Organizacion" },
-  user: [{ type: Schema.ObjectId, ref: "User" }]  
-});
+  user: [{ type: Schema.ObjectId, ref: "User" }],
+  
+},{timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }});
 
 const Chat = model("Chat", chatSchema);
 
