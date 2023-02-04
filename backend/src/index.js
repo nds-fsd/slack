@@ -31,7 +31,7 @@ app.listen(port, () => {
 */
 
 //He duplicado para generar la variable server y no romper nada de lo anterior, por las dudas
-const server = app.listen(port, () => {
+export const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
 })
 
