@@ -126,7 +126,7 @@ routerChat.patch("/deleteUserFromChat/:idChat",  jwtMiddleware, async (req, res)
 );
 
 //MÉTODO AGRUPADO DE AÑADIR Y QUITAR USUARIOS MEDIANTE QUERY PARAMS
-routerChat.patch("/modifyUser/:idChat/",  jwtMiddleware, async (req, res) => {
+routerChat.patch("/modifyUser/:idChat?",  jwtMiddleware, async (req, res) => {
   //Definición del query params:
   //method = a --> add users
   //method = d --> deleter users
