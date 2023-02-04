@@ -1,7 +1,7 @@
 import mongoose, {model, Schema } from "mongoose";
 
 const publicMessageSchema = new Schema({
-    texto: String,
+    text: String,
     from: String,
   },
   {
@@ -10,7 +10,7 @@ const publicMessageSchema = new Schema({
     },
   })
 
-const PublicMessage = model('Message', publicMessageSchema)
+const PublicMessage = model('PublicMessage', publicMessageSchema)
 
 
-export default Message;
+export default PublicMessage;
