@@ -17,6 +17,8 @@ import PrivateRoutes from './Componentes/PrivateRoute/PrivateRouter.js'
 import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 import AboutUs from './Componentes/AboutUs/AboutUs';
+import io from "socket.io-client";
+const socket = io("http://localhost:3001");
 
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00

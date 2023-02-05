@@ -1,9 +1,9 @@
 import express from "express";
 import PublicMessage from "../Schemas/public-message.js";
-import socketServer from "../index";
+import {io} from "../index.js"
 const routerPublicMessages = express.Router();
 
-routerPublicMessages.post("/message", async (req, res) => {
+routerPublicMessages.post("/publicMessage", async (req, res) => {
   const { text, from } = req.body;
   const newMessage = new PublicMessage({ text, from });
 
@@ -17,7 +17,8 @@ routerPublicMessages.post("/message", async (req, res) => {
 
     // despues de crear el mensaje de manera exitosa,
     // le decimos al socket que emita un evento
-    socketServer.io.emit("NEW_MESSAGE", newMessage);
+    const eventName = "NEW_MESSAGE";
+    io.emit(eventName, newMessage);
 
     return res.status(200).json({
       status: "success",
@@ -26,7 +27,7 @@ routerPublicMessages.post("/message", async (req, res) => {
   });
 });
 
-routerPublicMessages.get("/message", async (req, res) => {
+routerPublicMessages.get("/publicMessage", async (req, res) => {
   //buscamos los mensajes y los ordenamos a los mas nuevos primero
   const query = PublicMessage.find({}).sort({ created_at: -1 });
 

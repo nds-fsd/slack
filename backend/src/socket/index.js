@@ -1,4 +1,3 @@
-import { jwtVerifier } from "../Utils/utils.js";
 import { Server } from "socket.io";
 
 export const configurePublicSocket = (server) => {

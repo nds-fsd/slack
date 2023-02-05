@@ -11,13 +11,16 @@ const PublicChat = ({ socket }) => {
   const [messages, setMessages] = useState([]);
 
   //Carga inicial del histórico de conversación pública
+  
   useEffect(() => {
-    console.log('Paso por el fecth del useEffect - carga de mensajes')
-    fetch(URL + "message")
+   
+    fetch('http://localhost:3001/publicMessage')
       .then((res) => res.json())
       .then((res) => {
         //es res.messages por que en el backend está definidos así en la respuesta
+        
         setStoredMessages(res.messages);
+       
       });
   }, []);
 
@@ -30,6 +33,7 @@ const PublicChat = ({ socket }) => {
         from: mensaje.from === nickname ? "Yo" : mensaje.from,
       };
       setMessages([mensajeParseado, ...messages]);
+      console.log('setMessages', setMessages)
     };
 
     // Suscripcion al evento "NEW_MESSAGE con el callback a ejecutar"
@@ -55,7 +59,7 @@ const PublicChat = ({ socket }) => {
         text: message,
         from: nickname,
       };
-      fetch(URL + "createPublicMessage", {
+      fetch(URL + "publicMessage", {
         headers: {
           Accept: "application/json",
           "Content-type": "application/json",
@@ -112,7 +116,7 @@ const PublicChat = ({ socket }) => {
 
       {/* ------------- WINDOW CHAT ------------- */}
 
-      <div className={styles.window}>
+      <div className={styles.window} resize>
         {messages.map((message, index) => (
           <div
             key={index}
@@ -127,7 +131,7 @@ const PublicChat = ({ socket }) => {
                   : styles["bg-light-blue"]
               }`}
             >
-              {message.from}: {message.body}
+              {message.from}: {message.text}
             </div>
           </div>
         ))}
@@ -147,7 +151,7 @@ const PublicChat = ({ socket }) => {
                   : styles["bg-light-blue"]
               }`}
             >
-              {message.from}: {message.body}
+              {message.from}: {message.text}
             </div>
           </div>
         ))}
