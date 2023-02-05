@@ -1,10 +1,9 @@
 import express from "express";
 import PublicMessage from "../Schemas/public-message.js";
-import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 import socketServer from "../index";
 const routerPublicMessages = express.Router();
 
-routerPublicMessages.post("/createPublicMessage", async (req, res) => {
+routerPublicMessages.post("/message", async (req, res) => {
   const { text, from } = req.body;
   const newMessage = new PublicMessage({ text, from });
 
@@ -19,7 +18,7 @@ routerPublicMessages.post("/createPublicMessage", async (req, res) => {
     // despues de crear el mensaje de manera exitosa,
     // le decimos al socket que emita un evento
     socketServer.io.emit("NEW_MESSAGE", newMessage);
-    
+
     return res.status(200).json({
       status: "success",
       messageStored,
@@ -27,7 +26,7 @@ routerPublicMessages.post("/createPublicMessage", async (req, res) => {
   });
 });
 
-routerPublicMessages.get("/getPublicMessage", async (req, res) => {
+routerPublicMessages.get("/message", async (req, res) => {
   //buscamos los mensajes y los ordenamos a los mas nuevos primero
   const query = PublicMessage.find({}).sort({ created_at: -1 });
 

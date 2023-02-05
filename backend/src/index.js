@@ -6,6 +6,7 @@ import routerUsers from './routers/routerUsers.js';
 import routerOrg from './routers/routerOrg.js';
 import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
+import routerPublicMessages from './routers/routerPublicMessage.js'
 import {configurePublicSocket} from './socket/index.js'
 
 
@@ -21,6 +22,7 @@ app.use(routerUsers);
 app.use(routerOrg)
 app.use(routerChat)
 app.use(routerMessages)
+app.use(routerPublicMessages)
 
 import bodyParser from 'body-parser'
 app.use(bodyParser.urlencoded({ extended: false }));

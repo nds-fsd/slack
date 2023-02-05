@@ -13,7 +13,7 @@ import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 const ListUsersBootstrap = () => {
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(true);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);  
     const [handleId, setHandleId] = useState('');
     const navigate = useNavigate()
 

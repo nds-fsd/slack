@@ -18,6 +18,7 @@ import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 import AboutUs from './Componentes/AboutUs/AboutUs';
 
+
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
 //Los imports comentados no se estan utilizando
@@ -32,6 +33,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
+
           <Route path="/" element={<PrivateRoutes />}>
             {/*Las siguientes rutas son Outlet de PrivateRoutes*/}
             <Route path="/organizacion" element={<FormOrganizacion />}>  </Route>

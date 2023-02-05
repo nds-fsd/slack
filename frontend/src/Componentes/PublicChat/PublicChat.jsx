@@ -1,8 +1,6 @@
-import styles from "./chatPublic.module.css";
-//import URL from "../../utils/constants.js";
+import styles from "./PublicChat.module.css";
+import {URL} from "../../utils/constants.js";
 import { useState, useEffect } from "react";
-
-const URL = 'http://localhost:3001/';
 
 const PublicChat = ({ socket }) => {
   const [storedMessages, setStoredMessages] = useState([]);
@@ -14,7 +12,8 @@ const PublicChat = ({ socket }) => {
 
   //Carga inicial del histórico de conversación pública
   useEffect(() => {
-    fetch(URL + "getPublicMessage")
+    console.log('Paso por el fecth del useEffect - carga de mensajes')
+    fetch(URL + "message")
       .then((res) => res.json())
       .then((res) => {
         //es res.messages por que en el backend está definidos así en la respuesta
@@ -103,7 +102,7 @@ const PublicChat = ({ socket }) => {
             placeholder="message..."
             onChange={(e) => setMessage(e.target.value)}
             value={message}
-            resize={false}
+            
           />
           <button className={styles.button} onClick={handlerSubmit}>
             Send
