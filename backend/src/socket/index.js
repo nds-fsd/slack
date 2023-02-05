@@ -1,10 +1,8 @@
-import jwtVerifier from "../Utils/utils.js";
-//import {socketio} from "socket.io";
-//const socketio = require("socket.io");
-import * as socketio from "socket.io"
+import { jwtVerifier } from "../Utils/utils.js";
+import { Server } from "socket.io";
 
-const configurePublicSocket = (server) => {
-  const io = socketio(server, {
+export const configurePublicSocket = (server) => {
+  const io = new Server(server, {
     cors: {
       origin: "*",
     },
@@ -12,5 +10,3 @@ const configurePublicSocket = (server) => {
 
   return io;
 };
-
-export default configurePublicSocket

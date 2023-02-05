@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 const secret = process.env.JWT_SECRET;
 
-const generateJWT = (user) => {
+export const generateJWT = (user) => {
   const payload = {
     id: user._id,
     userName: user.userName,
@@ -13,7 +14,7 @@ const generateJWT = (user) => {
   return token;
 };
 
-const getUserIdFromToken = (token) => {
+export const getUserIdFromToken = (token) => {
   try {
     const decodedToken = jwt.verify(token, secret);
     return decodedToken.id;
@@ -22,9 +23,9 @@ const getUserIdFromToken = (token) => {
   }
 };
 
-const jwtVerifier = (token,callback) => {
+export const jwtVerifier = (token,callback) => {
 	jwt.verify(token, secret, callback);
 }
 
 
-export default {generateJWT, getUserIdFromToken, jwtVerifier};
+
