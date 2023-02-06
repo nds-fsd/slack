@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT ?? 8080;
 
 import { configurePublicSocket } from "./socket/index.js";
 import mongo from "./Mongo/index.js";

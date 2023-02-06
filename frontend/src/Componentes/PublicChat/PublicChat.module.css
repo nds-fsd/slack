@@ -5,6 +5,7 @@
     width: 100%;
     max-width: 800px;
     margin: auto;
+    max-height: 800px;
   }
   .top-card {
     display: flex;
@@ -58,10 +59,12 @@
     border: none;
     border-radius: 10px;
     background-color: #eee;
+   
   }
   .window {
     width: 100%;
     max-width: 800px;
+    max-height: 100vh;
     background-color: #fcfafa;
     padding: 1rem;
     border-radius: 10px;
@@ -70,15 +73,18 @@
     align-items: stretch;
     gap: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    overflow-y: scroll;
   }
   .message-row {
     width: 100%;
     display: flex;
+    max-height: 80vh;
   }
   .message {
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    max-width: 90%;
   }
   .end {
     justify-content: flex-end;
