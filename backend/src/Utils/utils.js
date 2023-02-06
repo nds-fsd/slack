@@ -7,8 +7,9 @@ const generateJWT = (user) =>{
         userName:user.userName,
         name:user.name
     }
+    
+    const token = jwt.sign(payload, secret, {expiresIn: 1})
 
-    const token=jwt.sign(payload, secret, {expiresIn: 1})
     return token
 
 }

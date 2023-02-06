@@ -3,5 +3,9 @@ node_modules
 .env
 env
 coverage
+
+
 .vscode
 
+
+/.vscode
