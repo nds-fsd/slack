@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./public-chat.module.css";
 import Badge from 'react-bootstrap/Badge';
 
@@ -6,18 +6,23 @@ import Badge from 'react-bootstrap/Badge';
 const PublicChat = ({ socket }) => {
     const [nickname, setNickname] = useState("");
     const [disabled, setDisabled] = useState(false);
-    const chat = document.querySelector('#panelChat')
+    const chat = useRef(null)
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [storedMessages, setStoredMessages] = useState([]);
 
+    const scrollDownChat = ()=>{
+        if(chat !== null && chat.current !== undefined){
+            chat.current.scrollTop = chat.current.scrollHeight
+        }
+    }
     useEffect(() => {
         //Cargamos los mensajes guardados en la BDD la primera vez
         fetch("http://localhost:3001/publicMessage")
             .then((res) => res.json())
             .then((res) => {
                 setStoredMessages(res);
-                chat.scrollTop = chat.scrollHeight;
+                scrollDownChat()
             });
     }, []);
 
@@ -29,13 +34,13 @@ const PublicChat = ({ socket }) => {
                 ...message,
                 from: message.from === nickname ? "Yo" : message.from,
             };
-
+         
             setMessages([...messages, parsedMessage]);
             
         };
         // Suscripcion al evento "NEW_MESSAGE con el callback a ejecutar"
         socket.on("NEW_MESSAGE", receivedMessage);
-        chat.scrollTop = chat.scrollHeight;
+        scrollDownChat()
         //Desuscribimos el estado del componente cuando ya no es necesario utilizarlo
         return () => {
             socket.off("NEW_MESSAGE", receivedMessage);
@@ -79,7 +84,7 @@ const PublicChat = ({ socket }) => {
 
 
             {/* ------------- WINDOW CHAT ------------- */}
-            <div id="panelChat" className={styles.window}>
+            <div ref={chat} className={styles.window}>
 
                 {storedMessages.map((message, index) => (
                     <>
