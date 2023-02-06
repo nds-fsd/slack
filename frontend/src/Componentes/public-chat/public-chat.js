@@ -31,11 +31,11 @@ const PublicChat = ({ socket }) => {
             };
 
             setMessages([...messages, parsedMessage]);
-            chat.scrollTop = chat.scrollHeight;
+            
         };
         // Suscripcion al evento "NEW_MESSAGE con el callback a ejecutar"
         socket.on("NEW_MESSAGE", receivedMessage);
-
+        chat.scrollTop = chat.scrollHeight;
         //Desuscribimos el estado del componente cuando ya no es necesario utilizarlo
         return () => {
             socket.off("NEW_MESSAGE", receivedMessage);
@@ -149,7 +149,7 @@ const PublicChat = ({ socket }) => {
                         placeholder="message..."
                         onChange={(e) => setMessage(e.target.value)}
                         value={message}
-                        resize={false}
+                       
                     />
                     <button className={styles.button} onClick={handlerSubmit}>
                         Send
