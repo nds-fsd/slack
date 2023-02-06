@@ -8,6 +8,8 @@ import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { configurePublicSocket } from './socket/index.js';
+import { Server } from 'socket.io';
+
 
 
 
@@ -29,4 +31,7 @@ const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
 })
 
-export const io = configurePublicSocket(server)
+export const socketIoPublic = configurePublicSocket(server);
+
+
+

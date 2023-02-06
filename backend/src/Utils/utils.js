@@ -23,7 +23,7 @@ const getUserIdFromToken = (token) => {
 };
 
 const jwtVerifier = (token,callback) => {
-	jwt.verify(token, jwtSecret, callback);
+	jwt.verify(token, secret, callback);
 }
 
 

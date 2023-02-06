@@ -18,6 +18,8 @@ import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 import AboutUs from './Componentes/AboutUs/AboutUs';
 
+
+
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
 
 //Los imports comentados no se estan utilizando

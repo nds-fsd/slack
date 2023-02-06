@@ -5,6 +5,7 @@ const PublicMessageSchema = new Schema(
   {
     text: String,
     from: String,
+    hour: String
   },
   {
     timestamps: {

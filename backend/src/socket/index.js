@@ -1,8 +1,7 @@
-import jwtVerifier from '../Utils/utils'
-import { Socket } from 'socket.io'
+import { Server } from 'socket.io'
 
  export const configurePublicSocket = (server) => {
-    const io = Socket(server, {
+    const io = new Server(server, {
       cors: {
         origin: "*",
       },
