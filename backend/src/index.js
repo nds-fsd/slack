@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(routerUsers);
 app.use(routerOrg)
 
-let port = process.env.PORT;
+let port = process.env.PORT ?? 8080;
 
 if(process.env.NODE_ENV !== 'test'){
     connectDB().then((error) => {

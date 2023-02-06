@@ -4,7 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 
 dotenv.config();
 
-let dbUrl = process.env.Mongo_URL;
+let dbUrl = process.env.MONGO_URL;
 
 let mongod;
 export const connectDB = async() => {
