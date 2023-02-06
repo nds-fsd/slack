@@ -99,7 +99,7 @@ const PublicChat = ({ socket }) => {
                                     : styles["bg-light-blue"]
                                     }`}
                             >
-                                <Badge>⌚{message.hour}</Badge>    {message.from}: {message.text}
+                             <p  className={styles.text}>   <Badge>⌚{message.hour}</Badge>    {message.from}: {message.text}</p>
                             </div>
 
                         </div>
@@ -120,7 +120,7 @@ const PublicChat = ({ socket }) => {
                                 : styles["bg-light-blue"]
                                 }`}
                         >
-                            {message.from}: {message.text}     ⌚ <Badge>{message.hour}</Badge>
+                           <p className={styles.text}> {message.from}: {message.text}     ⌚ <Badge>{message.hour}</Badge></p>
                         </div>
                     </div>
                 ))}
