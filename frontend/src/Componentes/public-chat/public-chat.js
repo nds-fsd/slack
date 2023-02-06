@@ -149,7 +149,7 @@ const PublicChat = ({ socket }) => {
                     </button>
                 </div>
                 <div className={styles["message-send-row"]}>
-                    <textarea
+                    <textarea className={styles.textarea}
                         type="text"
                         placeholder="message..."
                         onChange={(e) => setMessage(e.target.value)}
