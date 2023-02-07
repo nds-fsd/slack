@@ -24,6 +24,7 @@ export const LandingUserPage = () => {
                 setUser(res);
             });
     }, []);
+
     return (
         <LUPstyle>
 
@@ -46,7 +47,7 @@ export const LandingUserPage = () => {
                             </div>
 
                             <div className='btncard'>
-                                <Button as={Link} to="/skuadlack" variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
+                                <Button as={Link} to={`/skuadlack/${e._id}`} variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
                             </div>
                         </Card.Body>
                     </Card>
