@@ -6,7 +6,7 @@ import  {socketIoPublic}  from "../index.js";
 
 routerPublicMessage.post('/publicMessage',  (req, res) => {
     const now = new Date()                       //guardamos en una variable la fecha
-    const hour = now.getHours()                  //recurrimos a .getHours() un metodo de Date que te da el digito de la hora y lo guardamos en una variable
+    let hour = now.getHours()                  //recurrimos a .getHours() un metodo de Date que te da el digito de la hora y lo guardamos en una variable
     if (hour < 10) { hour = '0' + hour }         //si es menor de 10 ese digito le concatenamos un 0 delante para que ej=> las 04 en vez de las 4.
     let minutes = now.getMinutes()               //recurrimos a .getMinutes() un metodo de Date que te da el digito de los minutos y lo guardamos en una variable
     if (minutes < 10) { minutes = '0' + minutes }//si es menor de 10 ese digito le concatenamos un 0 delante para que ej=> sean 04 minutos en vez de 4.
