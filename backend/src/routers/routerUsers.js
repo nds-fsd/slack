@@ -123,7 +123,10 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
             lastName: userCreated.lastName
         }
 
+        console.log('resUser',resUser)
+
         return res.status(201).json({ resUser, userToken })
+        
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
 });

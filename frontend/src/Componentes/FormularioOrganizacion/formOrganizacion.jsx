@@ -26,7 +26,7 @@ const FormOrganizacion = () => {
         
         
         
-        const url = "http://localhost:3001/organizacion"; //pendiente saber la ruta
+        //const url = "http://localhost:3001/organizacion"; //pendiente saber la ruta
         const url2="/organizacionToUser"
         const body = {
             OrgMail: email,
@@ -34,6 +34,7 @@ const FormOrganizacion = () => {
             OrgDescription: trabajoActual
 
         };
+        /*
         const options = {
             method: "POST",
             mode: "cors",
@@ -44,12 +45,14 @@ const FormOrganizacion = () => {
             body: JSON.stringify(body),
         };
 
-
+        */
         
-        fetchSupreme(url2,"POST", body,"cors",false)
+        fetchSupreme(url2,"POST", body,"cors",true)
         .then((res) => {
-            console.log(res)
-            console.log(getUserSession().id)
+
+            console.log('Response',res)
+            console.log('getUserSession',getUserSession().id)
+
             navigate(`/LUP/${getUserSession().id}`)
             //aqui entiendo que cuando se cree el homepage de user habra que
             //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.

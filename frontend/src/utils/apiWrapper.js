@@ -1,10 +1,10 @@
 import { getUserToken } from "./localStorageUtils";
 
-const fetchSupreme = async (url,method, body, cors, token) => {
+const fetchSupreme = async (path,method, body, cors, token) => {
   let URL = "";
 
   if (window.location === "https://skuadlack.netlify.app") {
-    URL = "https://skuadlack.up.railway.app/";
+    URL = "https://skuadlack.up.railway.app";
   } else {
     URL = "http://localhost:3001";
   }
@@ -30,7 +30,7 @@ const fetchSupreme = async (url,method, body, cors, token) => {
     body:JSON.stringify(body),
   };
 
-  return fetch(URL + url, options).then((res) => {
+  return fetch(URL + path, options).then((res) => {
     res.json();
   });
 };

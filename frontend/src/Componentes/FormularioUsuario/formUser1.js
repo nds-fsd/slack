@@ -3,13 +3,30 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 import styles from "./formUser.module.css"
 import { postToMongo } from "../../utils/fetchToMongo.js";
+import fetchSupreme from "../../utils/apiWrapper";
 
 const FormUser1 = () => {
 
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm()
+    
+
     const onDataSubmit2 = (data) => {
-   
+        console.log('data',data);
+
+        const url= "/register"
+
+        fetchSupreme(url,"POST",data,'cors',false)
+        
+        .then((res) => {
+            //const user = dataServer
+         
+            console.log('Response', res.resUser);
+            alert(`el usuario ${res.resUser.userName} ha sido creado.`)
+            navigate(`/user/${res.resUser._id}`)
+        })
+}
+/*
         postToMongo("register", data)
             .then((dataServer) => {
                 const user = dataServer.resUser
@@ -17,7 +34,8 @@ const FormUser1 = () => {
                 alert(`el usuario ${user.userName} ha sido creado.`)
                 navigate(`/user/${user._id}`)
             })
-    }
+*/
+    
     return (
         <div className={styles.contenedor}>
             {/* <div className={styles.title}>
@@ -26,9 +44,9 @@ const FormUser1 = () => {
             <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
             {/* <h1>Bienvenido a SkuadLack </h1> */}
                 <h3 className={styles.h3Usuario}>Usuario de <span className={styles.h3Span}>SkuadLack</span></h3>
-                <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
+                <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 2, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
-                {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 5 carácteres"}
+                {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 2 carácteres"}
                 {errors.userName?.type === "maxLength" && "Tu nombre de usuario debe tener máximo 20 carácteres"}
                 <h3>Email</h3>
                 <input placeholder='email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} />

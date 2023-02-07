@@ -1,6 +1,8 @@
 import express, { application } from 'express';
 import Organizacion from "../Schemas/organizacion.js";
 import { validateOrgName } from '../Middlewares/orgName.js';
+import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
+import User from '../Schemas/user.js';
 const routerOrg = express.Router();
 
 routerOrg.get('/organizacion',async(req,res)=>{
@@ -36,21 +38,30 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
   });
 
   //router para que cuando se cree la organización automáticamente se asocie al usuario que la crea
-  routerOrg.post('/organizacionToUser',validateOrgName, async(req,res)=> {
+  routerOrg.post('/organizacionToUser',validateOrgName,jwtMiddleware, async(req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
       OrgMail: body.OrgMail,
       OrgDescription: body.OrgDescription
     };
-  
+
     if (!data.OrgName || !data.OrgMail) {
       return res.status(422).send("Falta el nombre o el correo electrónico de la organización");
     }
   
     try {
       const organizacion = new Organizacion(data);
+      const idUser= req.jwtPayload.id;
+      console.log(idUser);
+
+      //CONSULTAR ESTE PUNTO --> ¿CÓMO PUEDO ACTUALIZAR EN EL SCHEMA DE USER LA RELACIÓN DE ORGANIZACIÓN??????
+      const userSchema = User.findById(idUser);
+      userSchema.organizacion.push(organizacion._id)
+      organizacion.user.push(idUser);
+
       await organizacion.save();
+      //await userSchema.save();
       res.status(201).json(organizacion);
     } catch(error) {
       res.status(400).send(error.message);
