@@ -106,10 +106,10 @@ const PublicChat = () => {
                                     }`}
                             >
                                 <Badge className={`${message.from === nickname
-                                     ? styles.badgeblack 
-                                     : styles.badge}`}
-                                     >⌚{message.hour}
-                                </Badge>    
+                                    ? styles.badgeblack
+                                    : styles.badge}`}
+                                >{message.hour}
+                                </Badge>
                                 {message.from}: {message.text}
                             </div>
 
@@ -126,12 +126,18 @@ const PublicChat = () => {
                             }`}
                     >
                         <div
-                            className={`${styles.message} ${message.from === "Yo" || nickname
+                            className={`${styles.message} ${message.from === "Yo"
                                 ? styles["bg-self-blue"]
                                 : styles["bg-light-blue"]
                                 }`}
                         >
-                            {message.from}: {message.text}     ⌚ <Badge className={styles.badgeblack}>{message.hour}</Badge>
+
+                            <Badge className={`${message.from === "Yo"
+                                ? styles.badgeblack
+                                : styles.badge}`}
+                            >{message.hour}
+                            </Badge>
+                            {message.from}: {message.text}
                         </div>
                     </div>
                 ))}
