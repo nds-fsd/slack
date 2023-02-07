@@ -69,11 +69,12 @@
     color: white;
     overflow-y: auto;
     align-items: center;
-    resize: none
+    resize: none;
+    padding-top: 1rem;
   }
   .window {
     width: 100%;
-    height: 600px;
+    height: 650px;
     max-width: 800px;   
     overflow-y: scroll;    
     /* background-color: #3f485b; */
@@ -86,6 +87,8 @@
     align-items: stretch;
     gap: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    flex-grow: 1;
+    
     
   }
   .window::-webkit-scrollbar{
@@ -133,4 +136,8 @@
   }
  .badge{
   background: linear-gradient(to bottom right, #F54864 ,#F78361);
+ }
+
+ .badgeblack{
+  background: linear-gradient(to bottom right, #4E596F, #202430);
  }
