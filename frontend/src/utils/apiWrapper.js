@@ -30,8 +30,8 @@ const fetchSupreme = async (path,method, body, cors, token) => {
     body:JSON.stringify(body),
   };
 
-  return fetch(URL + path, options).then((res) => {
-    res.json();
+  return fetch(URL + path, options)
+  .then((res) => {res.json(res);
   });
 };
 
