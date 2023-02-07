@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./public-chat.module.css";
 import Badge from 'react-bootstrap/Badge';
-import {io} from "socket.io-client";
+import { io } from "socket.io-client";
+import { getUserSession } from "../../utils/localStorageUtils";
 const socket = io("http://localhost:3001");
 
 
@@ -13,13 +14,11 @@ const PublicChat = () => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [storedMessages, setStoredMessages] = useState([]);
-
-    const scrollDownChat = ()=>{
-        if(chat !== null && chat.current !== undefined){
+    const scrollDownChat = () => {
+        if (chat !== null && chat.current !== undefined) {
             chat.current.scrollTop = chat.current.scrollHeight
         }
     }
-
     useEffect(() => {
 
         //Cargamos los mensajes guardados en la BDD la primera vez
@@ -28,6 +27,8 @@ const PublicChat = () => {
             .then((res) => {
                 setStoredMessages(res);
                 scrollDownChat()
+                setNickname(getUserSession().name)
+
             });
     }, []);
 
@@ -39,9 +40,9 @@ const PublicChat = () => {
                 ...message,
                 from: message.from === nickname ? "Yo" : message.from,
             };
-         
+
             setMessages([...messages, parsedMessage]);
-            
+
         };
         // Suscripcion al evento "NEW_MESSAGE con el callback a ejecutar"
         socket.on("NEW_MESSAGE", receivedMessage);
@@ -54,7 +55,7 @@ const PublicChat = () => {
 
     const handlerSubmit = (e) => {
         //Evitamos recargar la página
-        e.preventDefault();
+
 
         //Enviamos el mensaje sólo si se ha establecido un nickname
         if (nickname !== "") {
@@ -104,14 +105,19 @@ const PublicChat = () => {
                                     : styles["bg-light-blue"]
                                     }`}
                             >
-                            <Badge className={styles.badge}>⌚{message.hour}</Badge>    {message.from}: {message.text}
+                                <Badge className={`${message.from === nickname
+                                     ? styles.badgeblack 
+                                     : styles.badge}`}
+                                     >⌚{message.hour}
+                                </Badge>    
+                                {message.from}: {message.text}
                             </div>
 
                         </div>
 
                     </>
                 ))}
-               
+
 
                 {messages.map((message, index) => (
                     <div
@@ -120,12 +126,12 @@ const PublicChat = () => {
                             }`}
                     >
                         <div
-                            className={`${styles.message} ${message.from === "Yo"
+                            className={`${styles.message} ${message.from === "Yo" || nickname
                                 ? styles["bg-self-blue"]
                                 : styles["bg-light-blue"]
                                 }`}
                         >
-                          {message.from}: {message.text}     ⌚ <Badge className={styles.badge}>{message.hour}</Badge>
+                            {message.from}: {message.text}     ⌚ <Badge className={styles.badgeblack}>{message.hour}</Badge>
                         </div>
                     </div>
                 ))}
@@ -133,33 +139,20 @@ const PublicChat = () => {
 
             </div>
             <div className={styles["top-card"]}>
-               
+
                 <div
                     className={`${styles["nickname-row"]} ${disabled ? styles.disabled : ""
                         }`}
                 >
-                    <input
-                        type="text"
-                        placeholder="Nickname..."
-                        disabled={disabled}
-                        onChange={(e) => setNickname(e.target.value)}
-                        value={nickname}
-                    />
-                    <button
-                        className={styles.button}
-                        disabled={disabled}
-                        onClick={nicknameSubmit}
-                    >
-                        Set Nickname
-                    </button>
+
                 </div>
                 <div className={styles["message-send-row"]}>
-                    <textarea 
+                    <textarea
                         type="text"
                         placeholder="message..."
                         onChange={(e) => setMessage(e.target.value)}
                         value={message}
-                       
+
                     />
                     <button className={styles.button} onClick={handlerSubmit}>
                         Send
