@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from "./formOrganizacion.module.css"
+import fetchSupreme from "../../utils/apiWrapper";
+import { Navigate } from "react-router-dom";
+import { getUserSession } from "../../utils/localStorageUtils";
+import { useNavigate } from "react-router-dom";
 
 const FormOrganizacion = () => {
 
     const [email, setMail] = useState("");
     const [name, setName] = useState("");
     const [trabajoActual, setTrabajoActual] = useState("");
+    const navigate = useNavigate();
 
     const getEmail = (event) => {
         setMail(event.target.value)
@@ -18,7 +23,11 @@ const FormOrganizacion = () => {
     }
 
     const postOrganizaciones = () => {
+        
+        
+        
         const url = "http://localhost:3001/organizacion"; //pendiente saber la ruta
+        const url2="/organizacionToUser"
         const body = {
             OrgMail: email,
             OrgName: name,
@@ -34,6 +43,18 @@ const FormOrganizacion = () => {
             },
             body: JSON.stringify(body),
         };
+
+
+        
+        fetchSupreme(url2,"POST", body,"cors",false)
+        .then((res) => {
+            console.log(res)
+            console.log(getUserSession().id)
+            navigate(`/LUP/${getUserSession().id}`)
+            //aqui entiendo que cuando se cree el homepage de user habra que
+            //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
+        })
+        /*
         fetch(url, options)
             .then((res) => {
                 res.json();
@@ -42,6 +63,8 @@ const FormOrganizacion = () => {
                 console.log(data)//aqui entiendo que cuando se cree el homepage de user habra que
                 //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
             })
+         */   
+
     }
 
     return (
