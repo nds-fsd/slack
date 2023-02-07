@@ -13,12 +13,7 @@ import { useEffect, useState } from "react";
 
 export const BarraNav = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState("")
-
-  useEffect(()=>{
-setUser(getUserSession())
-  })
-  
+   
 
   return (
     <NavBarStyle>
@@ -113,7 +108,7 @@ setUser(getUserSession())
 
                   {getUserToken() && (
                     <>
-                      <Nav.Link as={Link} to={`/LUP/${user.id}`}>
+                      <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
                         <Button variant="dark">Dashboard</Button>
                       </Nav.Link>
                       <Nav.Link as={Link} to="/users">
