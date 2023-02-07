@@ -9,8 +9,7 @@ import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../Assets/airbnb-logo.png'
 import slackLogo from '../../Assets/slackLogo.png'
 import PublicChat from "../public-chat/public-chat";
-import {io} from "socket.io-client";
-const socket = io("http://localhost:3001");
+
 
 
 
@@ -41,7 +40,7 @@ const LandingPage = () =>{
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
                 </div>
                 
-                <div><PublicChat socket={socket}/></div>
+                <div>seccion 2.2</div>
                 <div>seccion 2.3</div>
                 <div>sección 2.4</div>
 

@@ -17,6 +17,7 @@ import PrivateRoutes from './Componentes/PrivateRoute/PrivateRouter.js'
 import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 import AboutUs from './Componentes/AboutUs/AboutUs';
+import PublicChat from './Componentes/public-chat/public-chat';
 
 
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/LUP/:id" element={<LandingUserPage />} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
             <Route path="/skuadlack" element={<SkuadlackPage />}>  </Route>
+            <Route path="/publicChat" element={<PublicChat />}>  </Route>
 
           </Route>
           <Route path="/user" element={<FormUser1 />}>  </Route>

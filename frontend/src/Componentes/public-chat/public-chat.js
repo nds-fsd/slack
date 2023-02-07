@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./public-chat.module.css";
 import Badge from 'react-bootstrap/Badge';
+import {io} from "socket.io-client";
+const socket = io("http://localhost:3001");
 
 
-const PublicChat = ({ socket }) => {
+
+const PublicChat = () => {
     const [nickname, setNickname] = useState("");
     const [disabled, setDisabled] = useState(false);
     const chat = useRef(null)
@@ -16,7 +19,9 @@ const PublicChat = ({ socket }) => {
             chat.current.scrollTop = chat.current.scrollHeight
         }
     }
+
     useEffect(() => {
+
         //Cargamos los mensajes guardados en la BDD la primera vez
         fetch("http://localhost:3001/publicMessage")
             .then((res) => res.json())
@@ -99,14 +104,14 @@ const PublicChat = ({ socket }) => {
                                     : styles["bg-light-blue"]
                                     }`}
                             >
-                             <p  className={styles.text}>   <Badge>⌚{message.hour}</Badge>    {message.from}: {message.text}</p>
+                            <Badge className={styles.badge}>⌚{message.hour}</Badge>    {message.from}: {message.text}
                             </div>
 
                         </div>
 
                     </>
                 ))}
-                <h3 className={styles["title-divider"]}>... Mensajes guardados ...</h3>
+               
 
                 {messages.map((message, index) => (
                     <div
@@ -120,7 +125,7 @@ const PublicChat = ({ socket }) => {
                                 : styles["bg-light-blue"]
                                 }`}
                         >
-                           <p className={styles.text}> {message.from}: {message.text}     ⌚ <Badge>{message.hour}</Badge></p>
+                          {message.from}: {message.text}     ⌚ <Badge className={styles.badge}>{message.hour}</Badge>
                         </div>
                     </div>
                 ))}
@@ -128,7 +133,7 @@ const PublicChat = ({ socket }) => {
 
             </div>
             <div className={styles["top-card"]}>
-                <h1>PUBLIC CHAT</h1>
+               
                 <div
                     className={`${styles["nickname-row"]} ${disabled ? styles.disabled : ""
                         }`}
@@ -149,7 +154,7 @@ const PublicChat = ({ socket }) => {
                     </button>
                 </div>
                 <div className={styles["message-send-row"]}>
-                    <textarea className={styles.textarea}
+                    <textarea 
                         type="text"
                         placeholder="message..."
                         onChange={(e) => setMessage(e.target.value)}
