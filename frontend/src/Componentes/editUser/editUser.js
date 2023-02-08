@@ -79,7 +79,8 @@ const EditUser = (props) => {
 
             });
     }
-    if (!user) return (<div><NotFound /></div>)
+
+    
 
     return (
         <div className={userToEdit? styles.contenedor : styles.contenedorRegister}>

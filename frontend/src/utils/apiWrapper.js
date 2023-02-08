@@ -1,7 +1,13 @@
 import { getUserToken } from "./localStorageUtils";
 
 const fetchSupreme = (path,method, body, isToken,query) => {
-  
+
+  //path: tiene que incluir la primera barra. Ejemplo "http://localhost:3001/user" --> path = "/user"
+  //method: 'GET', 'POST'...
+  //body: incluir como objeto si es necesario. Si no, especificar undefined SUPER IMPORTANTE
+  //isToken: si es true, quiere decir que va a verificar si tenemos token, si es false, no.
+  //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante
+
   /*
   const ApiError = (message, data, status)=>{
     
@@ -22,6 +28,8 @@ const fetchSupreme = (path,method, body, isToken,query) => {
   const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
 
   let URL = URL_API + path
+
+  console.log('path',path)
 
   const authorization = isToken && `Bearer ${getUserToken()}`;
 
@@ -71,7 +79,8 @@ if (queryParams){
     return parsedResponse
   })
   .catch((error)=>{
-    //return response.json({ error: error });
+    //pendiente implementacion
+    //return parsedResponse.json(error)
 
   })
   )
