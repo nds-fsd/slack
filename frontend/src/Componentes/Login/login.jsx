@@ -6,6 +6,9 @@ import styles from "./login.module.css"
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [show, setShow] = useState(false)
+
+  const switchShow = () => setShow(!show);
 
   const navigate = useNavigate()
   // fetch login
@@ -44,7 +47,10 @@ const Login = () => {
         <label htmlFor="email">email</label>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
         <label htmlFor="password">password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        <div className={styles.password}>
+        <input type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
+        </div>
         <button className={styles.botonLogin} onClick={() => sendLogin()}>Login</button>
       </div>
     </div>
