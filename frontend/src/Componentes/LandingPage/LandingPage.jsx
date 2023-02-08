@@ -8,6 +8,9 @@ import logoNasa from '../../Assets/logo-nasa.png'
 import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../Assets/airbnb-logo.png'
 import slackLogo from '../../Assets/slackLogo.png'
+import PublicChat from "../public-chat/public-chat";
+
+
 
 
 const LandingPage = () =>{
@@ -37,8 +40,8 @@ const LandingPage = () =>{
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
                 </div>
                 
-                <div>sección 2.2</div>
-                <div>sección 2.3</div>
+                <div>seccion 2.2</div>
+                <div>seccion 2.3</div>
                 <div>sección 2.4</div>
 
             </div>

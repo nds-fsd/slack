@@ -8,10 +8,12 @@ import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox, MdOutlineLogout } from "react-icons/md";
-import { getUserToken, removeSession } from "../../utils/localStorageUtils.js";
+import { getUserSession, getUserToken, removeSession } from "../../utils/localStorageUtils.js";
+
 
 export const BarraNav = () => {
   const navigate = useNavigate();
+   
 
   return (
     <NavBarStyle>
@@ -106,9 +108,9 @@ export const BarraNav = () => {
 
                   {getUserToken() && (
                     <>
-                      {/* <Nav.Link as={Link} to="/LUP">
-                        <Button variant="dark">Comienza AHORA</Button>
-                      </Nav.Link> */}
+                      <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
+                        <Button variant="dark">Dashboard</Button>
+                      </Nav.Link>
                       <Nav.Link as={Link} to="/users">
                         <Button variant="warning">Admin Mode</Button>
                       </Nav.Link>

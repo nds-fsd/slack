@@ -26,6 +26,7 @@
     color: white;
     background-color: #202430;
     border:none;
+    border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
@@ -73,4 +74,32 @@
 }
 .h3Usuario{
     margin-bottom: 1.2rem;
+}
+.card button{
+    background-color: #242A38;
+    border: none;
+}
+.password{
+    display: flex;
+    width: 60%;
+    justify-content: center;
+}
+.password input{
+    width: 68%;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    margin-bottom: 1rem;
+    color: white;
+    background-color: #202430;
+    border:none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin-left: 2.8rem;
+    border-radius: 8px;
+}
+
+.password button{
+margin-bottom: 0.8rem;
+margin-left: 0.8rem;
 }
