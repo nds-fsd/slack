@@ -7,7 +7,7 @@ const routerOrg = express.Router();
 
 routerOrg.get('/organizacion',async(req,res)=>{
     try{
-        const allOrganizacions = await Organizacion.find();
+        const allOrganizacions = await Organizacion.find().populate('user');
         res.status(200).json(allOrganizacions);
         }catch(error){
           res.status(500).json(error)
@@ -38,7 +38,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
   });
 
   //router para que cuando se cree la organización automáticamente se asocie al usuario que la crea
-  routerOrg.post('/organizacionToUser',validateOrgName,jwtMiddleware, async (req,res)=> {
+  routerOrg.post('/userToOrganizacion',validateOrgName,jwtMiddleware, async (req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
@@ -66,11 +66,12 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
 
       //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
       await organizacion.save();
+
       user.organizacion.push(organizacion._id)
       
       //Necesario guardar de nuevo al existir cambios en el schema
       await user.save();
-      //await userSchema.save();
+      
       res.status(201).json(organizacion);
     } catch(error) {
       res.status(400).send(error.message);
@@ -80,7 +81,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id
     try{
-    const organizacion = await Organizacion.findById(id)
+    const organizacion = await Organizacion.findById(id).populate('user')
     if (organizacion){
         res.status(200).json(organizacion)
     }else{

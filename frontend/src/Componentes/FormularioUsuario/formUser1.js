@@ -16,7 +16,7 @@ const FormUser1 = () => {
 
         const url= "/register"
 
-        fetchSupreme(url,"POST",data,'cors',false)
+        fetchSupreme(url,"POST",data,false,null)
         
         .then((res) => {
             //const user = dataServer
