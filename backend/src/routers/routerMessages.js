@@ -7,7 +7,7 @@ const routerMessages = express.Router();
 routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   const date = new Date().toLocaleDateString();//guardamos en una variable la fecha y la hacemos fecha local y la stringeamos
   req.body.date = date                         //forzamos la key date del body con la variable date
-  const now = new Date()                       //guardamos en una variable la fecha
+  let now = new Date()                       //guardamos en una variable la fecha
   const hour = now.getHours()                  //recurrimos a .getHours() un metodo de Date que te da el digito de la hora y lo guardamos en una variable
   if (hour < 10) { hour = '0' + hour }         //si es menor de 10 ese digito le concatenamos un 0 delante para que ej=> las 04 en vez de las 4.
   let minutes = now.getMinutes()               //recurrimos a .getMinutes() un metodo de Date que te da el digito de los minutos y lo guardamos en una variable
