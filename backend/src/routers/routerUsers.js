@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find().populate('organizacion');
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json(error)
