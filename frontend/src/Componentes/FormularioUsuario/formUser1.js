@@ -20,10 +20,10 @@ const FormUser1 = () => {
         
         .then((res) => {
             //const user = dataServer
-         
+            setUserSession(res)
             console.log('Response', res.resUser);
-            alert(`el usuario ${res.resUser.userName} ha sido creado.`)
-            navigate(`/user/${res.resUser._id}`)
+            alert(`el usuario ${res.user.name} ha sido creado.`)
+            navigate(`/LUP/${res.user.id}`)
         })
 }
 /*

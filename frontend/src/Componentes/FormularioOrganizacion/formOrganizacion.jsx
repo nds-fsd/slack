@@ -27,7 +27,7 @@ const FormOrganizacion = () => {
         
         
         //const url = "http://localhost:3001/organizacion"; //pendiente saber la ruta
-        const url2="/organizacionToUser"
+        const url2="/userToOrganizacion"
         const body = {
             OrgMail: email,
             OrgName: name,
