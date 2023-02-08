@@ -30,7 +30,7 @@ function App() {
   
   return (
     <>
-      {location.pathname !== "/skuadlack" && <BarraNav />}      
+      {!location.pathname.startsWith("/skuadlack/") && <BarraNav />}     
         <div className={styles.mainRouter}>
 
         <Routes>
@@ -42,7 +42,7 @@ function App() {
             <Route path="/user/:id" element={<EditUser />}>  </Route>
             <Route path="/LUP/:id" element={<LandingUserPage />} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
-            <Route path="/skuadlack" element={<SkuadlackPage />}>  </Route>
+            <Route path="/skuadlack/:id" element={<SkuadlackPage />}>  </Route>
             <Route path="/publicChat" element={<PublicChat />}>  </Route>
 
           </Route>
