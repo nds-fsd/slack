@@ -9,7 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox, MdOutlineLogout } from "react-icons/md";
 import { getUserSession, getUserToken, removeSession } from "../../utils/localStorageUtils.js";
-import { useEffect, useState } from "react";
+
 
 export const BarraNav = () => {
   const navigate = useNavigate();
