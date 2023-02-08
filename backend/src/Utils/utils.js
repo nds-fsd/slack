@@ -27,4 +27,4 @@ const jwtVerifier = (token,callback) => {
 }
 
 
-export default {generateJWT, getUserIdFromToken, jwtVerifier};
+export {generateJWT, getUserIdFromToken, jwtVerifier};
