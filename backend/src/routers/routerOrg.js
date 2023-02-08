@@ -38,7 +38,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
   });
 
   //router para que cuando se cree la organización automáticamente se asocie al usuario que la crea
-  routerOrg.post('/organizacionToUser',validateOrgName,jwtMiddleware, async(req,res)=> {
+  routerOrg.post('/organizacionToUser',validateOrgName,jwtMiddleware, async (req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
@@ -53,14 +53,23 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
     try {
       const organizacion = new Organizacion(data);
       const idUser= req.jwtPayload.id;
-      console.log(idUser);
+      console.log('id usuario que está logueado',idUser);
 
-      //CONSULTAR ESTE PUNTO --> ¿CÓMO PUEDO ACTUALIZAR EN EL SCHEMA DE USER LA RELACIÓN DE ORGANIZACIÓN??????
-      const userSchema = User.findById(idUser);
-      userSchema.organizacion.push(organizacion._id)
+      //Fundamental el await!!!
+      const user = await User.findById(idUser)
+
+      console.log('userSchema', user)
       organizacion.user.push(idUser);
+      
+      console.log('user',user)
+      console.log('organizacion',organizacion)
 
+      //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
       await organizacion.save();
+      user.organizacion.push(organizacion._id)
+      
+      //Necesario guardar de nuevo al existir cambios en el schema
+      await user.save();
       //await userSchema.save();
       res.status(201).json(organizacion);
     } catch(error) {

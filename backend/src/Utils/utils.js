@@ -23,4 +23,4 @@ const getUserIdFromToken = (token) => {
 };
 
 
-export default {generateJWT, getUserIdFromToken};
+export {generateJWT, getUserIdFromToken};

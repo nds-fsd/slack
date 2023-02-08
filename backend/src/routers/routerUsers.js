@@ -2,7 +2,7 @@ import express from 'express';
 import User from '../Schemas/user.js';
 import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
-import generateJWT from '../Utils/utils.js';
+import {generateJWT} from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'

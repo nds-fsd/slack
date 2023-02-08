@@ -1,27 +1,49 @@
 import { getUserToken } from "./localStorageUtils";
 
-const fetchSupreme = async (path,method, body, cors, token) => {
-  let URL = "";
+const fetchSupreme = (path,method, body, isToken,query) => {
+  
+  /*
+  const ApiError = (message, data, status)=>{
+    
+  let response = ''
+    try{
+      response = JSON.parse(data);
 
-  if (window.location === "https://skuadlack.netlify.app") {
-    URL = "https://skuadlack.up.railway.app";
-  } else {
-    URL = "http://localhost:3001";
+    }catch(e){
+      response= data
+    }
+    this.response = response;
+    this.message = message;
+    this.status = status;
+
   }
+  */
 
+  const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
 
+  let URL = URL_API + path
 
-  let authorization = "";
+  const authorization = isToken && `Bearer ${getUserToken()}`;
 
-  if (token === true) {
+//const authorization = isToken ? `Bearer ${getUserToken()}`: "";
+
+/*
+  if (isToken === true) {
     authorization = `Bearer ${getUserToken()}`;
   } else {
     authorization = "";
   }
+*/
+
+const queryParams = query && JSON.stringify(query)
+
+if (queryParams){
+  URL = URL + '?' + queryParams
+}
 
   const options = {
     method: method,
-    mode: cors,
+    mode: 'cors',
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -29,10 +51,30 @@ const fetchSupreme = async (path,method, body, cors, token) => {
     },
     body:JSON.stringify(body),
   };
+  
+  let response = null
 
-  return fetch(URL + path, options)
-  .then((res) => {res.json(res);
-  });
+  return (
+    fetch(URL, options)
+  .then((responseObject) => {
+    response=responseObject;
+
+    if (responseObject.status === 401) {
+      return {authError:true}
+    }
+    return response.json();
+  })
+  .then ((parsedResponse) =>{
+    if (response.status<200 || response.status >=300){
+      throw parsedResponse;
+    }
+    return parsedResponse
+  })
+  .catch((error)=>{
+    //return response.json({ error: error });
+
+  })
+  )
 };
 
 export default fetchSupreme;

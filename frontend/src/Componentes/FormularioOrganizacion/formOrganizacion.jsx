@@ -47,7 +47,7 @@ const FormOrganizacion = () => {
 
         */
         
-        fetchSupreme(url2,"POST", body,"cors",true)
+        fetchSupreme(url2,"POST", body,true,null)
         .then((res) => {
 
             console.log('Response',res)
