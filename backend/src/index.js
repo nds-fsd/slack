@@ -9,6 +9,7 @@ import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { configurePublicSocket } from './socket/index.js';
 import { Server } from 'socket.io';
+import { sendMailWelcome } from './sendgrid/index.js';
 
 
 
@@ -25,6 +26,11 @@ app.use(routerOrg);
 app.use(routerChat);
 app.use(routerMessages);
 app.use(routerPublicMessage);
+
+app.get('/sendmail', (req, res)=>{
+sendMailWelcome()
+return res.status(200).send()
+})
 
 
 const server = app.listen(port, () => {
