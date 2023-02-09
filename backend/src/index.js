@@ -27,11 +27,6 @@ app.use(routerChat);
 app.use(routerMessages);
 app.use(routerPublicMessage);
 
-app.get('/sendmail', (req, res)=>{
-sendMailWelcome()
-return res.status(200).send()
-})
-
 
 const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
