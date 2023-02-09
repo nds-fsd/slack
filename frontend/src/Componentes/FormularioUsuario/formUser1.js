@@ -53,7 +53,11 @@ const FormUser1 = () => {
                 </div>
                 <br />
                 <input id = {styles.botonEnviar} type="submit" />
+                <td className={styles.checkbox}>
+                <input  type="checkbox"/>I accept to receive marketing emails
+                </td>
             </form>
+           
         </div>
 
     )
