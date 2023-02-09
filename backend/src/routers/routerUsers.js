@@ -7,6 +7,7 @@ const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
+import { sendMailWelcome } from '../sendgrid/index.js';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
@@ -152,6 +153,7 @@ routerUsers.post('/login', async (req, res) => {
                 return res.status(400).json({ error: { password: "Invalid Password" } })
             }
             // * if everything is ok, return the new token and user data
+            sendMailWelcome(foundUser.email, foundUser.name);
             return res.status(200).json({
                 token: foundUser.generateJWT(),
                 user: {
@@ -159,7 +161,9 @@ routerUsers.post('/login', async (req, res) => {
                     name: foundUser.name,
                     id: foundUser._id,
                 },
+                
             })
+            
         })
         .catch((err) => {
             return res.status(500).json({ error: { register: "Error Login in :(", error: err.message } })

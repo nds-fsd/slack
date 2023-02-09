@@ -9,7 +9,7 @@ import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { configurePublicSocket } from './socket/index.js';
 import { Server } from 'socket.io';
-import { sendMailWelcome } from './sendgrid/index.js';
+
 
 
 
