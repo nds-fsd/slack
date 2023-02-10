@@ -18,7 +18,8 @@ const ListUsersBootstrap = () => {
     const navigate = useNavigate()
 
     const deleteUser = (datosUser) => {
-        const url = "http://localhost:3001/user/" + datosUser._id
+        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        const url = `${URL_API}/user/` + datosUser._id
         const options = {
             method: "DELETE",
             mode: "cors",
@@ -43,7 +44,8 @@ const ListUsersBootstrap = () => {
 
     useEffect(() => {
         if (refresh) {
-            fetch("http://localhost:3001/user", {
+            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+            fetch(`${URL_API}/user`, {
                 headers: {
                     authorization: `Bearer ${getUserToken()}`
                 }

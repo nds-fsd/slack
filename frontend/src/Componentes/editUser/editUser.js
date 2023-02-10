@@ -19,7 +19,10 @@ const EditUser = (props) => {
 
     // funciones o efectos
     useEffect(() => {
-        fetch("http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id),     
+
+  const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+
+        fetch(`${URL_API}/user/` + (userToEdit ? userToEdit : params.id),     
         {
             headers:{
                 authorization:`Bearer ${getUserToken()}`
@@ -66,7 +69,8 @@ const EditUser = (props) => {
 
     }
     const deleteUser = () => {
-        const url = "http://localhost:3001/user/" + (userToEdit ? userToEdit : params.id);
+        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        const url = `${URL_API}/user/`  + (userToEdit ? userToEdit : params.id);
         const options = {
             method: "DELETE",
             mode: "cors",

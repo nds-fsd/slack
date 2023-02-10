@@ -11,7 +11,8 @@ export const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
     useEffect(() => {
-        fetch("http://localhost:3001/user/" + params.id,
+        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        fetch(`${URL_API}/user/` + params.id,
             {
                 headers: {
                     authorization: `Bearer ${getUserToken()}`

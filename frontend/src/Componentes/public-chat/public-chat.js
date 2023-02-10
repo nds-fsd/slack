@@ -22,7 +22,8 @@ const PublicChat = () => {
     useEffect(() => {
 
         //Cargamos los mensajes guardados en la BDD la primera vez
-        fetch("http://localhost:3001/publicMessage")
+        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        fetch(`${URL_API}/publicMessage`)
             .then((res) => res.json())
             .then((res) => {
                 setStoredMessages(res);
@@ -68,7 +69,8 @@ const PublicChat = () => {
                 text: message,
                 from: nickname,
             };
-            fetch("http://localhost:3001/publicMessage", {
+            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+            fetch(`${URL_API}/publicMessage`, {
                 headers: {
                     Accept: "application/json",
                     "Content-type": "application/json",
