@@ -13,7 +13,8 @@ const Login = () => {
   const navigate = useNavigate()
   // fetch login
   const sendLogin = () => {
-    fetch("http://localhost:3001/login", {
+    const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+    fetch(`${URL_API}/login`, {
       method: 'POST',
       headers: {
         Accept: "application/json",

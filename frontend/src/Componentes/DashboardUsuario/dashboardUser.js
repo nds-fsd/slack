@@ -6,7 +6,11 @@ import NotFound from "../NotFound/notFound";
 import styles from './dashboard.module.css';
 
 
+
 const DashboardUser = () =>{
+
+  const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+
     const navigate = useNavigate()
     let params = useParams()
     const [user, setUser] = useState("")
@@ -14,7 +18,7 @@ const DashboardUser = () =>{
     navigate(`/editUser/${user._id}`)
   }
     useEffect(() => {
-    fetch("http://localhost:3001/user/" + params.id)
+    fetch(`${URL_API}/user/` + params.id)
     .then((res)=>{
         return res.json();
     })
@@ -24,7 +28,8 @@ const DashboardUser = () =>{
 }, [params.id]);
     
     const deleteUser = () =>{
-  const url = "http://localhost:3001/user/" + params.id;
+
+  const url = `${URL_API}/user/` + params.id;
   const options = {
     method: "DELETE",
     mode: "cors",
