@@ -45,10 +45,20 @@ const EditUser = (props) => {
         patchToMongo(`user/${user._id}`, data).then((dataServer) => {
             alert(`el usuario ${dataServer.userName} ha sido modificado.`)
             // navigate(`/user/${dataServer._id}`)
-            setTriger(!triger)
+            //setTriger(!triger)
+            //(!userToEdit && navigate(`../LUP/${dataServer._id}`));
+            
             //No nos funciona la binaria, no entendemos por qué
-            props.setOpenModal(false)
-                (userToEdit ? props.setRefresh(true) : setTriger(!triger));
+            //(userToEdit &&  props.setOpenModal(false))
+            //(userToEdit ? (props.setRefresh(true) &&  props.setOpenModal(false) ): navigate(`../LUP/${dataServer._id}`));
+
+            if (userToEdit){
+                props.setRefresh(true)
+                 props.setOpenModal(false)
+            }else{
+                navigate(`../LUP/${dataServer._id}`)
+
+            }
             //(userToEdit && props.setRefresh(true));
             //(userToEdit && props.setOpenModal(false));
 
@@ -79,7 +89,8 @@ const EditUser = (props) => {
 
             });
     }
-    if (!user) return (<div><NotFound /></div>)
+
+    
 
     return (
         <div className={userToEdit? styles.contenedor : styles.contenedorRegister}>
