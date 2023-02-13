@@ -3,9 +3,14 @@ import styles from "./public-chat.module.css";
 import Badge from 'react-bootstrap/Badge';
 import { io } from "socket.io-client";
 import { getUserSession } from "../../utils/localStorageUtils";
-const socket = io("http://localhost:3001");
+import fetchSupreme from "../../utils/apiWrapper";
 
+const socket = io(window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001") 
 
+/*
+const urlIO = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+const socket = io(urlIO) 
+*/
 
 const PublicChat = () => {
     const [nickname, setNickname] = useState("");
@@ -23,8 +28,11 @@ const PublicChat = () => {
 
         //Cargamos los mensajes guardados en la BDD la primera vez
         const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        fetchSupreme('/publicMessage','GET',undefined,false,undefined)
+        /*
         fetch(`${URL_API}/publicMessage`)
             .then((res) => res.json())
+        */
             .then((res) => {
                 setStoredMessages(res);
                 scrollDownChat()
@@ -70,6 +78,9 @@ const PublicChat = () => {
                 from: nickname,
             };
             const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+
+            fetchSupreme('/publicMessage','POST',body, false,undefined)
+            /*
             fetch(`${URL_API}/publicMessage`, {
                 headers: {
                     Accept: "application/json",
@@ -78,6 +89,7 @@ const PublicChat = () => {
                 method: "POST",
                 body: JSON.stringify(body),
             });
+            */
         } else {
             alert("Para enviar mensajes debes establecer un nickname!!!");
         }
