@@ -7,6 +7,7 @@ const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
+import Organizacion from '../Schemas/organizacion.js';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
@@ -69,18 +70,21 @@ routerUsers.post('/user', validateUserName, async (req, res) => {
 
 // Añadir organizacion a usuario
 
-routerUsers.post('/user/:id/enrollOrganization', async (req, res) => {
+routerUsers.post('/user/enrollOrganization', async (req, res) => {
 
-    const id = req.params.id
-    const idOrganizacion = req.body._id
+    const idUser = req.body.idUser
+    const idOrganizacion = req.body.idOrganizacion
     try {
-        const user = await User.findById(id)
+        const user = await User.findById(idUser)
         console.log("USUARIO ENROLADO", user)
         if (!user) return res.status(404).json({ message: 'no encuentro el usuario' })
         if (user.organizacion.includes(idOrganizacion)) return res.status(400).json({ message: ' ya estas en la organizacion' })
         user.organizacion.push(idOrganizacion)
         await user.save()
-        res.status(201).json(user)
+        const organizacion = await Organizacion.findById(idOrganizacion)
+        organizacion.user.push(idUser)
+        await organizacion.save()
+        res.status(201).json({user, organizacion})
 
         /*
             Esto deberia devolvernos algo parecido a 
