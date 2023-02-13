@@ -36,7 +36,7 @@ routerUsers.get('/user/:id', jwtMiddleware, async (req, res) => {
 // app.use(validateUserName);
 
 
-routerUsers.post('/user', validateUserName, jwtMiddleware, async (req, res) => {
+routerUsers.post('/user', validateUserName, async (req, res) => {
     try {
 
         const emailExist = await User.findOne({ email: req.body.email })

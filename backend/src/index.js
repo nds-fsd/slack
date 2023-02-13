@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import mongo from './Mongo/index.js';
+import {connectDB} from './Mongo/index.js';
 import routerUsers from './routers/routerUsers.js';
 import routerOrg from './routers/routerOrg.js';
 import routerChat from './routers/routerChat.js';
@@ -15,8 +15,8 @@ import { Server } from 'socket.io';
 
 
 dotenv.config();
-const app = express();
-const port = process.env.PORT;
+export const app = express();
+// const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -27,9 +27,41 @@ app.use(routerMessages);
 app.use(routerPublicMessage);
 
 
+let port = process.env.PORT ?? 8080;
+
+if(process.env.NODE_ENV !== 'test'){
+    connectDB().then((error) => {
+        if(error){
+            console.log(error);
+        }else{
+            console.log('🏢 Connected to database!');
+        }
+    });
+}else{
+    port = process.env.TEST_PORT
+}
+
+const server = app.listen(port, () => {
+let port = process.env.PORT ?? 8080;
+
+if(process.env.NODE_ENV !== 'test'){
+    connectDB().then((error) => {
+        if(error){
+            console.log(error);
+        }else{
+            console.log('🏢 Connected to database!');
+        }
+    });
+}else{
+    port = process.env.TEST_PORT
+}
+})
+/*
 const server = app.listen(port, () => {
     console.log(`Server is up and running at port ${port} ⚡`)
 })
+
+*/
 
 export const socketIoPublic = configurePublicSocket(server);
 

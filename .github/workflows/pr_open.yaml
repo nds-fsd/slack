@@ -1,0 +1,15 @@
+name: Node CI
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+
+jobs:
+  build-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2     # checkout the repo
+      - run: cd backend && npm install  # install packages
+      - run: cd backend && npm test  

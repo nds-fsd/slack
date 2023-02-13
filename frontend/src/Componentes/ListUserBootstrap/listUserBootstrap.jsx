@@ -7,6 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import ModalEditUser from "../Modal/modalEditUser";
 import EditUser from '../editUser/editUser.js'
 import { getUserToken, removeSession } from "../../utils/localStorageUtils";
+import fetchSupreme from "../../utils/apiWrapper";
 
 
 
@@ -18,7 +19,8 @@ const ListUsersBootstrap = () => {
     const navigate = useNavigate()
 
     const deleteUser = (datosUser) => {
-        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        // const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        /*
         const url = `${URL_API}/user/` + datosUser._id
         const options = {
             method: "DELETE",
@@ -29,10 +31,16 @@ const ListUsersBootstrap = () => {
                 authorization: `Bearer ${getUserToken()}`,
             }
         };
+        */
+        fetchSupreme(`/user/${datosUser._id}`, 'DELETE',undefined, true, undefined)
+        
+        /*
         fetch(url, options)
             .then((res) => {
                 res.json();
             })
+        */
+
             .then(() => {
                 setRefresh(true);
                 alert(`Usuario ${datosUser.userName} eliminado.`);
@@ -44,7 +52,9 @@ const ListUsersBootstrap = () => {
 
     useEffect(() => {
         if (refresh) {
-            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+            // const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+            fetchSupreme('/user', 'GET', undefined, true,undefined)
+            /*
             fetch(`${URL_API}/user`, {
                 headers: {
                     authorization: `Bearer ${getUserToken()}`
@@ -53,11 +63,12 @@ const ListUsersBootstrap = () => {
                 .then((response) => {
                     return response.json();
                 })
+            */
                 .then((res) => {
                     setList(res);
                     setRefresh(false);
                 })
-            console.log('Acabado el fetch');
+            //console.log('Acabado el fetch');
         }
     }, [refresh])
 
@@ -102,7 +113,7 @@ const ListUsersBootstrap = () => {
                         </tr>
 
                     ))}
-                    {console.log('datos del handleID', handleId)}
+                 
                     <ModalEditUser userId={handleId} setRefresh={setRefresh} setOpenModal={setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
 
 

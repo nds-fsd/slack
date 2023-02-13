@@ -6,6 +6,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
 import { getUserToken } from '../../utils/localStorageUtils';
+import fetchSupreme from '../../utils/apiWrapper';
 
 
 export const LandingUserPage = () => {
@@ -14,6 +15,9 @@ export const LandingUserPage = () => {
     const [viewInvitation, setViewInvitation] = useState(null)
 
     useEffect(() => {
+        fetchSupreme(`/user/${params.id}`,'GET',undefined, true,undefined) 
+       
+        /*
         const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
         fetch(`${URL_API}/user/` + params.id,
             {
@@ -21,9 +25,12 @@ export const LandingUserPage = () => {
                     authorization: `Bearer ${getUserToken()}`
                 }
             })
+        
             .then((res) => {
                 return res.json();
             })
+        */
+
             .then((res) => {
                 setUser(res);
             });
