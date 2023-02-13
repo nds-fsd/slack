@@ -27,7 +27,7 @@ const PublicChat = () => {
     useEffect(() => {
 
         //Cargamos los mensajes guardados en la BDD la primera vez
-        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        //const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
         fetchSupreme('/publicMessage','GET',undefined,false,undefined)
         /*
         fetch(`${URL_API}/publicMessage`)
