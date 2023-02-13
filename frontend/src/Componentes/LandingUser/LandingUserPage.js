@@ -42,11 +42,11 @@ export const LandingUserPage = () => {
         <LUPstyle>
 
             <div>
-                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand className='hand'/></span>
-                    <ModalRollOrg setRefresh={setRefresh} refresh={refresh}/>
+                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand className='hand' /></span>
+                    <ModalRollOrg setRefresh={setRefresh} refresh={refresh} />
                     <Button className='buttonChat' as={Link} to="/publicChat" variant="dark">Chat Público</Button>
-                        
-                    </h1>
+
+                </h1>
             </div>
 
             <div>
@@ -90,21 +90,6 @@ export const LandingUserPage = () => {
                             <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
                         </div>
                     </Card.Body>
-
-                </Card>
-                <Card className='cardstyle' border="dark">
-                    <Card.Header as="h5" className='cardhead'>Entra en el <span className='rojo'>chat SkuadLack</span> público</Card.Header>
-                    <Card.Body>
-                        <div className='cardtext'>
-                            <Card.Text>
-                                <p>¿Quieres chatear?</p>
-                            </Card.Text>
-                        </div>
-                        <div className='btncard'>
-                            <Button as={Link} to="/publicChat" variant="dark">Iniciar Chat</Button>
-                        </div>
-                    </Card.Body>
-
                 </Card>
             </div>
 
