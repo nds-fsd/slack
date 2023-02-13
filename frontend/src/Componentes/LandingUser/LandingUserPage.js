@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { MdWavingHand, MdSettings } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
 import { getUserToken } from '../../utils/localStorageUtils';
@@ -10,6 +11,8 @@ import { getUserToken } from '../../utils/localStorageUtils';
 export const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
+    const [viewInvitation, setViewInvitation] = useState(null)
+
     useEffect(() => {
         const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
         fetch(`${URL_API}/user/` + params.id,
@@ -30,7 +33,8 @@ export const LandingUserPage = () => {
         <LUPstyle>
 
             <div>
-                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span></h1>
+                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span>
+                    <Button className='buttontitle' variant="danger">Unirse</Button></h1>
             </div>
 
             <div>
@@ -48,7 +52,13 @@ export const LandingUserPage = () => {
                             </div>
 
                             <div className='btncard'>
-                                <Button as={Link} to={`/skuadlack/${e._id}`} variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
+                                <Button as={Link} to={`/skuadlack/${e._id}`} variant="dark">Iniciar organización</Button>
+                            </div>
+                            <div className='btncard'>
+                                {viewInvitation !== e._id && <Button onClick={() => setViewInvitation(e._id)} variant="danger">Invitar</Button>}
+                                {viewInvitation === e._id && `Copia este código de invitación 
+                                ${e._id}`}
+                                {viewInvitation === e._id &&<CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger"/>}
                             </div>
                         </Card.Body>
                     </Card>
@@ -68,9 +78,9 @@ export const LandingUserPage = () => {
                             <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
                         </div>
                     </Card.Body>
-                    
+
                 </Card>
-                                <Card className='cardstyle' border="dark">
+                <Card className='cardstyle' border="dark">
                     <Card.Header as="h5" className='cardhead'>Entra en el <span className='rojo'>chat SkuadLack</span> público</Card.Header>
                     <Card.Body>
                         <div className='cardtext'>
@@ -82,7 +92,7 @@ export const LandingUserPage = () => {
                             <Button as={Link} to="/publicChat" variant="dark">Iniciar Chat</Button>
                         </div>
                     </Card.Body>
-                    
+
                 </Card>
             </div>
 
@@ -107,6 +117,9 @@ background-color: #242A38 ;
     padding-left: 2rem;
     font-weight: bolder;
     color: #f2f2f2;
+}
+.buttontitle{
+    margin-left: 2rem;
 }
 
 .rojo{
@@ -165,4 +178,8 @@ background-color: #242A38 ;
     color: #E65262;
     top: -.15rem;
     }
+.buttonX{
+    // height:15px;
+    margin
+}    
 `
