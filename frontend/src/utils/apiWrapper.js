@@ -36,7 +36,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
   const queryParams = query && JSON.stringify(query);
 
   if (queryParams) {
-    URL = `${URL}'?'${queryParams}`;
+    URL = `${URL}?${queryParams}`;
   }
 
   const options = {

@@ -65,7 +65,7 @@ const PublicChat = () => {
     const handlerSubmit = (e) => {
         //Evitamos recargar la página
 
-
+        if(!message)return
         //Enviamos el mensaje sólo si se ha establecido un nickname
         if (nickname !== "") {
             //Limpiamos el mensaje
