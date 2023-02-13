@@ -1,7 +1,6 @@
 import { getUserToken } from "./localStorageUtils";
 
-const fetchSupreme = (path,method, body, isToken,query) => {
-
+const fetchSupreme = (path, method, body, isToken, query) => {
   //path: tiene que incluir la primera barra. Ejemplo "http://localhost:3001/user" --> path = "/user"
   //method: 'GET', 'POST'...
   //body: incluir como objeto si es necesario. Si no, especificar undefined SUPER IMPORTANTE
@@ -25,65 +24,53 @@ const fetchSupreme = (path,method, body, isToken,query) => {
   }
   */
 
-  const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+  const URL_API =
+    window.location.hostname === "https://skuadlack.netlify.app"
+      ? "https://skuadlack.up.railway.app"
+      : "http://localhost:3001";
 
-  let URL = URL_API + path
-
-  console.log('path',path)
+  let URL = URL_API + path;
 
   const authorization = isToken && `Bearer ${getUserToken()}`;
 
-//const authorization = isToken ? `Bearer ${getUserToken()}`: "";
+  const queryParams = query && JSON.stringify(query);
 
-/*
-  if (isToken === true) {
-    authorization = `Bearer ${getUserToken()}`;
-  } else {
-    authorization = "";
+  if (queryParams) {
+    URL = `${URL}'?'${queryParams}`;
   }
-*/
-
-const queryParams = query && JSON.stringify(query)
-
-if (queryParams){
-  URL = URL + '?' + queryParams
-}
 
   const options = {
     method: method,
-    mode: 'cors',
+    mode: "cors",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
       authorization: authorization,
     },
-    body:JSON.stringify(body),
+    body: JSON.stringify(body),
   };
-  
-  let response = null
 
-  return (
-    fetch(URL, options)
-  .then((responseObject) => {
-    response=responseObject;
+  let response = null;
 
-    if (responseObject.status === 401) {
-      return {authError:true}
-    }
-    return response.json();
-  })
-  .then ((parsedResponse) =>{
-    if (response.status<200 || response.status >=300){
-      throw parsedResponse;
-    }
-    return parsedResponse
-  })
-  .catch((error)=>{
-    //pendiente implementacion
-    //return parsedResponse.json(error)
+  return fetch(URL, options)
+    .then((responseObject) => {
+      response = responseObject;
 
-  })
-  )
+      if (responseObject.status === 401) {
+        return { authError: true };
+      }
+      return response.json();
+    })
+    .then((parsedResponse) => {
+      if (response.status < 200 || response.status >= 300) {
+        throw parsedResponse;
+      }
+      return parsedResponse;
+    })
+    .catch((error) => {
+      //pendiente implementacion
+      //return parsedResponse.json(error)
+    });
 };
 
 export default fetchSupreme;
