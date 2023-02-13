@@ -7,41 +7,46 @@ import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
 import { getUserToken } from '../../utils/localStorageUtils';
 import fetchSupreme from '../../utils/apiWrapper';
+import ModalRollOrg from '../Modal/modalRollOrg/modalRollOrg';
 
 
 export const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
     const [viewInvitation, setViewInvitation] = useState(null)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
-        fetchSupreme(`/user/${params.id}`,'GET',undefined, true,undefined) 
-       
-        /*
-        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
-        fetch(`${URL_API}/user/` + params.id,
-            {
-                headers: {
-                    authorization: `Bearer ${getUserToken()}`
-                }
-            })
-        
-            .then((res) => {
-                return res.json();
-            })
-        */
+        fetchSupreme(`/user/${params.id}`, 'GET', undefined, true, undefined)
+
+            /*
+            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+            fetch(`${URL_API}/user/` + params.id,
+                {
+                    headers: {
+                        authorization: `Bearer ${getUserToken()}`
+                    }
+                })
+            
+                .then((res) => {
+                    return res.json();
+                })
+            */
 
             .then((res) => {
                 setUser(res);
             });
-    }, []);
+    }, [refresh]);
 
     return (
         <LUPstyle>
 
             <div>
-                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand /></span>
-                    <Button className='buttontitle' variant="danger">Unirse</Button></h1>
+                <h1 className='headtitle'>¡Bienvenido <span className='rojo'>{user.userName} <MdWavingHand className='hand'/></span>
+                    <ModalRollOrg setRefresh={setRefresh} refresh={refresh}/>
+                    <Button className='buttonChat' as={Link} to="/publicChat" variant="dark">Chat Público</Button>
+                        
+                    </h1>
             </div>
 
             <div>
@@ -65,7 +70,7 @@ export const LandingUserPage = () => {
                                 {viewInvitation !== e._id && <Button onClick={() => setViewInvitation(e._id)} variant="danger">Invitar</Button>}
                                 {viewInvitation === e._id && `Copia este código de invitación 
                                 ${e._id}`}
-                                {viewInvitation === e._id &&<CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger"/>}
+                                {viewInvitation === e._id && <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />}
                             </div>
                         </Card.Body>
                     </Card>
@@ -125,8 +130,10 @@ background-color: #242A38 ;
     font-weight: bolder;
     color: #f2f2f2;
 }
-.buttontitle{
-    margin-left: 2rem;
+.hand{
+   
+    margin-right: 2rem;
+
 }
 
 .rojo{
@@ -188,5 +195,8 @@ background-color: #242A38 ;
 .buttonX{
     // height:15px;
     margin
-}    
+} 
+.buttonChat{
+    margin-left:1rem
+}   
 `
