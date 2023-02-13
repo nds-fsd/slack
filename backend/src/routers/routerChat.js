@@ -35,7 +35,7 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
 //Listar todos los chats
 routerChat.get("/allChats", jwtMiddleware, async (req, res) => {
   try {
-    const allChats = await Chat.find();
+    const allChats = await Chat.find().populate('user');
     res.status(200).json(allChats);
   } catch (error) {
     res.status(500).json(error);
@@ -47,7 +47,7 @@ routerChat.get("/chat/:idChat", jwtMiddleware, async (req, res) => {
   const idChat = req.params.idChat;
 
   try {
-    const chat = await Chat.findById(idChat);
+    const chat = await Chat.findById(idChat).populate('user');
     res.status(200).json(chat);
   } catch (error) {
     res.status(500).json(error);

@@ -57,13 +57,9 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
 
       //Fundamental el await!!!
       const user = await User.findById(idUser)
-
-      console.log('userSchema', user)
+      
       organizacion.user.push(idUser);
       
-      console.log('user',user)
-      console.log('organizacion',organizacion)
-
       //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
       await organizacion.save();
 
