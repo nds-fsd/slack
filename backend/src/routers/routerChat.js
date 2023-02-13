@@ -163,6 +163,23 @@ routerChat.patch("/modifyUser/:idChat?",  jwtMiddleware, async (req, res) => {
 
     await chatFound.save();
 
+    const deleteChatFromUser = await User.findById(idUser);
+console.log('deleteChatFromUser', deleteChatFromUser)
+
+    const deleteChatIndex = deleteChatFromUser.chat.indexOf(idChat);
+
+    console.log('deleteChatIndex',deleteChatIndex)
+
+    if (deleteChatIndex === -1) return res.status(404).json("Chat no encontrado en el usuario");
+
+    const deleteChat = deleteChatFromUser.chat.splice(deleteChatIndex, 1);
+
+    console.log('deleteChatFromUser modified', deleteChatFromUser);
+
+    await deleteChatFromUser.save()
+
+    console.log('idUser', idUser)
+
     const userFound = await User.findById(idUser)
     console.log('userFound',userFound);
 
@@ -191,7 +208,14 @@ routerChat.patch("/modifyUser/:idChat?",  jwtMiddleware, async (req, res) => {
       chatModified.user.push(idUser);
   
       await chatModified.save();
-  
+      const userFound = await User.findById(idUser);
+
+      userFound.chat.push(idChat);
+      
+      await userFound.save();
+
+      console.log('userFound con chat', userFound)
+
       res.status(200).json(chatModified);
     } catch (error) {
       res.status(500).json(error);
