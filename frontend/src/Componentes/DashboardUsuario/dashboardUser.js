@@ -2,11 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import fetchSupreme from "../../utils/apiWrapper";
 import NotFound from "../NotFound/notFound";
 import styles from './dashboard.module.css';
 
 
+
 const DashboardUser = () =>{
+
+  //const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+
     const navigate = useNavigate()
     let params = useParams()
     const [user, setUser] = useState("")
@@ -14,17 +19,21 @@ const DashboardUser = () =>{
     navigate(`/editUser/${user._id}`)
   }
     useEffect(() => {
-    fetch("http://localhost:3001/user/" + params.id)
+      fetchSupreme(`/user/${params.id}`, 'GET', undefined, false,undefined)
+    /*
+      fetch(`${URL_API}/user/` + params.id)
     .then((res)=>{
         return res.json();
     })
+    */
     .then((res)=>{
         setUser(res);
     });
 }, [params.id]);
     
     const deleteUser = () =>{
-  const url = "http://localhost:3001/user/" + params.id;
+
+  const url = `${URL_API}/user/` + params.id;
   const options = {
     method: "DELETE",
     mode: "cors",

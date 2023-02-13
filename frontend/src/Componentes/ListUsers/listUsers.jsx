@@ -1,3 +1,5 @@
+//SIN USO
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./listUsers.module.css"
@@ -6,6 +8,7 @@ const ListUsers = ()=>{
         const [list, setList]=useState([]);
 
     useEffect (()=> {
+        
         fetch("http://localhost:3001/user")
             .then((response)=>{
                 return response.json();

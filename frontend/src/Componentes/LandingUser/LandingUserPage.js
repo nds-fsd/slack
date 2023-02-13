@@ -5,25 +5,34 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
 import { getUserToken } from '../../utils/localStorageUtils';
+import fetchSupreme from '../../utils/apiWrapper';
 
 
 export const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
     useEffect(() => {
-        fetch("http://localhost:3001/user/" + params.id,
+        fetchSupreme(`/user/${params.id}`,'GET',undefined, true,undefined) 
+       
+        /*
+        const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        fetch(`${URL_API}/user/` + params.id,
             {
                 headers: {
                     authorization: `Bearer ${getUserToken()}`
                 }
             })
+        
             .then((res) => {
                 return res.json();
             })
+        */
+
             .then((res) => {
                 setUser(res);
             });
     }, []);
+
     return (
         <LUPstyle>
 
@@ -46,7 +55,7 @@ export const LandingUserPage = () => {
                             </div>
 
                             <div className='btncard'>
-                                <Button as={Link} to="/skuadlack" variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
+                                <Button as={Link} to={`/skuadlack/${e._id}`} variant="secondary">Iniciar organización {/*{e.OrgName}*/}</Button>
                             </div>
                         </Card.Body>
                     </Card>
@@ -66,6 +75,21 @@ export const LandingUserPage = () => {
                             <Button as={Link} to="/organizacion" variant="dark">Crea tu Organizacion</Button>
                         </div>
                     </Card.Body>
+                    
+                </Card>
+                                <Card className='cardstyle' border="dark">
+                    <Card.Header as="h5" className='cardhead'>Entra en el <span className='rojo'>chat SkuadLack</span> público</Card.Header>
+                    <Card.Body>
+                        <div className='cardtext'>
+                            <Card.Text>
+                                <p>¿Quieres chatear?</p>
+                            </Card.Text>
+                        </div>
+                        <div className='btncard'>
+                            <Button as={Link} to="/publicChat" variant="dark">Iniciar Chat</Button>
+                        </div>
+                    </Card.Body>
+                    
                 </Card>
             </div>
 

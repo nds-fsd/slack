@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 import styles from "./formUser.module.css"
 import { postToMongo } from "../../utils/fetchToMongo.js";
+import fetchSupreme from "../../utils/apiWrapper";
+import { setUserSession } from "../../utils/localStorageUtils";
 
 const FormUser1 = () => {
-
+    const [show, setShow] = useState(false)
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const switchShow = () => setShow(!show);
     const onDataSubmit2 = (data) => {
-   
+
+        fetchSupreme("/register","POST",data,false,null)
+        
+        .then((res) => {
+            //const user = dataServer
+            setUserSession(res)
+            console.log('Response', res.resUser);
+            alert(`el usuario ${res.user.name} ha sido creado.`)
+            navigate(`/LUP/${res.user.id}`)
+        })
+}
+
+/*
         postToMongo("register", data)
             .then((dataServer) => {
-                const user = dataServer.resUser
+                const user = dataServer.user
                 // console.log("soy token", user.userToken)
-                alert(`el usuario ${user.userName} ha sido creado.`)
-                navigate(`/user/${user._id}`)
+                setUserSession(dataServer)
+                alert(`el usuario ${user.name} ha sido creado.`)
+                navigate(`/LUP/${user.id}`)
             })
-    }
+*/
+    
     return (
         <div className={styles.contenedor}>
             {/* <div className={styles.title}>
@@ -26,9 +43,9 @@ const FormUser1 = () => {
             <form className={styles.card} onSubmit={handleSubmit(onDataSubmit2)}>
             {/* <h1>Bienvenido a SkuadLack </h1> */}
                 <h3 className={styles.h3Usuario}>Usuario de <span className={styles.h3Span}>SkuadLack</span></h3>
-                <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 5, maxLength: 20 })} />
+                <input placeholder='Nombre de Usuario' {...register("userName", { required: true, minLength: 2, maxLength: 20 })} />
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
-                {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 5 carácteres"}
+                {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 2 carácteres"}
                 {errors.userName?.type === "maxLength" && "Tu nombre de usuario debe tener máximo 20 carácteres"}
                 <h3>Email</h3>
                 <input placeholder='email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} />
@@ -44,8 +61,11 @@ const FormUser1 = () => {
                 {errors.lastName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.lastName?.type === "maxLength" && "Tu apellido debe tener máximo 20 carácteres"}
                 <h3>Contraseña</h3>
-                <input placeholder='password' {...register("password", { required: true })} />
+                <div className={styles.password}>
+                <input placeholder='password' type={show ? 'text' : 'password'} {...register("password", { required: true })} />
+                <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
                 {errors.password && <span>❌campo obligatorio❗❗</span>}
+                </div>
                 <br />
                 <input id = {styles.botonEnviar} type="submit" />
             </form>

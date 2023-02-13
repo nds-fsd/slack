@@ -1,11 +1,13 @@
 import express, { application } from 'express';
 import Organizacion from "../Schemas/organizacion.js";
 import { validateOrgName } from '../Middlewares/orgName.js';
+import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
+import User from '../Schemas/user.js';
 const routerOrg = express.Router();
 
 routerOrg.get('/organizacion',async(req,res)=>{
     try{
-        const allOrganizacions = await Organizacion.find();
+        const allOrganizacions = await Organizacion.find().populate('user');
         res.status(200).json(allOrganizacions);
         }catch(error){
           res.status(500).json(error)
@@ -34,11 +36,52 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
       res.status(400).send(error.message);
     }
   });
+
+  //router para que cuando se cree la organización automáticamente se asocie al usuario que la crea
+  routerOrg.post('/userToOrganizacion',validateOrgName,jwtMiddleware, async (req,res)=> {
+    const body = req.body;
+    const data = {
+      OrgName: body.OrgName,
+      OrgMail: body.OrgMail,
+      OrgDescription: body.OrgDescription
+    };
+
+    if (!data.OrgName || !data.OrgMail) {
+      return res.status(422).send("Falta el nombre o el correo electrónico de la organización");
+    }
+  
+    try {
+      const organizacion = new Organizacion(data);
+      const idUser= req.jwtPayload.id;
+      console.log('id usuario que está logueado',idUser);
+
+      //Fundamental el await!!!
+      const user = await User.findById(idUser)
+
+      console.log('userSchema', user)
+      organizacion.user.push(idUser);
+      
+      console.log('user',user)
+      console.log('organizacion',organizacion)
+
+      //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
+      await organizacion.save();
+
+      user.organizacion.push(organizacion._id)
+      
+      //Necesario guardar de nuevo al existir cambios en el schema
+      await user.save();
+      
+      res.status(201).json(organizacion);
+    } catch(error) {
+      res.status(400).send(error.message);
+    }
+  });
   
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id
     try{
-    const organizacion = await Organizacion.findById(id)
+    const organizacion = await Organizacion.findById(id).populate('user')
     if (organizacion){
         res.status(200).json(organizacion)
     }else{

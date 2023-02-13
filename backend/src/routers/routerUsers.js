@@ -2,7 +2,7 @@ import express from 'express';
 import User from '../Schemas/user.js';
 import { validateUserName } from '../Middlewares/userName.js';
 const routerUsers = express.Router();
-import generateJWT from '../Utils/utils.js';
+import {generateJWT} from '../Utils/utils.js';
 const jwtSecret = process.env.JWT_SECRET;
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
@@ -10,7 +10,7 @@ import jwt from 'jsonwebtoken';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find().populate('organizacion');
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json(error)
@@ -113,17 +113,23 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
         const userCreated = await user.save();
 
         const userToken = generateJWT(userCreated);
-
+        const token = userCreated.generateJWT()
         //Crearmos otro objeto para no enviar la contraseña
-        const resUser = {
-            userName: userCreated.userName,
-            _id: userCreated._id,
-            email: userCreated.email,
-            name: userCreated.name,
-            lastName: userCreated.lastName
-        }
+        // const resUser = {
+        //     userName: userCreated.userName,
+        //     _id: userCreated._id,
+        //     email: userCreated.email,
+        //     name: userCreated.name,
+        //     lastName: userCreated.lastName
+        // }
 
-        return res.status(201).json({ resUser, userToken })
+        return res.status(201).json({   
+            token,
+            user: {
+                email: userCreated.email,
+                name: userCreated.name,
+                id: userCreated._id
+            }, })
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
 });
