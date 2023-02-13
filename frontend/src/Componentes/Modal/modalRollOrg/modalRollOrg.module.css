@@ -1,0 +1,20 @@
+.modal{
+    transition: visibility 0s linear 400ms, opacity 400ms;
+    backdrop-filter: blur(2px);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #242A38;
+    color: white;  
+}
+
+.inputId{
+    width: 43%;
+}
+.footer{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
