@@ -1,5 +1,6 @@
 import express from "express";
 import Chat from "../Schemas/chat.js";
+import User from '../Schemas/user.js';
 const routerChat = express.Router();
 import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 
@@ -161,6 +162,9 @@ routerChat.patch("/modifyUser/:idChat?",  jwtMiddleware, async (req, res) => {
     const deleteUser = chatFound.user.splice(deleteUserIndex, 1);
 
     await chatFound.save();
+
+    const userFound = await User.findById(idUser)
+    console.log('userFound',userFound);
 
     res.status(200).json(chatFound);
 

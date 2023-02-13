@@ -7,25 +7,8 @@ const fetchSupreme = (path, method, body, isToken, query) => {
   //isToken: si es true, quiere decir que va a verificar si tenemos token, si es false, no.
   //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante
 
-  /*
-  const ApiError = (message, data, status)=>{
-    
-  let response = ''
-    try{
-      response = JSON.parse(data);
-
-    }catch(e){
-      response= data
-    }
-    this.response = response;
-    this.message = message;
-    this.status = status;
-
-  }
-  */
-
   const URL_API =
-    window.location.hostname === "https://skuadlack.netlify.app"
+    window.location.hostname === "skuadlack.netlify.app"
       ? "https://skuadlack.up.railway.app"
       : "http://localhost:3001";
 
@@ -36,7 +19,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
   const queryParams = query && JSON.stringify(query);
 
   if (queryParams) {
-    URL = `${URL}'?'${queryParams}`;
+    URL = `${URL}?${queryParams}`;
   }
 
   const options = {
