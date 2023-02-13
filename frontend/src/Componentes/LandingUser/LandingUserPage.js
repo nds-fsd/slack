@@ -15,7 +15,12 @@ export const LandingUserPage = () => {
     const [user, setUser] = useState("")
     const [viewInvitation, setViewInvitation] = useState(null)
     const [refresh, setRefresh] = useState(false)
-
+    const [copied, setCopied] = useState(true);
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            setCopied(!copied);
+          });
+      };
     useEffect(() => {
         fetchSupreme(`/user/${params.id}`, 'GET', undefined, true, undefined)
 
@@ -68,8 +73,8 @@ export const LandingUserPage = () => {
                             </div>
                             <div className='btncard'>
                                 {viewInvitation !== e._id && <Button onClick={() => setViewInvitation(e._id)} variant="danger">Invitar</Button>}
-                                {viewInvitation === e._id && `Copia este código de invitación 
-                                ${e._id}`}
+                                {viewInvitation === e._id && `Copia este código de invitación ${e._id}`}
+                                {viewInvitation === e._id &&<button onClick={() => copyToClipboard(e._id)} className='save'>{copied ? '💾': '✅'}</button>}
                                 {viewInvitation === e._id && <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />}
                             </div>
                         </Card.Body>
@@ -183,5 +188,9 @@ background-color: #242A38 ;
 } 
 .buttonChat{
     margin-left:1rem
-}   
+} 
+.save{
+    border:none;
+    margin-right: 2rem
+}  
 `
