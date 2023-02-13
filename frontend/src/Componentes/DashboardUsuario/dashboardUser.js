@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import fetchSupreme from "../../utils/apiWrapper";
 import NotFound from "../NotFound/notFound";
 import styles from './dashboard.module.css';
 
@@ -18,10 +19,13 @@ const DashboardUser = () =>{
     navigate(`/editUser/${user._id}`)
   }
     useEffect(() => {
-    fetch(`${URL_API}/user/` + params.id)
+      fetchSupreme(`/user/${params.id}`, 'GET', undefined, false,undefined)
+    /*
+      fetch(`${URL_API}/user/` + params.id)
     .then((res)=>{
         return res.json();
     })
+    */
     .then((res)=>{
         setUser(res);
     });

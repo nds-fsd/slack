@@ -5,6 +5,7 @@ import { patchToMongo } from "../../utils/fetchToMongo";
 import NotFound from "../NotFound/notFound";
 import styles from "./editUser.module.css"
 import { getUserToken, removeSession } from "../../utils/localStorageUtils";
+import fetchSupreme from "../../utils/apiWrapper";
 
 const EditUser = (props) => {
     // Varuiables y estados
@@ -22,6 +23,8 @@ const EditUser = (props) => {
 
   const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
 
+        fetchSupreme(`/user/${(userToEdit ? userToEdit : params.id)}`,'GET',undefined,true,undefined)
+        /*
         fetch(`${URL_API}/user/` + (userToEdit ? userToEdit : params.id),     
         {
             headers:{
@@ -32,7 +35,9 @@ const EditUser = (props) => {
 
             .then((res) => {
                 return res.json();
+        
             })
+            */
             .then((res) => {
                 setUser(res);
 
@@ -45,7 +50,9 @@ const EditUser = (props) => {
     }, [triger, userToEdit]);
 
     const onDataSubmit2 = (data) => {
-        patchToMongo(`user/${user._id}`, data).then((dataServer) => {
+        //patchToMongo(`user/${user._id}`, data)
+        fetchSupreme(`/user/${user._id}`, 'PATCH',data,true,undefined)
+        .then((dataServer) => {
             alert(`el usuario ${dataServer.userName} ha sido modificado.`)
             // navigate(`/user/${dataServer._id}`)
             //setTriger(!triger)
@@ -70,6 +77,7 @@ const EditUser = (props) => {
     }
     const deleteUser = () => {
         const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+        /*
         const url = `${URL_API}/user/`  + (userToEdit ? userToEdit : params.id);
         const options = {
             method: "DELETE",
@@ -78,7 +86,9 @@ const EditUser = (props) => {
                 authorization:`Bearer ${getUserToken()}`
             }
         };
-        fetch(url, options)
+        */
+        fetchSupreme(`/user/${(userToEdit ? userToEdit : params.id)}`,'DELETE', undefined, true)
+        //fetch(url, options)
             .then((res) => {
                 res.json();
             })

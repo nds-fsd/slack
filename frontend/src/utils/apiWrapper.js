@@ -69,8 +69,10 @@ const fetchSupreme = (path, method, body, isToken, query) => {
       return parsedResponse;
     })
     .catch((error) => {
-      //pendiente implementacion
-      //return parsedResponse.json(error)
+      console.log(error)
+
+      return error.json()
+     
     });
 };
 
