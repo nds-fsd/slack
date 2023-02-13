@@ -25,7 +25,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
   */
 
   const URL_API =
-    window.location.hostname === "https://skuadlack.netlify.app"
+    window.location.hostname === "skuadlack.netlify.app"
       ? "https://skuadlack.up.railway.app"
       : "http://localhost:3001";
 
