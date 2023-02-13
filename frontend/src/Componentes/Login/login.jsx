@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import fetchSupreme from "../../utils/apiWrapper";
 import { setUserSession } from "../../utils/localStorageUtils";
 import styles from "./login.module.css"
 
@@ -13,6 +14,15 @@ const Login = () => {
   const navigate = useNavigate()
   // fetch login
   const sendLogin = () => {
+    
+    const bodyLogin ={
+      email,
+      password
+    }
+    
+    fetchSupreme('/login','POST',bodyLogin,false,undefined)
+    
+    /*
     const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
     fetch(`${URL_API}/login`, {
       method: 'POST',
@@ -25,14 +35,20 @@ const Login = () => {
         password
       })
     })
+  
       .then((response) => {
         return response.json();
 
-      }).then((res) => {
+      })
+       */
+       
+      .then((res) => {
+
+        console.log('Response del Login',res)
+
         if (res.token) {
           setUserSession(res)
           navigate(`/LUP/${res.user.id}`)
-
         }
       })
   };
