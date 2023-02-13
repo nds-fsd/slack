@@ -12,11 +12,8 @@ const FormUser1 = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const switchShow = () => setShow(!show);
     const onDataSubmit2 = (data) => {
-        console.log('data',data);
 
-        const url= "/register"
-
-        fetchSupreme(url,"POST",data,false,null)
+        fetchSupreme("/register","POST",data,false,null)
         
         .then((res) => {
             //const user = dataServer
@@ -26,6 +23,7 @@ const FormUser1 = () => {
             navigate(`/LUP/${res.user.id}`)
         })
 }
+
 /*
         postToMongo("register", data)
             .then((dataServer) => {

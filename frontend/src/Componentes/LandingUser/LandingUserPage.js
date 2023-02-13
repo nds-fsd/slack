@@ -26,7 +26,7 @@ export const LandingUserPage = () => {
             .then((res) => {
                 return res.json();
             })
-            */
+        */
 
             .then((res) => {
                 setUser(res);

@@ -24,16 +24,14 @@ const FormOrganizacion = () => {
 
     const postOrganizaciones = () => {
         
-        
-        
-       
-        const url2="/userToOrganizacion"
+        //const url2="/userToOrganizacion"
         const body = {
             OrgMail: email,
             OrgName: name,
             OrgDescription: trabajoActual
 
         };
+        
         /*
         const options = {
             method: "POST",
@@ -47,7 +45,7 @@ const FormOrganizacion = () => {
 
         */
         
-        fetchSupreme(url2,"POST", body,true,null)
+        fetchSupreme("/userToOrganizacion","POST", body,true,null)
         .then((res) => {
 
             console.log('Response',res)
@@ -57,6 +55,7 @@ const FormOrganizacion = () => {
             //aqui entiendo que cuando se cree el homepage de user habra que
             //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
         })
+
         /*
         fetch(url, options)
             .then((res) => {
@@ -67,7 +66,6 @@ const FormOrganizacion = () => {
                 //redirigir para que cargue el componente del perfil creado. => la home de ese perfil.
             })
          */   
-
     }
 
     return (

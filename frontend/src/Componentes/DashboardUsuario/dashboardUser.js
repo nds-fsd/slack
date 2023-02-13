@@ -10,7 +10,7 @@ import styles from './dashboard.module.css';
 
 const DashboardUser = () =>{
 
-  const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
+  //const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
 
     const navigate = useNavigate()
     let params = useParams()

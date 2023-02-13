@@ -49,7 +49,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
     },
     body: JSON.stringify(body),
   };
-  console.log('Options del APIWrapper', options);
+  //console.log('Options del APIWrapper', options);
 
   let response = null;
 
@@ -71,7 +71,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
     .catch((error) => {
       console.log(error)
 
-      return error.json()
+      return error
      
     });
 };
