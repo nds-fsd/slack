@@ -73,11 +73,21 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
       res.status(400).send(error.message);
     }
   });
+
+  /*
+   const messageFound = await Messages.findById(req.params.id).populate({//populamos la key user del schema message y user tambien tiene informacion que popular
+    path: 'user',
+    populate: { path: 'organizacion' }                                 //2do populate de organizacion que esta dentro de la key user 
+  })
+  */
   
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id
     try{
-    const organizacion = await Organizacion.findById(id).populate('user')
+    const organizacion = await Organizacion.findById(id).populate({
+      path:'user',
+      populate:{path:'chat'}
+    })
     if (organizacion){
         res.status(200).json(organizacion)
     }else{

@@ -7,6 +7,7 @@ const orgSchema = new Schema({
     OrgDescription: String,
     user: [{type: Schema.ObjectId, ref: 'User'}],
     chat: [{type: Schema.ObjectId, ref: 'Chat'}]
+    //creo que organización no debería tener Chat
 });
 
 const Organizacion = model('Organizacion', orgSchema);

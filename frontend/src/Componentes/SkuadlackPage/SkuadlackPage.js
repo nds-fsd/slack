@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import AddChat from '../addChat/addChat'
+
 import { Search } from './Componets/BarraSuperior/search'
+
 
 export const SkuadlackPage = () => {
   return (
@@ -23,7 +26,9 @@ export const SkuadlackPage = () => {
         <div className='box2'>
           <div className='chatbox'>infOrg</div>
           <div className='chatbox'>canales </div>
-          <div className='chatbox'>chats</div>
+          <div className='chatbox'>
+           <AddChat/>
+          </div>
 
         </div>
 
@@ -34,7 +39,9 @@ export const SkuadlackPage = () => {
             <div>opciones </div>
           </div>
 
-          <div className='bodyChat'>chat/canal abierto</div>
+          <div className='bodyChat'>chat/canal abierto
+        
+          </div>
 
           <div className='barraSuperiorChat'>
             <div>input texto</div>
@@ -132,6 +139,11 @@ const PageStyle = styled.div `
       height: 32%;
       border-radius: 10px;
       background-color: #202430;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      justify-items:center;
 
 
     }

@@ -21,7 +21,7 @@ routerUsers.get('/user', jwtMiddleware, async (req, res) => {
 routerUsers.get('/user/:id', jwtMiddleware, async (req, res) => {
     const id = req.params.id
     try {
-        const user = await User.findById(id).populate('organizacion')
+        const user = await User.findById(id).populate('organizacion')//.populate('chat')
             
         if (user) {
             res.status(200).json(user)

@@ -179,7 +179,7 @@ background-color: #242A38 ;
     }
 .buttonX{
     // height:15px;
-    margin
+    margin:auto;
 } 
 .buttonChat{
     margin-left:1rem

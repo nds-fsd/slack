@@ -10,7 +10,6 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
 
   //El id de organzación y fecha es necesario mandarlo con el body
   const idOrganizacion = req.body.organizacion;
-  const creationDate = req.body.creationDate;
 
   //El middleware devuelve el jwtPayload con los datos del payload
   const idUser = req.jwtPayload.id;
@@ -25,6 +24,43 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
     chat.user.push(idUser);
 
     await chat.save();
+
+    const userSchema = await User.findById(idUser);
+
+    userSchema.chat.push(chat._id)
+
+    await userSchema.save()
+
+    res.status(201).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
+  //Crear un chat que a diferencia del anterior el usuario venga en el body
+
+  //El id de organzación y fecha es necesario mandarlo con el body
+  const idOrganizacion = req.body.organizacion;
+
+  const idUser = req.body.idUser;
+
+  try {
+    const chat = new Chat(req.body);
+
+    //La forma de asignar el idOrganización es mediante una equivalencia cuando son dependencias 1 a N (sin array en el schema de Chat)
+    chat.organizacion = idOrganizacion;
+
+    //Esta es la forma de añadir usuarios al chat cuando son equivalencias N a N
+    chat.user.push(idUser);
+
+    await chat.save();
+
+    const userSchema = await User.findById(idUser);
+    
+    userSchema.chat.push(chat._id)
+
+    await userSchema.save()
 
     res.status(201).json(chat);
   } catch (error) {
@@ -204,16 +240,14 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
     try {
       // comprobamos que el chat nos lo pasan por parametro de la url
       if (!idChat) return res.status(404).json("IdChat no existe");
+
       // si el chat existe lo buscamos en la base de datos y lo metemos en la variable chatModified
       const chatModified = await Chat.findById(idChat);
-
-      console.log("chatModificado", chatModified);
 
       //Validar que el usuario no está registrado ya
       const existingUser = await Chat.findOne({ _id: idChat, user: idUser });
 
-      if (existingUser)
-        return res.status(404).json("El usuario ya existe en el chat");
+      if (existingUser) return res.status(404).json("El usuario ya existe en el chat");
 
       chatModified.user.push(idUser);
 
@@ -221,6 +255,8 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
       const userFound = await User.findById(idUser);
 
       userFound.chat.push(idChat);
+
+      console.log('Usuario con el chat añadido', userFound)
 
       await userFound.save();
 
