@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import { getUserSession } from "../../utils/localStorageUtils";
 import fetchSupreme from "../../utils/apiWrapper";
 
-const socket = io(window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001") 
+const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001") 
 
 /*
 const urlIO = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
@@ -65,7 +65,7 @@ const PublicChat = () => {
     const handlerSubmit = (e) => {
         //Evitamos recargar la página
 
-
+        if(!message)return
         //Enviamos el mensaje sólo si se ha establecido un nickname
         if (nickname !== "") {
             //Limpiamos el mensaje
