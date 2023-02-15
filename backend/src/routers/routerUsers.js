@@ -8,6 +8,7 @@ import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
 import Organizacion from '../Schemas/organizacion.js';
+import { sendMailWelcome } from '../mailgun/index.js';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
@@ -156,6 +157,7 @@ routerUsers.post('/login', async (req, res) => {
                 return res.status(400).json({ error: { password: "Invalid Password" } })
             }
             // * if everything is ok, return the new token and user data
+            sendMailWelcome(foundUser.name, foundUser.email)
             return res.status(200).json({
                 token: foundUser.generateJWT(),
                 user: {
