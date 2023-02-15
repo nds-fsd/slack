@@ -5,8 +5,9 @@ const orgSchema = new Schema({
     OrgName: {type: String, required: true},
     OrgMail: {type: String, required: true},
     OrgDescription: String,
-    user: [{type: Schema.ObjectId, ref: 'User'}],
-    chat: [{type: Schema.ObjectId, ref: 'Chat'}]
+    chat: [{type: Schema.ObjectId, ref: 'Chat'}],
+    user: [{type: Schema.ObjectId, ref: 'User'}]
+    
     //creo que organización no debería tener Chat
 });
 

@@ -5,7 +5,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
   //method: 'GET', 'POST'...
   //body: incluir como objeto si es necesario. Si no, especificar undefined SUPER IMPORTANTE
   //isToken: si es true, quiere decir que va a verificar si tenemos token, si es false, no.
-  //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante
+  //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante. si no hay nada UNDEFINDED
 
   const URL_API =
     window.location.hostname === "skuadlack.netlify.app"
