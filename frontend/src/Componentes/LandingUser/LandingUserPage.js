@@ -69,9 +69,12 @@ export const LandingUserPage = () => {
                             </div>
                             <div className='btncard'>
                                 {viewInvitation !== e._id && <Button onClick={() => setViewInvitation(e._id)} variant="danger">Invitar</Button>}
-                                {viewInvitation === e._id && `Copia este código de invitación ${e._id}`}
-                                {viewInvitation === e._id && <ButtonCopied id={e._id}/>}
-                                {viewInvitation === e._id && <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />}
+                                {viewInvitation === e._id && (
+                                <>
+                                    Copia este código de invitación ${e._id}
+                                    <ButtonCopied id={e._id}/>
+                                    <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />
+                                </>)}
                             </div>
                         </Card.Body>
                     </Card>
