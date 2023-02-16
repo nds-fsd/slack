@@ -110,11 +110,14 @@ routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
     chatModified.user.push(idNewUser);
 
     await chatModified.save();
+
+    /* No tiene sentido al modificar el schema
     const userFound = await User.findById(idUser);
 
     userFound.chat.push(idChat);
 
     await userFound.save();
+    */
 
     res.status(200).json(chatModified);
   } catch (error) {
@@ -135,10 +138,7 @@ routerChat.delete("/deleteChat/:idChat", jwtMiddleware, async (req, res) => {
 });
 
 //Eliminar un usuario del chat
-routerChat.patch(
-  "/deleteUserFromChat/:idChat",
-  jwtMiddleware,
-  async (req, res) => {
+routerChat.patch("/deleteUserFromChat/:idChat", jwtMiddleware, async (req, res) => {
     const idUserToDelete = req.body.user;
     const idChat = req.params.idChat;
 
@@ -155,13 +155,13 @@ routerChat.patch(
       //Buscamos el índice del usuario dentro de la matriz user que está dentro del objeto del schema correspondiente al chat
       const deleteUserIndex = chatFound.user.indexOf(idUserToDelete);
       //Si el indexOf es -1 quiere decir que no encuentra el resultado
-      if (deleteUserIndex === -1)
-        return res.status(404).json("Usuario no encontrado en el chat");
+      if (deleteUserIndex === -1) return res.status(404).json("Usuario no encontrado en el chat");
 
       //Eliminar el usuario en función del índice encontrado. El método splice devuelve el usuario eliminado y altera la matriz que se utiliza el splice
       const deleteUser = chatFound.user.splice(deleteUserIndex, 1);
 
       await chatFound.save();
+      /* No tiene sentido al eliminar chat del schema de usuario
       const deleteChatFromUser = await User.findById(idUser);
 
       const deleteChatIndex = deleteChatFromUser.chat.indexOf(idChat);
@@ -172,6 +172,8 @@ routerChat.patch(
       const deleteChat = deleteChatFromUser.chat.splice(deleteChatIndex, 1);
 
       await deleteChatFromUser.save();
+
+      */
 
       res.status(200).json(chatFound);
     } catch (error) {
@@ -220,6 +222,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
 
       await chatFound.save();
 
+      /* no tiene sentido al eliminar el chat del schema de usuario
       const deleteChatFromUser = await User.findById(idUser);
 
       const deleteChatIndex = deleteChatFromUser.chat.indexOf(idChat);
@@ -230,7 +233,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
       const deleteChat = deleteChatFromUser.chat.splice(deleteChatIndex, 1);
 
       await deleteChatFromUser.save();
-
+      */
 
       res.status(200).json(chatFound);
     } catch (error) {
@@ -252,6 +255,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
       chatModified.user.push(idUser);
 
       await chatModified.save();
+      /* No tiene sentido al eliminar el schema de chat de usuario
       const userFound = await User.findById(idUser);
 
       userFound.chat.push(idChat);
@@ -259,6 +263,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
       console.log('Usuario con el chat añadido', userFound)
 
       await userFound.save();
+      */
 
       res.status(200).json(chatModified);
     } catch (error) {

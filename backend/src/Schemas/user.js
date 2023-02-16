@@ -11,8 +11,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, required: true, unique: true, trim: true, match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i },
   lastName: { type: String, required: true },
   password: { type: String, required: true, required: true, unique: true, trim: true },
-  organizacion: [{type: Schema.ObjectId, ref: 'Organizacion'}],
-  chat: [{type: Schema.ObjectId, ref: 'Chat'}]
+  
 });
 
 userSchema.pre('save', function (next) {

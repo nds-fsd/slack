@@ -63,10 +63,12 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
       //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
       await organizacion.save();
 
+      /* No tiene sentido al cambiar el schema de usuario
       user.organizacion.push(organizacion._id)
       
       //Necesario guardar de nuevo al existir cambios en el schema
       await user.save();
+      */
       
       res.status(201).json(organizacion);
     } catch(error) {
@@ -84,10 +86,11 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id
     try{
-    const organizacion = await Organizacion.findById(id).populate({
+    const organizacion = await Organizacion.findById(id) /* no tiene sentido al cambiar el schema de usuario.populate({
       path:'user',
       populate:{path:'chat'}
     })
+    */
     if (organizacion){
         res.status(200).json(organizacion)
     }else{
