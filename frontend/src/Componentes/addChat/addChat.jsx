@@ -42,7 +42,7 @@ const AddChat = () => {
        
        {userChats && userChats.map((e)=>{
 
-           return (<ListGroup.Item key={e._id + 'keyId'}>{e._id}</ListGroup.Item>)
+           return (<ListGroup.Item key={e.user + 'keyId'}>{e.user}</ListGroup.Item>)
 
       })}
        

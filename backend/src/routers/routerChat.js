@@ -274,7 +274,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
   }
 });
 
-routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
+routerChat.get("/userChatsId", jwtMiddleware, async (req, res) => {
 
   //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
 
@@ -283,7 +283,8 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
   
   try {
     const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
-    //console.log('AllChats', allChats)
+    console.log('AllChats', allChats)
+    
     res.status(200).json(allChats);
 
    
@@ -302,6 +303,43 @@ routerChat.get("/userChatsBody", jwtMiddleware, async (req, res) => {
   try {
     const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
     //console.log('allChats', allChats)
+    res.status(200).json(allChats);
+
+   
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
+
+  //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
+
+    const idOrganizacion = req.query.idOrganizacion
+    const idUser = req.query.idUser
+  
+  try {
+    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
+    //console.log('AllChats', allChats)
+
+    const allUser = allChats.map(chat=>chat.user)
+    //console.log(allUser)
+
+    const getUserName = async(idUser)=>{
+      const user = await User.findById(idUser)
+      //console.log('user',user)
+      return user.userName
+
+    }
+
+    const arrayUserName = allUser.map((e)=>{
+      console.log('elemento',e)
+      console.log('resultado',forEach(getUserName(e)))
+
+    })
+
+
+    
     res.status(200).json(allChats);
 
    
