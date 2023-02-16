@@ -29,13 +29,12 @@ describe('user router TEST', () => {
                 password: '1234'
 
             });
-            const user = res.body.userCreated;
+            const user = res.body.resUser;
             expect(res.status).toBe(201);
             expect(user.userName).toBe('user test');
             expect(user.name).toBe('name test');
             expect(user.email).toBe('test@test.es');
             expect(user.lastName).toBe('lastest');
-            expect(user.password).not.toBe(undefined)
             expect(user._id).not.toBe(undefined);
         });
     });

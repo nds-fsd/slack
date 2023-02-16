@@ -41,7 +41,7 @@ if(process.env.NODE_ENV !== 'test'){
     port = process.env.TEST_PORT
 }
 
-const server = app.listen(port, () => {
+export const server = app.listen(port, () => {
 let port = process.env.PORT ?? 8080;
 
 if(process.env.NODE_ENV !== 'test'){
