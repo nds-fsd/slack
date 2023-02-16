@@ -280,13 +280,28 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
 
     const idOrganizacion = req.query.idOrganizacion
     const idUser = req.query.idUser
-
-    console.log('idOrganizacion', idOrganizacion)
-    console.log('idUser', idUser)
   
   try {
-    const allChats = await Chat.find({organizacion:idOrganizacion, user: [idUser]})
-    console.log('AllChats', allChats)
+    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
+    //console.log('AllChats', allChats)
+    res.status(200).json(allChats);
+
+   
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+routerChat.get("/userChatsBody", jwtMiddleware, async (req, res) => {
+
+  //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
+
+    const idOrganizacion = req.body.idOrganizacion
+    const idUser = req.body.idUser
+  
+  try {
+    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
+    //console.log('allChats', allChats)
     res.status(200).json(allChats);
 
    

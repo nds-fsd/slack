@@ -13,24 +13,40 @@ const AddChat = () => {
   const idOrganizacion =params.id
   const idUser = getUserSession().id
 
+  console.log('idUser', idUser)
+  console.log('idOrganizacion',idOrganizacion)
 
+  const body ={
+    idUser:idUser,
+    idOrganizacion: idOrganizacion
+  }
+  console.log('string query', `idOrganizacion=${idOrganizacion}&idUser=${idUser}`)
 
 //Cogemos todos los chats del usuario de la ruta definida para ese propósito
   useEffect(() => {
-    fetchSupreme(`/userChats?`, "GET", undefined, true, `idOrganizacion="${idOrganizacion}"&idUser="${idUser}"`)
+    fetchSupreme("/userChats", "GET", undefined, true, `idOrganizacion=${idOrganizacion}&idUser=${idUser}`)
     .then((res) => {
+      console.log('response',res)
     setUserChats(res)
  
     });
   }, []);
 
-  console.log(userChats)
+  console.log('userChats',userChats)
 
   return (
  
     <div className={styles.contenedorChats}>
 
-      
+      <ListGroup>
+       
+       {userChats && userChats.map((e)=>{
+
+           return (<ListGroup.Item key={e._id + 'keyId'}>{e._id}</ListGroup.Item>)
+
+      })}
+       
+      </ListGroup>
         
 
     

@@ -16,7 +16,8 @@ const fetchSupreme = (path, method, body, isToken, query) => {
 
   const authorization = isToken && `Bearer ${getUserToken()}`;
 
-  const queryParams = query && JSON.stringify(query);
+  //const queryParams = query && JSON.stringify(query); --> si pongo esto no funciona el queryParams... no sé por qué
+  const queryParams = query
 
   if (queryParams) {
     URL = `${URL}?${queryParams}`;

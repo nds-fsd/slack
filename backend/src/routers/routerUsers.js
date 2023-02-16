@@ -11,7 +11,7 @@ import Organizacion from '../Schemas/organizacion.js';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
-        const allUsers = await User.find().populate('organizacion');
+        const allUsers = await User.find()//no tiene sentido con el nuevo schema de User .populate('organizacion');
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json(error)
