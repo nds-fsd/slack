@@ -22,8 +22,7 @@ const data = {
 };
 mg.messages().send(data, function (error, body) {
 	
-	console.log('body', body);
-    console.log('error', error)
+	
 
 });
 }; 
