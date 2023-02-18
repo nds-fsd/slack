@@ -43,14 +43,14 @@ const ListChat = () => {
   }, []);
 
   const obtenerValor = (item) => {
-
     
     const elemento = userNames.find(e => e === item);
     const indexId = userNames.findIndex(e => e === item);
 
-    console.log('indexId', indexId)
-    console.log('chat id alert')
-    console.log('prueba', chatIds[indexId])
+    //console.log('indexId', indexId)
+    //console.log('chat id alert')
+    //console.log('prueba', chatIds[indexId])
+
     return alert(`Estás haciendo click en ${elemento} y idChat ${chatIds[indexId]}`);
   };
 
@@ -95,16 +95,3 @@ const ListChat = () => {
 };
 
 export default ListChat;
-
-/*
-
-      <ListGroup>
-       
-            {arrayOrgData && arrayOrgData.map((e)=>(
-    
-                <ListGroup.Item key={e._id + 'keyId'}>{e}</ListGroup.Item>
-
-            ))}
-            
-      </ListGroup>
-    */

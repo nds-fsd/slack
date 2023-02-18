@@ -72,6 +72,8 @@ const ListUsersBootstrap = () => {
         }
     }, [refresh])
 
+    //console.log('lista usuarios', list)
+
     return (
         <div className={styles.listadoTablaBootstrap}>
             <Table className={styles.tablaDark} size="sm" bordered hover variant="dark">

@@ -8,18 +8,20 @@ import { Link, useParams } from 'react-router-dom';
 import { getUserToken } from '../../utils/localStorageUtils';
 import fetchSupreme from '../../utils/apiWrapper';
 import ModalRollOrg from '../Modal/modalRollOrg/modalRollOrg';
+import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
 
 
 export const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
+    const [organizacion, setOrganizacion]= useState([""]);
     const [viewInvitation, setViewInvitation] = useState(null)
     const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
-        fetchSupreme(`/user/${params.id}`, 'GET', undefined, true, undefined)
-
-            /*
+        fetchSupreme(`/userOrg/${params.id}`, 'GET', undefined, true, undefined)  
+            
+        /*
             const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
             fetch(`${URL_API}/user/` + params.id,
                 {
@@ -31,13 +33,15 @@ export const LandingUserPage = () => {
                 .then((res) => {
                     return res.json();
                 })
-            */
+        */
 
             .then((res) => {
-                setUser(res);
+                setUser(res.user);
+                setOrganizacion(res.organizacion);
             });
     }, [refresh]);
 
+    
     return (
         <LUPstyle>
 
@@ -50,15 +54,17 @@ export const LandingUserPage = () => {
             </div>
 
             <div>
-                {user.organizacion && user.organizacion.map((e) => (
-
+                {organizacion && organizacion.map((e) => (
+                    
                     <Card className='cardstyle' border="dark">
                         <Card.Header as="h5" className='cardhead'><span className='rojo'>Organizaciones SkuadLack</span> de {user.email}</Card.Header>
                         <Card.Body>
                             <div className='cardtext'>
                                 <Card.Text>
-                                    <h3>{e.OrgName}</h3>
+                                    <h3 >{e.OrgName}</h3>
+                                    
                                     <p>{e.OrgDescription}</p>
+                                    
                                 </Card.Text>
 
                             </div>
