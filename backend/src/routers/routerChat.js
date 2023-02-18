@@ -319,28 +319,25 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
     const idUser = req.query.idUser
   
   try {
-    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
+    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser}).populate('user')
     //console.log('AllChats', allChats)
 
-    const allUser = allChats.map(chat=>chat.user)
-    //console.log(allUser)
+    //me traigo del objeto de chats, solo los usuarios
+    const allUsers = allChats.map(chat=>chat.user)
 
-    const getUserName = async(idUser)=>{
-      const user = await User.findById(idUser)
-      //console.log('user',user)
-      return user.userName
-
-    }
-
-    const arrayUserName = allUser.map((e)=>{
-      console.log('elemento',e)
-      console.log('resultado',forEach(getUserName(e)))
-
-    })
-
+    //allUsers es un array con tantos subArrays como usuarios existan en cada chat
+    //lo peculiar es que si es un chat de 1 solo, es un objeto de 1 usuario
+    //pero si tiene varios usuarios, crea un array con tantos arrays como usuarios existan
+    //por eso es necesario validar si existe un array o directamente es un chat con solo 1 usuario
+    
+    const allUserNames = allUsers.map(user => {
+      if (Array.isArray(user)) return user.map(u => u.userName);
+      return user.name
+  })
+    
 
     
-    res.status(200).json(allChats);
+    res.status(200).json(allUserNames);
 
    
   } catch (error) {
