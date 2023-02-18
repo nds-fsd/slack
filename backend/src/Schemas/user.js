@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 
 const userSchema = new Schema({
-  userName: { type: String, required: true },
+  userName: { type: String, required: true, unique:true },
   name: { type: String, required: true },
   email: { type: String, required: true, required: true, unique: true, trim: true, match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i },
   lastName: { type: String, required: true },
