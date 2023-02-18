@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { MdWavingHand, MdSettings } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
-import { getUserToken } from '../../utils/localStorageUtils';
 import fetchSupreme from '../../utils/apiWrapper';
 import ModalRollOrg from '../Modal/modalRollOrg/modalRollOrg';
+import { ButtonCopied } from '../buttonCopied/buttonCopy';
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
+
 
 
 export const LandingUserPage = () => {
@@ -17,6 +18,7 @@ export const LandingUserPage = () => {
     const [organizacion, setOrganizacion]= useState([""]);
     const [viewInvitation, setViewInvitation] = useState(null)
     const [refresh, setRefresh] = useState(false)
+
 
     useEffect(() => {
         fetchSupreme(`/userOrg/${params.id}`, 'GET', undefined, true, undefined)  
@@ -74,9 +76,12 @@ export const LandingUserPage = () => {
                             </div>
                             <div className='btncard'>
                                 {viewInvitation !== e._id && <Button onClick={() => setViewInvitation(e._id)} variant="danger">Invitar</Button>}
-                                {viewInvitation === e._id && `Copia este código de invitación 
-                                ${e._id}`}
-                                {viewInvitation === e._id && <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />}
+                                {viewInvitation === e._id && (
+                                <>
+                                    Copia este código de invitación ${e._id}
+                                    <ButtonCopied id={e._id}/>
+                                    <CloseButton aria-label="Hide" onClick={() => setViewInvitation(null)} variant="danger" />
+                                </>)}
                             </div>
                         </Card.Body>
                     </Card>
@@ -189,5 +194,9 @@ background-color: #242A38 ;
 } 
 .buttonChat{
     margin-left:1rem
-}   
+} 
+.save{
+    border:none;
+    margin-right: 2rem
+}  
 `
