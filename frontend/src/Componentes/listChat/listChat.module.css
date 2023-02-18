@@ -1,0 +1,18 @@
+.chatContainer{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    
+}
+
+.listChats{
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    
+  
+}
+
+.elementChat{
+    
+}

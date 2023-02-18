@@ -293,24 +293,6 @@ routerChat.get("/userChatsId", jwtMiddleware, async (req, res) => {
   }
 });
 
-routerChat.get("/userChatsBody", jwtMiddleware, async (req, res) => {
-
-  //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
-
-    const idOrganizacion = req.body.idOrganizacion
-    const idUser = req.body.idUser
-  
-  try {
-    const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
-    //console.log('allChats', allChats)
-    res.status(200).json(allChats);
-
-   
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
 routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
 
   //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
@@ -329,12 +311,16 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
     //lo peculiar es que si es un chat de 1 solo, es un objeto de 1 usuario
     //pero si tiene varios usuarios, crea un array con tantos arrays como usuarios existan
     //por eso es necesario validar si existe un array o directamente es un chat con solo 1 usuario
-
+    
+    /*
     const allUserNames = allUsers.map(user => {
       if (Array.isArray(user)) return user.map(u => u.userName);
       return user.name
   })
-    
+  */
+  //es lo mismo que lo que está anteriormente comentado pero en una sola línea
+  const allUserNames = allUsers.map(user => Array.isArray(user) ? user.map(u => u.name) : user.name);
+
     res.status(200).json(allUserNames);
 
    
