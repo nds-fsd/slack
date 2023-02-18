@@ -302,7 +302,7 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
   
   try {
     const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser}).populate('user')
-    //console.log('AllChats', allChats)
+    console.log('AllChats', allChats)
 
     //me traigo del objeto de chats, solo los usuarios
     const allUsers = allChats.map(chat=>chat.user)

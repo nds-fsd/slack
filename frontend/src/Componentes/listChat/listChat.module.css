@@ -5,10 +5,12 @@
     
 }
 
-.listChats{
+.listGroup{
     display: flex;
     flex-wrap: wrap;
     position: absolute;
+    width: 97%;
+  
     
   
 }

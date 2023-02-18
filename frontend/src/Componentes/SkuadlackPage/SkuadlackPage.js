@@ -141,9 +141,13 @@ const PageStyle = styled.div `
       background-color: #202430;
       display:flex;
       flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      justify-items:center;
+      align-items:start;
+      justify-content:start;
+      justify-items:start;
+      overflow:scroll;
+      flex-wrap:wrap;
+      position: relative;
+      
 
 
     }
