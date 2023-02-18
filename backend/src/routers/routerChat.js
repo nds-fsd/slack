@@ -306,6 +306,8 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
 
     //me traigo del objeto de chats, solo los usuarios
     const allUsers = allChats.map(chat=>chat.user)
+    const chatIds =allChats.map(chat=>chat._id)
+    console.log('chatIds',chatIds)
 
     //allUsers es un array con tantos subArrays como usuarios existan en cada chat
     //lo peculiar es que si es un chat de 1 solo, es un objeto de 1 usuario
@@ -321,7 +323,13 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
   //es lo mismo que lo que está anteriormente comentado pero en una sola línea
   const allUserNames = allUsers.map(user => Array.isArray(user) ? user.map(u => u.name) : user.name);
 
-    res.status(200).json(allUserNames);
+  const response = {
+    users:allUserNames,
+    chats:allChats,
+    chatIds:chatIds
+  }
+
+    res.status(200).json(response);
 
    
   } catch (error) {
