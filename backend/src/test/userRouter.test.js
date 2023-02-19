@@ -9,8 +9,8 @@ const { connectDB, disconnectDB } = require('../Mongo');
 describe('user router TEST', () => {
     beforeAll(async () => {
         const connectionError = await connectDB();
-        if (!connectionError) console.log('🏢 Connected to database!');
-        else console.log(connectionError);
+        
+        console.log('¿ConnectionError?',connectionError);
     });
     afterAll(async () => {
         await disconnectDB();
@@ -75,5 +75,41 @@ describe('user router TEST', () => {
             expect(res.body._id).not.toBe(undefined);
         });
     });
+    let idOrg
+    describe('POST /organizacion', () => {
+        it('can create organizacion', async () => {
+            const res = await fakeRequest
+            .post('/organizacion')
+            .send({
+                OrgName: 'organizacion test',
+                OrgMail: 'orgTest@test.es',
+                OrgDescription: 'description test'
+            })
+            .set('Authorization', `Bearer ${token}`);
+
+            
+            expect(res.body.OrgName).toBe('organizacion test');
+            expect(res.body.OrgMail).toBe('orgTest@test.es');
+            expect(res.body.OrgDescription).toBe('description test');
+            expect(res.body._id).not.toBe(undefined);
+            idOrg= res.body._id;
+        })
+    })
+
+    describe('GET /organizacion/:id', ()=>{
+        it('can view organizacion', async () => {
+            const res = await fakeRequest
+            .get(`/organizacion/${idOrg}`)
+            .set('Authorization', `Bearer ${token}`);
+
+            expect(res.body.OrgName).toBe('organizacion test');
+            expect(res.body.OrgMail).toBe('orgTest@test.es');
+            expect(res.body.OrgDescription).toBe('description test');
+            expect(res.body._id).toBe(idOrg);
+        })
+  
+    })
+
+
 });
 

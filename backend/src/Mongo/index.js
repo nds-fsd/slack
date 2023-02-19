@@ -11,6 +11,7 @@ export const connectDB = async() => {
     if (process.env.NODE_ENV === 'test') {
         mongod = await MongoMemoryServer.create();
         dbUrl = mongod.getUri();
+        console.log('Creo un Mongo en Memoria')
     }
   
     mongoose.set("strictQuery", false);
