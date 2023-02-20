@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import fetchSupreme from "../../utils/apiWrapper";
+import fetchSupreme from "../../../utils/apiWrapper";
 import styles from "./listChat.module.css";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
-import { getUserSession } from "../../utils/localStorageUtils";
+import { getUserSession } from "../../../utils/localStorageUtils";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
 

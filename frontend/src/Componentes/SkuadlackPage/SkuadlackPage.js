@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ListChat from '../listChat/listChat'
+import ListChat from '../Chat/listChat/listChat'
 
 import { Search } from './Componets/BarraSuperior/search'
 
