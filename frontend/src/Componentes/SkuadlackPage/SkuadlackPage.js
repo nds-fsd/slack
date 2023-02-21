@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { SkuadLackContextProvider, useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 
 import { Search } from './Componets/BarraSuperior/search'
+import CircleAvatar from './Componets/circleAvatarOrganizacion/circleAvatar'
 
 
 export const SkuadlackPage = () => {
+const  {user, organizacionActual, myOrganizaciones} = useSkuadLackContext()
+const navigate = useNavigate()
   return (
+    
     <PageStyle>
     <div className='barrasuperior'>
-      <div>nombre org</div>
+      <div>{organizacionActual.OrgName}</div>
       <div><Search/></div>
       <div>fotoPerfil</div>
 
@@ -19,12 +25,17 @@ export const SkuadlackPage = () => {
 
         <div className='box1'>
           <div className='AddOrg'>+</div>
-          <div className='Org'>Organizaciones</div>
+          {myOrganizaciones && myOrganizaciones.map((e)=>(
+          <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
+          ))}
           <div className='AddOrg'>+</div>
         </div>
 
         <div className='box2'>
-          <div className='chatbox'>infOrg</div>
+          <div className='chatbox'>
+            <h4>{organizacionActual.OrgName}</h4>
+            <h4>{organizacionActual.OrgDescription}</h4>
+          </div>
           <div className='chatbox'>canales </div>
           <div className='chatbox'>
            <ListChat/>
