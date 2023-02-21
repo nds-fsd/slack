@@ -96,13 +96,11 @@ export const SkuadlackPage = () => {
       </div>
 
 
-
-    <div className="box2">
-        
-          <div>
-            OrgName
-          </div>
-      </div> 
+      <div className='box2'>
+          <div className='chatbox'>infOrg</div>
+          <div className='chatbox'>canales </div>
+          <div className='chatbox'>chats</div>
+      </div>
 
       <div className="box3">
         <div className="barraSuperiorChat">
