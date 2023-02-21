@@ -30,6 +30,7 @@ export const SupremeSocket = () => {
             server:'public'
         })
 
+
 // Manejamos el evento "chat", que se dispara cuando un usuario envía un mensaje
 
         socket.on('chat', (data)=>{

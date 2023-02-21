@@ -12,14 +12,22 @@ const socket = io('http://localhost:8081',{
 export const SkuadlackPage = () => {
   let userId = getUserSession()
   userId = userId.id
+  console.log(userId)
   // const [socket, setSocket] = useState(null);
   const [room, setRoom] = useState('');
+  const [user, setUser] = useState('')
   const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
   const {register, handleSubmit, reset} = useForm()
-  const {data} = fetchSupreme(`/user/${userId}`, 'GET', undefined, true)
 
+  useEffect(() => {
+      fetchSupreme(`/user/${userId}`, 'GET', undefined, true, undefined)
+      .then((res) => {
+                setUser(res);
+      });
+  },[userId])
 
+  console.log(user.organizacion) ///
   // useEffect(() => {
   //   const newSocket = io('http://localhost:8081');
   //   setSocket(newSocket);
@@ -31,9 +39,9 @@ export const SkuadlackPage = () => {
       setRoom(room)
       console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
-    socket.on('usuario Conectado', mensajeBienvenida)
+    socket.on('userConect', mensajeBienvenida)
     return()=> {
-      socket.off('usuario Conectado', mensajeBienvenida)
+      socket.off('userConect', mensajeBienvenida)
     }
   }, [room])
 
@@ -56,20 +64,20 @@ export const SkuadlackPage = () => {
     reset()
   }
 
-  const handleOrganizacion = (e) => {
-    e.preventDefault()
-    data.organizacion.map((org) => {
-      if(org._id === e.target.value) {
-        setRoom(org.OrgName)
-        console.log(org)
-        setRoomInfo(org)
-        socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
-        setMessage([])
-      }
-      reset()
-      return null
-      })
-  }
+  // const handleOrganizacion = (e) => {
+  //   e.preventDefault()
+  //   user.organizacion.map((org) => {
+  //     if(org._id === e.target.value) {
+  //       setRoom(org.OrgName)
+  //       console.log(org)
+  //       setRoomInfo(org)
+  //       socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
+  //       setMessage([])
+  //     }
+  //     reset()
+  //     return null
+  //     })
+  // }
 
   return (
     <PageStyle>
@@ -87,13 +95,14 @@ export const SkuadlackPage = () => {
         <div className="AddOrg">+</div>
       </div>
 
-      <div className="box2">
-        {data.organizacion.map((org) => (
-          <div key={org._id} onClick={(e) => handleOrganizacion(e)} value={org._id}>
-            {org.OrgName}
+
+
+    <div className="box2">
+        
+          <div>
+            OrgName
           </div>
-        ))}
-      </div>
+      </div> 
 
       <div className="box3">
         <div className="barraSuperiorChat">
