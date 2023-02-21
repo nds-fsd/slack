@@ -7,6 +7,7 @@ import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import { getUserSession } from "../../utils/localStorageUtils";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
+import { useSkuadLackContext } from "../../contexts/skuadLack-context";
 
 const ListChat = () => {
   const [userNames, setUserNames] = useState([]);
@@ -20,27 +21,27 @@ const ListChat = () => {
   //console.log('userSession',getUserSession())
 
   //Cogemos todos los chats del usuario de la ruta definida para ese propósito
-  useEffect(() => {
-    fetchSupreme(
-      "/userChats",
-      "GET",
-      undefined,
-      true,
-      `idOrganizacion=${idOrganizacion}&idUser=${idUser}`
-    ).then((res) => {
-      //console.log('response',res)
-      setUserNames(res.users);
-      setChats(res.chats)
-      setChatIds(res.chatIds)
-    });
-    //En el UserSession no tengo mi userName, por lo que realizo otra llamada para obtener mis datos de usuario
-    fetchSupreme(`/user/${idUser}`, "GET", undefined, true, undefined).then(
-      (res) => {
-        setUserNameActual(res.userName);
-        //console.log('userNameActual',userNameActual)
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   fetchSupreme(
+  //     "/userChats",
+  //     "GET",
+  //     undefined,
+  //     true,
+  //     `idOrganizacion=${idOrganizacion}&idUser=${idUser}`
+  //   ).then((res) => {
+  //     //console.log('response',res)
+  //     setUserNames(res.users);
+  //     setChats(res.chats)
+  //     setChatIds(res.chatIds)
+  //   });
+  //   //En el UserSession no tengo mi userName, por lo que realizo otra llamada para obtener mis datos de usuario
+  //   fetchSupreme(`/user/${idUser}`, "GET", undefined, true, undefined).then(
+  //     (res) => {
+  //       setUserNameActual(res.userName);
+  //       //console.log('userNameActual',userNameActual)
+  //     }
+  //   );
+  // }, []);
 
   const obtenerValor = (item) => {
     
