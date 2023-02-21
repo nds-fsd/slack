@@ -18,6 +18,7 @@ import { LandingUserPage } from './Componentes/LandingUser/LandingUserPage';
 import { SkuadlackPage } from './Componentes/SkuadlackPage/SkuadlackPage';
 import AboutUs from './Componentes/AboutUs/AboutUs';
 import PublicChat from './Componentes/public-chat/public-chat';
+import { SkuadLackContextProvider } from './contexts/skuadLack-context';
 
 
 
@@ -42,7 +43,11 @@ function App() {
             <Route path="/user/:id" element={<EditUser />}>  </Route>
             <Route path="/LUP/:id" element={<LandingUserPage />} />
             <Route path="/users" element={<ListUserBootstrap />}></Route>
-            <Route path="/skuadlack/:id" element={<SkuadlackPage />}>  </Route>
+            <Route path="/skuadlack/:id" element={
+            <SkuadLackContextProvider>
+            <SkuadlackPage />
+            </SkuadLackContextProvider>
+            }>  </Route>
             <Route path="/publicChat" element={<PublicChat />}>  </Route>
 
           </Route>
