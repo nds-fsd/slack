@@ -1,12 +1,10 @@
-import express from 'express';
-import { createServer } from "http";
 import { Server } from 'socket.io';
-const app = express();
-const server = createServer(app);
+import {server} from '../index.js'
+
 
 // Creamos el servidor de socket
 
-export const SupremeSocket = () => {
+export const SupremeSocket = (server) => {
     const io = new Server(server, {
         cors: {
             origin: "*",
@@ -62,7 +60,5 @@ export const SupremeSocket = () => {
         console.log('usuario desconectado');
     })
 
-    server.listen(8081, () => {
-        console.log('socket on en 8081!');
-    })
+   
 };

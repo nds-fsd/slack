@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 import { Button } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:8081", {
+const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:3001", {
   reconnection: false
 });
 ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
@@ -60,7 +60,7 @@ export const SkuadlackPage = () => {
     reset()
   }
 
-
+console.log(message)
   return (
     <PageStyle>
       <div className='barrasuperior'>

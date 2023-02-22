@@ -25,7 +25,7 @@ app.use(routerOrg);
 app.use(routerChat);
 app.use(routerMessages);
 app.use(routerPublicMessage);
-SupremeSocket();
+// SupremeSocket();
 
 let port = process.env.PORT ?? 8080;
 
@@ -64,6 +64,6 @@ const server = app.listen(port, () => {
 */
 
 export const socketIoPublic = configurePublicSocket(server);
-
+export const socketIoPrivate = SupremeSocket(server)
 
 
