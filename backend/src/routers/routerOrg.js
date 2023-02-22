@@ -57,31 +57,40 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
 
       //Fundamental el await!!!
       const user = await User.findById(idUser)
-
-      console.log('userSchema', user)
+      
       organizacion.user.push(idUser);
       
-      console.log('user',user)
-      console.log('organizacion',organizacion)
-
       //Primero guardar el organización para posteriormente mediante el _id poder relacionar el usuario
       await organizacion.save();
 
+      /* No tiene sentido al cambiar el schema de usuario
       user.organizacion.push(organizacion._id)
       
       //Necesario guardar de nuevo al existir cambios en el schema
       await user.save();
+      */
       
       res.status(201).json(organizacion);
     } catch(error) {
       res.status(400).send(error.message);
     }
   });
+
+  /*
+   const messageFound = await Messages.findById(req.params.id).populate({//populamos la key user del schema message y user tambien tiene informacion que popular
+    path: 'user',
+    populate: { path: 'organizacion' }                                 //2do populate de organizacion que esta dentro de la key user 
+  })
+  */
   
 routerOrg.get('/organizacion/:id', async (req,res)=>{
     const id = req.params.id
     try{
-    const organizacion = await Organizacion.findById(id).populate('user')
+    const organizacion = await Organizacion.findById(id) /* no tiene sentido al cambiar el schema de usuario.populate({
+      path:'user',
+      populate:{path:'chat'}
+    })
+    */
     if (organizacion){
         res.status(200).json(organizacion)
     }else{

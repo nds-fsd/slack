@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import ListChat from '../listChat/listChat'
+
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
 import { getUserSession } from '../../utils/localStorageUtils';
@@ -8,6 +10,7 @@ import fetchSupreme from '../../utils/apiWrapper';
 const socket = io('http://localhost:8081',{
   reconnection: false
 })
+
 
 export const SkuadlackPage = () => {
   let userId = getUserSession()
@@ -99,7 +102,9 @@ export const SkuadlackPage = () => {
       <div className='box2'>
           <div className='chatbox'>infOrg</div>
           <div className='chatbox'>canales </div>
-          <div className='chatbox'>chats</div>
+          <div className='chatbox'>
+           <ListChat/>
+          </div>
       </div>
 
       <div className="box3">
@@ -216,6 +221,15 @@ const PageStyle = styled.div `
       height: 32%;
       border-radius: 10px;
       background-color: #202430;
+      display:flex;
+      flex-direction:column;
+      align-items:start;
+      justify-content:start;
+      justify-items:start;
+      overflow:scroll;
+      flex-wrap:wrap;
+      position: relative;
+      
 
 
     }
