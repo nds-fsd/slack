@@ -81,11 +81,11 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-
+  console.log('quiero saber nombre org y sale...', roomInfo);
   return (
     <PageStyle>
       <div className='barrasuperior'>
-        <div>{roomInfo.OrgName}</div>
+        <div>{user.organizacion}</div>
         <div><Search/></div>
         <div>fotoPerfil</div>
       </div>
