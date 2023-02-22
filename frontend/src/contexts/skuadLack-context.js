@@ -56,7 +56,8 @@ export const SkuadLackContextProvider = (props) => {
         chats,
         userNames,
         chatIds,
-        organizacionActual
+        organizacionActual,
+        idOrganizacionActual
     };
 
     return (

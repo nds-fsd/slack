@@ -30,18 +30,16 @@ export const SupremeSocket = () => {
             room:'public'
         })
 
-
+        
 // Manejamos el evento "chat", que se dispara cuando un usuario envía un mensaje
 
         socket.on('chat', (data)=>{
                 console.log('eto e un DATA',data);
                 // Enviamos el mensaje a todos los sockets que estén en la misma sala (room)
 
-            socket.to(data.roomId).emit('reply',{
-                from: socket.id,
+            socket.to(data.room).emit('reply',{
+                from: data.from,
                 message: data.message,
-                room: data.room,
-                roomId: data.roomId
             
             })
         })
@@ -49,11 +47,9 @@ export const SupremeSocket = () => {
 // Manejamos el evento "joinRoom", que se dispara cuando un usuario se une a una sala
 
         socket.on('joinRoom',(data)=>{
-             // El usuario sale de la sala anterior
-            socket.leave(data.previousRoom)
-            console.log(`Usuario id: ${socket.id} en la room: ${data.room}`)
-            // El usuario se une a la nueva sala
-            socket.join(data.room)
+            console.log('joinroom data', data);
+            socket.join(data)
+
         })
     })
 

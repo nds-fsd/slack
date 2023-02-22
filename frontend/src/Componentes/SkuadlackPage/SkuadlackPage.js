@@ -3,46 +3,47 @@ import styled from 'styled-components'
 import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
-import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 import io from 'socket.io-client';
-import { getUserSession } from '../../utils/localStorageUtils';
 import {useForm} from 'react-hook-form'
-import fetchSupreme from '../../utils/apiWrapper';
+import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 const socket = io('http://localhost:8081',{
   reconnection: false
-})
+});
+  ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
 
-
-
-
-export const SkuadlackPage = () => {
-  
-  
-  console.log(userId)
-  // const [socket, setSocket] = useState(null);
-  const [room, setRoom] = useState('');
-  const [user, setUser] = useState('')
-  const [roomInfo, setRoomInfo] = useState([]);
-  const [message, setMessage] = useState([]);
-  const {register, handleSubmit, reset} = useForm()
-
-  useEffect(() => {
-      fetchSupreme(`/user/${userId}`, 'GET', undefined, true, undefined)
-      .then((res) => {
-                setUser(res);
-      });
-  },[userId])
-
-  console.log(user.organizacion) ///
   // useEffect(() => {
   //   const newSocket = io('http://localhost:8081');
   //   setSocket(newSocket);
   //   return () => newSocket.close();
   // }, []);
 
+
+export const SkuadlackPage = () => {
+  //lineasjorge
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
+
+
+  //lineasDani
+  console.log(idUser)
+  // const [socket, setSocket] = useState(null);
+  //const [room, setRoom] = useState('');
+  const room = idOrganizacionActual
+  //const [roomInfo, setRoomInfo] = useState([]);
+  const [message, setMessage] = useState([]);
+  const {register, handleSubmit, reset} = useForm()
+
+
+
+  console.log(user.organizacion)
+
+  useEffect(()=>{
+   socket.emit('joinRoom', idOrganizacionActual)
+   //setRoom(organizacionActual)
+  },[idOrganizacionActual])
   useEffect(() =>{
-    const mensajeBienvenida = ({from, message, room }) =>{
-      setRoom(room)
+    const mensajeBienvenida = ({from, message, sala }) =>{
+      sala=room
+//      setRoom(room)
       console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
     socket.on('userConect', mensajeBienvenida)
@@ -53,7 +54,7 @@ export const SkuadlackPage = () => {
 
   useEffect(()=>{
     const InfoDelSocket = (data) =>{
-      setRoom(data.roomId)
+  //    setRoom(data.roomId)
       console.log('respuesta del BE', data)
       setMessage([...message, {dataMessage: data.message, from: data.from}])
     }
@@ -65,7 +66,7 @@ export const SkuadlackPage = () => {
 
   const onSubmit = (data) =>{
     console.log('Data Onsubmit: ', data)
-    socket.emit('chat', {message: data.message, room: room, roomId:roomInfo._id})
+    socket.emit('chat', {message: data.message, room: room, from: user.userName})
     setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
     reset()
   }
@@ -84,7 +85,8 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', user);
+  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
+
   return (
     <PageStyle>
       <div className='barrasuperior'>
@@ -117,7 +119,7 @@ export const SkuadlackPage = () => {
 
       <div className="box3">
         <div className="barraSuperiorChat">
-          <div>nombre canal/user(s) con el que hablas</div>
+          <div>{idOrganizacionActual}</div>
             <div>opciones </div>
           </div>
   

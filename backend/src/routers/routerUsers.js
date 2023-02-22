@@ -105,7 +105,7 @@ routerUsers.post('/user/enrollOrganization', async (req, res) => {
         if (organizacion.user.includes(idUser)) return res.status(400).json({ message: ' ya estas en la organizacion' })
         organizacion.user.push(idUser)
         await organizacion.save()
-        res.status(201).json(organizacion)
+        res.status(201).json({organizacion})
 
         /*
             Esto deberia devolvernos algo parecido a 
