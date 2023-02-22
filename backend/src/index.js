@@ -8,7 +8,6 @@ import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { configurePublicSocket } from './socket/index.js';
-import { Server } from 'socket.io';
 import { SupremeSocket } from './socket/SupremeSocket.js';
 
 

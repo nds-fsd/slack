@@ -1,97 +1,74 @@
 import React, { useEffect, useState } from 'react'
+import Nav from "react-bootstrap/Nav";
 import styled from 'styled-components'
 import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import CircleAvatar from './Componets/circleAvatar/circleAvatar'
-const socket = io('http://localhost:8081',{
+import { Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:8081", {
   reconnection: false
 });
-  ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
+///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
 
-  // useEffect(() => {
-  //   const newSocket = io('http://localhost:8081');
-  //   setSocket(newSocket);
-  //   return () => newSocket.close();
-  // }, []);
+// useEffect(() => {
+//   const newSocket = io('http://localhost:8081');
+//   setSocket(newSocket);
+//   return () => newSocket.close();
+// }, []);
 
 
 export const SkuadlackPage = () => {
-  //lineasjorge
+
   const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
-
-
-  //lineasDani
-  console.log(idUser)
-  // const [socket, setSocket] = useState(null);
-  //const [room, setRoom] = useState('');
   const room = idOrganizacionActual
-  //const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
-  const {register, handleSubmit, reset} = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
 
+  useEffect(() => {
+    //cuando monto el componente emito un joinroom con el id de la organizacion
+    socket.emit('joinRoom', room)
 
-  console.log(user.organizacion)
-
-  useEffect(()=>{
-   socket.emit('joinRoom', idOrganizacionActual)
-   //setRoom(organizacionActual)
-  },[idOrganizacionActual])
-  useEffect(() =>{
-    const mensajeBienvenida = ({from, message, sala }) =>{
-      sala=room
-//      setRoom(room)
-      console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
+    return () => {
+      //si cambia el id de organizacion emito un evento leave que el backend se encarga de desconectarme 
+      // socket.emit('leave', room);
     }
-    socket.on('userConect', mensajeBienvenida)
-    return()=> {
-      socket.off('userConect', mensajeBienvenida)
-    }
-  }, [room])
+  }, [idOrganizacionActual])
 
-  useEffect(()=>{
-    const InfoDelSocket = (data) =>{
-  //    setRoom(data.roomId)
+
+  useEffect(() => {
+    const InfoDelSocket = (data) => {
+
       console.log('respuesta del BE', data)
-      setMessage([...message, {dataMessage: data.message, from: data.from}])
+      setMessage([...message, { dataMessage: data.message, from: data.from, room: data.room }])
     }
-    socket.on('reply', InfoDelSocket )
-    return()=>{
-      socket.off('reply', InfoDelSocket )
+    socket.on('reply', InfoDelSocket)
+    return () => {
+      socket.off('reply', InfoDelSocket)
+
     }
   }, [message])
 
-  const onSubmit = (data) =>{
+  const onSubmit = (data) => {
     console.log('Data Onsubmit: ', data)
-    socket.emit('chat', {message: data.message, room: room, from: user.userName})
-    setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
+    socket.emit('chat', { message: data.message, room: room, from: user.userName })
+    setMessage([...message, { from: 'Yo', dataMessage: data.message, room: room }])
     reset()
   }
 
-  // const handleOrganizacion = (e) => {
-  //   e.preventDefault()
-  //   user.organizacion.map((org) => {
-  //     if(org._id === e.target.value) {
-  //       setRoom(org.OrgName)
-  //       console.log(org)
-  //       setRoomInfo(org)
-  //       socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
-  //       setMessage([])
-  //     }
-  //     reset()
-  //     return null
-  //     })
-  // }
-  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
 
   return (
     <PageStyle>
       <div className='barrasuperior'>
         <div>{organizacionActual.OrgName}</div>
         <div><Search /></div>
+        <Nav.Link as={Link} to={`/LUP/${idUser}`}>
+          <Button variant="warning">Dashboard</Button>
+        </Nav.Link>
         <div>fotoPerfil</div>
 
       </div>
@@ -115,25 +92,26 @@ export const SkuadlackPage = () => {
           <div className='chatbox'>
             <ListChat />
           </div>
-      </div>
+        </div>
 
-      <div className="box3">
-        <div className="barraSuperiorChat">
-          <div>{idOrganizacionActual}</div>
+        <div className="box3">
+          <div className="barraSuperiorChat">
+            <div>{`Public chat ${organizacionActual.OrgName}`}</div>
             <div>opciones </div>
           </div>
-  
+
           <div className='bodyChat'>
             {message.map((msg, i) => {
-              return (
-                <div key={i}>
-                  <div>{msg.from}:</div>
-                  <div>{msg.dataMessage}</div>
-                </div>
-              )
+              if (idOrganizacionActual === msg.room)
+                return (
+                  <div key={i}>
+                    <div>{msg.from}:</div>
+                    <div>{msg.dataMessage}</div>
+                  </div>
+                )
             })}
           </div>
-  
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='barraSuperiorChat'>
               <div><input {...register('message')} /></div>
@@ -141,13 +119,13 @@ export const SkuadlackPage = () => {
             </div>
           </form>
         </div>
-  
+
         <div className='box1'>
           <div className='AddOrg'>+</div>
           <div className='Org'>users conectados</div>
           <div className='AddOrg'>+</div>
         </div>
-    </div>
+      </div>
     </PageStyle>
   )
 }
