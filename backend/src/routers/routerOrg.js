@@ -16,7 +16,7 @@ routerOrg.get('/organizacion',async(req,res)=>{
 
 // app.use(validateOrgName);
 
-routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
+routerOrg.post('/organizacion',validateOrgName,jwtMiddleware, async(req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
@@ -83,7 +83,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
   })
   */
   
-routerOrg.get('/organizacion/:id', async (req,res)=>{
+routerOrg.get('/organizacion/:id',jwtMiddleware, async (req,res)=>{
     const id = req.params.id
     try{
     const organizacion = await Organizacion.findById(id) /* no tiene sentido al cambiar el schema de usuario.populate({
@@ -100,7 +100,7 @@ routerOrg.get('/organizacion/:id', async (req,res)=>{
     }
 });
 
-routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
+routerOrg.patch('/organizacion/:id',validateOrgName,jwtMiddleware, async(req,res)=>{
     try{
         const organizacionModified = await Organizacion.findByIdAndUpdate(req.params.id, req.body);
         if(organizacionModified){
@@ -113,7 +113,7 @@ routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
     }
 });
 
-routerOrg.delete('/organizacion/:id', async(req,res)=>{
+routerOrg.delete('/organizacion/:id',jwtMiddleware, async(req,res)=>{
   const id = req.params.id;
 
   try {

@@ -1,7 +1,7 @@
 import express from "express";
 
 const validateOrgName = (req, res, next) => {
-    console.log('Request Type:', req.method);
+    
     const org = req.body;
     
     if (org.OrgName === undefined || org.OrgName.length === 0) {
