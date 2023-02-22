@@ -321,10 +321,10 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
   })
   */
   //es lo mismo que lo que está anteriormente comentado pero en una sola línea
-  const allUserNames = allUsers.map(user => Array.isArray(user) ? user.map(u => u.name) : user.name);
+  const allUserNames = allUsers.map(user => Array.isArray(user) ? user.map(u => u.userName) : user.userName);
 
   const response = {
-    users:allUserNames,
+    userNames:allUserNames,
     chats:allChats,
     chatIds:chatIds
   }

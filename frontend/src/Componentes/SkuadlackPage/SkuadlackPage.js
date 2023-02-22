@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
@@ -9,100 +10,39 @@ import fetchSupreme from '../../utils/apiWrapper';
 const socket = io('http://localhost:8081',{
   reconnection: false
 })
+import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 
 
 export const SkuadlackPage = () => {
-  let userId = getUserSession()
-  userId = userId.id
-  console.log(userId)
-  // const [socket, setSocket] = useState(null);
-  const [room, setRoom] = useState('');
-  const [user, setUser] = useState('')
-  const [roomInfo, setRoomInfo] = useState([]);
-  const [message, setMessage] = useState([]);
-  const {register, handleSubmit, reset} = useForm()
+  const { user, organizacionActual, myOrganizaciones } = useSkuadLackContext()
 
-  useEffect(() => {
-      fetchSupreme(`/user/${userId}`, 'GET', undefined, true, undefined)
-      .then((res) => {
-                setUser(res);
-      });
-  },[userId])
-
-  console.log(user.organizacion) ///
-  // useEffect(() => {
-  //   const newSocket = io('http://localhost:8081');
-  //   setSocket(newSocket);
-  //   return () => newSocket.close();
-  // }, []);
-
-  useEffect(() =>{
-    const mensajeBienvenida = ({from, message, room }) =>{
-      setRoom(room)
-      console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
-    }
-    socket.on('userConect', mensajeBienvenida)
-    return()=> {
-      socket.off('userConect', mensajeBienvenida)
-    }
-  }, [room])
-
-  useEffect(()=>{
-    const InfoDelSocket = (data) =>{
-      setRoom(data.roomId)
-      console.log('respuesta del BE', data)
-      setMessage([...message, {dataMessage: data.message, from: data.from}])
-    }
-    socket.on('reply', InfoDelSocket )
-    return()=>{
-      socket.off('reply', InfoDelSocket )
-    }
-  }, [message])
-
-  const onSubmit = (data) =>{
-    console.log('Data Onsubmit: ', data)
-    socket.emit('chat', {message: data.message, room: room, roomId:roomInfo._id})
-    setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
-    reset()
-  }
-
-  // const handleOrganizacion = (e) => {
-  //   e.preventDefault()
-  //   user.organizacion.map((org) => {
-  //     if(org._id === e.target.value) {
-  //       setRoom(org.OrgName)
-  //       console.log(org)
-  //       setRoomInfo(org)
-  //       socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
-  //       setMessage([])
-  //     }
-  //     reset()
-  //     return null
-  //     })
-  // }
-  console.log('quiero saber nombre org y sale...', user);
   return (
     <PageStyle>
       <div className='barrasuperior'>
-        <div>{user.organizacion}</div>
-        <div><Search/></div>
+        <div>{organizacionActual.OrgName}</div>
+        <div><Search /></div>
         <div>fotoPerfil</div>
-      </div>
-  
 
-      <div className="cuerpo">
-      <div className="box1">
-        <div className="AddOrg">+</div>
-        <div className="Org">Organizaciones</div>
-        <div className="AddOrg">+</div>
       </div>
 
+      <div className='cuerpo'>
 
-      <div className='box2'>
-          <div className='chatbox'>infOrg</div>
+        <div className='box1'>
+          <div className='AddOrg'>+</div>
+          {myOrganizaciones && myOrganizaciones.map((e) => (
+            <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
+          ))}
+          <div className='AddOrg'>+</div>
+        </div>
+
+        <div className='box2'>
+          <div className='chatbox'>
+            <h4>{organizacionActual.OrgName}</h4>
+            <h4>{organizacionActual.OrgDescription}</h4>
+          </div>
           <div className='chatbox'>canales </div>
           <div className='chatbox'>
-           <ListChat/>
+            <ListChat />
           </div>
       </div>
 
@@ -140,7 +80,7 @@ export const SkuadlackPage = () => {
     </PageStyle>
   )
 }
-const PageStyle = styled.div `
+const PageStyle = styled.div`
 
 
     display: block;
