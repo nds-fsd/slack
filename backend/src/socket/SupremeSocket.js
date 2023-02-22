@@ -16,7 +16,7 @@ export const SupremeSocket = () => {
 // Manejamos los eventos de conexión de sockets
 
     io.on('connection', (socket) => {
-        console.log('Usuario conectado al socket' + socket.id)
+        console.log('Usuario conectado al socket: ' + socket.id)
 
 // El usuario se une al canal "public" al conectarse
 
