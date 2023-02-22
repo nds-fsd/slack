@@ -100,16 +100,12 @@ routerUsers.post('/user/enrollOrganization', async (req, res) => {
     const idUser = req.body.idUser
     const idOrganizacion = req.body.idOrganizacion
     try {
-        const user = await User.findById(idUser)
-        console.log("USUARIO ENROLADO", user)
-        if (!user) return res.status(404).json({ message: 'no encuentro el usuario' })
-        if (user.organizacion.includes(idOrganizacion)) return res.status(400).json({ message: ' ya estas en la organizacion' })
-        user.organizacion.push(idOrganizacion)
-        await user.save()
         const organizacion = await Organizacion.findById(idOrganizacion)
+        if (!organizacion) return res.status(404).json({ message: 'no encuentro la organizacion' })
+        if (organizacion.user.includes(idUser)) return res.status(400).json({ message: ' ya estas en la organizacion' })
         organizacion.user.push(idUser)
         await organizacion.save()
-        res.status(201).json({user, organizacion})
+        res.status(201).json({organizacion})
 
         /*
             Esto deberia devolvernos algo parecido a 

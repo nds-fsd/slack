@@ -20,15 +20,15 @@ const socket = io('http://localhost:8081',{
 
 export const SkuadlackPage = () => {
   //lineasjorge
-  const { user, idUser, organizacionActual, myOrganizaciones } = useSkuadLackContext()
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
 
 
   //lineasDani
   console.log(idUser)
   // const [socket, setSocket] = useState(null);
   //const [room, setRoom] = useState('');
-  const room = organizacionActual.OrgName
-  const [roomInfo, setRoomInfo] = useState([]);
+  const room = idOrganizacionActual
+  //const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
   const {register, handleSubmit, reset} = useForm()
 
@@ -36,7 +36,10 @@ export const SkuadlackPage = () => {
 
   console.log(user.organizacion)
 
-
+  useEffect(()=>{
+   socket.emit('joinRoom', idOrganizacionActual)
+   //setRoom(organizacionActual)
+  },[idOrganizacionActual])
   useEffect(() =>{
     const mensajeBienvenida = ({from, message, sala }) =>{
       sala=room
@@ -51,7 +54,7 @@ export const SkuadlackPage = () => {
 
   useEffect(()=>{
     const InfoDelSocket = (data) =>{
-      setRoom(data.roomId)
+  //    setRoom(data.roomId)
       console.log('respuesta del BE', data)
       setMessage([...message, {dataMessage: data.message, from: data.from}])
     }
@@ -63,7 +66,7 @@ export const SkuadlackPage = () => {
 
   const onSubmit = (data) =>{
     console.log('Data Onsubmit: ', data)
-    socket.emit('chat', {message: data.message, room: room, roomId:roomInfo._id})
+    socket.emit('chat', {message: data.message, room: room, from: user.userName})
     setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
     reset()
   }
@@ -82,7 +85,7 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', user);
+  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
 
   return (
     <PageStyle>
@@ -116,7 +119,7 @@ export const SkuadlackPage = () => {
 
       <div className="box3">
         <div className="barraSuperiorChat">
-          <div>nombre canal/user(s) con el que hablas</div>
+          <div>{idOrganizacionActual}</div>
             <div>opciones </div>
           </div>
   
