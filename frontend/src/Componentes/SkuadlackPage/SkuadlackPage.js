@@ -1,14 +1,90 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+import io from 'socket.io-client';
+import { getUserSession } from '../../utils/localStorageUtils';
+import {useForm} from 'react-hook-form'
+import fetchSupreme from '../../utils/apiWrapper';
+const socket = io('http://localhost:8081',{
+  reconnection: false
+})
+
+
 
 
 export const SkuadlackPage = () => {
-  const { user, organizacionActual, myOrganizaciones } = useSkuadLackContext()
+  
+  
+  console.log(userId)
+  // const [socket, setSocket] = useState(null);
+  const [room, setRoom] = useState('');
+  const [user, setUser] = useState('')
+  const [roomInfo, setRoomInfo] = useState([]);
+  const [message, setMessage] = useState([]);
+  const {register, handleSubmit, reset} = useForm()
 
+  useEffect(() => {
+      fetchSupreme(`/user/${userId}`, 'GET', undefined, true, undefined)
+      .then((res) => {
+                setUser(res);
+      });
+  },[userId])
+
+  console.log(user.organizacion) ///
+  // useEffect(() => {
+  //   const newSocket = io('http://localhost:8081');
+  //   setSocket(newSocket);
+  //   return () => newSocket.close();
+  // }, []);
+
+  useEffect(() =>{
+    const mensajeBienvenida = ({from, message, room }) =>{
+      setRoom(room)
+      console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
+    }
+    socket.on('userConect', mensajeBienvenida)
+    return()=> {
+      socket.off('userConect', mensajeBienvenida)
+    }
+  }, [room])
+
+  useEffect(()=>{
+    const InfoDelSocket = (data) =>{
+      setRoom(data.roomId)
+      console.log('respuesta del BE', data)
+      setMessage([...message, {dataMessage: data.message, from: data.from}])
+    }
+    socket.on('reply', InfoDelSocket )
+    return()=>{
+      socket.off('reply', InfoDelSocket )
+    }
+  }, [message])
+
+  const onSubmit = (data) =>{
+    console.log('Data Onsubmit: ', data)
+    socket.emit('chat', {message: data.message, room: room, roomId:roomInfo._id})
+    setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
+    reset()
+  }
+
+  // const handleOrganizacion = (e) => {
+  //   e.preventDefault()
+  //   user.organizacion.map((org) => {
+  //     if(org._id === e.target.value) {
+  //       setRoom(org.OrgName)
+  //       console.log(org)
+  //       setRoomInfo(org)
+  //       socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
+  //       setMessage([])
+  //     }
+  //     reset()
+  //     return null
+  //     })
+  // }
+  console.log('quiero saber nombre org y sale...', user);
   return (
     <PageStyle>
       <div className='barrasuperior'>
@@ -37,33 +113,39 @@ export const SkuadlackPage = () => {
           <div className='chatbox'>
             <ListChat />
           </div>
+      </div>
 
-        </div>
-
-        <div className='box3'>
-
-          <div className='barraSuperiorChat'>
-            <div>nombre canal/user(s) con el que hablas</div>
+      <div className="box3">
+        <div className="barraSuperiorChat">
+          <div>nombre canal/user(s) con el que hablas</div>
             <div>opciones </div>
           </div>
-
-          <div className='bodyChat'>chat/canal abierto
-
+  
+          <div className='bodyChat'>
+            {message.map((msg, i) => {
+              return (
+                <div key={i}>
+                  <div>{msg.from}:</div>
+                  <div>{msg.dataMessage}</div>
+                </div>
+              )
+            })}
           </div>
-
-          <div className='barraSuperiorChat'>
-            <div>input texto</div>
-            <div>enviar </div>
-          </div>
+  
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='barraSuperiorChat'>
+              <div><input {...register('message')} /></div>
+              <div><button type='submit'>Enviar</button></div>
+            </div>
+          </form>
         </div>
-
-
+  
         <div className='box1'>
           <div className='AddOrg'>+</div>
           <div className='Org'>users conectados</div>
           <div className='AddOrg'>+</div>
         </div>
-      </div>
+    </div>
     </PageStyle>
   )
 }
