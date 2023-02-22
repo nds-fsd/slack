@@ -10,14 +10,15 @@ import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca 
 import { useSkuadLackContext } from "../../contexts/skuadLack-context";
 
 const ListChat = () => {
-  const [userNames, setUserNames] = useState([]);
-  const [chats, setChats]=useState([])
-  const [userNameActual, setUserNameActual] = useState("");
-  const[chatIds, setChatIds]=useState([''])
-  const [bottonValue, setBottonValue] = useState('');
-  const params = useParams();
-  const idOrganizacion = params.id;
-  const idUser = getUserSession().id;
+  const {userNames, chatIds, myUserName} = useSkuadLackContext()
+  // const [userNames, setUserNames] = useState([]);
+  // const [chats, setChats]=useState([])
+  // const [userNameActual, setUserNameActual] = useState("");
+  // const[chatIds, setChatIds]=useState([''])
+  // const [bottonValue, setBottonValue] = useState('');
+  // const params = useParams();
+  // const idOrganizacion = params.id;
+  // const idUser = getUserSession().id;
   //console.log('userSession',getUserSession())
 
   //Cogemos todos los chats del usuario de la ruta definida para ese propósito
@@ -55,7 +56,7 @@ const ListChat = () => {
     return alert(`Estás haciendo click en ${elemento} y idChat ${chatIds[indexId]}`);
   };
 
-  //console.log('userNames',userNames)
+  console.log('myUserName',myUserName)
 
   return (
     <div className={styles.chatContainer}>
@@ -64,7 +65,7 @@ const ListChat = () => {
           userNames.map((e) => {
             const uniqueKey = uuidv4();
 
-            if (e.toString() === userNameActual) {
+            if (e.toString() === myUserName) {
               return (
                 <ListGroup.Item
                   className={styles.elementChat}

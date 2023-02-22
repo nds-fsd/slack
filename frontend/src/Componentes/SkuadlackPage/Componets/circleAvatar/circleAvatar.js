@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function CircleAvatar({ name, color, size, id}) {
+function CircleAvatar({ name, color, size, id }) {
   // Extraer las dos primeras letras del nombre
   const initials = name
     .split(' ')

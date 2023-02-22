@@ -19,6 +19,9 @@ export const SkuadLackContextProvider = (props) => {
     const [chatIds, setChatIds] = useState([''])
     const [myUserName, setMyUserName] = useState("");
     const [organizacionActual, setorganizacionActual] = useState("")
+
+    //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
+    //componentes que consumen de el
     useEffect(() => {
         fetchSupreme(`/userOrg/${idUser}`, 'GET', undefined, true, undefined)
             .then((res) => {
@@ -31,20 +34,20 @@ export const SkuadLackContextProvider = (props) => {
 
         fetchSupreme("/userChats", "GET", undefined, true, `idOrganizacion=${idOrganizacionActual}&idUser=${idUser}`
         ).then((res) => {
-            setUserNames(res.users);
+            setUserNames(res.userNames);
             setChats(res.chats)
             setChatIds(res.chatIds)
 
         });
 
         fetchSupreme(`/organizacion/${idOrganizacionActual}`, "GET", undefined, true, undefined)
-        .then((res)=>{
-            setorganizacionActual(res)
-        })
+            .then((res) => {
+                setorganizacionActual(res)
+            })
 
-    }, []);
+    }, [idOrganizacionActual]);
 
-
+    //pasamos por value las variables a "compartir".
     const value = {
         user,
         myOrganizaciones,

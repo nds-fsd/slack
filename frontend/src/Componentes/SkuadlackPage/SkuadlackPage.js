@@ -1,32 +1,29 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react'
 import styled from 'styled-components'
-import { SkuadLackContextProvider, useSkuadLackContext } from '../../contexts/skuadLack-context'
+import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
-
 import { Search } from './Componets/BarraSuperior/search'
-import CircleAvatar from './Componets/circleAvatarOrganizacion/circleAvatar'
+import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 
 
 export const SkuadlackPage = () => {
-const  {user, organizacionActual, myOrganizaciones} = useSkuadLackContext()
-const navigate = useNavigate()
+  const { user, organizacionActual, myOrganizaciones } = useSkuadLackContext()
+
   return (
-    
     <PageStyle>
-    <div className='barrasuperior'>
-      <div>{organizacionActual.OrgName}</div>
-      <div><Search/></div>
-      <div>fotoPerfil</div>
+      <div className='barrasuperior'>
+        <div>{organizacionActual.OrgName}</div>
+        <div><Search /></div>
+        <div>fotoPerfil</div>
 
-    </div>
+      </div>
 
-    <div className='cuerpo'>
+      <div className='cuerpo'>
 
         <div className='box1'>
           <div className='AddOrg'>+</div>
-          {myOrganizaciones && myOrganizaciones.map((e)=>(
-          <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
+          {myOrganizaciones && myOrganizaciones.map((e) => (
+            <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
           ))}
           <div className='AddOrg'>+</div>
         </div>
@@ -38,7 +35,7 @@ const navigate = useNavigate()
           </div>
           <div className='chatbox'>canales </div>
           <div className='chatbox'>
-           <ListChat/>
+            <ListChat />
           </div>
 
         </div>
@@ -51,7 +48,7 @@ const navigate = useNavigate()
           </div>
 
           <div className='bodyChat'>chat/canal abierto
-        
+
           </div>
 
           <div className='barraSuperiorChat'>
@@ -66,11 +63,11 @@ const navigate = useNavigate()
           <div className='Org'>users conectados</div>
           <div className='AddOrg'>+</div>
         </div>
-    </div>
+      </div>
     </PageStyle>
   )
 }
-const PageStyle = styled.div `
+const PageStyle = styled.div`
 
 
     display: block;
