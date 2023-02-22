@@ -4,17 +4,85 @@ import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
-import { getUserSession } from '../../utils/localStorageUtils';
 import {useForm} from 'react-hook-form'
-import fetchSupreme from '../../utils/apiWrapper';
+import CircleAvatar from './Componets/circleAvatar/circleAvatar'
 const socket = io('http://localhost:8081',{
   reconnection: false
-})
-import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+});
+  ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
+
+  // useEffect(() => {
+  //   const newSocket = io('http://localhost:8081');
+  //   setSocket(newSocket);
+  //   return () => newSocket.close();
+  // }, []);
 
 
 export const SkuadlackPage = () => {
-  const { user, organizacionActual, myOrganizaciones } = useSkuadLackContext()
+  //lineasjorge
+  const { user, idUser, organizacionActual, myOrganizaciones } = useSkuadLackContext()
+
+
+  //lineasDani
+  console.log(idUser)
+  // const [socket, setSocket] = useState(null);
+  //const [room, setRoom] = useState('');
+  const room = organizacionActual.OrgName
+  const [roomInfo, setRoomInfo] = useState([]);
+  const [message, setMessage] = useState([]);
+  const {register, handleSubmit, reset} = useForm()
+
+
+
+  console.log(user.organizacion)
+
+
+  useEffect(() =>{
+    const mensajeBienvenida = ({from, message, sala }) =>{
+      sala=room
+//      setRoom(room)
+      console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
+    }
+    socket.on('userConect', mensajeBienvenida)
+    return()=> {
+      socket.off('userConect', mensajeBienvenida)
+    }
+  }, [room])
+
+  useEffect(()=>{
+    const InfoDelSocket = (data) =>{
+      setRoom(data.roomId)
+      console.log('respuesta del BE', data)
+      setMessage([...message, {dataMessage: data.message, from: data.from}])
+    }
+    socket.on('reply', InfoDelSocket )
+    return()=>{
+      socket.off('reply', InfoDelSocket )
+    }
+  }, [message])
+
+  const onSubmit = (data) =>{
+    console.log('Data Onsubmit: ', data)
+    socket.emit('chat', {message: data.message, room: room, roomId:roomInfo._id})
+    setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
+    reset()
+  }
+
+  // const handleOrganizacion = (e) => {
+  //   e.preventDefault()
+  //   user.organizacion.map((org) => {
+  //     if(org._id === e.target.value) {
+  //       setRoom(org.OrgName)
+  //       console.log(org)
+  //       setRoomInfo(org)
+  //       socket.emit('entra en la Sala', {room: e.target.value, previousRoom: room})
+  //       setMessage([])
+  //     }
+  //     reset()
+  //     return null
+  //     })
+  // }
+  console.log('quiero saber nombre org y sale...', user);
 
   return (
     <PageStyle>
