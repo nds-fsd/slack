@@ -30,7 +30,10 @@ app.use(routerPublicMessage);
 let port
 
 if(process.env.NODE_ENV !== 'test'){
-    connectDB()
+    console.log("estoy aqui")
+    connectDB().then(()=>{
+        console.log("connected to database.")
+    })
    port = process.env.PORT ?? 8080;
 }else{
     port = process.env.TEST_PORT
@@ -40,16 +43,6 @@ export const server = app.listen(port, () => {
 
 console.log(`Server is up and running at port ${port} ⚡`)
 
-
-if(process.env.NODE_ENV !== 'test'){
-    connectDB().then((error) => {
-        if(error){
-            console.log(error);
-        }else{
-            console.log('Connected to database! MONGO ATLAS');
-        }
-    });
-}
 
 })
 
