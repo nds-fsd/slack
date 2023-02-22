@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ListChat from '../listChat/listChat'
-
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
 import { getUserSession } from '../../utils/localStorageUtils';
@@ -81,7 +80,7 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', roomInfo);
+  console.log('quiero saber nombre org y sale...', user);
   return (
     <PageStyle>
       <div className='barrasuperior'>

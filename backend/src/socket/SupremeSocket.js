@@ -27,21 +27,22 @@ export const SupremeSocket = () => {
         io.emit('userConect',{
             from:'server',
             message:'Usuario conectado',
-            server:'public'
+            room:'public'
         })
 
 
 // Manejamos el evento "chat", que se dispara cuando un usuario envía un mensaje
 
         socket.on('chat', (data)=>{
-
+                console.log('eto e un DATA',data);
                 // Enviamos el mensaje a todos los sockets que estén en la misma sala (room)
 
             socket.to(data.roomId).emit('reply',{
                 from: socket.id,
                 message: data.message,
-                server: data.room,
+                room: data.room,
                 roomId: data.roomId
+            
             })
         })
 
