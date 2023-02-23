@@ -46,8 +46,6 @@ routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
 
   const idUser = req.body.idUser;
 
-
-
   try {
     const chat = new Chat(req.body);
 
@@ -189,7 +187,7 @@ routerChat.patch("/deleteUserFromChat/:idChat", jwtMiddleware, async (req, res) 
 );
 
 //MÉTODO AGRUPADO DE AÑADIR Y QUITAR USUARIOS MEDIANTE QUERY PARAMS
-routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
+routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {-q
   //Definición del query params:
   //method = a --> add users
   //method = d --> deleter users
