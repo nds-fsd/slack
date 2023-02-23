@@ -1,65 +1,135 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Nav from "react-bootstrap/Nav";
 import styled from 'styled-components'
+import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from '../listChat/listChat'
-
 import { Search } from './Componets/BarraSuperior/search'
+import io from 'socket.io-client';
+import { useForm } from 'react-hook-form'
+import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+import { Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:3001", {
+  reconnection: false
+});
+///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
+
+// useEffect(() => {
+//   const newSocket = io('http://localhost:8081');
+//   setSocket(newSocket);
+//   return () => newSocket.close();
+// }, []);
 
 
 export const SkuadlackPage = () => {
+
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
+  const room = idOrganizacionActual
+  const [message, setMessage] = useState([]);
+  const { register, handleSubmit, reset } = useForm()
+
+
+  useEffect(() => {
+    //cuando monto el componente emito un joinroom con el id de la organizacion
+    socket.emit('joinRoom', room)
+
+    return () => {
+      //si cambia el id de organizacion emito un evento leave que el backend se encarga de desconectarme 
+      // socket.emit('leave', room);
+    }
+  }, [idOrganizacionActual])
+
+
+  useEffect(() => {
+    const InfoDelSocket = (data) => {
+
+      console.log('respuesta del BE', data)
+      setMessage([...message, { dataMessage: data.message, from: data.from, room: data.room }])
+    }
+    socket.on('reply', InfoDelSocket)
+    return () => {
+      socket.off('reply', InfoDelSocket)
+
+    }
+  }, [message])
+
+  const onSubmit = (data) => {
+    console.log('Data Onsubmit: ', data)
+    socket.emit('chat', { message: data.message, room: room, from: user.userName })
+    setMessage([...message, { from: 'Yo', dataMessage: data.message, room: room }])
+    reset()
+  }
+
+console.log(message)
   return (
     <PageStyle>
-    <div className='barrasuperior'>
-      <div>nombre org</div>
-      <div><Search/></div>
-      <div>fotoPerfil</div>
+      <div className='barrasuperior'>
+        <div>{organizacionActual.OrgName}</div>
+        <div><Search /></div>
+        <Nav.Link as={Link} to={`/LUP/${idUser}`}>
+          <Button variant="warning">Dashboard</Button>
+        </Nav.Link>
+        <div>fotoPerfil</div>
 
-    </div>
+      </div>
 
-    <div className='cuerpo'>
+      <div className='cuerpo'>
 
         <div className='box1'>
           <div className='AddOrg'>+</div>
-          <div className='Org'>Organizaciones</div>
+          {myOrganizaciones && myOrganizaciones.map((e) => (
+            <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
+          ))}
           <div className='AddOrg'>+</div>
         </div>
 
         <div className='box2'>
-          <div className='chatbox'>infOrg</div>
+          <div className='chatbox'>
+            <h4>{organizacionActual.OrgName}</h4>
+            <h4>{organizacionActual.OrgDescription}</h4>
+          </div>
           <div className='chatbox'>canales </div>
           <div className='chatbox'>
-           <ListChat/>
+            <ListChat />
           </div>
-
         </div>
 
-        <div className='box3'>
-
-          <div className='barraSuperiorChat'>
-            <div>nombre canal/user(s) con el que hablas</div>
+        <div className="box3">
+          <div className="barraSuperiorChat">
+            <div>{`Public chat ${organizacionActual.OrgName}`}</div>
             <div>opciones </div>
           </div>
 
-          <div className='bodyChat'>chat/canal abierto
-        
+          <div className='bodyChat'>
+            {message.map((msg, i) => {
+              if (idOrganizacionActual === msg.room)
+                return (
+                  <div key={i}>
+                    <div>{msg.from}:</div>
+                    <div>{msg.dataMessage}</div>
+                  </div>
+                )
+            })}
           </div>
 
-          <div className='barraSuperiorChat'>
-            <div>input texto</div>
-            <div>enviar </div>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='barraSuperiorChat'>
+              <div><input {...register('message')} /></div>
+              <div><button type='submit'>Enviar</button></div>
+            </div>
+          </form>
         </div>
-
 
         <div className='box1'>
           <div className='AddOrg'>+</div>
           <div className='Org'>users conectados</div>
           <div className='AddOrg'>+</div>
         </div>
-    </div>
+      </div>
     </PageStyle>
   )
 }
-const PageStyle = styled.div `
+const PageStyle = styled.div`
 
 
     display: block;
