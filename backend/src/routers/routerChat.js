@@ -45,6 +45,8 @@ routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
 
   const idUser = req.body.idUser;
 
+
+
   try {
     const chat = new Chat(req.body);
 
@@ -52,7 +54,16 @@ routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
     chat.organizacion = idOrganizacion;
 
     //Esta es la forma de añadir usuarios al chat cuando son equivalencias N a N
+
+  if (Array.isArray(idUser)){
+
+    idUser.map((e)=>{
+      chat.user.push(e)
+    })
+  }else{
+    
     chat.user.push(idUser);
+  }
 
     await chat.save();
 
