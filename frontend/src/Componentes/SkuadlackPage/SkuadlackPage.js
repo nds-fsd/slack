@@ -25,19 +25,17 @@ export const SkuadlackPage = () => {
   //lineasjorge
   const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual, chatId, setIdChat } = useSkuadLackContext()
 
+  const room = chatId ? chatId : organizacionActual
 
-  
-  // const [socket, setSocket] = useState(null);
-  //const [room, setRoom] = useState('');
-  const room = idOrganizacionActual
-  //const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
   const {register, handleSubmit, reset} = useForm()
 
   useEffect(()=>{
-   socket.emit('joinRoom', idOrganizacionActual)
-   //setRoom(organizacionActual)
-  },[idOrganizacionActual])
+   
+    socket.emit('joinRoom', room)
+   
+  },[room])
+  
   useEffect(() =>{
     const mensajeBienvenida = ({from, message, sala }) =>{
       sala=room
