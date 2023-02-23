@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSkuadLackContext } from '../../contexts/skuadLack-context'
-import ListChat from '../listChat/listChat'
+import ListChat from './Componets/listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
 import {useForm} from 'react-hook-form'
 import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+import {BiMessageAdd} from 'react-icons/bi'
+import {AiOutlineUserAdd} from 'react-icons/ai'
+
 const socket = io('http://localhost:8081',{
   reconnection: false
 });
@@ -20,21 +23,16 @@ const socket = io('http://localhost:8081',{
 
 export const SkuadlackPage = () => {
   //lineasjorge
-  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual, chatId, setIdChat } = useSkuadLackContext()
 
 
-  //lineasDani
-  console.log(idUser)
+  
   // const [socket, setSocket] = useState(null);
   //const [room, setRoom] = useState('');
   const room = idOrganizacionActual
   //const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
   const {register, handleSubmit, reset} = useForm()
-
-
-
-  console.log(user.organizacion)
 
   useEffect(()=>{
    socket.emit('joinRoom', idOrganizacionActual)
@@ -55,7 +53,7 @@ export const SkuadlackPage = () => {
   useEffect(()=>{
     const InfoDelSocket = (data) =>{
   //    setRoom(data.roomId)
-      console.log('respuesta del BE', data)
+      //console.log('respuesta del BE', data)
       setMessage([...message, {dataMessage: data.message, from: data.from}])
     }
     socket.on('reply', InfoDelSocket )
@@ -65,7 +63,7 @@ export const SkuadlackPage = () => {
   }, [message])
 
   const onSubmit = (data) =>{
-    console.log('Data Onsubmit: ', data)
+    //console.log('Data Onsubmit: ', data)
     socket.emit('chat', {message: data.message, room: room, from: user.userName})
     setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
     reset()
@@ -85,7 +83,8 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
+
+  //console.log('quiero saber nombre org y sale...', idOrganizacionActual);
 
   return (
     <PageStyle>
@@ -101,7 +100,7 @@ export const SkuadlackPage = () => {
         <div className='box1'>
           <div className='AddOrg'>+</div>
           {myOrganizaciones && myOrganizaciones.map((e) => (
-            <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40} /></p></div>
+            <div className='Org'><p><CircleAvatar name={e.OrgName} id={e._id} color="#3f485b" size={40}/></p></div>
           ))}
           <div className='AddOrg'>+</div>
         </div>
@@ -113,14 +112,19 @@ export const SkuadlackPage = () => {
           </div>
           <div className='chatbox'>canales </div>
           <div className='chatbox'>
+            <div className='botonAddChat'>
+              <BiMessageAdd size="2rem"/>
+            </div>
             <ListChat />
           </div>
       </div>
 
       <div className="box3">
         <div className="barraSuperiorChat">
-          <div>{idOrganizacionActual}</div>
-            <div>opciones </div>
+          <div> {chatId && chatId}</div>
+            <div>
+              <AiOutlineUserAdd size={"1.5rem"}/>
+            </div>
           </div>
   
           <div className='bodyChat'>

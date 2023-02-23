@@ -274,6 +274,18 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 routerChat.get("/userChatsId", jwtMiddleware, async (req, res) => {
 
   //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
