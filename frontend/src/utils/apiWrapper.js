@@ -1,6 +1,6 @@
 import { getUserToken } from "./localStorageUtils";
 
-const fetchSupreme = (path, method, body, isToken, query) => {
+const fetchSupreme = (path, method = 'GET', body, isToken, query) => {
   //path: tiene que incluir la primera barra. Ejemplo "http://localhost:3001/user" --> path = "/user"
   //method: 'GET', 'POST'...
   //body: incluir como objeto si es necesario. Si no, especificar undefined SUPER IMPORTANTE
@@ -13,14 +13,11 @@ const fetchSupreme = (path, method, body, isToken, query) => {
       : "http://localhost:3001";
 
   let URL = URL_API + path;
-
-  const authorization = isToken && `Bearer ${getUserToken()}`;
-
   //const queryParams = query && JSON.stringify(query); --> si pongo esto no funciona el queryParams... no sé por qué
-  const queryParams = query
+ 
 
-  if (queryParams) {
-    URL = `${URL}?${queryParams}`;
+  if (query) {
+    URL = `${URL}?${new URLSearchParams(query).toString()}`;
   }
 
   const options = {
@@ -29,7 +26,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      authorization: authorization,
+      authorization: `Bearer ${getUserToken()}`,
     },
     body: JSON.stringify(body),
   };

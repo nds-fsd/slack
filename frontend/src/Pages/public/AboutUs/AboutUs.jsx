@@ -1,10 +1,10 @@
 import styles from "./AboutUs.module.css";
 import React from "react";
-import Nico from '../../Assets/Nico.jpg';
-import Dani from '../../Assets/Dani.jpg';
-import Jorge from '../../Assets/Jorge.jpeg';
-import German from '../../Assets/German.jpg';
-import Norma from '../../Assets/Norma.png';
+import Nico from '../../../Assets/Nico.jpg';
+import Dani from '../../../Assets/Dani.jpg';
+import Jorge from '../../../Assets/Jorge.jpeg';
+import German from '../../../Assets/German.jpg';
+import Norma from '../../../Assets/Norma.png';
 
 const AboutUs = () => {
   return (

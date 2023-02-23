@@ -5,14 +5,14 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Card from 'react-bootstrap/Card';
 import { Link, useParams } from 'react-router-dom';
-import fetchSupreme from '../../utils/apiWrapper';
-import ModalRollOrg from '../Modal/modalRollOrg/modalRollOrg';
-import { ButtonCopied } from '../buttonCopied/buttonCopy';
+import fetchSupreme from '../../../utils/apiWrapper';
+import ModalRollOrg from '../../../Componentes/Modal/modalRollOrg/modalRollOrg'
+import { ButtonCopied } from '../../../Componentes/buttonCopied/buttonCopy';
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
 
 
 
-export const LandingUserPage = () => {
+const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
     const [organizacion, setOrganizacion]= useState([""]);
@@ -110,6 +110,7 @@ export const LandingUserPage = () => {
         </LUPstyle>
     )
 }
+
 const LUPstyle = styled.div`
 display: flex;
 flex-direction: column;
@@ -200,3 +201,5 @@ background-color: #242A38 ;
     margin-right: 2rem
 }  
 `
+
+export default LandingUserPage;

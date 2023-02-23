@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Nav from "react-bootstrap/Nav";
 import styled from 'styled-components'
-import { useSkuadLackContext } from '../../contexts/skuadLack-context'
+import { useSkuadLackContext } from '../../../contexts/skuadLack-context'
 import ListChat from './Componets/listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
 import { useForm } from 'react-hook-form'
-import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+import CircleAvatar from '../../../Componentes/circleAvatar/circleAvatar'
 import { Button } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import {BiMessageAdd} from 'react-icons/bi'
 import {AiOutlineUserAdd} from 'react-icons/ai'
+import { useSocket } from '../../../contexts/useSocket';
 
-const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:3001", {
-  reconnection: false
-});
+
 ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
 
 // useEffect(() => {
@@ -24,7 +23,8 @@ const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https:
 // }, []);
 
 
-export const SkuadlackPage = () => {
+const SkuadlackPage = () => {
+  const {socket,joinChat, onMessageReceived } = useSocket();
   //lineasjorge
   const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual,chatId, room, setRoom } = useSkuadLackContext()
   const [refresh, setRefresh] = useState(true)
@@ -38,7 +38,7 @@ export const SkuadlackPage = () => {
   //console.log(user.organizacion)
 
   useEffect(()=>{
-   socket.emit('joinRoom', room)
+   joinChat(room);
    //setRoom(organizacionActual)
   },[room])
   useEffect(() =>{
@@ -47,26 +47,22 @@ export const SkuadlackPage = () => {
 //      setRoom(room)
       console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
-  }, [room])
+  }, [room]);
 
 
- 
-  useEffect(()=>{
-    const InfoDelSocket = (data) =>{
+  const InfoDelSocket = (data) =>{
      
-      console.log('respuesta del BE', data)
-      setMessage([...message, {dataMessage: data.message, from: data.from, room:room}])
- 
-    }
-    
-    socket.on('reply', InfoDelSocket)
+    console.log('respuesta del BE', data)
+    setMessage([...message, {dataMessage: data.message, from: data.from, room:room}])
+
+  }
+
+  onMessageReceived((message) => {
     
 
-    return () => {
-      socket.off('reply', InfoDelSocket)
+  })
 
-    }
-  }, [message])
+
 
   const onSubmit = (data) =>{
     console.log('Data Onsubmit: ', data)
@@ -271,3 +267,4 @@ const PageStyle = styled.div`
 }
 `
 
+export default SkuadlackPage;

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./formOrganizacion.module.css"
-import fetchSupreme from "../../utils/apiWrapper";
+import fetchSupreme from "../../../utils/apiWrapper";
 import { Navigate } from "react-router-dom";
-import { getUserSession } from "../../utils/localStorageUtils";
+import { getUserSession } from "../../../utils/localStorageUtils";
 import { useNavigate } from "react-router-dom";
 
-const FormOrganizacion = () => {
+const CreateOrganization = () => {
 
     const [email, setMail] = useState("");
     const [name, setName] = useState("");
@@ -90,4 +90,4 @@ const FormOrganizacion = () => {
     )
 }
 
-export default FormOrganizacion
+export default CreateOrganization

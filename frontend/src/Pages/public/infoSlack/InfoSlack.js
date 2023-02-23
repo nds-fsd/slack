@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { MdConnectWithoutContact, MdGroupWork, MdSecurity } from 'react-icons/md';
  
 
-export const InfoSlack = () => {
+const InfoSlack = () => {
   return (
     <InfoStyle>
       <div className='alldiv'>
@@ -102,3 +102,5 @@ h2{
   
 }
 `
+
+export default InfoSlack;

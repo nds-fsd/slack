@@ -1,0 +1,33 @@
+.message {
+	display: flex;
+	margin-bottom: 12px;
+	gap: 4px;
+}
+
+.messageAvatar {
+	display: flex;
+	gap: 4px
+}
+
+.messageText {
+	border-radius: 8px;
+	padding: 4px;
+}
+
+.messageHeader {
+	max-width: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+}
+
+.messageName{
+	font-weight: bold;
+}
+
+.messageTime {
+	font-size: 14px;
+	color: #ffffff;
+}
+

@@ -2,28 +2,39 @@ import express from "express";
 import Messages from "../Schemas/message.js";
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 const routerMessages = express.Router();
-
+import {io} from '../index.js';
 
 routerMessages.post('/message', jwtMiddleware, async (req, res) => {
-  const date = new Date().toLocaleDateString();//guardamos en una variable la fecha y la hacemos fecha local y la stringeamos
-  req.body.date = date                         //forzamos la key date del body con la variable date
-  let now = new Date()                       //guardamos en una variable la fecha
-  const hour = now.getHours()                  //recurrimos a .getHours() un metodo de Date que te da el digito de la hora y lo guardamos en una variable
-  if (hour < 10) { hour = '0' + hour }         //si es menor de 10 ese digito le concatenamos un 0 delante para que ej=> las 04 en vez de las 4.
-  let minutes = now.getMinutes()               //recurrimos a .getMinutes() un metodo de Date que te da el digito de los minutos y lo guardamos en una variable
-  if (minutes < 10) { minutes = '0' + minutes }//si es menor de 10 ese digito le concatenamos un 0 delante para que ej=> sean 04 minutos en vez de 4.
-  const hourComplete = `${hour}:${minutes}`   //guardamos en una variable el formato que imprimimos ej=> 20:09
-  req.body.hour = hourComplete                //forzamos la key hour del body con la variable hourComplete
+
   const idUser = req.jwtPayload.id;           //recogemos del payload del token el id y lo guardamos en una variable
-  req.body.user = idUser;                     //forzamos la key user del body con la variable que acabamos de guardar con el id de usuario del token del payload.
   if (!req.body.text) return res.status(404).json({ message: "No hay mensaje" })
-  if (!req.body.user) return res.status(404).json({ message: "No hay usuario" })
-  const newMessage = new Messages(req.body);
+  if (!req.body.chat) return res.status(404).json({ message: "No hay chat" });
+
+  const newMessage = new Messages({
+    ...req.body,
+    date: new Date(),
+    user: idUser,
+  });
 
   const messageCreate = await newMessage.save();
+  console.log('emiting message to',req.body.chat)
+  io.to(req.body.chat).emit("message", messageCreate);
   return res.status(201).json(messageCreate)
 
 });
+
+routerMessages.get('/message', jwtMiddleware, async (req, res) => {
+  try {
+    const query = req.query;
+    const allMessages = await Messages.find(query).populate({ //populamos lo mismo que en el metodo get por :id
+      path: 'user',
+    })
+    res.status(200).json(allMessages);
+  } catch (error) {
+    res.status(500).json(error)
+  }
+});
+
 
 routerMessages.get('/message/:id', jwtMiddleware, async (req, res) => {
   const messageFound = await Messages.findById(req.params.id).populate({//populamos la key user del schema message y user tambien tiene informacion que popular
@@ -34,17 +45,6 @@ routerMessages.get('/message/:id', jwtMiddleware, async (req, res) => {
   else res.status(404).send('Mensaje no encontrado')
 })
 
-routerMessages.get('/message', jwtMiddleware, async (req, res) => {
-  try {
-    const allMessages = await Messages.find().populate({ //populamos lo mismo que en el metodo get por :id
-      path: 'user',
-      populate: { path: 'organizacion' }
-    })
-    res.status(200).json(allMessages);
-  } catch (error) {
-    res.status(500).json(error)
-  }
-});
 
 
 routerMessages.patch('/message/:id', jwtMiddleware, async (req, res) => { //el metodo post tiene detallado tambien los siguientes pasos son iguales.

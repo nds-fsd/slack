@@ -3,7 +3,7 @@ import styles from "./listChat.module.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
-import { useSkuadLackContext } from "../../../../contexts/skuadLack-context";
+import { useSkuadLackContext } from "../../../../../contexts/skuadLack-context";
 
 
 const ListChat = () => {
