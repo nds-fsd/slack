@@ -8,7 +8,6 @@ import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { configurePublicSocket } from './socket/index.js';
-import { Server } from 'socket.io';
 import { SupremeSocket } from './socket/SupremeSocket.js';
 
 
@@ -26,7 +25,7 @@ app.use(routerOrg);
 app.use(routerChat);
 app.use(routerMessages);
 app.use(routerPublicMessage);
-SupremeSocket();
+// SupremeSocket();
 
 let port = process.env.PORT ?? 8080;
 
@@ -65,6 +64,6 @@ const server = app.listen(port, () => {
 */
 
 export const socketIoPublic = configurePublicSocket(server);
-
+export const socketIoPrivate = SupremeSocket(server)
 
 

@@ -1,67 +1,78 @@
 import React, { useEffect, useState } from 'react'
+import Nav from "react-bootstrap/Nav";
 import styled from 'styled-components'
 import { useSkuadLackContext } from '../../contexts/skuadLack-context'
 import ListChat from './Componets/listChat/listChat'
 import { Search } from './Componets/BarraSuperior/search'
 import io from 'socket.io-client';
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import CircleAvatar from './Componets/circleAvatar/circleAvatar'
+import { Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import {BiMessageAdd} from 'react-icons/bi'
 import {AiOutlineUserAdd} from 'react-icons/ai'
 
-const socket = io('http://localhost:8081',{
+const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app" : "http://localhost:3001", {
   reconnection: false
 });
-  ///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
+///esta useEffect no la borreis, es otra manera de llamar al socket como la Linea 11
 
-  // useEffect(() => {
-  //   const newSocket = io('http://localhost:8081');
-  //   setSocket(newSocket);
-  //   return () => newSocket.close();
-  // }, []);
+// useEffect(() => {
+//   const newSocket = io('http://localhost:8081');
+//   setSocket(newSocket);
+//   return () => newSocket.close();
+// }, []);
 
 
 export const SkuadlackPage = () => {
   //lineasjorge
-  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual, chatId, setIdChat } = useSkuadLackContext()
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
 
-  const room = chatId ? chatId : organizacionActual
 
+  //lineasDani
+  console.log(idUser)
+  // const [socket, setSocket] = useState(null);
+  //const [room, setRoom] = useState('');
+  const room = idOrganizacionActual
+  //const [roomInfo, setRoomInfo] = useState([]);
   const [message, setMessage] = useState([]);
-  const {register, handleSubmit, reset} = useForm()
+  const { register, handleSubmit, reset } = useForm()
+
+
+
+  //console.log(user.organizacion)
 
   useEffect(()=>{
-   
-    socket.emit('joinRoom', room)
-   
-  },[room])
-  
+   socket.emit('joinRoom', idOrganizacionActual)
+   //setRoom(organizacionActual)
+  },[idOrganizacionActual])
   useEffect(() =>{
     const mensajeBienvenida = ({from, message, sala }) =>{
       sala=room
 //      setRoom(room)
       console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
-    socket.on('userConect', mensajeBienvenida)
-    return()=> {
-      socket.off('userConect', mensajeBienvenida)
-    }
-  }, [room])
+  }, [idOrganizacionActual])
+
+
+  useEffect(() => {
+    const InfoDelSocket = (data) => {
 
   useEffect(()=>{
     const InfoDelSocket = (data) =>{
   //    setRoom(data.roomId)
-      //console.log('respuesta del BE', data)
+      console.log('respuesta del BE', data)
       setMessage([...message, {dataMessage: data.message, from: data.from}])
     }
-    socket.on('reply', InfoDelSocket )
-    return()=>{
-      socket.off('reply', InfoDelSocket )
+    socket.on('reply', InfoDelSocket)
+    return () => {
+      socket.off('reply', InfoDelSocket)
+
     }
   }, [message])
 
   const onSubmit = (data) =>{
-    //console.log('Data Onsubmit: ', data)
+    console.log('Data Onsubmit: ', data)
     socket.emit('chat', {message: data.message, room: room, from: user.userName})
     setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
     reset()
@@ -81,14 +92,16 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-
-  //console.log('quiero saber nombre org y sale...', idOrganizacionActual);
+  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
 
   return (
     <PageStyle>
       <div className='barrasuperior'>
         <div>{organizacionActual.OrgName}</div>
         <div><Search /></div>
+        <Nav.Link as={Link} to={`/LUP/${idUser}`}>
+          <Button variant="warning">Dashboard</Button>
+        </Nav.Link>
         <div>fotoPerfil</div>
 
       </div>
@@ -115,27 +128,26 @@ export const SkuadlackPage = () => {
             </div>
             <ListChat />
           </div>
-      </div>
+        </div>
 
       <div className="box3">
         <div className="barraSuperiorChat">
-          <div> {chatId && chatId}</div>
-            <div>
-              <AiOutlineUserAdd size={"1.5rem"}/>
-            </div>
+          <div>{idOrganizacionActual}</div>
+            <div>opciones </div>
           </div>
-  
+
           <div className='bodyChat'>
             {message.map((msg, i) => {
-              return (
-                <div key={i}>
-                  <div>{msg.from}:</div>
-                  <div>{msg.dataMessage}</div>
-                </div>
-              )
+              if (idOrganizacionActual === msg.room)
+                return (
+                  <div key={i}>
+                    <div>{msg.from}:</div>
+                    <div>{msg.dataMessage}</div>
+                  </div>
+                )
             })}
           </div>
-  
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='barraSuperiorChat'>
               <div><input {...register('message')} /></div>
@@ -143,7 +155,7 @@ export const SkuadlackPage = () => {
             </div>
           </form>
         </div>
-  
+
         <div className='box1'>
           <div className='AddOrg'>+</div>
           <div className='Org'>users conectados</div>
@@ -282,6 +294,6 @@ const PageStyle = styled.div`
     }
   
   }
-}
-`
+}`})}
+
 
