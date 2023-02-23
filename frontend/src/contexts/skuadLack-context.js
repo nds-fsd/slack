@@ -20,6 +20,7 @@ export const SkuadLackContextProvider = (props) => {
     const [myUserName, setMyUserName] = useState("");
     const [organizacionActual, setorganizacionActual] = useState("")
     const [chatId, setChatId] =useState('');
+    const [room, setRoom] = useState(idOrganizacionActual);
 
     //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
     //componentes que consumen de el
@@ -45,6 +46,8 @@ export const SkuadLackContextProvider = (props) => {
             .then((res) => {
                 setorganizacionActual(res)
                 setChatId('')
+                setRoom(res._id)
+                
             })
 
     }, [idOrganizacionActual]);
@@ -61,7 +64,9 @@ export const SkuadLackContextProvider = (props) => {
         organizacionActual,
         idOrganizacionActual,
         setChatId,
-        chatId
+        chatId,
+        room,
+        setRoom
     };
 
     return (

@@ -5,16 +5,18 @@ import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
 import { useSkuadLackContext } from "../../../../contexts/skuadLack-context";
 
-const ListChat = () => {
-  const {userNames, chatIds, myUserName, chatId, setChatId} = useSkuadLackContext()  
 
+const ListChat = () => {
+  const {userNames, chatIds, myUserName, chatId, setChatId, setRoom} = useSkuadLackContext()
+  
   const obtenerValor = (item) => {
     
     const elemento = userNames.find(e => e === item);
     const indexId = userNames.findIndex(e => e === item);
-    
-    setChatId(chatIds[indexId])
-   
+
+    //setChatId(chatIds[indexId])
+    setRoom(chatIds[indexId])
+
     //return alert(`Estás haciendo click en ${elemento} y idChat ${chatIds[indexId]}`);
   };
 

@@ -26,45 +26,42 @@ const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https:
 
 export const SkuadlackPage = () => {
   //lineasjorge
-  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual } = useSkuadLackContext()
+  const { user, idUser, organizacionActual, myOrganizaciones, idOrganizacionActual,chatId, room, setRoom } = useSkuadLackContext()
+  const [refresh, setRefresh] = useState(true)
 
 
-  //lineasDani
-  console.log(idUser)
-  // const [socket, setSocket] = useState(null);
-  //const [room, setRoom] = useState('');
-  const room = idOrganizacionActual
-  //const [roomInfo, setRoomInfo] = useState([]);
+ //setRoom(chatId ? chatId : idOrganizacionActual)
+
   const [message, setMessage] = useState([]);
   const { register, handleSubmit, reset } = useForm()
-
-
 
   //console.log(user.organizacion)
 
   useEffect(()=>{
-   socket.emit('joinRoom', idOrganizacionActual)
+   socket.emit('joinRoom', room)
    //setRoom(organizacionActual)
-  },[idOrganizacionActual])
+  },[room])
   useEffect(() =>{
     const mensajeBienvenida = ({from, message, sala }) =>{
       sala=room
 //      setRoom(room)
       console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
-  }, [idOrganizacionActual])
+  }, [room])
 
 
-  useEffect(() => {
-    const InfoDelSocket = (data) => {
-
+ 
   useEffect(()=>{
     const InfoDelSocket = (data) =>{
-  //    setRoom(data.roomId)
+     
       console.log('respuesta del BE', data)
-      setMessage([...message, {dataMessage: data.message, from: data.from}])
+      setMessage([...message, {dataMessage: data.message, from: data.from, room:room}])
+ 
     }
+    
     socket.on('reply', InfoDelSocket)
+    
+
     return () => {
       socket.off('reply', InfoDelSocket)
 
@@ -74,7 +71,8 @@ export const SkuadlackPage = () => {
   const onSubmit = (data) =>{
     console.log('Data Onsubmit: ', data)
     socket.emit('chat', {message: data.message, room: room, from: user.userName})
-    setMessage([...message,{from: 'Yo', dataMessage: data.message} ])
+    setMessage([...message,{from: 'Yo', dataMessage: data.message, room:room} ])
+   
     reset()
   }
 
@@ -92,8 +90,8 @@ export const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', idOrganizacionActual);
-
+  console.log('quiero saber nombre org y sale...', room);
+  console.log('mensajes', message)
   return (
     <PageStyle>
       <div className='barrasuperior'>
@@ -126,23 +124,24 @@ export const SkuadlackPage = () => {
             <div className='botonAddChat'>
               <BiMessageAdd size="2rem"/>
             </div>
-            <ListChat />
+            <ListChat/>
           </div>
         </div>
 
       <div className="box3">
         <div className="barraSuperiorChat">
-          <div>{idOrganizacionActual}</div>
+          <div>{room}</div>
             <div>opciones </div>
           </div>
-
+            
           <div className='bodyChat'>
             {message.map((msg, i) => {
-              if (idOrganizacionActual === msg.room)
+              if (room === msg.room)
                 return (
                   <div key={i}>
                     <div>{msg.from}:</div>
                     <div>{msg.dataMessage}</div>
+                    <div>{msg.room}</div>
                   </div>
                 )
             })}
@@ -165,24 +164,18 @@ export const SkuadlackPage = () => {
     </PageStyle>
   )
 }
+
 const PageStyle = styled.div`
-
-
     display: block;
     justify-content: center;
     text-align: center;
-    color : #f2f2f2;
+    color : #F2F2F2;
     max-height: fit-content;
-
-
-
-
-
 .barrasuperior{
   height: 8vh;
-  background-color: #090a0f;
+  background-color: #090A0F;
   z-index: 2000;
-  color: #f2f2f2;
+  color: #F2F2F2;
   width: 100%;
   padding: .5rem;
   display: flex;
@@ -190,34 +183,25 @@ const PageStyle = styled.div`
   justify-content: space-between;
   overflow: hidden;
   align-items: center;
- 
 }
-
-
-
-
 .cuerpo{
   display: flex;
   flex-direction: row;
   height: 92vh;
   width: 100%;
   margin: 0;
-  
-
   .box1{
-
     padding: .3rem;
     background: #D9D9D9;
     height: 100%;
     width: 5%;
     text-align: center;
-    color: #090a0f;
+    color: #090A0F;
     font-size: x-large;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-
     .Org{
       height: 80%;
       word-wrap: break-word;
@@ -238,7 +222,6 @@ const PageStyle = styled.div`
     justify-content: space-between;
     overflow: hidden;
     text-align: center;
-
     .chatbox{
       box-shadow: 2px 2px 5px #0A0A0B, -2px -2px 5px #445CA3;
       width: 100%;
@@ -253,11 +236,7 @@ const PageStyle = styled.div`
       overflow:scroll;
       flex-wrap:wrap;
       position: relative;
-      
-
-
     }
-
   }
   .box3{
     padding: .2rem;
@@ -265,16 +244,15 @@ const PageStyle = styled.div`
     background-color: #3F485B;
     height: 100%;
     width: 65%;
-    color: #090a0f;
+    color: #090A0F;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    
     .barraSuperiorChat{
       height: 8vh;
       background-color: #202430;
-      color: #f2f2f2;
+      color: #F2F2F2;
       width: 100%;
       display: flex;
       flex-direction: row;
@@ -283,17 +261,13 @@ const PageStyle = styled.div`
       align-items: center;
       padding: 1rem;
       box-shadow: 2px  #0A0A0B, -2px  #445CA3;
-
     }
     .bodyChat{
       background-color: #3F485B;
       height: 100%;
-      color: #f2f2f2;
-
-
+      color: #F2F2F2;
     }
-  
   }
-}`})}
-
+}
+`
 

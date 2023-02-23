@@ -41,8 +41,6 @@ routerUsers.get('/userOrg/:id', jwtMiddleware, async (req, res) => {
         
         const organizacionUser = await Organizacion.find({user:idUser})
 
-      
-
         const response = {
             user:user,
             organizacion: organizacionUser
