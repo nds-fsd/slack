@@ -20,10 +20,10 @@ const ListChat = () => {
     //return alert(`Estás haciendo click en ${elemento} y idChat ${chatIds[indexId]}`);
   };
 
-  
+  console.log('userNames',userNames)
   return (
     <div className={styles.chatContainer}>
-      <ListGroup className={styles.listGroup} as="ol" numbered>
+      <ListGroup className={styles.listGroup} as="ol" >
         {userNames &&
           userNames.map((e) => {
             const uniqueKey = uuidv4();
@@ -49,7 +49,7 @@ const ListChat = () => {
                   action
                   onClick={() => obtenerValor(e)}
                 >
-                  {e}
+                  {(e.filter(item=>item !==myUserName)).join(" | ")}
                 </ListGroup.Item>
               );
             }

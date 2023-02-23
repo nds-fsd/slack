@@ -37,9 +37,18 @@ routerUsers.get('/user/:id', jwtMiddleware, async (req, res) => {
 routerUsers.get('/userOrg/:id', jwtMiddleware, async (req, res) => {
     const idUser = req.params.id
     try {
-        const user = await User.findById(idUser)//No tiene sentido al cambiar el schema en usuario .populate('organizacion').populate('chat')
+        const userFound = await User.findById(idUser)//No tiene sentido al cambiar el schema en usuario .populate('organizacion').populate('chat')
         
         const organizacionUser = await Organizacion.find({user:idUser})
+
+        const user = {
+            _id:userFound._id,
+            userName:userFound.userName,
+            name:userFound.name,
+            email:userFound.lastName,
+            lastName:userFound.lastName
+        }
+        //const user = userFound.map(({_id, userName, email, lastName}) => ({_id, userName, email, lastName}));
 
         const response = {
             user:user,
