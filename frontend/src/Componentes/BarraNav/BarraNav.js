@@ -17,7 +17,6 @@ export const BarraNav = () => {
 
   return (
     <NavBarStyle>
-      <div>
         <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
           <Container fluid>
             <img
@@ -25,7 +24,7 @@ export const BarraNav = () => {
               src={require("../../Assets/Png  logo.png")}
               alt=""
             />
-            <Navbar.Brand href="/">
+            <Navbar.Brand href={getUserToken()? `/LUP/${getUserSession().id}`: `/`}>
               <h1>SkuadLack</h1>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
@@ -41,9 +40,11 @@ export const BarraNav = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
+                {!getUserToken() && (
                   <Nav.Link as={Link} to="/">
                     <p>Home Page</p>
                   </Nav.Link>
+                )}
                   <NavDropdown
                     title="About Us"
                     id={`offcanvasNavbarDropdown-expand-md`}
@@ -134,7 +135,6 @@ export const BarraNav = () => {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-      </div>
     </NavBarStyle>
   );
 };

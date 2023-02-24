@@ -8,10 +8,11 @@ import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
 import Organizacion from '../Schemas/organizacion.js';
+import { sendMailWelcome } from '../mailgun/index.js';
 
 routerUsers.get('/user', jwtMiddleware, async (req, res) => {
     try {
-        const allUsers = await User.find().populate('organizacion');
+        const allUsers = await User.find()//no tiene sentido con el nuevo schema de User .populate('organizacion');
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json(error)
@@ -19,12 +20,43 @@ routerUsers.get('/user', jwtMiddleware, async (req, res) => {
 });
 
 routerUsers.get('/user/:id', jwtMiddleware, async (req, res) => {
-    const id = req.params.id
+    const idUser = req.params.id
     try {
-        const user = await User.findById(id).populate('organizacion')
-            
+        const user = await User.findById(idUser)//No tiene sentido al cambiar el schema en usuario .populate('organizacion').populate('chat')
+
         if (user) {
             res.status(200).json(user)
+        } else {
+            res.status(404).send('No existe este usuario')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+});
+
+routerUsers.get('/userOrg/:id', jwtMiddleware, async (req, res) => {
+    const idUser = req.params.id
+    try {
+        const userFound = await User.findById(idUser)//No tiene sentido al cambiar el schema en usuario .populate('organizacion').populate('chat')
+        
+        const organizacionUser = await Organizacion.find({user:idUser})
+
+        const user = {
+            _id:userFound._id,
+            userName:userFound.userName,
+            name:userFound.name,
+            email:userFound.lastName,
+            lastName:userFound.lastName
+        }
+        //const user = userFound.map(({_id, userName, email, lastName}) => ({_id, userName, email, lastName}));
+
+        const response = {
+            user:user,
+            organizacion: organizacionUser
+        }
+
+        if (user) {
+            res.status(200).json(response)
         } else {
             res.status(404).send('No existe este usuario')
         }
@@ -75,16 +107,12 @@ routerUsers.post('/user/enrollOrganization', async (req, res) => {
     const idUser = req.body.idUser
     const idOrganizacion = req.body.idOrganizacion
     try {
-        const user = await User.findById(idUser)
-        console.log("USUARIO ENROLADO", user)
-        if (!user) return res.status(404).json({ message: 'no encuentro el usuario' })
-        if (user.organizacion.includes(idOrganizacion)) return res.status(400).json({ message: ' ya estas en la organizacion' })
-        user.organizacion.push(idOrganizacion)
-        await user.save()
         const organizacion = await Organizacion.findById(idOrganizacion)
+        if (!organizacion) return res.status(404).json({ message: 'no encuentro la organizacion' })
+        if (organizacion.user.includes(idUser)) return res.status(400).json({ message: ' ya estas en la organizacion' })
         organizacion.user.push(idUser)
         await organizacion.save()
-        res.status(201).json({user, organizacion})
+        res.status(201).json(organizacion)
 
         /*
             Esto deberia devolvernos algo parecido a 
@@ -156,6 +184,7 @@ routerUsers.post('/login', async (req, res) => {
                 return res.status(400).json({ error: { password: "Invalid Password" } })
             }
             // * if everything is ok, return the new token and user data
+            sendMailWelcome(foundUser.name, foundUser.email)
             return res.status(200).json({
                 token: foundUser.generateJWT(),
                 user: {

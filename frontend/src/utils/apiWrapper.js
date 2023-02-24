@@ -1,28 +1,11 @@
 import { getUserToken } from "./localStorageUtils";
 
-const fetchSupreme = (path, method, body, isToken, query) => {
+const fetchSupreme = (path, method = 'GET', body, isToken, query) => {
   //path: tiene que incluir la primera barra. Ejemplo "http://localhost:3001/user" --> path = "/user"
   //method: 'GET', 'POST'...
   //body: incluir como objeto si es necesario. Si no, especificar undefined SUPER IMPORTANTE
   //isToken: si es true, quiere decir que va a verificar si tenemos token, si es false, no.
-  //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante
-
-  /*
-  const ApiError = (message, data, status)=>{
-    
-  let response = ''
-    try{
-      response = JSON.parse(data);
-
-    }catch(e){
-      response= data
-    }
-    this.response = response;
-    this.message = message;
-    this.status = status;
-
-  }
-  */
+  //query: incluir como string los query params. Ejemplo inventado: /user?id='1234' --> query = 'id=1234'. Sin interrogante. si no hay nada UNDEFINDED
 
   const URL_API =
     window.location.hostname === "skuadlack.netlify.app"
@@ -30,13 +13,11 @@ const fetchSupreme = (path, method, body, isToken, query) => {
       : "http://localhost:3001";
 
   let URL = URL_API + path;
+  //const queryParams = query && JSON.stringify(query); --> si pongo esto no funciona el queryParams... no sé por qué
+ 
 
-  const authorization = isToken && `Bearer ${getUserToken()}`;
-
-  const queryParams = query && JSON.stringify(query);
-
-  if (queryParams) {
-    URL = `${URL}?${queryParams}`;
+  if (query) {
+    URL = `${URL}?${new URLSearchParams(query).toString()}`;
   }
 
   const options = {
@@ -45,7 +26,7 @@ const fetchSupreme = (path, method, body, isToken, query) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      authorization: authorization,
+      authorization: `Bearer ${getUserToken()}`,
     },
     body: JSON.stringify(body),
   };

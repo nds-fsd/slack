@@ -6,13 +6,12 @@ import jwt from 'jsonwebtoken'
 
 
 const userSchema = new Schema({
-  userName: { type: String, required: true },
+  userName: { type: String, required: true, unique:true },
   name: { type: String, required: true },
   email: { type: String, required: true, required: true, unique: true, trim: true, match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i },
   lastName: { type: String, required: true },
   password: { type: String, required: true, required: true, unique: true, trim: true },
-  organizacion: [{type: Schema.ObjectId, ref: 'Organizacion'}],
-  chat: [{type: Schema.ObjectId, ref: 'Chat'}]
+  
 });
 
 userSchema.pre('save', function (next) {
@@ -35,7 +34,7 @@ userSchema.methods.generateJWT = function () {
 
   let payload = {
     id: this._id,
-    name: this.firstName,
+    name: this.name,
     email: this.email,
   };
   // * This method is from the json-web-token library (who is in charge to generate the JWT
