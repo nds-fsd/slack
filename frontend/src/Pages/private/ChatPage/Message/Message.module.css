@@ -6,7 +6,7 @@
 
 .messageAvatar {
 	display: flex;
-	gap: 4px
+	gap: 4px;	
 }
 
 .messageText {
@@ -17,14 +17,13 @@
 .messageHeader {
 	max-width: 100px;
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	gap: 4px;
 }
 
 .messageName{
 	font-weight: bold;
-	margin-left:1rem;
 }
 
 .messageTime {

@@ -7,6 +7,7 @@ import AutoTextArea from './AutoTextArea/autoTextArea';
 import Message from './Message/Message';
 import { useSocket } from '../../../contexts/useSocket';
 import CircleAvatar from '../../../Componentes/circleAvatar/circleAvatar';
+import CircleAvatarUsers from '../../../Componentes/circleAvatar/circleAvatarUsers';
 //import { isBefore } from 'date-fns';
 const ChatPage = ()=> {
 
@@ -17,7 +18,7 @@ const ChatPage = ()=> {
     const [messages, setMessages] =  useState([]);
     const [messageBody, setMessageBody] = useState('');
 
-    const {chats, myOrganizaciones, idOrganizacionActual, myUserName, idUser} = useSkuadLackContext();
+    const {chats, myOrganizaciones, idOrganizacionActual, myUserName, idUser, organizacionActual, userOfOrganizacionActual} = useSkuadLackContext();
     const handleMessageBody = (e) => {
 		setMessageBody(e.target.value);
 	}
@@ -86,7 +87,6 @@ const ChatPage = ()=> {
 
 	const scrollToBottom = () => {
 		if(messagesEndRef && messagesEndRef.current){
-            console.log(messagesEndRef);
 			messagesEndRef.current.scrollTop = messagesEndRef?.current?.scrollHeight ;
 		}
 	}
@@ -102,6 +102,7 @@ const ChatPage = ()=> {
             </div>))}
         </div>
         <div className={styles.chatsRoot}>
+            <h4>{organizacionActual.OrgName}</h4>
             <h2 className={styles.chatsTitle}>
                 Chats
             </h2>
@@ -120,9 +121,9 @@ const ChatPage = ()=> {
             {currentChat  && (
                 <>
                     <h5 className={styles.chatHeader}>
-                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.userName).join(' | ')}
+                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
                     </h5>
-                    <hr className={styles.divider}/>
+                    
                     <div className={styles.wrapper}>
                         <div className={styles.messages} ref={messagesEndRef}>
                             {messages.map(message => <Message message={message}/>)}
@@ -134,6 +135,17 @@ const ChatPage = ()=> {
                 </>
             )}
             
+        </div>
+        <div className={styles.listUserRoot}>
+        <h2 className={styles.usersTitle}>
+                Users
+            </h2>
+            {userOfOrganizacionActual.map(user => (
+            <div className={styles.usersRoot}
+            onClick={()=> console.log(user.userName)} >
+                <CircleAvatarUsers name={user.userName} id={user._id} size={40} color={stringToColour(user.name)}/>
+                {user.userName}
+            </div>))}
         </div>
        
     </div>

@@ -19,8 +19,10 @@ export const SkuadLackContextProvider = (props) => {
     const [chatIds, setChatIds] = useState([''])
     const [myUserName, setMyUserName] = useState("");
     const [organizacionActual, setorganizacionActual] = useState("")
-    const [chatId, setChatId] =useState('');
+    const [chatId, setChatId] = useState('');
     const [room, setRoom] = useState(idOrganizacionActual);
+    const [userOfOrganizacionActual, setUserOfOrganizacionActual] = useState([])
+    const [refreshContext, setRefreshContext] = useState(true)
 
     //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
     //componentes que consumen de el
@@ -47,10 +49,19 @@ export const SkuadLackContextProvider = (props) => {
                 setorganizacionActual(res)
                 setChatId('')
                 setRoom(res._id)
-                
+
             })
 
-    }, [idOrganizacionActual]);
+        fetchSupreme(`/organizacionUsers/${idOrganizacionActual}`, "GET", undefined, true, undefined)
+            .then((res) => {
+                setUserOfOrganizacionActual(res)
+               
+
+            })
+
+    }, [idOrganizacionActual, refreshContext]);
+
+
 
     //pasamos por value las variables a "compartir".
     const value = {
@@ -66,7 +77,11 @@ export const SkuadLackContextProvider = (props) => {
         setChatId,
         chatId,
         room,
-        setRoom
+        setRoom,
+        userOfOrganizacionActual,
+        setChats,
+        setRefreshContext,
+        refreshContext
     };
 
     return (

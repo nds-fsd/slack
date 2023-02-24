@@ -7,15 +7,24 @@
 
 .chatsRoot {
     padding: 24px 12px;
-    background-color: rgb(26, 23, 23);
+    background-color:#242A38;
     display: flex;
     flex-direction: column;
+    width: 200px;
     gap: 4px;
+    border-right: 1px solid #0e1116;
+}
+
+.chatsRoot h4{
+    color:white;
+    border-bottom: 1px solid white;
+    
+    padding-bottom: 1.8rem;
 }
 .orgsRoot {
     padding: 24px 12px;
-    background-color: rgb(26, 23, 23);
-    border-right: 1px solid white;
+    background-color:#242A38;
+    border-right: 1px solid #0e1116;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -24,7 +33,19 @@
 .chatsTitle {
     color: white;
 }
-
+.usersTitle {
+    color: white;
+    border-bottom: 1px solid white;
+}
+.listUserRoot {
+    padding: 24px 12px;
+    background-color:#242A38;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 4px;
+    border-left: 1px solid #0e1116;
+}
 .chat {
     color: white;
     padding: 8px;
@@ -32,17 +53,23 @@
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
+    
 }
 
 .focusedChat {
-    background-color: #dc3545;
+    background: linear-gradient(to bottom right, #F54864 ,#F78361);
+    width: fit-content;
+    
+    
 }
 
 .chat:hover {
-    background-color: rgb(73, 67, 67);
+      background-color:  #3f485b;
+    
 }
 
 .chatWindow{
+    background-color:  #3f485b;
     border-radius: 4px;
     color: white;
     flex: 1;
@@ -51,12 +78,16 @@
 
 .chatHeader{
     box-sizing: border-box;
-    padding: 8px;
+    padding: 12px;
+    background-color:#242A38;
+    border-bottom: 1px solid #0e1116;
+   
+
 }
 
 .divider{
     border-top: 1px solid white;
-    margin: 0;
+    background-color:#242A38;
 }
 
 .wrapper {
@@ -76,7 +107,7 @@
 }
 
 .area {
-	background: #521218;
+    background: linear-gradient(to bottom right, #a10d26 ,#e67d5d);
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
@@ -93,6 +124,18 @@
 .messages:hover {
 	overflow-y: scroll;
 	padding-right: 0px;
+}
+
+.usersRoot{
+    color: white;
+ 
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 4px;
+    overflow-y: scroll;
 }
 
 
