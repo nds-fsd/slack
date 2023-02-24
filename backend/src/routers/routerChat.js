@@ -4,7 +4,7 @@ import User from "../Schemas/user.js";
 const routerChat = express.Router();
 import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 
-
+//No se utiliza
 routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   //Solo puedo crear un chat si he hecho login. En el key de token tengo el id de usuario
 

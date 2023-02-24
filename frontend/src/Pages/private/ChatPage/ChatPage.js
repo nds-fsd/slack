@@ -109,7 +109,22 @@ const ChatPage = ()=> {
                 })}
                 onClick={() => setCurrentChat(chat)}
             >
-                {chat.userName ? chat.userName : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
+                
+                {chat.name ? chat.name : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
+
+               {/*
+                {chat.user.map((u)=>{
+
+                    if(u.userName.toString() === myUserName){
+                        return `${myUserName} : tu`
+
+                    }else{
+                        u.userName.filter((item)=>{
+                            return ((item !== myUserName).join(' | '))
+                        })
+                    }
+                })}
+            */}          
             </div>))}
         </div>
         <div className={styles.chatWindow}>
