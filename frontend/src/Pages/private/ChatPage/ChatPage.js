@@ -17,8 +17,7 @@ const ChatPage = ()=> {
     const [messages, setMessages] =  useState([]);
     const [messageBody, setMessageBody] = useState('');
 
-    const {chats, myOrganizaciones, idOrganizacionActual} = useSkuadLackContext();
-
+    const {chats, myOrganizaciones, idOrganizacionActual, myUserName} = useSkuadLackContext();
     const handleMessageBody = (e) => {
 		setMessageBody(e.target.value);
 	}
@@ -110,14 +109,14 @@ const ChatPage = ()=> {
                 })}
                 onClick={() => setCurrentChat(chat)}
             >
-                {chat.name ? chat.name : chat.user.map(u=> u.name).join(', ')}
+                {chat.userName ? chat.userName : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
             </div>))}
         </div>
         <div className={styles.chatWindow}>
             {currentChat  && (
                 <>
                     <h5 className={styles.chatHeader}>
-                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.name).join(', ')}
+                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.userName).join(' | ')}
                     </h5>
                     <hr className={styles.divider}/>
                     <div className={styles.wrapper}>

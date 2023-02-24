@@ -27,7 +27,7 @@ const Message = (props) =>{
 			</div>
 			<div className={styles.messageBody}>
 				<div className={styles.messageHeader}>
-					<div className={styles.messageName}>{message.user.name}</div>
+					<div className={styles.messageName}>{message.user.userName}</div>
 					<div className={styles.messageTime}>
 						{format(new Date(message.date), 'HH:mm')}
 					</div>
