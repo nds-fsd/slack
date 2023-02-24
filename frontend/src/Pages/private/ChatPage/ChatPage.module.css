@@ -42,7 +42,7 @@
     background-color:#242A38;
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 140px;
     gap: 4px;
     border-left: 1px solid #0e1116;
 }
