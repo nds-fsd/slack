@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSkuadLackContext } from "../../contexts/skuadLack-context"
 
-function CircleAvatar({ name, color, size, id }) {
+function CircleAvatar({ name, color, size, id, path }) {
   // Extraer las dos primeras letras del nombre
 
   const {setChatId } = useSkuadLackContext()
@@ -32,7 +32,7 @@ function CircleAvatar({ name, color, size, id }) {
 
   return (
   
-  <Button as={Link} to={`/skuadlack/${id}`} style={circleStyle}>{initials}</Button>
+  <Button as={Link} to={path + id} style={circleStyle}>{initials}</Button>
   )
 }
 

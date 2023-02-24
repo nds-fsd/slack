@@ -17,7 +17,7 @@ const ChatPage = ()=> {
     const [messages, setMessages] =  useState([]);
     const [messageBody, setMessageBody] = useState('');
 
-    const {chats, myOrganizaciones, idOrganizacionActual, myUserName} = useSkuadLackContext();
+    const {chats, myOrganizaciones, idOrganizacionActual, myUserName, idUser} = useSkuadLackContext();
     const handleMessageBody = (e) => {
 		setMessageBody(e.target.value);
 	}
@@ -95,7 +95,7 @@ const ChatPage = ()=> {
         <div className={styles.orgsRoot}>
             {myOrganizaciones?.map(org => (
             <div>
-                <CircleAvatar name={org.OrgName} id={org._id} color={stringToColour(org.OrgName)} size={40}/>
+                <CircleAvatar  name={org.OrgName} path={'/LUP/'} id={idUser} color={stringToColour(org.OrgName)} size={40}/>
             </div>))}
         </div>
         <div className={styles.chatsRoot}>
@@ -109,7 +109,8 @@ const ChatPage = ()=> {
                 })}
                 onClick={() => setCurrentChat(chat)}
             >
-                {chat.userName ? chat.userName : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
+                
+                {chat.name? chat.name : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
             </div>))}
         </div>
         <div className={styles.chatWindow}>
