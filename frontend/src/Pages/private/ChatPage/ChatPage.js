@@ -8,6 +8,9 @@ import Message from './Message/Message';
 import { useSocket } from '../../../contexts/useSocket';
 import CircleAvatar from '../../../Componentes/circleAvatar/circleAvatar';
 import CircleAvatarUsers from '../../../Componentes/circleAvatar/circleAvatarUsers';
+import {BiCommentAdd} from 'react-icons/bi'
+import CreateNewChatWithUsers from '../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx';
+
 //import { isBefore } from 'date-fns';
 const ChatPage = ()=> {
 
@@ -104,7 +107,7 @@ const ChatPage = ()=> {
         <div className={styles.chatsRoot}>
             <h4>{organizacionActual.OrgName}</h4>
             <h2 className={styles.chatsTitle}>
-                Chats
+                Chats <button onClick={()=>(<CreateNewChatWithUsers/>)}><BiCommentAdd/></button>
             </h2>
             {chats.map(chat => (
             <div 
