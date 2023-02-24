@@ -8,6 +8,8 @@ const AutoTextArea = (props) => {
 			<TextareaAutosize
 				{...props}
 				className={styles.textarea}
+				maxRows={3}
+				minRows={1}
 			/>
 	);
 };
