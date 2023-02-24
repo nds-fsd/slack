@@ -46,10 +46,12 @@ const ChatPage = ()=> {
 	}
 
     useEffect(() => {
-        if(!currentChat && chats.length > 0){
+        if(chats.length > 0){
             setCurrentChat({...chats[0]})
+        }else{
+            setCurrentChat(undefined);
         }
-    }, [chats]);
+    }, [chats, idOrganizacionActual]);
 
     useEffect(() => {
         if(currentChat){
@@ -83,12 +85,13 @@ const ChatPage = ()=> {
     const messagesEndRef = useRef()
 
 	const scrollToBottom = () => {
-		if(messagesEndRef && messagesEndRef.current !== undefined){
+		if(messagesEndRef && messagesEndRef.current){
+            console.log(messagesEndRef);
 			messagesEndRef.current.scrollTop = messagesEndRef?.current?.scrollHeight ;
 		}
 	}
 
-	useEffect(scrollToBottom, [messages]);
+	useEffect(scrollToBottom, [messages, messagesEndRef]);
 
 
     return <div className={styles.root}>
