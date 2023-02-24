@@ -95,7 +95,7 @@ const ChatPage = ()=> {
         <div className={styles.orgsRoot}>
             {myOrganizaciones?.map(org => (
             <div>
-                <CircleAvatar  name={org.OrgName} path={'/LUP/'} id={idUser} color={stringToColour(org.OrgName)} size={40}/>
+                <CircleAvatar  name={org.OrgName} path={'/skuadlack/'} id={org._id} color={stringToColour(org.OrgName)} size={40}/>
             </div>))}
         </div>
         <div className={styles.chatsRoot}>
