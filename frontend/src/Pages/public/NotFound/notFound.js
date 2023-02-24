@@ -1,5 +1,5 @@
 import styles from './notFound.module.css'
-import notFound from '../../Assets/notFound.png'
+import notFound from '../../../Assets/notFound.png'
 
 const NotFound = () => {
     return (

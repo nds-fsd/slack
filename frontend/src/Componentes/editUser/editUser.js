@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { patchToMongo } from "../../utils/fetchToMongo";
-import NotFound from "../NotFound/notFound";
 import styles from "./editUser.module.css";
 import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 import fetchSupreme from "../../utils/apiWrapper";

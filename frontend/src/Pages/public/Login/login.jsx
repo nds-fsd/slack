@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import fetchSupreme from "../../utils/apiWrapper";
-import { setUserSession } from "../../utils/localStorageUtils";
+import fetchSupreme from "../../../utils/apiWrapper";
+import { setUserSession } from "../../../utils/localStorageUtils";
 import styles from "./login.module.css"
 
 const Login = () => {

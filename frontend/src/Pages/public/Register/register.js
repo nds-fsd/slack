@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
-import styles from "./formUser.module.css"
-import { postToMongo } from "../../utils/fetchToMongo.js";
-import fetchSupreme from "../../utils/apiWrapper";
-import { setUserSession } from "../../utils/localStorageUtils";
+import styles from "./register.module.css"
+import { postToMongo } from "../../../utils/fetchToMongo.js";
+import fetchSupreme from "../../../utils/apiWrapper";
+import { setUserSession } from "../../../utils/localStorageUtils";
 
-const FormUser1 = () => {
+const Register = () => {
     const [show, setShow] = useState(false)
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -74,4 +74,4 @@ const FormUser1 = () => {
     )
 }
 
-export default FormUser1;
+export default Register;

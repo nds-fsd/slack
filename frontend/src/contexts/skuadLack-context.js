@@ -13,7 +13,7 @@ export const SkuadLackContextProvider = (props) => {
     const idOrganizacionActual = params.id
     const idUser = getUserSession().id;
     const [user, setUser] = useState("")
-    const [myOrganizaciones, setMyOrganizaciones] = useState("")
+    const [myOrganizaciones, setMyOrganizaciones] = useState([]);
     const [userNames, setUserNames] = useState([]);
     const [chats, setChats] = useState([])
     const [chatIds, setChatIds] = useState([''])

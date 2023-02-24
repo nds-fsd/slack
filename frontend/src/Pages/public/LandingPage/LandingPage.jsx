@@ -1,14 +1,11 @@
-//SIN USO
 
 import styles from "./landingPage.module.css";
-import videoVerde from '../../Assets/480_verde.mp4';
-import imagenChat from '../../Assets/videochat_umlaut.jpg';
+import imagenChat from '../../../Assets/videochat_umlaut.jpg';
 import {Link} from "react-router-dom"
-import logoNasa from '../../Assets/logo-nasa.png'
-import logoMundoToday from '../../Assets/logo-elmundotoday2.png'
-import logoAirbnb from '../../Assets/airbnb-logo.png'
-import slackLogo from '../../Assets/slackLogo.png'
-import PublicChat from "../public-chat/public-chat";
+import logoNasa from '../../../Assets/logo-nasa.png'
+import logoMundoToday from '../../../Assets/logo-elmundotoday2.png'
+import logoAirbnb from '../../../Assets/airbnb-logo.png'
+import slackLogo from '../../../Assets/slackLogo.png'
 
 
 

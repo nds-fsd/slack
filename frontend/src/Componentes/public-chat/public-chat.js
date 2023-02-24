@@ -4,8 +4,8 @@ import Badge from 'react-bootstrap/Badge';
 import { io } from "socket.io-client";
 import { getUserSession } from "../../utils/localStorageUtils";
 import fetchSupreme from "../../utils/apiWrapper";
+import { useSocket } from "../../contexts/useSocket";
 
-const socket = io(window.location.hostname === "skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001") 
 
 /*
 const urlIO = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
@@ -13,6 +13,8 @@ const socket = io(urlIO)
 */
 
 const PublicChat = () => {
+    const {socket} = useSocket();
+
     const [nickname, setNickname] = useState("");
     const [disabled, setDisabled] = useState(false);
     const chat = useRef(null)

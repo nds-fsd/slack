@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useSkuadLackContext } from "../../../../contexts/skuadLack-context"
+import { useSkuadLackContext } from "../../contexts/skuadLack-context"
 
 function CircleAvatar({ name, color, size, id }) {
   // Extraer las dos primeras letras del nombre

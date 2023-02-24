@@ -5,7 +5,6 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import ModalEditUser from "../Modal/modalEditUser";
-import EditUser from '../editUser/editUser.js'
 import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 import fetchSupreme from "../../utils/apiWrapper";
 
