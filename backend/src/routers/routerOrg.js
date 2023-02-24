@@ -100,6 +100,36 @@ routerOrg.get('/organizacion/:id', async (req,res)=>{
     }
 });
 
+  //Para obtener los usuarios de una organización sin devolver la contraseña
+routerOrg.get('/organizacionUsers/:id', async (req,res)=>{
+  const idOrg = req.params.id
+
+  try{
+  const organizacion = await Organizacion.findById(idOrg).populate('user')
+
+    console.log('organizacion', organizacion)
+
+    const usersNoPassword = organizacion.user
+
+
+    console.log('users', usersNoPassword)
+    
+    //método para devolver las keys que queramos cuando los objetos están anidados en un array
+    const users = usersNoPassword.map(({_id, name, userName, email, lastName}) => ({_id, name,userName, email, lastName}));
+    
+    
+    console.log('cleanUsers', users)
+
+  if (organizacion){
+      res.status(200).json(users)
+  }else{
+      res.status(404).send('No existe este usuario')
+  }}catch(error){
+      res.status(500).json(error)
+  }
+});
+
+
 routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
     try{
         const organizacionModified = await Organizacion.findByIdAndUpdate(req.params.id, req.body);

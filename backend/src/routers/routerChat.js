@@ -4,7 +4,7 @@ import User from "../Schemas/user.js";
 const routerChat = express.Router();
 import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 
-//Crear un chat asociado a un usuario y organización
+
 routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   //Solo puedo crear un chat si he hecho login. En el key de token tengo el id de usuario
 
@@ -37,6 +37,7 @@ routerChat.post("/createChat", jwtMiddleware, async (req, res) => {
   }
 });
 
+//Crear un chat asociado a un usuario o VARIOS y organización
 routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
   //Crear un chat que a diferencia del anterior el usuario venga en el body
 
@@ -51,8 +52,17 @@ routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
     //La forma de asignar el idOrganización es mediante una equivalencia cuando son dependencias 1 a N (sin array en el schema de Chat)
     chat.organizacion = idOrganizacion;
 
-    //Esta es la forma de añadir usuarios al chat cuando son equivalencias N a N
+
+    //Así podemos añadir 1 o varios usuarios al mismo tiempo
+  if (Array.isArray(idUser)){
+
+    idUser.map((e)=>{
+      chat.user.push(e)
+    })
+  }else{
+    
     chat.user.push(idUser);
+  }
 
     await chat.save();
 
@@ -177,7 +187,7 @@ routerChat.patch("/deleteUserFromChat/:idChat", jwtMiddleware, async (req, res) 
 );
 
 //MÉTODO AGRUPADO DE AÑADIR Y QUITAR USUARIOS MEDIANTE QUERY PARAMS
-routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
+routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {-q
   //Definición del query params:
   //method = a --> add users
   //method = d --> deleter users
