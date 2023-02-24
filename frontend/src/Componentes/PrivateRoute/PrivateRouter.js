@@ -1,11 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { SocketContextProvider } from "../../contexts/useSocket.js";
 import { getUserToken } from "../../utils/localStorageUtils.js"
 
 // "getUserToken" tiene q venir de local storage para redireccionar las rutas en caso de no coincidir
 
 const PrivateRoutes = () => {
   if (getUserToken()) {
-    return <Outlet />;
+    return (
+      <SocketContextProvider>
+        <Outlet/> 
+      </SocketContextProvider>)     
   } else {
     return <Navigate to="/login" />; //redirigir a login 
   }

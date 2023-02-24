@@ -56,12 +56,6 @@ routerChat.post("/createChatById", jwtMiddleware, async (req, res) => {
 
     await chat.save();
 
-    const userSchema = await User.findById(idUser);
-    
-    userSchema.chat.push(chat._id)
-
-    await userSchema.save()
-
     res.status(201).json(chat);
   } catch (error) {
     res.status(500).json(error);
@@ -274,6 +268,7 @@ routerChat.patch("/modifyUser/:idChat?", jwtMiddleware, async (req, res) => {
   }
 });
 
+
 routerChat.get("/userChatsId", jwtMiddleware, async (req, res) => {
 
   //se espera algo tipo /userChats?idOrganización=1212123&idUser=238238283
@@ -283,7 +278,7 @@ routerChat.get("/userChatsId", jwtMiddleware, async (req, res) => {
   
   try {
     const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser})
-    console.log('AllChats', allChats)
+    //console.log('AllChats', allChats)
     
     res.status(200).json(allChats);
 
@@ -302,12 +297,12 @@ routerChat.get("/userChats", jwtMiddleware, async (req, res) => {
   
   try {
     const allChats = await Chat.find({organizacion:idOrganizacion, user: idUser}).populate('user')
-    console.log('AllChats', allChats)
+    //console.log('AllChats', allChats)
 
     //me traigo del objeto de chats, solo los usuarios
     const allUsers = allChats.map(chat=>chat.user)
     const chatIds =allChats.map(chat=>chat._id)
-    console.log('chatIds',chatIds)
+    //console.log('chatIds',chatIds)
 
     //allUsers es un array con tantos subArrays como usuarios existan en cada chat
     //lo peculiar es que si es un chat de 1 solo, es un objeto de 1 usuario

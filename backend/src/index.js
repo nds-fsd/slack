@@ -7,12 +7,7 @@ import routerOrg from './routers/routerOrg.js';
 import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
-import { configurePublicSocket } from './socket/index.js';
 import { SupremeSocket } from './socket/SupremeSocket.js';
-
-
-
-
 
 dotenv.config();
 export const app = express();
@@ -40,30 +35,10 @@ if(process.env.NODE_ENV !== 'test'){
 }else{
     port = process.env.TEST_PORT
 }
-
 export const server = app.listen(port, () => {
-let port = process.env.PORT ?? 8080;
-
-if(process.env.NODE_ENV !== 'test'){
-    connectDB().then((error) => {
-        if(error){
-            console.log(error);
-        }else{
-            console.log('🏢 Connected to database!');
-        }
-    });
-}else{
-    port = process.env.TEST_PORT
-}
-})
-/*
-const server = app.listen(port, () => {
-    console.log(`Server is up and running at port ${port} ⚡`)
+    console.log('Server started! ⚡')
 })
 
-*/
-
-export const socketIoPublic = configurePublicSocket(server);
-export const socketIoPrivate = SupremeSocket(server)
+export const io = SupremeSocket(server)
 
 

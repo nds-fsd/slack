@@ -17,7 +17,6 @@ export const BarraNav = () => {
 
   return (
     <NavBarStyle>
-      <div>
         <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
           <Container fluid>
             <img
@@ -136,7 +135,6 @@ export const BarraNav = () => {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-      </div>
     </NavBarStyle>
   );
 };

@@ -34,7 +34,7 @@ userSchema.methods.generateJWT = function () {
 
   let payload = {
     id: this._id,
-    name: this.firstName,
+    name: this.name,
     email: this.email,
   };
   // * This method is from the json-web-token library (who is in charge to generate the JWT

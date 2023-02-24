@@ -1,7 +1,7 @@
 import express from "express";
 import PublicMessage from "../Schemas/publicMessage.js";
 const routerPublicMessage = express.Router();
-import  {socketIoPublic}  from "../index.js";
+//import  {socketIoPublic}  from "../index.js";
 
 
 routerPublicMessage.post('/publicMessage',  (req, res) => {
@@ -20,7 +20,7 @@ routerPublicMessage.post('/publicMessage',  (req, res) => {
             return res.status(404).send('Error saving message')
         }
     })
-     socketIoPublic.emit("NEW_MESSAGE", newMessage);
+     //socketIoPublic.emit("NEW_MESSAGE", newMessage);
     
      return res.status(200).json({
         status: "success",
