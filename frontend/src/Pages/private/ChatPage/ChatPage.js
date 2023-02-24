@@ -7,6 +7,7 @@ import AutoTextArea from './AutoTextArea/autoTextArea';
 import Message from './Message/Message';
 import { useSocket } from '../../../contexts/useSocket';
 import CircleAvatar from '../../../Componentes/circleAvatar/circleAvatar';
+import CircleAvatarUsers from '../../../Componentes/circleAvatar/circleAvatarUsers';
 //import { isBefore } from 'date-fns';
 const ChatPage = ()=> {
 
@@ -17,7 +18,7 @@ const ChatPage = ()=> {
     const [messages, setMessages] =  useState([]);
     const [messageBody, setMessageBody] = useState('');
 
-    const {chats, myOrganizaciones, idOrganizacionActual, myUserName} = useSkuadLackContext();
+    const {chats, myOrganizaciones, idOrganizacionActual, myUserName, idUser, organizacionActual, userOfOrganizacionActual} = useSkuadLackContext();
     const handleMessageBody = (e) => {
 		setMessageBody(e.target.value);
 	}
@@ -46,10 +47,12 @@ const ChatPage = ()=> {
 	}
 
     useEffect(() => {
-        if(!currentChat && chats.length > 0){
+        if(chats.length > 0){
             setCurrentChat({...chats[0]})
+        }else{
+            setCurrentChat(undefined);
         }
-    }, [chats]);
+    }, [chats, idOrganizacionActual]);
 
     useEffect(() => {
         if(currentChat){
@@ -83,22 +86,23 @@ const ChatPage = ()=> {
     const messagesEndRef = useRef()
 
 	const scrollToBottom = () => {
-		if(messagesEndRef && messagesEndRef.current !== undefined){
+		if(messagesEndRef && messagesEndRef.current){
 			messagesEndRef.current.scrollTop = messagesEndRef?.current?.scrollHeight ;
 		}
 	}
 
-	useEffect(scrollToBottom, [messages]);
+	useEffect(scrollToBottom, [messages, messagesEndRef]);
 
 
     return <div className={styles.root}>
         <div className={styles.orgsRoot}>
             {myOrganizaciones?.map(org => (
             <div>
-                <CircleAvatar name={org.OrgName} id={org._id} color={stringToColour(org.OrgName)} size={40}/>
+                <CircleAvatar  name={org.OrgName} path={'/skuadlack/'} id={org._id} color={stringToColour(org.OrgName)} size={40}/>
             </div>))}
         </div>
         <div className={styles.chatsRoot}>
+            <h4>{organizacionActual.OrgName}</h4>
             <h2 className={styles.chatsTitle}>
                 Chats
             </h2>
@@ -109,16 +113,17 @@ const ChatPage = ()=> {
                 })}
                 onClick={() => setCurrentChat(chat)}
             >
-                {chat.userName ? chat.userName : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
+                
+                {chat.name? chat.name : chat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
             </div>))}
         </div>
         <div className={styles.chatWindow}>
             {currentChat  && (
                 <>
                     <h5 className={styles.chatHeader}>
-                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.userName).join(' | ')}
+                        {currentChat.name ? currentChat.name : currentChat.user.map(u=> u.userName).filter(item=> item !== myUserName).join(' | ')}
                     </h5>
-                    <hr className={styles.divider}/>
+                    
                     <div className={styles.wrapper}>
                         <div className={styles.messages} ref={messagesEndRef}>
                             {messages.map(message => <Message message={message}/>)}
@@ -130,6 +135,17 @@ const ChatPage = ()=> {
                 </>
             )}
             
+        </div>
+        <div className={styles.listUserRoot}>
+        <h2 className={styles.usersTitle}>
+                Users
+            </h2>
+            {userOfOrganizacionActual.map(user => (
+            <div className={styles.usersRoot}
+            onClick={()=> console.log(user.userName)} >
+                <CircleAvatarUsers name={user.userName} id={user._id} size={40} color={stringToColour(user.name)}/>
+                {user.userName}
+            </div>))}
         </div>
        
     </div>

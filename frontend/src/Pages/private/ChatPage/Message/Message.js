@@ -23,7 +23,7 @@ const Message = (props) =>{
 	return (
 		<div className={styles.message}>
 			<div className={styles.messageAvatar}>
-				<CircleAvatar name={message.user.name} size={40} color={stringToColour(message.user.name)}/>
+				<CircleAvatar name={message.user.userName} path={`/LUP/`} id={message.user._id} size={40} color={stringToColour(message.user.name)}/>
 			</div>
 			<div className={styles.messageBody}>
 				<div className={styles.messageHeader}>
