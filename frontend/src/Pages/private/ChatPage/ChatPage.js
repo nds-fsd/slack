@@ -128,9 +128,11 @@ const ChatPage = () => {
       <div className={styles.chatsRoot}>
         <h4>{organizacionActual.OrgName}</h4>
         <h2 className={styles.chatsTitle}>
-          <div>Chats</div>
-          <div>
-            <CreateNewChatWithUsers />
+          <div className={styles.chatCreateButton}>
+            <div>Chats</div>
+            <div>
+              <CreateNewChatWithUsers />
+            </div>
           </div>
         </h2>
         {chats.map((chat) => (

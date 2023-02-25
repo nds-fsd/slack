@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import fetchSupreme from "../../utils/apiWrapper";
 
+
 const CreateNewChatWithUsers = () => {
 
   const [show, setShow] = useState(false);
@@ -63,8 +64,8 @@ const CreateNewChatWithUsers = () => {
 
   return (
     <div>
-      <Button variant="success" onClick={handleShow}>
-        New Chat
+      <Button variant="secondary" id= {styles.buttonCreateChatID} className= {styles.buttonCreateChat} onClick={handleShow}>
+        +
       </Button>
 
       <Modal

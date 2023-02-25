@@ -33,6 +33,13 @@
 .chatsTitle {
     color: white;
 }
+
+.chatCreateButton{
+    display: flex;
+    flex-direction: row;
+    margin:5px;
+    justify-content: space-between;
+}
 .usersTitle {
     color: white;
     border-bottom: 1px solid white;
