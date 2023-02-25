@@ -6,15 +6,16 @@ import Button from 'react-bootstrap/Button';
 const DeleteChat = (props) =>{
 
     //paso por props el chatId por que por el contexto parece que no funciona bien
-    const {setRefreshContext} = useSkuadLackContext();
-    const chatId = props.currentChat._id
+    const {setRefreshContext,refreshContext} = useSkuadLackContext();
+    let chatId
+    props.currentChat && (chatId = props.currentChat._id)
 
     const handleOnClick = ()=>{
 
-        fetchSupreme(`/deleteChat/${chatId}`,'DELETE',undefined,true,undefined)
+        (chatId && fetchSupreme(`/deleteChat/${chatId}`,'DELETE',undefined,true,undefined)
         .then((res)=>{
-            setRefreshContext(true)
-        })
+            setRefreshContext(!refreshContext)
+        }))
 
     }
     

@@ -15,7 +15,7 @@ const CreateNewChatWithUsers = () => {
   const handleClose = () => {
     setShow(false)
     setCheckedState({})
-    setRefreshContext(true)
+    setRefreshContext(!refresContext)
 };
   const handleShow = () => setShow(true);
 
@@ -56,6 +56,7 @@ const CreateNewChatWithUsers = () => {
     fetchSupreme('/createChatById','POST',body,true, undefined)
     .then((res) => {
         handleClose();
+        setRefreshContext(!refresContext)
         
     })
 
