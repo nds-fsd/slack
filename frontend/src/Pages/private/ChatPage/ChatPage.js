@@ -11,15 +11,18 @@ import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUse
 import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
+import NuevoMensaje from "../../../Componentes/NuevoMensaje/nuevoMensaje";
+
 //import { isBefore } from 'date-fns';
 
 const ChatPage = () => {
-  const { joinChat, onMessageReceived } = useSocket();
+  const { joinChat, onMessageReceived,setShowNewMessage, showNewMessage } = useSocket();
 
   const [currentChat, setCurrentChat] = useState();
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
+  
 
   const {
     chats,
@@ -31,6 +34,18 @@ const ChatPage = () => {
     userOfOrganizacionActual,
     refreshContext,
   } = useSkuadLackContext();
+
+  /*
+  const setTimerNewMessage = () =>{
+    setShowNewMessage(true)
+    setTimeout(() => {
+        setShowNewMessage(false);
+      }, [5000]);
+      console.log('paso por setTimer')
+  
+  }
+  */
+
   const handleMessageBody = (e) => {
     setMessageBody(e.target.value);
   };
@@ -112,6 +127,7 @@ const ChatPage = () => {
 
   return (
     <div className={styles.root}>
+        {showNewMessage && <NuevoMensaje/>}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
           <div>
