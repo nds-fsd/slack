@@ -53,7 +53,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
     try {
       const organizacion = new Organizacion(data);
       const idUser= req.jwtPayload.id;
-      console.log('id usuario que está logueado',idUser);
+      //console.log('id usuario que está logueado',idUser);
 
       //Fundamental el await!!!
       const user = await User.findById(idUser)
@@ -107,18 +107,18 @@ routerOrg.get('/organizacionUsers/:id', async (req,res)=>{
   try{
   const organizacion = await Organizacion.findById(idOrg).populate('user')
 
-    console.log('organizacion', organizacion)
+    //console.log('organizacion', organizacion)
 
     const usersNoPassword = organizacion.user
 
 
-    console.log('users', usersNoPassword)
+    //console.log('users', usersNoPassword)
     
     //método para devolver las keys que queramos cuando los objetos están anidados en un array
     const users = usersNoPassword.map(({_id, name, userName, email, lastName}) => ({_id, name,userName, email, lastName}));
     
     
-    console.log('cleanUsers', users)
+    //console.log('cleanUsers', users)
 
   if (organizacion){
       res.status(200).json(users)
