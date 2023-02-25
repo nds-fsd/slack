@@ -22,21 +22,6 @@ const LandingUserPage = () => {
 
     useEffect(() => {
         fetchSupreme(`/userOrg/${params.id}`, 'GET', undefined, true, undefined)  
-            
-        /*
-            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
-            fetch(`${URL_API}/user/` + params.id,
-                {
-                    headers: {
-                        authorization: `Bearer ${getUserToken()}`
-                    }
-                })
-            
-                .then((res) => {
-                    return res.json();
-                })
-        */
-
             .then((res) => {
                 setUser(res.user);
                 setOrganizacion(res.organizacion);

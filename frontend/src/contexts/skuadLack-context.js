@@ -22,7 +22,7 @@ export const SkuadLackContextProvider = (props) => {
     const [chatId, setChatId] = useState('');
     const [room, setRoom] = useState(idOrganizacionActual);
     const [userOfOrganizacionActual, setUserOfOrganizacionActual] = useState([])
-    const [refreshContext, setRefreshContext] = useState(true)
+    const [refreshContext, setRefreshContext] = useState(false)
 
     //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
     //componentes que consumen de el

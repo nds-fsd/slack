@@ -4,7 +4,6 @@ import styles from "./createNewChatWithUsers.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useParams } from "react-router-dom";
 import fetchSupreme from "../../utils/apiWrapper";
 
 const CreateNewChatWithUsers = () => {
@@ -12,13 +11,10 @@ const CreateNewChatWithUsers = () => {
   const [show, setShow] = useState(false);
   const [checkedState, setCheckedState] = useState({});
 
-  //He puesto este useParams para evitar el contexto, ya que se renderiza muchas veces la página, no entiendo el por qué. Sigue pasando
-  const params = useParams();
-
   const handleClose = () => {
     setShow(false)
     setCheckedState({})
-    setRefreshContext(!refresContext)
+    setRefreshContext(true)
 };
   const handleShow = () => setShow(true);
 
@@ -30,21 +26,6 @@ const CreateNewChatWithUsers = () => {
     setRefreshContext,
     refresContext
   } = useSkuadLackContext();
-
-  /*
-  useEffect(() => {
-    fetchSupreme(
-      `/organizacionUsers/${idOrganizacionActual}`,
-      "GET",
-      undefined,
-      true,
-      undefined
-    ).then((res) => {
-      setUsersOrg(res);
-    });
-  }, [idOrganizacionActual]);
-
-  */
 
   //console.log("userOfOrganizacionActual", userOfOrganizacionActual);
 
@@ -76,8 +57,6 @@ const CreateNewChatWithUsers = () => {
         handleClose();
         
     })
-
-
 
   }
   console.log('checkedState', checkedState)

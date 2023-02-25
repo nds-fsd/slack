@@ -10,8 +10,8 @@ import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers";
 import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
-
 //import { isBefore } from 'date-fns';
+
 const ChatPage = () => {
   const { joinChat, onMessageReceived } = useSocket();
 
