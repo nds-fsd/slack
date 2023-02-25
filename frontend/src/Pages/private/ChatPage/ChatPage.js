@@ -92,7 +92,7 @@ const ChatPage = () => {
     if (currentChat) {
       joinChat(currentChat._id);
       onMessageReceived((newMessage) => {
-        console.log("message received");
+        console.log("message received", newMessage);
         if (newMessage.chat === currentChat._id) {
           setRefresh(true);
         }
