@@ -16,13 +16,13 @@ import NuevoMensaje from "../../../Componentes/NuevoMensaje/nuevoMensaje";
 //import { isBefore } from 'date-fns';
 
 const ChatPage = () => {
-  const { joinChat, onMessageReceived,setShowNewMessage, showNewMessage } = useSocket();
+  const { joinChat, onMessageReceived, setAlert, alert } = useSocket();
 
   const [currentChat, setCurrentChat] = useState();
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
-  
+  const [showNewMessage, setShowNewMessage] = useState(false);
 
   const {
     chats,
@@ -35,16 +35,17 @@ const ChatPage = () => {
     refreshContext,
   } = useSkuadLackContext();
 
-  /*
-  const setTimerNewMessage = () =>{
-    setShowNewMessage(true)
-    setTimeout(() => {
+  //No entiendo, si pongo que no se pinte si el idChat es diferente,  no pinta nada
+  //No acabo de entener por qué no se pinta para el usuario que NO está en el chat
+  const setTimerNewMessage = (newMessage) => {
+    if (!currentChat === newMessage.chat) {
+      setShowNewMessage(true);
+      setTimeout(() => {
         setShowNewMessage(false);
-      }, [5000]);
-      console.log('paso por setTimer')
-  
-  }
-  */
+      }, [3000]);
+      console.log("paso por setTimer");
+    }
+  };
 
   const handleMessageBody = (e) => {
     setMessageBody(e.target.value);
@@ -115,6 +116,13 @@ const ChatPage = () => {
     }
   }, [currentChat]);
 
+  useEffect(() => {
+    onMessageReceived((newMessage) => {
+      setTimerNewMessage(newMessage);
+    });
+    setAlert(false);
+  }, [alert]);
+
   const messagesEndRef = useRef();
 
   const scrollToBottom = () => {
@@ -127,7 +135,7 @@ const ChatPage = () => {
 
   return (
     <div className={styles.root}>
-        {showNewMessage && <NuevoMensaje/>}
+      {showNewMessage && <NuevoMensaje />}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
           <div>
@@ -166,11 +174,9 @@ const ChatPage = () => {
                   .filter((item) => item !== myUserName)
                   .join(" | ")}
           </div>
-          
         ))}
-       
       </div>
-      
+
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
@@ -182,7 +188,7 @@ const ChatPage = () => {
                     .filter((item) => item !== myUserName)
                     .join(" | ")}
             </h5>
-           
+
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
@@ -204,7 +210,7 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
-      <DeleteChat currentChat={currentChat}/>
+        <DeleteChat currentChat={currentChat} />
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div

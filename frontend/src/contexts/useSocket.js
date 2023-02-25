@@ -5,7 +5,8 @@ const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   
-  const [showNewMessage, setShowNewMessage] = useState(false);
+  //const [showNewMessage, setShowNewMessage] = useState(false);
+  const [alert, setAlert] = useState(false)
 
   const socket = useMemo(() => {
     const token = getUserToken();
@@ -25,23 +26,25 @@ export const SocketContextProvider = ({ children }) => {
 
   const joinChat = (chatId) => {
     socket.emit("join-room", chatId);
+    /*
     setShowNewMessage(true);
     
     setTimeout(() => {
       setShowNewMessage(false);
     }, [5000]);
+    */
   };
 
   const onMessageReceived = (callback) => {
     socket.on("message", callback);
-    
-    
+    setAlert(true)
+        
     
   };
 
   return (
     <SocketContext.Provider
-      value={{ joinChat, socket, onMessageReceived,setShowNewMessage,showNewMessage }}
+      value={{ joinChat, socket, onMessageReceived, setAlert, alert}}
     >
       {children}
     </SocketContext.Provider>
