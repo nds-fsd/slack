@@ -10,6 +10,7 @@ import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers";
 import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
+import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 //import { isBefore } from 'date-fns';
 
 const ChatPage = () => {
@@ -149,8 +150,11 @@ const ChatPage = () => {
                   .filter((item) => item !== myUserName)
                   .join(" | ")}
           </div>
+          
         ))}
+       
       </div>
+      
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
@@ -162,7 +166,7 @@ const ChatPage = () => {
                     .filter((item) => item !== myUserName)
                     .join(" | ")}
             </h5>
-
+           
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
@@ -184,6 +188,7 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
+      <DeleteChat currentChat={currentChat}/>
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div

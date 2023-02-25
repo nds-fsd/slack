@@ -60,7 +60,6 @@ const CreateNewChatWithUsers = () => {
     })
 
   }
-  console.log('checkedState', checkedState)
 
   return (
     <div>
