@@ -1,49 +1,133 @@
 import React, { useState } from "react";
 import { useSkuadLackContext } from "../../contexts/skuadLack-context";
-import fetchSupreme from "../../utils/apiWrapper";
 import styles from "./createNewChatWithUsers.css";
-import { MultiSelectUnstyled } from "@mui/base/SelectUnstyled";
-
-//Vamos a cambiar esto por un modal donde sale un checkbox y eliges la opción que quieras para crear un chat!!
-
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import { useParams } from "react-router-dom";
+import fetchSupreme from "../../utils/apiWrapper";
 
 const CreateNewChatWithUsers = () => {
-  const [usersOrg, setUsersOrg] = useState([""]);
+
+  const [show, setShow] = useState(false);
+  const [checkedState, setCheckedState] = useState({});
+
+  //He puesto este useParams para evitar el contexto, ya que se renderiza muchas veces la página, no entiendo el por qué. Sigue pasando
+  const params = useParams();
+
+  const handleClose = () => {
+    setShow(false)
+    setCheckedState({})
+    setRefreshContext(!refresContext)
+};
+  const handleShow = () => setShow(true);
 
   const {
-    chats,
-    myOrganizaciones,
     idOrganizacionActual,
     myUserName,
     idUser,
-    organizacionActual,
     userOfOrganizacionActual,
+    setRefreshContext,
+    refresContext
   } = useSkuadLackContext();
 
-  fetchSupreme(
-    `/organizacionUsers/${idOrganizacionActual}`,
-    "GET",
-    undefined,
-    true,
-    undefined
-  ).then((res) => {
-    setUsersOrg(res);
-  });
+  /*
+  useEffect(() => {
+    fetchSupreme(
+      `/organizacionUsers/${idOrganizacionActual}`,
+      "GET",
+      undefined,
+      true,
+      undefined
+    ).then((res) => {
+      setUsersOrg(res);
+    });
+  }, [idOrganizacionActual]);
+
+  */
+
+  //console.log("userOfOrganizacionActual", userOfOrganizacionActual);
+
+  const handleChange = (e) => {
+    const userId = e.target.value;
+    const isChecked = e.target.checked;
+    setCheckedState({ ...checkedState, [userId]: isChecked });
+  };
+
+  const handleOnClick= (objectStates)=>{
+    
+    const trueKeys = [];
+    for (let key in objectStates) {
+      if (objectStates[key]) {
+        trueKeys.push(key);
+      }
+    }
+
+    //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checbox. Pero se da por supuesto que el idUser también está dentro
+    trueKeys.push(idUser)
+
+    const body = {
+        organizacion: idOrganizacionActual,
+        idUser:trueKeys
+    }
+
+    fetchSupreme('/createChatById','POST',body,true, undefined)
+    .then((res) => {
+        handleClose();
+        
+    })
+
+
+
+  }
+  console.log('checkedState', checkedState)
 
   return (
     <div>
-      <button class="MuiSelectUnstyled-root" type="button">
-        Open
-      </button>
-      <div class="MuiSelectUnstyled-popper">
-        <ul class="MuiSelectUnstyled-listbox">
-            {usersOrg.map((e)=>{
+      <Button variant="success" onClick={handleShow}>
+        New Chat
+      </Button>
 
-                <li key={e._id} class="MuiOptionUnstyled-root">{e.userName}</li>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        keyboard={true}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Select the user name/s</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            {userOfOrganizacionActual &&
+              userOfOrganizacionActual.map((e) => {
+                //un array con objetos con las keys de cada user (userName, name, email...), la recorro para obtener los userName y pintarlos en un checkbox
 
-            })}
-        </ul>
-      </div>
+                //solo quiero los usuarios diferentes al mío
+                if (e.userName !== myUserName) {
+                  
+                  return (
+                    <Form.Check
+                      type="checkbox"
+                      label={e?.userName}
+                      value={e._id}
+                      key={e?._id}
+                      onChange={handleChange}
+                    />
+                  );
+                }
+              })}
+          </Form>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={()=>handleOnClick(checkedState)}>Create Chat</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
