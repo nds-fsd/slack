@@ -11,7 +11,7 @@ import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUse
 import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
-import NuevoMensaje from "../../../Componentes/NuevoMensaje/nuevoMensaje";
+import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 
 //import { isBefore } from 'date-fns';
 
@@ -136,7 +136,7 @@ const ChatPage = () => {
 
   return (
     <div className={styles.root}>
-      {showNewMessage && <NuevoMensaje />}
+      {showNewMessage && <NotificacionNuevoMensaje />}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
           <div>
