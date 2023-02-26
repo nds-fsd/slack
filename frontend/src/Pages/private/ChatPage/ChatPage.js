@@ -12,6 +12,7 @@ import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
+import stringToColour from "../../../utils/stringToColour";
 
 //import { isBefore } from 'date-fns';
 
@@ -49,19 +50,6 @@ const ChatPage = () => {
 
   const handleMessageBody = (e) => {
     setMessageBody(e.target.value);
-  };
-
-  const stringToColour = function (str) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    var colour = "#";
-    for (var i = 0; i < 3; i++) {
-      var value = (hash >> (i * 8)) & 0xff;
-      colour += ("00" + value.toString(16)).substr(-2);
-    }
-    return colour;
   };
 
   const handleSendMessage = (evt) => {
@@ -122,6 +110,8 @@ const ChatPage = () => {
       setTimerNewMessage(newMessage);
     });
     setAlert(false);
+    console.log('paso por el useEffect')
+    console.log('alert', alert)
   }, [alert]);
 
   const messagesEndRef = useRef();

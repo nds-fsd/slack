@@ -104,6 +104,7 @@ const CreateNewChatWithUsers = () => {
                 })}
             </Form>
           </Modal.Body>
+          
           <div className={styles.footer}>
             
             <Button

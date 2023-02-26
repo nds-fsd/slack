@@ -3,6 +3,7 @@
     height: 100%;
     box-sizing: border-box;
     padding-top: 60px;
+    overflow: unset;
 }
 
 .chatsRoot {
@@ -68,7 +69,6 @@
     background: linear-gradient(to bottom right, #F54864 ,#F78361);
     width: fit-content;
     
-    
 }
 
 .chat:hover {
@@ -86,7 +86,7 @@
 
 .chatHeader{
     box-sizing: border-box;
-    padding: 5px;
+    padding: 15px;
     background-color:#242A38;
     border-bottom: 1px solid #0e1116;
     display: flex;
