@@ -15,7 +15,6 @@ const CreateNewChatWithUsers = () => {
   const handleClose = () => {
     setShow(false)
     setCheckedState({})
-    setRefreshContext(!refresContext)
 };
   const handleShow = () => setShow(true);
 
