@@ -25,7 +25,7 @@ const CreateNewChatWithUsers = () => {
     idUser,
     userOfOrganizacionActual,
     setRefreshContext,
-    refresContext
+    refreshContext
   } = useSkuadLackContext();
 
   //console.log("userOfOrganizacionActual", userOfOrganizacionActual);
@@ -56,7 +56,7 @@ const CreateNewChatWithUsers = () => {
     fetchSupreme('/createChatById','POST',body,true, undefined)
     .then((res) => {
         handleClose();
-        setRefreshContext(!refresContext)
+        setRefreshContext(!refreshContext)
         
     })
 
