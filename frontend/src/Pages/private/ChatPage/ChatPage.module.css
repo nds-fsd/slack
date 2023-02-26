@@ -86,13 +86,11 @@
 
 .chatHeader{
     box-sizing: border-box;
-    padding: 12px;
+    padding: 5px;
     background-color:#242A38;
     border-bottom: 1px solid #0e1116;
     display: flex;
     justify-content: space-between;
-   
-
 }
 
 .divider{
