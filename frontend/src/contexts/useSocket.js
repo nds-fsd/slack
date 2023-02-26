@@ -26,20 +26,12 @@ export const SocketContextProvider = ({ children }) => {
 
   const joinChat = (chatId) => {
     socket.emit("join-room", chatId);
-    /*
-    setShowNewMessage(true);
-    
-    setTimeout(() => {
-      setShowNewMessage(false);
-    }, [5000]);
-    */
+    setAlert(true)
   };
 
   const onMessageReceived = (callback) => {
     socket.on("message", callback);
     setAlert(true)
-        
-    
   };
 
   return (

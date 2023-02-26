@@ -20,7 +20,7 @@ const DeleteChat = (props) =>{
     }
     
     return(
-            <Button variant="light" onClick={()=>handleOnClick()}>Delete Chat</Button>
+            <Button size='sm' variant="light" onClick={()=>handleOnClick()}>Delete Chat</Button>
        
     )
 }

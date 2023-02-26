@@ -64,7 +64,7 @@ const CreateNewChatWithUsers = () => {
 
   return (
     <div>
-      <Button variant="secondary" id= {styles.buttonCreateChatID} className= {styles.buttonCreateChat} onClick={handleShow}>
+      <Button variant="secondary" size='sm' id= {styles.buttonCreateChatID} className= {styles.buttonCreateChat} onClick={handleShow}>
         +
       </Button>
 

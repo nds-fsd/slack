@@ -43,6 +43,7 @@
 .usersTitle {
     color: white;
     border-bottom: 1px solid white;
+   
 }
 .listUserRoot {
     padding: 24px 12px;
@@ -88,6 +89,8 @@
     padding: 12px;
     background-color:#242A38;
     border-bottom: 1px solid #0e1116;
+    display: flex;
+    justify-content: space-between;
    
 
 }

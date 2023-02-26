@@ -116,6 +116,7 @@ const ChatPage = () => {
     }
   }, [currentChat]);
 
+  //Me creo un useEffect independiente para controlar las notificaciones y lanzarlas cuando quiera
   useEffect(() => {
     onMessageReceived((newMessage) => {
       setTimerNewMessage(newMessage);
@@ -160,6 +161,7 @@ const ChatPage = () => {
             </div>
           </div>
         </h2>
+        
         {chats.map((chat) => (
           <div
             className={classnames(styles.chat, {
@@ -175,8 +177,9 @@ const ChatPage = () => {
                   .join(" | ")}
           </div>
         ))}
+        
       </div>
-
+                
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
@@ -187,8 +190,11 @@ const ChatPage = () => {
                     .map((u) => u.userName)
                     .filter((item) => item !== myUserName)
                     .join(" | ")}
+            
+            <DeleteChat currentChat={currentChat} />
             </h5>
-
+            
+                
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
@@ -210,7 +216,7 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
-        <DeleteChat currentChat={currentChat} />
+    
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div
