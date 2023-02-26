@@ -8,7 +8,6 @@ import Message from "./Message/Message";
 import { useSocket } from "../../../contexts/useSocket";
 import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers";
-import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 //import { isBefore } from 'date-fns';
@@ -26,23 +25,21 @@ const ChatPage = () => {
     myOrganizaciones,
     idOrganizacionActual,
     myUserName,
-    idUser,
     organizacionActual,
-    userOfOrganizacionActual,
-    refreshContext,
+    userOfOrganizacionActual
   } = useSkuadLackContext();
   const handleMessageBody = (e) => {
     setMessageBody(e.target.value);
   };
 
   const stringToColour = function (str) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     var colour = "#";
-    for (var i = 0; i < 3; i++) {
-      var value = (hash >> (i * 8)) & 0xff;
+    for (let j = 0; j < 3; j++) {
+      let value = (hash >> (j * 8)) & 0xff;
       colour += ("00" + value.toString(16)).substr(-2);
     }
     return colour;
