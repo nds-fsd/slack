@@ -198,7 +198,7 @@ const ChatPage = () => {
               size={40}
               color={stringToColour(user.name)}
             />
-            {user.userName}
+            {user.userName === myUserName? myUserName + '(tu)' : user.userName }
           </div>
         ))}
       </div>
