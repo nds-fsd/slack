@@ -3,6 +3,7 @@ import styles from "./Message.module.css";
 import {format} from 'date-fns';
 import { getUserSession } from "../../../../utils/localStorageUtils";
 import CircleAvatar from "../../../../Componentes/circleAvatar/circleAvatar";
+import CircleAvatarUsers from "../../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 
 const Message = (props) =>{
 	const { message} = props;
@@ -23,7 +24,7 @@ const Message = (props) =>{
 	return (
 		<div className={styles.message}>
 			<div className={styles.messageAvatar}>
-				<CircleAvatar name={message.user.userName} path={`/LUP/`} id={message.user._id} size={40} color={stringToColour(message.user.name)}/>
+				<CircleAvatarUsers name={message.user.userName}  id={message.user._id} size={40} color={stringToColour(message.user.name)}/>
 			</div>
 			<div className={styles.messageBody}>
 				<div className={styles.messageHeader}>

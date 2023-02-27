@@ -7,7 +7,7 @@ import AutoTextArea from "./AutoTextArea/autoTextArea";
 import Message from "./Message/Message";
 import { useSocket } from "../../../contexts/useSocket";
 import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
-import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers";
+import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 //import { isBefore } from 'date-fns';

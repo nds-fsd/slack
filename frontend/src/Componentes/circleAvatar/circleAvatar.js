@@ -12,6 +12,7 @@ function CircleAvatar({ name, color, size, id, path }) {
     .split(' ')
     .map(word => word[0])
     .join('')
+    .slice(0,2)
     .toUpperCase();
 
   // Estilos CSS para el círculo
