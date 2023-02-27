@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useSkuadLackContext } from "../../contexts/skuadLack-context"
-import fetchSupreme from '../../utils/apiWrapper';
+import { useSkuadLackContext } from "../../../contexts/skuadLack-context"
+import fetchSupreme from '../../../utils/apiWrapper';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import styles from "./circleAvatarUsers.module.css";
 
-function CircleAvatarUsers({ name, color, size, id, path }) {
+function CircleAvatarUsers({ name, color, size, id }) {
   const [show, setShow] = useState(false);
   const [userShow, setUserShow] = useState("")
   const handleClose = () => setShow(false);
@@ -18,20 +19,13 @@ function CircleAvatarUsers({ name, color, size, id, path }) {
       })
   }
 
-  // Extraer las dos primeras letras del nombre
+  
 
 
 
   const { idOrganizacionActual, organizacionActual, setChats, chats, setRefreshContext, refreshContext, idUser } = useSkuadLackContext()
 
-  const createChat = () => {
-    fetchSupreme(`/createChatById`, "POST", { organizacion: idOrganizacionActual, idUser: [id, idUser] }, true, undefined)
-      .then((res) => {
-        setRefreshContext(!refreshContext)
-      })
-
-  }
-
+// Extraer las dos primeras letras del nombre
   const initials = name
     .split(' ')
     .map(word => word[0])
@@ -60,17 +54,23 @@ function CircleAvatarUsers({ name, color, size, id, path }) {
       <Button onClick={handleShow} className="me-2"
         style={circleStyle}>{initials}
       </Button>
-      <Offcanvas show={show} placement="bottom" onHide={handleClose} >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Usuario de {organizacionActual.OrgName} </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <h3>{userShow.userName}</h3>
-          <h5>{userShow.name}</h5>
-          <h5>{userShow.lastName}</h5>
-          <h5>{userShow.email}</h5>
-        </Offcanvas.Body>
+
+      <Offcanvas className={styles.container} show={show} placement="end" onHide={handleClose} >
+
+        <div className={styles.card}>
+          <Offcanvas.Header className={styles.header}>
+            <button disabled style={circleStyle}>{initials}</button>
+            <Offcanvas.Title className={styles.tittle}>Usuario de {organizacionActual.OrgName} </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className={styles.body}>
+            <input disabled id="userName" value={userShow.userName} />
+            <input disabled id="name" value={userShow.name} />
+            <input disabled id="lastName" value={userShow.lastName} />
+            <input disabled id="email" value={userShow.email} />
+          </Offcanvas.Body>
+        </div>
       </Offcanvas>
+
     </>
 
 
