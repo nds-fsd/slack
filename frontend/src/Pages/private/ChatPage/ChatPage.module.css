@@ -18,8 +18,8 @@
 .chatsRoot h4{
     color:white;
     border-bottom: 1px solid white;
-    
     padding-bottom: 1.8rem;
+    position: static;
 }
 .orgsRoot {
     padding: 24px 12px;
@@ -59,7 +59,12 @@
     font-size: 14px;
     font-weight: bold;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer;    
+}
+.chatSpace{
+    overflow-y: scroll;
+    height: 40%;
+    border-bottom: 1px solid white;
     
 }
 

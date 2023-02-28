@@ -125,33 +125,35 @@ const ChatPage = () => {
       </div>
       <div className={styles.chatsRoot}>
         <h4>{organizacionActual.OrgName}</h4>
-        <h2 className={styles.chatsTitle}>
-          <div className={styles.chatCreateButton}>
-            <div>Chats</div>
-            <div>
-              <CreateNewChatWithUsers />
+       
+          <h2 className={styles.chatsTitle}>
+            <div className={styles.chatCreateButton}>
+              <div>Chats</div>
+              <div>
+                <CreateNewChatWithUsers />
+              </div>
             </div>
-          </div>
-        </h2>
-        {chats.map((chat) => (
-          <div
-            className={classnames(styles.chat, {
-              [styles.focusedChat]: chat._id === currentChat?._id,
-            })}
-            onClick={() => setCurrentChat(chat)}
-          >
-            {chat.name
-              ? chat.name
-              : chat.user
+          </h2>
+          <div className={styles.chatSpace}>
+          {chats.map((chat) => (
+            <div
+              className={classnames(styles.chat, {
+                [styles.focusedChat]: chat._id === currentChat?._id,
+              })}
+              onClick={() => setCurrentChat(chat)}
+            >
+              {chat.name
+                ? chat.name
+                : chat.user
                   .map((u) => u.userName)
                   .filter((item) => item !== myUserName)
                   .join(" | ")}
-          </div>
-          
-        ))}
-       
+            </div>
+
+          ))}
+        </div>
       </div>
-      
+
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
@@ -159,11 +161,11 @@ const ChatPage = () => {
               {currentChat.name
                 ? currentChat.name
                 : currentChat.user
-                    .map((u) => u.userName)
-                    .filter((item) => item !== myUserName)
-                    .join(" | ")}
+                  .map((u) => u.userName)
+                  .filter((item) => item !== myUserName)
+                  .join(" | ")}
             </h5>
-           
+
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
@@ -185,7 +187,7 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
-      <DeleteChat currentChat={currentChat}/>
+        <DeleteChat currentChat={currentChat} />
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div
@@ -198,7 +200,7 @@ const ChatPage = () => {
               size={40}
               color={stringToColour(user.name)}
             />
-            {user.userName === myUserName? myUserName + '(tú)' : user.userName }
+            {user.userName === myUserName ? myUserName + '(tú)' : user.userName}
           </div>
         ))}
       </div>
