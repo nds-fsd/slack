@@ -164,7 +164,7 @@ const ChatPage = () => {
             </div>
           </div>
         </h2>
-        
+        <div className={styles.chatSpace}>
         {chats.map((chat) => (
           <div
             className={classnames(styles.chat, {
@@ -180,7 +180,7 @@ const ChatPage = () => {
                   .join(" | ")}
           </div>
         ))}
-        
+        </div>
       </div>
                 
       <div className={styles.chatWindow}>
