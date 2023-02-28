@@ -8,45 +8,43 @@ import Message from "./Message/Message";
 import { useSocket } from "../../../contexts/useSocket";
 import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers";
-import { BiCommentAdd } from "react-icons/bi";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
 
-//import { isBefore } from 'date-fns';
-
 const ChatPage = () => {
-  const { joinChat, onMessageReceived, setAlert, alert } = useSocket();
+  const { socket, joinChat, onMessageReceived, setAlert, alert } = useSocket();
 
-  const [currentChat, setCurrentChat] = useState();
+  const [currentChat, setCurrentChat] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
+  const [infoNotification, setInfoNotification] =useState('')
 
   const {
+    idUser,
     chats,
     myOrganizaciones,
     idOrganizacionActual,
     myUserName,
-    idUser,
     organizacionActual,
-    userOfOrganizacionActual,
-    refreshContext,
+    userOfOrganizacionActual
   } = useSkuadLackContext();
+  
+  const setTimerNewMessage = (chatId) => { 
+    //objetivo: No quiero ver la notificación si ya estoy en el chat que se emite el mensaje
+    //Con este condicional, nos echa de la función si se cumple la condición
+    if(currentChat._id === chatId) return
 
-  //No entiendo, si pongo que no se pinte si el idChat es diferente,  no pinta nada
-  //No acabo de entener por qué no se pinta para el usuario que NO está en el chat
-  const setTimerNewMessage = (newMessage) => {
-    if (!currentChat === newMessage.chat) {
       setShowNewMessage(true);
       setTimeout(() => {
         setShowNewMessage(false);
-      }, [3000]);
+      }, [5000]);
       console.log("paso por setTimer");
-    }
   };
+
 
   const handleMessageBody = (e) => {
     setMessageBody(e.target.value);
@@ -55,6 +53,8 @@ const ChatPage = () => {
   const handleSendMessage = (evt) => {
     if (evt.keyCode === 13 && !evt.shiftKey) {
       evt.preventDefault();
+      //socket.emit('notification',{chat:currentChat._id, user:myUserName})
+      //console.log('paso por emit de notification')  //AQUIIII
       fetchSupreme("/message", "POST", {
         chat: currentChat._id,
         text: messageBody,
@@ -62,12 +62,13 @@ const ChatPage = () => {
         setMessageBody("");
         setRefresh(true);
       });
+      socket.emit('notification', {chat: currentChat._id, text: messageBody, userName: myUserName, idUser: idUser })
     }
   };
 
   useEffect(() => {
     if (chats.length > 0) {
-      setCurrentChat({ ...chats[0] });
+      setCurrentChat(chats[0]);
     } else {
       setCurrentChat(undefined);
     }
@@ -104,15 +105,26 @@ const ChatPage = () => {
     }
   }, [currentChat]);
 
-  //Me creo un useEffect independiente para controlar las notificaciones y lanzarlas cuando quiera
   useEffect(() => {
-    onMessageReceived((newMessage) => {
-      setTimerNewMessage(newMessage);
-    });
-    setAlert(false);
-    console.log('paso por el useEffect')
-    console.log('alert', alert)
-  }, [alert]);
+    
+    const chatReply = (data) =>{
+      console.log('data de la respuesta', data)
+      
+      setInfoNotification({userName:data.userName, idChat: data.chat,text:data.text})
+
+      console.log('info Notificacion', infoNotification)
+      
+      const {chat} = data 
+      console.log('data',data)
+      setTimerNewMessage(chat)
+    }
+    socket.on('reply2', chatReply)
+
+    return () => {
+      socket.off('reply2', chatReply)
+    }
+  })
+
 
   const messagesEndRef = useRef();
 
@@ -126,7 +138,7 @@ const ChatPage = () => {
 
   return (
     <div className={styles.root}>
-      {showNewMessage && <NotificacionNuevoMensaje />}
+      {showNewMessage && <NotificacionNuevoMensaje infoNotification = {infoNotification}/>}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
           <div>

@@ -26,16 +26,15 @@ export const SocketContextProvider = ({ children }) => {
 
   const joinChat = (chatId) => {
     socket.emit("join-room", chatId);
-    setAlert(true)
     console.log('paso por el joinChat')
   };
 
   const onMessageReceived = (callback) => {
-    socket.on("message", callback);
-    setAlert(true)
-    console.log('paso por socketContext')
+    socket.on("reply", callback);
+    console.log('paso por socketContext -messageReceived')
   };
 
+  
   return (
     <SocketContext.Provider
       value={{ joinChat, socket, onMessageReceived, setAlert, alert}}
