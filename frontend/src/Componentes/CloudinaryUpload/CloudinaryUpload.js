@@ -1,6 +1,7 @@
 import { CloudinaryContext } from 'cloudinary-react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { AiOutlineUpload } from "react-icons/ai";
 
 export const CloudinaryUpload = () => {
   const [images, setImages] = useState([]);
@@ -46,8 +47,11 @@ export const CloudinaryUpload = () => {
       secure={true}
     >
       <div>
-        <Button variant='dark' size='sm'>
-          <label htmlFor='image-upload'>Seleccionar Imágenes</label>
+        <Button variant='dark' size='sm'
+        style={{
+                margin: '1rem'
+              }}>
+          <label htmlFor='image-upload'><AiOutlineUpload/></label>
           <input
             type='file'
             id='image-upload'
