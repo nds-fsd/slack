@@ -10,6 +10,7 @@ import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
+import { CloudinaryUpload } from "../../../Componentes/CloudinaryUpload/CloudinaryUpload";
 //import { isBefore } from 'date-fns';
 
 const ChatPage = () => {
@@ -179,6 +180,7 @@ const ChatPage = () => {
                     onKeyDown={handleSendMessage}
                   />
                 )}
+                <CloudinaryUpload/>
               </div>
             </div>
           </>
