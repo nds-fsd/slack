@@ -64,7 +64,7 @@ export const CloudinaryUpload = () => {
       <div>
         {previewImages.map((image, index) => (
           <div key={index} style={{ position: 'relative' }}>
-            <img src={image} alt='Imagen Cargada' />
+            <img src={image} alt='Archivo Cargada' />
             <button
               style={{
                 position: 'absolute',
@@ -75,6 +75,9 @@ export const CloudinaryUpload = () => {
                 border: 'none',
                 cursor: 'pointer',
                 fontSize: '1.2rem',
+                display: 'flex',
+                flexDirection: 'row',
+                width: '40%',
               }}
               onClick={() => handleImageRemove(index)}
             >
