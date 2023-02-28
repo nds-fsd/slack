@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom"
 import fetchSupreme from "../utils/apiWrapper"
 import { getUserSession, } from "../utils/localStorageUtils"
 
-
-
 export const SkuadLackContext = createContext()
 
 export const SkuadLackContextProvider = (props) => {

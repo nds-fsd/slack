@@ -1,0 +1,16 @@
+.ContenedorNotificacionNuevoMensaje{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: #34d399;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: slideInDown 0.5s ease;
+
+}
+
+.NotificacionNuevoMensaje{
+    color:white;
+}
