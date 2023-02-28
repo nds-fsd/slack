@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+import User from '../Schemas/user.js';
 
 dotenv.config();
 
@@ -17,6 +18,25 @@ export const connectDB = async() => {
   
     try {
       await   mongoose.connect(dbUrl);
+
+      const admin = await User.findOne({ role: "GLOBAL_ADMIN" });
+      if (!admin) {
+          console.log('💿 [DATABASE] ADMIN user not found, creating one....');
+
+          const admin = new User({
+              email: 'admin@skuadlack.com',
+              password: 'nuclioskuadlack',
+              name: "Admin",
+              userName: "Admin",
+              lastName: "Global",
+              role: "GLOBAL_ADMIN"
+          });
+
+          await admin.save();
+          console.log("💿 [DATABASE] ADMIN user created!: ", admin.email);
+      } else {
+          console.log("💿 [DATABASE] ADMIN user exists: ", admin.email);
+      }
   
       const mongo = mongoose.connection;
       mongo.on("error", (error) => console.error(error));
