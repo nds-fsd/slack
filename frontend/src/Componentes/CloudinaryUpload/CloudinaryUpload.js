@@ -3,18 +3,39 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 export const CloudinaryUpload = () => {
-  const [image, setImage] = useState('');
-  const url = 'https://api.cloudinary.com/v1_1/dnsy1t6dj/auto/upload'
+  const [images, setImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const url = 'https://api.cloudinary.com/v1_1/dnsy1t6dj/auto/upload';
 
   const handleImageUpload = async (event) => {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'w6v9atp0');
-    const options = {method: 'POST', body: formData};
-    const response = await fetch(url, options);
-    const json = await response.json();
-    setImage(json.secure_url);
+    const files = event.target.files;
+    const uploadedImages = [];
+    const previewedImages = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'w6v9atp0');
+      const options = {method: 'POST', body: formData};
+      const response = await fetch(url, options);
+      const json = await response.json();
+      uploadedImages.push(json.secure_url);
+      const imageURL = URL.createObjectURL(file);
+      previewedImages.push(imageURL);
+    }
+
+    setImages([...images, ...uploadedImages]);
+    setPreviewImages([...previewImages, ...previewedImages]);
+  };
+
+  const handleImageRemove = (index) => {
+    const newImages = [...images];
+    const newPreviewImages = [...previewImages];
+    newImages.splice(index, 1);
+    newPreviewImages.splice(index, 1);
+    setImages(newImages);
+    setPreviewImages(newPreviewImages);
   };
 
   return (
@@ -25,8 +46,39 @@ export const CloudinaryUpload = () => {
       secure={true}
     >
       <div>
-        <Button variant='dark' size='sm'><input type='file' onChange={handleImageUpload} /></Button>
+        <Button variant='dark' size='sm'>
+          <label htmlFor='image-upload'>Seleccionar Imágenes</label>
+          <input
+            type='file'
+            id='image-upload'
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+            multiple
+          />
+        </Button>
+      </div>
+      <div>
+        {previewImages.map((image, index) => (
+          <div key={index} style={{ position: 'relative' }}>
+            <img src={image} alt='Imagen Cargada' />
+            <button
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                backgroundColor: 'transparent',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1.2rem',
+              }}
+              onClick={() => handleImageRemove(index)}
+            >
+              &times;
+            </button>
+          </div>
+        ))}
       </div>
     </CloudinaryContext>
   );
-}
+};
