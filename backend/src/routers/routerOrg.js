@@ -54,7 +54,7 @@ routerOrg.post('/organizacion',validateOrgName,jwtMiddleware, async(req,res)=> {
     try {
       const organizacion = new Organizacion(data);
       const idUser= req.jwtPayload.id;
-      console.log('id usuario que está logueado',idUser);
+      //console.log('id usuario que está logueado',idUser);
 
       //Fundamental el await!!!
       const user = await User.findById(idUser)

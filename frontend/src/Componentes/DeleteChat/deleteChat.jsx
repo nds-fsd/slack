@@ -2,6 +2,7 @@ import React from "react";
 import { useSkuadLackContext } from "../../contexts/skuadLack-context";
 import fetchSupreme from "../../utils/apiWrapper";
 import Button from 'react-bootstrap/Button';
+import styles from './deleteChat.module.css'
 
 const DeleteChat = (props) =>{
 
@@ -15,12 +16,13 @@ const DeleteChat = (props) =>{
         (chatId && fetchSupreme(`/deleteChat/${chatId}`,'DELETE',undefined,true,undefined)
         .then((res)=>{
             setRefreshContext(!refreshContext)
+            console.log('delete refresh', refreshContext)
         }))
 
     }
     
     return(
-            <Button variant="light" onClick={()=>handleOnClick()}>Delete Chat</Button>
+            <Button className={styles.botonDelete} size='sm' variant="light" onClick={()=>handleOnClick()}>Delete Chat</Button>
        
     )
 }

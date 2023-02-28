@@ -1,0 +1,85 @@
+.buttonCreateChat {
+  background-image: linear-gradient(
+    to right,
+    #cc95c0 0%,
+    #dbd4b4 51%,
+    #cc95c0 100%
+  );
+  margin: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 10px #eee;
+  border-radius: 10px;
+  display: block;
+  border:none;
+  font-weight:bold;
+  font-size: 1rem;
+}
+
+.buttonCreateChat:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.containerModal{
+  backdrop-filter: blur(2px);
+ 
+  
+}
+.bodyModal{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #242A38;
+    color: white;  
+}
+.footer{
+  margin-top: 0.6rem;
+  margin-bottom: 1.8rem;
+}
+
+           
+  .buttonCreate{
+    background-image: linear-gradient(
+      to right,
+      #cc95c0 0%,
+      #dbd4b4 51%,
+      #cc95c0 100%
+    );
+    
+    padding: 5px 10px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 5px #eee;
+    border-radius: 10px;
+    display: block;
+    border:none;
+    font-weight:bold;
+    font-size: 1.2rem;
+  }
+
+  buttonCreate:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .check{
+    margin:0.9rem;
+    font-size: 1.2rem;
+  }
+
+.check input:checked{
+  background-color: #cc95c0;
+    border-color: #cc95c0;
+}
+
+
