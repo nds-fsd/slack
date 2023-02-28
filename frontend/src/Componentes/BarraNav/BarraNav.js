@@ -9,6 +9,7 @@ import Button from "react-bootstrap/esm/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox, MdOutlineLogout } from "react-icons/md";
 import { getUserSession, getUserToken, removeSession } from "../../utils/localStorageUtils.js";
+import { hasPermission } from "../../utils/rolePermissUtils.js";
 
 
 export const BarraNav = () => {
@@ -112,9 +113,10 @@ export const BarraNav = () => {
                       <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
                         <Button variant="dark">Dashboard</Button>
                       </Nav.Link>
+                      {hasPermission('GLOBAL_ADMIN') &&
                       <Nav.Link as={Link} to="/users">
                         <Button variant="warning">Admin Mode</Button>
-                      </Nav.Link>
+                      </Nav.Link>}
 
                       <Nav.Link>
                         <Button

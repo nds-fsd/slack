@@ -22,7 +22,7 @@ const jwtMiddleware = (req, res, next) => {
     tokenPayload = jwt.verify(token, jwtSecret);
   } catch (error) {
     // Si falla, será porque el token es inválido, por lo que devolvemo error 401
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized token no valid", message: error.message });
   }
 
   // Guardamos los datos del token dentro de req.jwtPayload, para que esté accesible en los próximos objetos req

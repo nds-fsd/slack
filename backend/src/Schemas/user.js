@@ -1,7 +1,9 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 const secret = process.env.JWT_SECRET;
-import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
+dotenv.config();
+import jwt from 'jsonwebtoken';
 
 
 
@@ -26,6 +28,8 @@ userSchema.pre('save', function (next) {
 userSchema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+//ESTE METODO DE GENERATEJWT no se usa, estamos usando la funcion directa del utils
 
 userSchema.methods.generateJWT = function () {
   const today = new Date();
