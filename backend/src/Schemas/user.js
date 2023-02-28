@@ -11,6 +11,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, required: true, unique: true, trim: true, match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i },
   lastName: { type: String, required: true },
   password: { type: String, required: true, required: true, unique: true, trim: true },
+  role:{type: String, enum:['GLOBAL_ADMIN', 'USER'], default:'USER'}
   
 });
 
@@ -36,6 +37,7 @@ userSchema.methods.generateJWT = function () {
     id: this._id,
     name: this.name,
     email: this.email,
+    role: this.role,
   };
   // * This method is from the json-web-token library (who is in charge to generate the JWT
   return jwt.sign(payload, secret, {
