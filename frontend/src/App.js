@@ -17,6 +17,7 @@ import CreateOrganization from './Pages/private/CreateOrganization/createOrganiz
 import LandingPage from './Pages/public/LandingPage/LandingPage';
 import ChatPage from './Pages/private/ChatPage/ChatPage';
 import { SocketContextProvider } from './contexts/useSocket';
+import RolePermiss from './Componentes/rolePermiss/rolePermiss';
 
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
@@ -25,11 +26,11 @@ import { SocketContextProvider } from './contexts/useSocket';
 
 function App() {
   const location = useLocation();
-  
+
   return (
     <>
-      
-        <div className={styles.contenedorPrincipal}>
+
+      <div className={styles.contenedorPrincipal}>
         <BarraNav />
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
@@ -39,16 +40,20 @@ function App() {
             <Route path="/organizacion" element={<CreateOrganization />}>  </Route>
             <Route path="/user/:id" element={<EditUserPage />}>  </Route>
             <Route path="/LUP/:id" element={<LandingUserPage />} />
-            <Route path="/users" element={<ListUserBootstrap />}></Route>
+            <Route path="/users" element={
+              <RolePermiss permission={'GLOBAL_ADMIN'}>
+                <ListUserBootstrap />
+              </RolePermiss>}>
+            </Route>
             <Route path="/skuadlack/:id" element={
-            <SkuadLackContextProvider>
+              <SkuadLackContextProvider>
                 <ChatPage />
-            </SkuadLackContextProvider>
+              </SkuadLackContextProvider>
             }>  </Route>
 
           </Route>
 
-          
+
           <Route path="/user" element={<Register />}>  </Route>
           {/* <Route path="/editUser/:id" element=>  </Route> */}
           <Route path="/InfoSlack" element={<InfoSlack />} >  </Route>

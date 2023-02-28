@@ -142,8 +142,7 @@
     border-radius: 4px;
     cursor: pointer;
     margin: 4px;
-    overflow-y: scroll;
-}
+    }
 
 
 ::-webkit-scrollbar {

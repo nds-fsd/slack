@@ -144,8 +144,8 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
         //antes de grabarse se ejecuta la función PRE del schema
         const userCreated = await user.save();
 
-        const userToken = generateJWT(userCreated);
-        const token = userCreated.generateJWT()
+        const token = generateJWT(userCreated);
+        
         //Crearmos otro objeto para no enviar la contraseña
         // const resUser = {
         //     userName: userCreated.userName,
@@ -160,7 +160,8 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
             user: {
                 email: userCreated.email,
                 name: userCreated.name,
-                id: userCreated._id
+                id: userCreated._id,
+                role: userCreated.role
             }, })
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
@@ -186,11 +187,12 @@ routerUsers.post('/login', async (req, res) => {
             // * if everything is ok, return the new token and user data
             sendMailWelcome(foundUser.name, foundUser.email)
             return res.status(200).json({
-                token: foundUser.generateJWT(),
+                token: generateJWT(foundUser),
                 user: {
                     email: foundUser.email,
                     name: foundUser.name,
                     id: foundUser._id,
+                    role: foundUser.role,
                 },
             })
         })
