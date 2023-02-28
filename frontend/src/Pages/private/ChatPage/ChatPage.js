@@ -30,6 +30,7 @@ const ChatPage = () => {
     idOrganizacionActual,
     myUserName,
     organizacionActual,
+    
     userOfOrganizacionActual
   } = useSkuadLackContext();
   

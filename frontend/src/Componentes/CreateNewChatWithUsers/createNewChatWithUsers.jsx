@@ -22,7 +22,7 @@ const CreateNewChatWithUsers = () => {
     idUser,
     userOfOrganizacionActual,
     setRefreshContext,
-    refreshContext,
+    refreshContext
   } = useSkuadLackContext();
 
   const handleChange = (e) => {
@@ -53,11 +53,11 @@ const CreateNewChatWithUsers = () => {
         setRefreshContext(!refreshContext);
         console.log(res);
         handleClose();
-      }
-    );
+        setRefreshContext(!refreshContext)
+        
+    })
 
-    console.log("refresh", refreshContext);
-  };
+  }
 
   return (
     <div>
