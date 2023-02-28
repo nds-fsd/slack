@@ -109,10 +109,10 @@ export const BarraNav = () => {
                   )}
 
                   {getUserToken() && (
-                    <>
+                    <>{!hasPermission('GLOBAL_ADMIN') &&
                       <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
                         <Button variant="dark">Dashboard</Button>
-                      </Nav.Link>
+                      </Nav.Link>}
                       {hasPermission('GLOBAL_ADMIN') &&
                       <Nav.Link as={Link} to="/users">
                         <Button variant="warning">Admin Mode</Button>

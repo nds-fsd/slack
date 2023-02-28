@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchSupreme from "../../../utils/apiWrapper";
 import { setUserSession } from "../../../utils/localStorageUtils";
+import { hasPermission } from "../../../utils/rolePermissUtils";
 import styles from "./login.module.css"
 
 const Login = () => {
@@ -48,7 +49,11 @@ const Login = () => {
 
         if (res.token) {
           setUserSession(res)
+         if(hasPermission('GLOBAL_ADMIN')){
+          navigate('/users')
+         }else{
           navigate(`/LUP/${res.user.id}`)
+         }           
         }
       })
   };
