@@ -145,7 +145,7 @@ const ChatPage = () => {
       {showNewMessage && <NotificacionNuevoMensaje infoNotification = {infoNotification}/>}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
-          <div>
+          <div className={styles.listOrg}>
             <CircleAvatar
               key={org._id}
               name={org.OrgName}

@@ -30,7 +30,14 @@
     flex-direction: column;
     gap: 16px;
 }
-
+.listOrg{
+    padding: 8px;
+    border-bottom:1px solid #0e1116;
+}
+.listOrg:hover{
+  background-color:  #3f485b;
+  border-radius: 50%;
+}
 .chatsTitle {
     color: white;
 }
@@ -44,6 +51,7 @@
 .usersTitle {
     color: white;
     border-bottom: 1px solid white;
+    padding-bottom: 10px;
    
 }
 .listUserRoot {
@@ -51,7 +59,7 @@
     background-color:#242A38;
     display: flex;
     flex-direction: column;
-    width: 140px;
+    width: 190px;
     gap: 4px;
     border-left: 1px solid #0e1116;
 }
@@ -66,7 +74,8 @@
     height: 45px;
     box-shadow: -5px,-5px;
     align-items: center;
-    box-shadow: #0e1116 0px -3px 2px 0px;
+    
+    border-bottom:1px solid #0e1116;
 }
 .chatSpace{
     overflow: hidden;
@@ -151,13 +160,19 @@
 
 .usersRoot{
     color: white;
- 
+    display: flex;
     padding: 8px;
     font-size: 14px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
     margin: 4px;
+    border-bottom:1px solid #0e1116;
+    align-items: center;
+    }
+
+    .usersRoot:hover{
+        background-color:  #3f485b;
     }
 
 
