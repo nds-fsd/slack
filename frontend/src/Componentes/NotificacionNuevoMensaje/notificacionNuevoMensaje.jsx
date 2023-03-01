@@ -4,7 +4,7 @@ import stringToColour from "../../utils/stringToColour";
 import styles from './notificacionNuevoMensaje.module.css'
 
 const NotificacionNuevoMensaje = (props) => {
-    const { myUserName } = useSkuadLackContext();
+    const { myUserName, setRefreshContext, refreshContext,setIdOrganizacionActual } = useSkuadLackContext();
     const color = stringToColour(props.infoNotification.name)
     // let miIdChatLargo = props.infoNotification.idChat
     // let miIdChatCorto = miIdChatLargo.substring(miIdChatLargo.length - 5);
@@ -27,9 +27,19 @@ const NotificacionNuevoMensaje = (props) => {
         fontSize: 40 / 2,
         textTransform: 'uppercase',
     };
+
+        const text = props.infoNotification.text.length > 30 ? props.infoNotification.text.substr(0,28) + '...' : props.infoNotification.text
+
     return (
 
-        <div className={styles.ContenedorNotificacionNuevoMensaje}>
+        <div  onClick={() =>{           
+          props.setShowNewMessage(false)
+          setIdOrganizacionActual(props.infoNotification.idOrganizacion)
+          setTimeout(() => {
+            props.setCurrentChat(props.infoNotification.chat)
+        }, [500]);
+          
+          }}className={styles.ContenedorNotificacionNuevoMensaje}>
             <div className={styles.skuadLack}>
                 <img
                     className={styles.logo}
@@ -45,7 +55,7 @@ const NotificacionNuevoMensaje = (props) => {
                 </div>
                 <div>
                     <p className={styles.NotificacionNuevoMensaje}>Nuevo mensaje de {props.infoNotification.userName} <br />
-                        <span>{props.infoNotification.text}</span> <br /> en el chat {props.infoNotification.chatName.name ? props.infoNotification.chatName.name : props.infoNotification.chatName.user 
+                        <span>{text}</span> <br /> en el chat {props.infoNotification.chatName.name ? props.infoNotification.chatName.name : props.infoNotification.chatName.user 
                             .map((u) => u.userName)
                             .filter((item) => item !== myUserName)
                             .join(" | ")}</p>

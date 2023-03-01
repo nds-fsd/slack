@@ -6,7 +6,7 @@ import { useSkuadLackContext } from "../../contexts/skuadLack-context"
 function CircleAvatar({ name, color, size, id, path }) {
   // Extraer las dos primeras letras del nombre
 
-  const {setChatId } = useSkuadLackContext()
+  const {setChatId, setIdOrganizacionActual } = useSkuadLackContext()
 
   const initials = name
     .split(' ')
@@ -33,7 +33,7 @@ function CircleAvatar({ name, color, size, id, path }) {
 
   return (
   
-  <Button as={Link} to={path + id} style={circleStyle}>{initials}</Button>
+  <Button onClick= {()=>setIdOrganizacionActual(id)} as={Link} to={path + id} style={circleStyle}>{initials}</Button>
   )
 }
 
