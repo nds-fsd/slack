@@ -66,7 +66,7 @@ const ChatPage = () => {
       const chatName = currentChat.name? currentChat.name : currentChat.user.map((u) => u.userName)
       .filter((item) => item !== myUserName)
       .join(" | ")
-      socket.emit('notification', {chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
+      socket.emit('notification', {organizacion: organizacionActual.OrgName ,chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
     }
   };
 
@@ -114,7 +114,7 @@ const ChatPage = () => {
     const chatReply = (data) =>{
       console.log('data de la respuesta', data)
       
-      setInfoNotification({userName:data.userName, idChat: data.chat,text:data.text, chatName:data.chatName})
+      setInfoNotification({userName:data.userName, idChat: data.chat,text:data.text, chatName:data.chatName, organizacion:data.organizacion})
 
       console.log('info Notificacion', infoNotification)
       

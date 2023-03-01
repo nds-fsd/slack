@@ -1,16 +1,65 @@
-.ContenedorNotificacionNuevoMensaje{
+.ContenedorNotificacionNuevoMensaje {
     position: fixed;
     bottom: 0;
     right: 0;
+
     padding: 1rem;
     margin: 1rem;
+    margin-top: 0rem;
+    padding-top: 0rem;
     background: linear-gradient(to bottom right, #4E596F, #202430);
     border-radius: 0.25rem;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     animation: slideInDown 0.5s ease;
+    align-items: center;
+    width: 300px;
+    height: 190px;
+}
+
+.NotificacionNuevoMensaje {
+    color: white;
+    margin-top: 10px;
+}
+
+.circle {
+    margin-right: 10px;
+}
+
+.skuadLack {
+    color: white;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    border-bottom:1px solid #0e1116;
+}
+
+.skuadLack p {
+    margin-top: 16px;
+}
+
+.mensaje {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+
+    width: 1.8rem;
+    height: 2rem;
+    margin-right: 6px;
 
 }
 
-.NotificacionNuevoMensaje{
-    color:white;
+.organizacion {
+    font-weight: bold;
+    color: white;
+    margin-top: 16px;
+    
+}
+.NotificacionNuevoMensaje span {
+
+    color: #d3ddf1;
+    font-style: italic;
+  
 }
