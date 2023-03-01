@@ -63,9 +63,7 @@ const ChatPage = () => {
         setMessageBody("");
         setRefresh(true);
       });
-      const chatName = currentChat.name? currentChat.name : currentChat.user.map((u) => u.userName)
-      .filter((item) => item !== myUserName)
-      .join(" | ")
+      const chatName = currentChat.name? currentChat.name : currentChat
       socket.emit('notification', {organizacion: organizacionActual.OrgName ,chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
     }
   };
