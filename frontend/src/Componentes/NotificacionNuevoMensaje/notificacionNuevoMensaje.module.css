@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    border-bottom:1px solid #0e1116;
+    border-bottom:1px solid white;
 }
 
 .skuadLack p {
