@@ -24,6 +24,7 @@ const ChatPage = () => {
   const [infoNotification, setInfoNotification] =useState('')
 
   const {
+    user,
     idUser,
     chats,
     myOrganizaciones,
@@ -64,7 +65,7 @@ const ChatPage = () => {
         setRefresh(true);
       });
       const chatName = currentChat.name? currentChat.name : currentChat
-      socket.emit('notification', {organizacion: organizacionActual.OrgName ,chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
+      socket.emit('notification', {organizacion: organizacionActual.OrgName ,chat: currentChat._id, chatName: chatName, text: messageBody, name: user.name, userName: myUserName, idUser: idUser })
     }
   };
 
@@ -112,7 +113,7 @@ const ChatPage = () => {
     const chatReply = (data) =>{
       console.log('data de la respuesta', data)
       
-      setInfoNotification({userName:data.userName, idChat: data.chat,text:data.text, chatName:data.chatName, organizacion:data.organizacion})
+      setInfoNotification({userName:data.userName, name: data.name, idChat: data.chat,text:data.text, chatName:data.chatName, organizacion:data.organizacion})
 
       console.log('info Notificacion', infoNotification)
       

@@ -5,7 +5,7 @@ import styles from './notificacionNuevoMensaje.module.css'
 
 const NotificacionNuevoMensaje = (props) => {
     const { myUserName } = useSkuadLackContext();
-    const color = stringToColour(props.infoNotification.userName)
+    const color = stringToColour(props.infoNotification.name)
     // let miIdChatLargo = props.infoNotification.idChat
     // let miIdChatCorto = miIdChatLargo.substring(miIdChatLargo.length - 5);
     const initials = props.infoNotification.userName
