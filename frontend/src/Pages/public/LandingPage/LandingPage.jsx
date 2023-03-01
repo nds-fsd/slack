@@ -36,15 +36,8 @@ const LandingPage = () =>{
                     <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
                 </div>
-                
-                <div>seccion 2.2</div>
-                <div>seccion 2.3</div>
-                <div>sección 2.4</div>
-
+    
             </div>
-            <div className={styles.seccion3}>sección 3</div>
-            <div className={styles.seccion4}>sección 4</div>
-            <div className={styles.seccion5}>sección 5</div>
 
         </div> 
     

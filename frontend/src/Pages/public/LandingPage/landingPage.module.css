@@ -105,12 +105,20 @@ body {
 
 #logoMundoToday {
     height: 4rem;
-    width: 9rem;
+    width: 14rem;
+}
+#logoNasa{
+    height: 8.5rem;
+    width: 10rem;
+}
+#logoAirbnb{
+    height: 5rem;
+    width: 16rem;
 }
 
 #logoSlack {
-    height: 6rem;
-    width: 7rem;
+    height: 7rem;
+    width: 10rem;
 }
 
 .seccion2 h2 {
