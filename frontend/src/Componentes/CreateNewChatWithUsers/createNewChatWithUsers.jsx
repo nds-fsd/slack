@@ -14,7 +14,7 @@ const CreateNewChatWithUsers = (props) => {
     props.setShowModal(false);
     setCheckedState({});
   };
-  const handleShow = () => props.setShowModal(true);
+ 
 
   const {
     idOrganizacionActual,
