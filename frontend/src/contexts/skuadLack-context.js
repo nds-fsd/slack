@@ -8,7 +8,7 @@ export const SkuadLackContext = createContext()
 export const SkuadLackContextProvider = (props) => {
     // Creamos todas las variables de estado que necesitemos y funciones
     const params = useParams()
-    const idOrganizacionActual = params.id
+    const [idOrganizacionActual, setIdOrganizacionActual] = useState(params.id) 
     const idUser = getUserSession().id;
     const [user, setUser] = useState("")
     const [myOrganizaciones, setMyOrganizaciones] = useState([]);
@@ -79,7 +79,9 @@ export const SkuadLackContextProvider = (props) => {
         userOfOrganizacionActual,
         setChats,
         setRefreshContext,
-        refreshContext
+        refreshContext,
+        setIdOrganizacionActual
+        
     };
 
     return (

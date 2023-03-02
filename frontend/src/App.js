@@ -18,6 +18,7 @@ import LandingPage from './Pages/public/LandingPage/LandingPage';
 import ChatPage from './Pages/private/ChatPage/ChatPage';
 import { SocketContextProvider } from './contexts/useSocket';
 import RolePermiss from './Componentes/rolePermiss/rolePermiss';
+import PublicChat from './Componentes/public-chat/public-chat';
 
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
@@ -33,13 +34,14 @@ function App() {
       <div className={styles.contenedorPrincipal}>
         <BarraNav />
         <Routes>
-          <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/" element={<LandingPage />}/>
 
           <Route path="/" element={<PrivateRoutes />}>
             {/*Las siguientes rutas son Outlet de PrivateRoutes*/}
-            <Route path="/organizacion" element={<CreateOrganization />}>  </Route>
-            <Route path="/user/:id" element={<EditUserPage />}>  </Route>
+            <Route path="/organizacion" element={<CreateOrganization />}/>
+            <Route path="/user/:id" element={<EditUserPage />}/>
             <Route path="/LUP/:id" element={<LandingUserPage />} />
+            <Route path="/publicChat" element={<PublicChat />} />
             <Route path="/users" element={
               <RolePermiss permission={'GLOBAL_ADMIN'}>
                 <ListUserBootstrap />
