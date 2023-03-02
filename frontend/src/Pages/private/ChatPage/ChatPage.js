@@ -201,8 +201,8 @@ const ChatPage = () => {
               {chat.name
                 ? chat.name
                 : chat.user
-                  .map((u) => u.userName)
-                  .filter((item) => item !== myUserName)
+                  .map((u) => u.userName === myUserName ? `${myUserName} : tu` : u.userName)
+                  //.filter((item) => item !== myUserName)
                   .join(" | ")}
               <DeleteChat currentChat={chat}/>
             </div>
