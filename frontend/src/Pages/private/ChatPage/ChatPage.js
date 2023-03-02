@@ -14,41 +14,52 @@ import { CloudinaryUpload } from "../../../Componentes/CloudinaryUpload/Cloudina
 //import { isBefore } from 'date-fns';
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
+import { MdOutlineMapsUgc } from "react-icons/md";
+import { BsTrash } from "react-icons/bs";
+
+
+
 
 const ChatPage = () => {
-  const { socket, joinChat, onMessageReceived, setAlert, alert } = useSocket();
+  const { socket, joinChat, onMessageReceived, setAlert, alert, setIdOrganizacionActual } = useSocket();
+
   const [currentChat, setCurrentChat] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
-  const [infoNotification, setInfoNotification] =useState('')
+  const [infoNotification, setInfoNotification] = useState('')
   const [imagesUpload, setImagesUpload] =useState([])
   const [showImage, setShowImage] = useState(false)
   const [cleanImageUpload, setCleanImageUpload] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+
   console.log(showImage)
-  console.log(imagesUpload); // es un array
+  console.log(imagesUpload); // es un array  const [showModal, setShowModal] = useState(false)
+
   const {
+    user,
     idUser,
     chats,
     myOrganizaciones,
     idOrganizacionActual,
     myUserName,
     organizacionActual,
-    
+
     userOfOrganizacionActual
   } = useSkuadLackContext();
-  
-  const setTimerNewMessage = (chatId) => { 
+
+  const setTimerNewMessage = (data) => {
     //objetivo: No quiero ver la notificación si ya estoy en el chat que se emite el mensaje
     //Con este condicional, nos echa de la función si se cumple la condición
-    if(currentChat._id === chatId) return
 
-      setShowNewMessage(true);
-      setTimeout(() => {
-        setShowNewMessage(false);
-      }, [5000]);
-      console.log("paso por setTimer");
+
+    if (currentChat._id === data._id) return
+
+    setShowNewMessage(true);
+    setTimeout(() => {
+      setShowNewMessage(false);
+    }, [5000]);
   };
 
 
@@ -70,11 +81,17 @@ const ChatPage = () => {
         setShowImage(false)
         setCleanImageUpload(true)
       });
-      // sendImages()
-      const chatName = currentChat.name? currentChat.name : currentChat.user.map((u) => u.userName)
-      .filter((item) => item !== myUserName)
-      .join(" | ")
-      socket.emit('notification', {chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
+      const chatName = currentChat.name ? currentChat.name : currentChat
+      socket.emit('notification', {
+        organizacion: organizacionActual.OrgName,
+        idOrganizacion: idOrganizacionActual,
+        chat: currentChat,
+        chatName: chatName,
+        text: messageBody,
+        name: user.name,
+        userName: myUserName,
+        idUser: idUser
+      })
     }
   };
 
@@ -136,7 +153,6 @@ const ChatPage = () => {
     if (currentChat) {
       joinChat(currentChat._id);
       onMessageReceived((newMessage) => {
-        console.log("message received", newMessage);
         if (newMessage.chat === currentChat._id) {
           setRefresh(true);
         }
@@ -145,16 +161,24 @@ const ChatPage = () => {
   }, [currentChat]);
 
   useEffect(() => {
-    
-    const chatReply = (data) =>{
+
+    const chatReply = (data) => {
       console.log('data de la respuesta', data)
-      
-      setInfoNotification({userName:data.userName, idChat: data.chat,text:data.text, chatName:data.chatName})
+
+      setInfoNotification({
+        chat: data.chat,
+        userName: data.userName,
+        name: data.name,
+        idChat: data.chat,
+        text: data.text,
+        chatName: data.chatName,
+        organizacion: data.organizacion,
+        idOrganizacion: data.idOrganizacion
+      })
 
       console.log('info Notificacion', infoNotification)
-      
-      const {chat} = data 
-      console.log('data',data)
+
+      const { chat } = data
       setTimerNewMessage(chat)
     }
     socket.on('reply2', chatReply)
@@ -188,10 +212,10 @@ const ChatPage = () => {
 
   return (
     <div className={styles.root}>
-      {showNewMessage && <NotificacionNuevoMensaje infoNotification = {infoNotification}/>}
+      {showNewMessage && <NotificacionNuevoMensaje setShowNewMessage={setShowNewMessage} setCurrentChat={setCurrentChat} infoNotification={infoNotification} />}
       <div className={styles.orgsRoot}>
         {myOrganizaciones?.map((org) => (
-          <div>
+          <div className={styles.listOrg}>
             <CircleAvatar
               key={org._id}
               name={org.OrgName}
@@ -209,29 +233,31 @@ const ChatPage = () => {
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
             <div>
-              <CreateNewChatWithUsers />
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
+              {showModal && <CreateNewChatWithUsers showModal = {showModal} setShowModal = {setShowModal}/>}
             </div>
           </div>
         </h2>
         <div className={styles.chatSpace}>
-        {chats.map((chat) => (
-          <div
-            className={classnames(styles.chat, {
-              [styles.focusedChat]: chat._id === currentChat?._id,
-            })}
+          {chats.map((chat) => (
+            <div
+              className={classnames(styles.chat, {
+                [styles.focusedChat]: chat._id === currentChat?._id,
+              })}
             onClick={() => setCurrentChat(chat)}
-          >
-            {chat.name
-              ? chat.name
-              : chat.user
-                  .map((u) => u.userName)
-                  .filter((item) => item !== myUserName)
+            >
+              {chat.name
+                ? chat.name
+                : chat.user
+                  .map((u) => u.userName === myUserName ? `${myUserName} : tu` : u.userName)
+                  //.filter((item) => item !== myUserName)
                   .join(" | ")}
-          </div>
-        ))}
+              <DeleteChat currentChat={chat}/>
+            </div>
+          ))}
         </div>
       </div>
-                
+
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
@@ -239,12 +265,14 @@ const ChatPage = () => {
               {currentChat.name
                 ? currentChat.name
                 : currentChat.user
-                    .map((u) => u.userName)
-                    .filter((item) => item !== myUserName)
-                    .join(" | ")}
-            
-            <DeleteChat currentChat={currentChat} />
-            </h5>  
+                  .map((u) => u.userName)
+                  .filter((item) => item !== myUserName)
+                  .join(" | ")}
+
+              <DeleteChat currentChat={currentChat} />
+            </h5>
+
+
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
@@ -281,7 +309,7 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
-    
+
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div
@@ -289,12 +317,13 @@ const ChatPage = () => {
             onClick={() => console.log(user.userName)}
           >
             <CircleAvatarUsers
+              className={styles.circleAvatarUsers}
               name={user.userName}
               id={user._id}
               size={40}
               color={stringToColour(user.name)}
             />
-            {user.userName === myUserName? myUserName + '(tú)' : user.userName }
+            {user.userName === myUserName ? myUserName + '(tú)' : user.userName}
           </div>
         ))}
       </div>

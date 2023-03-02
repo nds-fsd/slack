@@ -1,24 +1,8 @@
-.botonDelete {
-  background-image: linear-gradient(
-    to right,
-    #ef3b36 0%,
-    #e7a4a4 51%,
-    #ef3b36 100%
-  );
-
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 5px #eee;
-  border-radius: 10px;
-  display: block;
-  border: none;
-  width: fit-content;
+.botonDelete{
+  transition: transform 0.2s ease-in-out;
 }
 
-.botonDelete:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
+.botonDelete:hover{
+  cursor:pointer;
+  transform: scale(1.2);
 }
