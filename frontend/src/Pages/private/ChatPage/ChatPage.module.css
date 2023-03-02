@@ -11,7 +11,7 @@
     background-color: #242A38;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 350px;
     gap: 4px;
     border-right: 1px solid #0e1116;
 }
@@ -65,7 +65,7 @@
     background-color: #242A38;
     display: flex;
     flex-direction: column;
-    width: 190px;
+    width: 250px;
     gap: 4px;
     border-left: 1px solid #0e1116;
 }
@@ -81,14 +81,18 @@
     height: 45px;
     box-shadow: -5px, -5px;
     align-items: center;
-
     border-bottom: 1px solid #0e1116;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
 }
 
 .chatSpace {
     overflow: hidden;
     height: 40%;
     border-bottom: 1px solid white;
+    padding: 15px;
+  
 
 
 }
@@ -96,16 +100,19 @@
 .chatSpace:hover {
     overflow-y: scroll;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    overflow: hidden;
 }
 
 .focusedChat {
     background: linear-gradient(to bottom right, #F54864, #F78361);
-
+    max-width: 275px;
+    transform: scale(1.1);
 
 }
 
 .chat:hover {
     background-color: #3f485b;
+    transform:scale(1.1)
 
 }
 
@@ -124,6 +131,7 @@
     border-bottom: 1px solid #0e1116;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .divider {
@@ -189,6 +197,16 @@
     cursor: pointer;
 
 }
+
+.buttonCreateChat{
+    cursor:pointer;
+    transition: transform 0.2s ease-in-out;
+    
+}
+
+.buttonCreateChat:hover {
+    transform: scale(1.2);
+  }
 
 
 

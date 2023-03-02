@@ -12,6 +12,11 @@ import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
+import { MdOutlineMapsUgc } from "react-icons/md";
+import { BsTrash } from "react-icons/bs";
+
+
+
 
 const ChatPage = () => {
   const { socket, joinChat, onMessageReceived, setAlert, alert, setIdOrganizacionActual } = useSocket();
@@ -22,6 +27,7 @@ const ChatPage = () => {
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [infoNotification, setInfoNotification] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const {
     user,
@@ -179,7 +185,8 @@ const ChatPage = () => {
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
             <div>
-              <CreateNewChatWithUsers />
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
+              {showModal && <CreateNewChatWithUsers showModal = {showModal} setShowModal = {setShowModal}/>}
             </div>
           </div>
         </h2>
@@ -194,9 +201,10 @@ const ChatPage = () => {
               {chat.name
                 ? chat.name
                 : chat.user
-                  .map((u) => u.userName)
-                  .filter((item) => item !== myUserName)
+                  .map((u) => u.userName === myUserName ? `${myUserName} : tu` : u.userName)
+                  //.filter((item) => item !== myUserName)
                   .join(" | ")}
+              <DeleteChat currentChat={chat}/>
             </div>
           ))}
         </div>

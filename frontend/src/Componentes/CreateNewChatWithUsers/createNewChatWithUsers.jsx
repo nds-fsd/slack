@@ -6,15 +6,14 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import fetchSupreme from "../../utils/apiWrapper";
 
-const CreateNewChatWithUsers = () => {
-  const [show, setShow] = useState(false);
+const CreateNewChatWithUsers = (props) => {
+
   const [checkedState, setCheckedState] = useState({});
 
   const handleClose = () => {
-    setShow(false);
+    props.setShowModal(false);
     setCheckedState({});
   };
-  const handleShow = () => setShow(true);
 
   const {
     idOrganizacionActual,
@@ -40,8 +39,11 @@ const CreateNewChatWithUsers = () => {
       }
     }
 
-    //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checbox. Pero se da por supuesto que el idUser también está dentro
-    trueKeys.push(idUser);
+    //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checkbox. Pero se da por supuesto que el idUser también está dentro
+    //A no ser que el usuario lo seleccione
+    !trueKeys.includes(idUser) && trueKeys.push(idUser);
+
+    
 
     const body = {
       organizacion: idOrganizacionActual,
@@ -61,18 +63,9 @@ const CreateNewChatWithUsers = () => {
 
   return (
     <div>
-      <Button
-        size="sm"
-        id={styles.buttonCreateChatID}
-        className={styles.buttonCreateChat}
-        onClick={handleShow}
-      >
-        +
-      </Button>
-
-      <Modal
+       <Modal
         className={styles.containerModal}
-        show={show}
+        show={props.showModal}
         onHide={handleClose}
         keyboard={true}
         aria-labelledby="contained-modal-title-vcenter"
@@ -89,18 +82,19 @@ const CreateNewChatWithUsers = () => {
                   //un array con objetos con las keys de cada user (userName, name, email...), la recorro para obtener los userName y pintarlos en un checkbox
 
                   //solo quiero los usuarios diferentes al mío
-                  if (e.userName !== myUserName) {
+                
+                 
                     return (
                       <Form.Check
                         type="checkbox"
-                        label={e?.userName}
+                        label={e?.userName === myUserName ? `${myUserName} : tu`:e.userName}
                         value={e._id}
                         key={e?._id}
                         onChange={handleChange}
                         className = {styles.check}
                       />
                     );
-                  }
+                  
                 })}
             </Form>
           </Modal.Body>
