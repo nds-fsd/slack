@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import fetchSupreme from "../../utils/apiWrapper";
 
 const CreateNewChatWithUsers = (props) => {
-  const [show, setShow] = useState(props.showModal);
+
   const [checkedState, setCheckedState] = useState({});
 
   const handleClose = () => {
@@ -40,7 +40,7 @@ const CreateNewChatWithUsers = (props) => {
     }
 
     //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checbox. Pero se da por supuesto que el idUser también está dentro
-    trueKeys.push(idUser);
+    trueKeys[trueKeys.length-1]!== idUser && trueKeys.push(idUser);
 
     const body = {
       organizacion: idOrganizacionActual,
@@ -79,18 +79,19 @@ const CreateNewChatWithUsers = (props) => {
                   //un array con objetos con las keys de cada user (userName, name, email...), la recorro para obtener los userName y pintarlos en un checkbox
 
                   //solo quiero los usuarios diferentes al mío
-                  if (e.userName !== myUserName) {
+                
+                 
                     return (
                       <Form.Check
                         type="checkbox"
-                        label={e?.userName}
+                        label={e?.userName === myUserName ? `${myUserName} : tu`:e.userName}
                         value={e._id}
                         key={e?._id}
                         onChange={handleChange}
                         className = {styles.check}
                       />
                     );
-                  }
+                  
                 })}
             </Form>
           </Modal.Body>
