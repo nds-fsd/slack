@@ -6,12 +6,21 @@ import logoNasa from '../../../Assets/logo-nasa.png'
 import logoMundoToday from '../../../Assets/logo-elmundotoday2.png'
 import logoAirbnb from '../../../Assets/airbnb-logo.png'
 import slackLogo from '../../../Assets/slackLogo.png'
+import EasterEgg from "../easterEgg/easterEgg";
+import { useState } from "react";
 
 
 
 
 const LandingPage = () =>{
 
+    const [showModal, setShowModal] = useState(false)
+
+    const handleOnClick = () =>{
+        setShowModal(!showModal);
+
+    }
+    
 
     return (
 
@@ -31,7 +40,8 @@ const LandingPage = () =>{
             <div className={styles.seccion2}>
                 <h2>Empresas y personas de todo el mundo confían en SkuadLack</h2>
                 <div className={styles.seccion2_1}>
-                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa"/>
+                    <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa" onClick= {handleOnClick}/>
+                    {showModal && <EasterEgg/>}
                     <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday} alt="Logo Mundo Today"/>
                     <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
