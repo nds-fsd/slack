@@ -1,8 +1,7 @@
 .contenedor{
     position: fixed;
     top:100px;
-    right: 40px;
-    background-color: #E65262;
+    right: 250px;
     width: 60%;
     border-radius: 20px;
     display: flex;
@@ -12,6 +11,12 @@
     margin: 10px;
     padding: 10px;
     color: white;
+    background-image: linear-gradient(to right, #114357 0%, #F29492  51%, #114357  100%);
+    transition: 0.5s;
+}
+
+.contenedor:hover{
+    background-position: right left; /* change the direction of the change here */
 }
 
 .text{

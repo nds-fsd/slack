@@ -14,10 +14,10 @@ import { useState } from "react";
 
 const LandingPage = () =>{
 
-    const [showModal, setShowModal] = useState(false)
+    const [show, setShow] = useState(false)
 
     const handleOnClick = () =>{
-        setShowModal(!showModal);
+        setShow(!show);
 
     }
     
@@ -41,7 +41,7 @@ const LandingPage = () =>{
                 <h2>Empresas y personas de todo el mundo confían en SkuadLack</h2>
                 <div className={styles.seccion2_1}>
                     <img id={styles.logoNasa} className={styles.logos} src={logoNasa} alt="Logo Nasa" onClick= {handleOnClick}/>
-                    {showModal && <EasterEgg/>}
+                    {show && <EasterEgg/>}
                     <img id={styles.logoMundoToday} className={styles.logos}  src={logoMundoToday} alt="Logo Mundo Today"/>
                     <img id={styles.logoAirbnb} className={styles.logos}  src={logoAirbnb} alt="Logo Airbnb"/>
                     <img id={styles.logoSlack} className={styles.logos}  src={slackLogo} alt="Slack Logo"/>
