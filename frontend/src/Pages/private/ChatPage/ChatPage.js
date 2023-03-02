@@ -12,6 +12,8 @@ import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
+import { MdOutlineChatBubbleOutline } from "react-icons/md";
+
 
 const ChatPage = () => {
   const { socket, joinChat, onMessageReceived, setAlert, alert, setIdOrganizacionActual } = useSocket();
@@ -22,6 +24,7 @@ const ChatPage = () => {
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [infoNotification, setInfoNotification] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const {
     user,
@@ -179,7 +182,8 @@ const ChatPage = () => {
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
             <div>
-              <CreateNewChatWithUsers />
+              <MdOutlineChatBubbleOutline className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
+              {showModal && <CreateNewChatWithUsers showModal = {showModal} setShowModal = {setShowModal}/>}
             </div>
           </div>
         </h2>

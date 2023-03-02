@@ -190,6 +190,16 @@
 
 }
 
+.buttonCreateChat{
+    cursor:pointer;
+    transition: transform 0.2s ease-in-out;
+    
+}
+
+.buttonCreateChat:hover {
+    transform: scale(1.2);
+  }
+
 
 
 ::-webkit-scrollbar {

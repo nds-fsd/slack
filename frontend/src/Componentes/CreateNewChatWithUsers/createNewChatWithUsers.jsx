@@ -6,15 +6,15 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import fetchSupreme from "../../utils/apiWrapper";
 
-const CreateNewChatWithUsers = () => {
-  const [show, setShow] = useState(false);
+const CreateNewChatWithUsers = (props) => {
+  const [show, setShow] = useState(props.showModal);
   const [checkedState, setCheckedState] = useState({});
 
   const handleClose = () => {
-    setShow(false);
+    props.setShowModal(false);
     setCheckedState({});
   };
-  const handleShow = () => setShow(true);
+  const handleShow = () => props.setShowModal(true);
 
   const {
     idOrganizacionActual,
@@ -61,18 +61,9 @@ const CreateNewChatWithUsers = () => {
 
   return (
     <div>
-      <Button
-        size="sm"
-        id={styles.buttonCreateChatID}
-        className={styles.buttonCreateChat}
-        onClick={handleShow}
-      >
-        +
-      </Button>
-
-      <Modal
+       <Modal
         className={styles.containerModal}
-        show={show}
+        show={props.showModal}
         onHide={handleClose}
         keyboard={true}
         aria-labelledby="contained-modal-title-vcenter"
