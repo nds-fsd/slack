@@ -1,0 +1,7 @@
+.circleOrg {
+  transition: transform 0.2s ease-in-out;
+}
+
+.circleOrg:hover {
+  transform: scale(1.15);
+}

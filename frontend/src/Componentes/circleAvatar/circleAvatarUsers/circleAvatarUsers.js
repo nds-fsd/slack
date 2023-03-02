@@ -51,7 +51,7 @@ function CircleAvatarUsers({ name, color, size, id }) {
 
   return (
     <>
-      <Button onClick={handleShow} className="me-2"
+      <Button onClick={handleShow} className={styles.me2}
         style={circleStyle}>{initials}
       </Button>
 
