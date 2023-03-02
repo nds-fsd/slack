@@ -83,6 +83,8 @@
     align-items: center;
     border-bottom: 1px solid #0e1116;
     transition: transform 0.2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
 }
 
 .chatSpace {

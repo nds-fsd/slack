@@ -13,6 +13,7 @@ import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
 import { MdOutlineMapsUgc } from "react-icons/md";
+import { BsTrash } from "react-icons/bs";
 
 
 
@@ -203,6 +204,7 @@ const ChatPage = () => {
                   .map((u) => u.userName)
                   .filter((item) => item !== myUserName)
                   .join(" | ")}
+              <DeleteChat currentChat={chat}/>
             </div>
           ))}
         </div>
