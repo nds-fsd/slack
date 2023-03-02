@@ -3,6 +3,7 @@ import { useSkuadLackContext } from "../../contexts/skuadLack-context";
 import fetchSupreme from "../../utils/apiWrapper";
 import Button from 'react-bootstrap/Button';
 import styles from './deleteChat.module.css'
+import { BsTrash } from "react-icons/bs";
 
 const DeleteChat = (props) =>{
 
@@ -22,7 +23,7 @@ const DeleteChat = (props) =>{
     }
     
     return(
-            <Button className={styles.botonDelete} size='sm' variant="light" onClick={()=>handleOnClick()}>Delete Chat</Button>
+            <BsTrash className={styles.botonDelete} onClick={()=>handleOnClick()}/>
        
     )
 }

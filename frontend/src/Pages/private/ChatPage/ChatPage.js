@@ -12,7 +12,9 @@ import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
-import { MdOutlineChatBubbleOutline } from "react-icons/md";
+import { MdOutlineMapsUgc } from "react-icons/md";
+
+
 
 
 const ChatPage = () => {
@@ -182,7 +184,7 @@ const ChatPage = () => {
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
             <div>
-              <MdOutlineChatBubbleOutline className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
               {showModal && <CreateNewChatWithUsers showModal = {showModal} setShowModal = {setShowModal}/>}
             </div>
           </div>
