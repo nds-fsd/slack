@@ -6,7 +6,9 @@ import CircleAvatar from "../../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 
 const Message = (props) =>{
-	const { message} = props;
+
+	// tienes que poder pasar las url de todas las imagenes que mandes	
+	const { message} = props; // por defecto es un string 
 	const sessionUser = getUserSession();
 
 	const stringToColour = function(str) {
@@ -34,7 +36,10 @@ const Message = (props) =>{
 					</div>
 				</div>
 				<div>
-					{message.text}
+					{message.text.includes('res.cloudinary.com')?
+					<img src={message.text} style={{height: '100px', width: '100px'}} alt="" />:
+					message.text	
+				}
 				</div>
 			
 			</div>

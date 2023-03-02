@@ -1,19 +1,32 @@
+
+import { useEffect } from "react";
 import { CloudinaryContext } from "cloudinary-react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { AiOutlineUpload } from "react-icons/ai";
 
-// Definimos el componente CloudinaryUpload
-export const CloudinaryUpload = () => {
-  // Definimos dos estados del componente: images para almacenar las imágenes cargadas en Cloudinary y previewImages para almacenar las imágenes previsualizadas antes de cargarlas
+export const CloudinaryUpload = ({imageHandler, passUrlCloudinary, setCloseUploadImages, stateShowImage, passDatafromCloudinary, stateCleanImage}) => {
+  // Definimos dos estados del componente: images para almacenar las imágenes cargadas en Cloudinary y
+  // previewImages para almacenar las imágenes previsualizadas antes de cargarlas
   const [images, setImages] = useState([]);
+  console.log("este es el estado de limpieza de fotos", stateCleanImage)
+  
   const [previewImages, setPreviewImages] = useState([]);
 
-  // Definimos la URL de la API de Cloudinary para cargar imágenes
+  useEffect(() =>{
+    if(stateShowImage === false){
+      setPreviewImages([])
+    }
+  },[stateShowImage])
+
+
+  // Definimos la URL de la API de Cloudinary para cargar archivos(auto)
   const url = "https://api.cloudinary.com/v1_1/dnsy1t6dj/auto/upload";
 
   // Esta función se activa cuando el usuario carga una o varias imágenes en el componente
   const handleImageUpload = async (event) => {
+    setCloseUploadImages(true)
+    // setCloseUploadImages(!stateShowImage)
     // Obtenemos los archivos seleccionados
     const files = event.target.files;
 
@@ -36,7 +49,12 @@ export const CloudinaryUpload = () => {
       const response = await fetch(url, options);
       const json = await response.json();
       uploadedImages.push(json.secure_url);
+      passUrlCloudinary(json.secure_url)
+      passDatafromCloudinary(images, setImages)
 
+      
+
+      //retrieveImage(uploadedImages)
       // Creamos una URL local para la previsualización de la imagen cargada
       const imageURL = URL.createObjectURL(file);
       previewedImages.push(imageURL);
@@ -45,6 +63,7 @@ export const CloudinaryUpload = () => {
     // Actualizamos los estados del componente con las imágenes cargadas y previsualizadas
     setImages([...images, ...uploadedImages]);
     setPreviewImages([...previewImages, ...previewedImages]);
+    imageHandler([...images, ...uploadedImages])
   };
 
   // Esta función se activa cuando el usuario elimina una imagen de la lista de imágenes cargadas
@@ -60,6 +79,7 @@ export const CloudinaryUpload = () => {
     // Actualizamos los estados del componente con las nuevas listas de imágenes cargadas y previsualizadas
     setImages(newImages);
     setPreviewImages(newPreviewImages);
+    imageHandler(newImages)
   };
 
   // Devolvemos el componente JSX que muestra la nube de Cloudinary y las imágenes cargadas y previsualizadas
@@ -91,10 +111,11 @@ export const CloudinaryUpload = () => {
           />
         </Button>
       </div>
+
+      {stateShowImage &&
       <div
         style={{
           width: "18rem",
-
           background: "black",
           position: "absolute",
           padding: 0,
@@ -102,6 +123,8 @@ export const CloudinaryUpload = () => {
           bottom: 60,
           right: 130,
           display: "inline",
+          overflowY: 'hidden',
+
         }}
       >
         {previewImages.map((image, index) => (
@@ -112,16 +135,17 @@ export const CloudinaryUpload = () => {
               width: "8rem",
               display: "inline",
               height: "8rem",
+
               
               
             }}
           >
-            <img src={image} alt="Imagen Cargada" style={{borderRadius: "1rem",}}/>
+            <img src={image} alt="Imagen Cargada" style={{borderRadius: "1rem", margin: '.5rem', width: '80%',display:'flex', alignContent: 'center'}}/>
             <Button
               variant="danger"
               style={{
                 position: "absolute",
-                top: -45,
+                top:  0,
                 right: 5,
                 cursor: "pointer",
                 fontSize: ".8rem",
@@ -133,7 +157,7 @@ export const CloudinaryUpload = () => {
             </Button>
           </div>
         ))}
-      </div>
+      </div>}
     </CloudinaryContext>
   );
 };

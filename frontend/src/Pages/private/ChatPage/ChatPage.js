@@ -17,14 +17,17 @@ import stringToColour from "../../../utils/stringToColour";
 
 const ChatPage = () => {
   const { socket, joinChat, onMessageReceived, setAlert, alert } = useSocket();
-
   const [currentChat, setCurrentChat] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [infoNotification, setInfoNotification] =useState('')
-
+  const [imagesUpload, setImagesUpload] =useState([])
+  const [showImage, setShowImage] = useState(false)
+  const [cleanImageUpload, setCleanImageUpload] = useState(false)
+  console.log(showImage)
+  console.log(imagesUpload); // es un array
   const {
     idUser,
     chats,
@@ -64,13 +67,43 @@ const ChatPage = () => {
       }).then(() => {
         setMessageBody("");
         setRefresh(true);
+        setShowImage(false)
+        setCleanImageUpload(true)
       });
+      // sendImages()
       const chatName = currentChat.name? currentChat.name : currentChat.user.map((u) => u.userName)
       .filter((item) => item !== myUserName)
       .join(" | ")
       socket.emit('notification', {chat: currentChat._id, chatName: chatName, text: messageBody, userName: myUserName, idUser: idUser })
     }
   };
+
+  // const sendImages = async()=>{
+  //   if(imagesUpload.length===0){
+  //     return
+  //   }
+  //  const promises =  imagesUpload.map( (imageUrl)=>{
+  //    return fetchSupreme("/message", "POST", {
+  //       chat: currentChat._id,
+  //       text: imageUrl,
+  //     })  
+  //   })
+  //   try{
+  //     const resolvedPromises = await Promise.all(promises)
+      
+  //     if(resolvedPromises.length > 0){
+  //       setImagesUpload([])
+    
+  //     }
+  //   }catch(e){
+  //     console.error(e)
+  //     return
+  //   }
+
+   
+
+
+  // }
 
   useEffect(() => {
     if (chats.length > 0) {
@@ -131,6 +164,17 @@ const ChatPage = () => {
     }
   })
 
+
+//____________________________________________________________________________________//
+  const getUrlfromCloudinaryComponent = (url) =>{
+    console.log(`recibo una url` + url)
+    // recorrer un array y por cada uno de ellos vas a tener que concantenar cada elemento de un array con un salto de linea y unificarlo
+    setMessageBody(url)
+  }
+
+  const getDatafromCloudinaryComponent = (state, setter) => {
+      console.log("FUNCIOOOOOOOOOOOOOOON", setter) // funcion
+  }
 
   const messagesEndRef = useRef();
 
@@ -200,13 +244,13 @@ const ChatPage = () => {
                     .join(" | ")}
             
             <DeleteChat currentChat={currentChat} />
-            </h5>
-            
-                
+            </h5>  
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
-                  <Message message={message} />
+
+                <Message message={message}
+                  />
                 ))}
               </div>
               <div className={styles.area}>
@@ -214,11 +258,23 @@ const ChatPage = () => {
                   <AutoTextArea
                     placeholder="Write a message..."
                     value={messageBody}
+                    
                     onChange={handleMessageBody}
                     onKeyDown={handleSendMessage}
                   />
                 )}
-                <CloudinaryUpload/>
+                <CloudinaryUpload
+
+                  passUrlCloudinary={getUrlfromCloudinaryComponent}
+                  stateCleanImage={cleanImageUpload}
+                  setCloseUploadImages={setShowImage}
+                  passDatafromCloudinary={getDatafromCloudinaryComponent}
+                  stateShowImage={showImage}
+                  imageHandler={(arrayImagesUpload)=>{
+                    setImagesUpload(arrayImagesUpload)
+                  }}
+
+                />
               </div>
             </div>
           </>
