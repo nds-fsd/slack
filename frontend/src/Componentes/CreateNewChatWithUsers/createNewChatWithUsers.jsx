@@ -39,8 +39,11 @@ const CreateNewChatWithUsers = (props) => {
       }
     }
 
-    //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checbox. Pero se da por supuesto que el idUser también está dentro
-    trueKeys[trueKeys.length-1]!== idUser && trueKeys.push(idUser);
+    //Le tengo que añadir el usuario del login que es quien está interactuando y lo he quitado del checkbox. Pero se da por supuesto que el idUser también está dentro
+    //A no ser que el usuario lo seleccione
+    !trueKeys.includes(idUser) && trueKeys.push(idUser);
+
+    
 
     const body = {
       organizacion: idOrganizacionActual,
