@@ -10,6 +10,8 @@ import CircleAvatar from "../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 import CreateNewChatWithUsers from "../../../Componentes/CreateNewChatWithUsers/createNewChatWithUsers.jsx";
 import DeleteChat from "../../../Componentes/DeleteChat/deleteChat";
+import { CloudinaryUpload } from "../../../Componentes/CloudinaryUpload/CloudinaryUpload";
+//import { isBefore } from 'date-fns';
 import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMensaje/notificacionNuevoMensaje";
 import stringToColour from "../../../utils/stringToColour";
 import { MdOutlineMapsUgc } from "react-icons/md";
@@ -20,14 +22,19 @@ import { BsTrash } from "react-icons/bs";
 
 const ChatPage = () => {
   const { socket, joinChat, onMessageReceived, setAlert, alert, setIdOrganizacionActual } = useSocket();
-
+  const [urls, setUrls] = useState([])
   const [currentChat, setCurrentChat] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [infoNotification, setInfoNotification] = useState('')
+  const [imagesUpload, setImagesUpload] =useState([])
+  const [showImage, setShowImage] = useState(false)
+  const [cleanImageUpload, setCleanImageUpload] = useState(false)
   const [showModal, setShowModal] = useState(false)
+
+
 
   const {
     user,
@@ -70,7 +77,10 @@ const ChatPage = () => {
       }).then(() => {
         setMessageBody("");
         setRefresh(true);
+        setShowImage(false)
+        setCleanImageUpload(true)
       });
+      sendImages()
       const chatName = currentChat.name ? currentChat.name : currentChat
       socket.emit('notification', {
         organizacion: organizacionActual.OrgName,
@@ -84,6 +94,28 @@ const ChatPage = () => {
       })
     }
   };
+
+  const sendImages = async()=>{
+    if(urls.length===0){
+      return
+    }
+   const promises =  urls.map( (imageUrl)=>{
+     return fetchSupreme("/message", "POST", {
+        chat: currentChat._id,
+        text: imageUrl,
+      })  
+    })
+    try{
+      const resolvedPromises = await Promise.all(promises)
+      
+      if(resolvedPromises.length > 0){
+        setUrls([])
+      }
+    }catch(e){
+      console.error(e)
+      return
+    }
+  }
 
   useEffect(() => {
     if (chats.length > 0) {
@@ -152,6 +184,19 @@ const ChatPage = () => {
   })
 
 
+//____________________________________________________________________________________//
+  const getUrlfromCloudinaryComponent = (url) =>{
+    setMessageBody('Envio de archivos cargados')
+
+  }
+
+  const getDatafromCloudinaryComponent = (state) => {
+      setUrls(urls.flat().concat(state));
+      setImagesUpload(urls)
+  }
+
+  console.log(urls)
+
   const messagesEndRef = useRef();
 
   const scrollToBottom = () => {
@@ -193,6 +238,7 @@ const ChatPage = () => {
         <div className={styles.chatSpace}>
           {chats.map((chat) => (
             <div
+              key={chat._id}
               className={classnames(styles.chat, {
                 [styles.focusedChat]: chat._id === currentChat?._id,
               })}
@@ -252,18 +298,35 @@ const ChatPage = () => {
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
-                  <Message message={message} />
+                <Message message={message}
+                  />
                 ))}
+
+
+
               </div>
               <div className={styles.area}>
                 {currentChat && (
                   <AutoTextArea
                     placeholder="Write a message..."
                     value={messageBody}
+                    
                     onChange={handleMessageBody}
                     onKeyDown={handleSendMessage}
                   />
                 )}
+                <CloudinaryUpload
+
+                  passUrlCloudinary={getUrlfromCloudinaryComponent}
+                  stateCleanImage={cleanImageUpload}
+                  setCloseUploadImages={setShowImage}
+                  passDatafromCloudinary={getDatafromCloudinaryComponent}
+                  stateShowImage={showImage}
+                  imageHandler={(arrayImagesUpload)=>{
+                    setImagesUpload(arrayImagesUpload)
+                  }}
+
+                />
               </div>
             </div>
           </>
@@ -274,6 +337,7 @@ const ChatPage = () => {
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div
+            key={user._id}
             className={styles.usersRoot}
             onClick={() => console.log(user.userName)}
           >
