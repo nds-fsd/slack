@@ -125,6 +125,7 @@
     color: white;
     flex: 1;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .chatHeader {
@@ -166,11 +167,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column-reverse;
-    max-width: 900px;
 	word-wrap: break-word;
- 
- 
-
 }
 
 .area {
