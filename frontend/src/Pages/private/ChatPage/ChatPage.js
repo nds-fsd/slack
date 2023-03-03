@@ -184,7 +184,7 @@ const ChatPage = () => {
   })
 
 
-//____________________________________________________________________________________//
+
   const getUrlfromCloudinaryComponent = (url) =>{
     setMessageBody('Envio de archivos cargados')
 
@@ -195,7 +195,6 @@ const ChatPage = () => {
       setImagesUpload(urls)
   }
 
-  console.log(urls)
 
   const messagesEndRef = useRef();
 

@@ -26,12 +26,12 @@ export const SocketContextProvider = ({ children }) => {
 
   const joinChat = (chatId) => {
     socket.emit("join-room", chatId);
-    console.log('paso por el joinChat')
+    
   };
 
   const onMessageReceived = (callback) => {
     socket.on("reply", callback);
-    console.log('paso por socketContext -messageReceived')
+    
   };
 
   
