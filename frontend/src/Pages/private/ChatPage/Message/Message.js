@@ -37,9 +37,9 @@ const Message = (props) =>{
 					</div>
 				</div>
 				<div>
-					{message.text.includes('res.cloudinary.com')?
-					<img src={message.text} style={{height: '100px', width: '100px'}} alt="" />:
-					message.text	
+					{message.text.includes('res.cloudinary.com')
+					?<a href={message.text} target='_blank'><img src={message.text} style={{height: '100px', width: '100px'}} alt="" /></a> 
+					:message.text	
 				}
 				</div>
 			
