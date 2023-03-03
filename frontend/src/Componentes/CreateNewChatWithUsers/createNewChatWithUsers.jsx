@@ -87,7 +87,7 @@ const CreateNewChatWithUsers = (props) => {
                     return (
                       <Form.Check
                         type="checkbox"
-                        label={e?.userName === myUserName ? `${myUserName} : tu`:e.userName}
+                        label={e?.userName === myUserName ? `${myUserName} : tú`:e.userName}
                         value={e._id}
                         key={e?._id}
                         onChange={handleChange}

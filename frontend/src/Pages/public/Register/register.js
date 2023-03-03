@@ -16,10 +16,7 @@ const Register = () => {
         fetchSupreme("/register","POST",data,false,null)
         
         .then((res) => {
-            //const user = dataServer
             setUserSession(res)
-            console.log('Response', res.resUser);
-            alert(`el usuario ${res.user.name} ha sido creado.`)
             navigate(`/LUP/${res.user.id}`)
         })
 }

@@ -31,3 +31,7 @@
 	color: #ffffff;
 }
 
+.messageBody{
+	cursor: default;
+	overflow-x: hidden;
+}
