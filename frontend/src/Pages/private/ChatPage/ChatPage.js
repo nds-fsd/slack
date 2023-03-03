@@ -34,10 +34,7 @@ const ChatPage = () => {
   const [cleanImageUpload, setCleanImageUpload] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-//   console.log(showImage)
-//   const showImageUrl = () => {
-//   console.log(imagesUpload);
-// }// es un array  const [showModal, setShowModal] = useState(false)
+
 
   const {
     user,
@@ -189,12 +186,9 @@ const ChatPage = () => {
 
 //____________________________________________________________________________________//
   const getUrlfromCloudinaryComponent = (url) =>{
-    // recorrer un array y por cada uno de ellos vas a tener que concantenar cada elemento de un array con un salto de linea y unificarlo
     setMessageBody('Envio de archivos cargados')
 
   }
-
-  console.log(messageBody)
 
   const getDatafromCloudinaryComponent = (state) => {
       setUrls(urls.flat().concat(state));

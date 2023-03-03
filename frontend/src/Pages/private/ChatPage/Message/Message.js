@@ -7,9 +7,7 @@ import CircleAvatarUsers from "../../../../Componentes/circleAvatar/circleAvatar
 
 const Message = (props) =>{
 
-	// tienes que poder pasar las url de todas las imagenes que mandes	
 	const { message} = props;
-	//console.log('message en Mesaage', message)
 
 	// por defecto es un string 
 	const sessionUser = getUserSession();
