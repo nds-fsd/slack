@@ -6,7 +6,10 @@ import CircleAvatar from "../../../../Componentes/circleAvatar/circleAvatar";
 import CircleAvatarUsers from "../../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 
 const Message = (props) =>{
+
 	const { message} = props;
+
+	// por defecto es un string 
 	const sessionUser = getUserSession();
 
 	const stringToColour = function(str) {
@@ -34,7 +37,10 @@ const Message = (props) =>{
 					</div>
 				</div>
 				<div>
-					{message.text}
+					{message.text.includes('res.cloudinary.com')
+					?<a href={message.text} target='_blank'><img src={message.text} style={{height: '100px', width: '100px'}} alt="" /></a> 
+					:message.text	
+				}
 				</div>
 			
 			</div>
