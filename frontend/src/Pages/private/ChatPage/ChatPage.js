@@ -185,8 +185,8 @@ const ChatPage = () => {
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
             <div>
-              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={ ()=>(setShowModal(true))}/>
-              {showModal && <CreateNewChatWithUsers showModal = {showModal} setShowModal = {setShowModal}/>}
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={() => (setShowModal(true))} />
+              {showModal && <CreateNewChatWithUsers showModal={showModal} setShowModal={setShowModal} />}
             </div>
           </div>
         </h2>
@@ -196,15 +196,16 @@ const ChatPage = () => {
               className={classnames(styles.chat, {
                 [styles.focusedChat]: chat._id === currentChat?._id,
               })}
-            onClick={() => setCurrentChat(chat)}
+              onClick={() => setCurrentChat(chat)}
             >
               {chat.name
                 ? chat.name
-                : chat.user
-                  .map((u) => u.userName === myUserName ? `${myUserName} : tu` : u.userName)
-                  //.filter((item) => item !== myUserName)
-                  .join(" | ")}
-              <DeleteChat currentChat={chat}/>
+                : chat.user.length === 1
+                  ? chat.user.map((u) => u.userName === myUserName && (<div>{myUserName} <span className={styles.span}>tú</span></div>))
+                  : chat.user.map((u) => u.userName)
+                    .filter((item) => item !== myUserName)
+                    .join(" | ")}
+              <DeleteChat currentChat={chat} />
             </div>
           ))}
         </div>
@@ -214,13 +215,36 @@ const ChatPage = () => {
         {currentChat && (
           <>
             <h5 className={styles.chatHeader}>
+              <div className={styles.tittleChatHeader}>
               {currentChat.name
                 ? currentChat.name
-                : currentChat.user
-                  .map((u) => u.userName)
-                  .filter((item) => item !== myUserName)
-                  .join(" | ")}
-
+                : currentChat.user.length === 1
+                  ? currentChat.user.map((u) => u.userName === myUserName && (
+                    <div className={styles.tittleChatHeader}>
+                      <CircleAvatarUsers
+                        className={styles.circleAvatarUsers}
+                        name={u.userName}
+                        id={u._id}
+                        size={40}
+                        color={stringToColour(u.name)}
+                      />
+                      {myUserName} <span className={styles.span}>tú</span>
+                    </div>))
+                  : currentChat.user
+                    .map((u) => u)
+                    .filter((item) => item.userName !== myUserName)
+                    .map((u) => u &&
+                      <div className={styles.tittleChatHeader}>
+                        <CircleAvatarUsers
+                          className={styles.circleAvatarUsers}
+                          name={u.userName}
+                          id={u._id}
+                          size={40}
+                          color={stringToColour(u.name)}
+                        />
+                        {u.userName}
+                      </div>)}
+                      </div>
               <DeleteChat currentChat={currentChat} />
             </h5>
 
@@ -260,7 +284,9 @@ const ChatPage = () => {
               size={40}
               color={stringToColour(user.name)}
             />
-            {user.userName === myUserName ? myUserName + '(tú)' : user.userName}
+            {user.userName === myUserName
+              ? (<div>{myUserName} <span className={styles.span}>tú</span></div>)
+              : user.userName}
           </div>
         ))}
       </div>

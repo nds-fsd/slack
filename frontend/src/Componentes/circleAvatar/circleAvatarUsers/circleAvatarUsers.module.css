@@ -56,6 +56,10 @@
   padding: 2%;
   margin: 8px;
   border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+.body input:hover{
+  transform: scale(1.1);
 }
 .header button {
   margin-bottom: 8px;
