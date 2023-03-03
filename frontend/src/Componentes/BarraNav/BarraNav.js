@@ -62,16 +62,6 @@ export const BarraNav = () => {
                     </Nav.Link>
                   </NavDropdown.Item>
 
-                  <NavDropdown.Item href="#action3">
-                    <Nav.Link
-                      className="dropdownlinks"
-                      as={Link}
-                      to="/infoSlack"
-                    >
-                      Porque SkuadLack?
-                    </Nav.Link>
-                  </NavDropdown.Item>
-
                   <NavDropdown.Item href="#action2">
                     <Nav.Link
                       className="dropdownlinks"
@@ -83,7 +73,6 @@ export const BarraNav = () => {
                   </NavDropdown.Item>
 
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
                   <NavDropdown.Item href="#action5">
                     <Nav.Link
                       className="dropdownlinks"
