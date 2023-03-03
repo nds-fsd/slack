@@ -161,7 +161,8 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
                 email: userCreated.email,
                 name: userCreated.name,
                 id: userCreated._id,
-                role: userCreated.role
+                role: userCreated.role,
+                userName: userCreated.userName,
             }, })
 
     } catch (e) { return res.status(500).json({ message: `el error es ${e}` }) }
@@ -193,6 +194,7 @@ routerUsers.post('/login', async (req, res) => {
                     name: foundUser.name,
                     id: foundUser._id,
                     role: foundUser.role,
+                    userName:foundUser.userName,
                 },
             })
         })
