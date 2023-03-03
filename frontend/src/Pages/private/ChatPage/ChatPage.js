@@ -22,7 +22,7 @@ import { BsTrash } from "react-icons/bs";
 
 const ChatPage = () => {
   const { socket, joinChat, onMessageReceived, setAlert, alert, setIdOrganizacionActual } = useSocket();
-
+  const [urls, setUrls] = useState([])
   const [currentChat, setCurrentChat] = useState("");
   const [refresh, setRefresh] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -34,8 +34,10 @@ const ChatPage = () => {
   const [cleanImageUpload, setCleanImageUpload] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  console.log(showImage)
-  console.log(imagesUpload); // es un array  const [showModal, setShowModal] = useState(false)
+//   console.log(showImage)
+//   const showImageUrl = () => {
+//   console.log(imagesUpload);
+// }// es un array  const [showModal, setShowModal] = useState(false)
 
   const {
     user,
@@ -81,6 +83,7 @@ const ChatPage = () => {
         setShowImage(false)
         setCleanImageUpload(true)
       });
+      sendImages()
       const chatName = currentChat.name ? currentChat.name : currentChat
       socket.emit('notification', {
         organizacion: organizacionActual.OrgName,
@@ -95,32 +98,27 @@ const ChatPage = () => {
     }
   };
 
-  // const sendImages = async()=>{
-  //   if(imagesUpload.length===0){
-  //     return
-  //   }
-  //  const promises =  imagesUpload.map( (imageUrl)=>{
-  //    return fetchSupreme("/message", "POST", {
-  //       chat: currentChat._id,
-  //       text: imageUrl,
-  //     })  
-  //   })
-  //   try{
-  //     const resolvedPromises = await Promise.all(promises)
+  const sendImages = async()=>{
+    if(urls.length===0){
+      return
+    }
+   const promises =  urls.map( (imageUrl)=>{
+     return fetchSupreme("/message", "POST", {
+        chat: currentChat._id,
+        text: imageUrl,
+      })  
+    })
+    try{
+      const resolvedPromises = await Promise.all(promises)
       
-  //     if(resolvedPromises.length > 0){
-  //       setImagesUpload([])
-    
-  //     }
-  //   }catch(e){
-  //     console.error(e)
-  //     return
-  //   }
-
-   
-
-
-  // }
+      if(resolvedPromises.length > 0){
+        setUrls([])
+      }
+    }catch(e){
+      console.error(e)
+      return
+    }
+  }
 
   useEffect(() => {
     if (chats.length > 0) {
@@ -191,14 +189,19 @@ const ChatPage = () => {
 
 //____________________________________________________________________________________//
   const getUrlfromCloudinaryComponent = (url) =>{
-    console.log(`recibo una url` + url)
     // recorrer un array y por cada uno de ellos vas a tener que concantenar cada elemento de un array con un salto de linea y unificarlo
-    setMessageBody(url)
+    setMessageBody('Envio de archivos cargados')
+
   }
 
-  const getDatafromCloudinaryComponent = (state, setter) => {
-      console.log("FUNCIOOOOOOOOOOOOOOON", setter) // funcion
+  console.log(messageBody)
+
+  const getDatafromCloudinaryComponent = (state) => {
+      setUrls(urls.flat().concat(state));
+      setImagesUpload(urls)
   }
+
+  console.log(urls)
 
   const messagesEndRef = useRef();
 
@@ -241,6 +244,7 @@ const ChatPage = () => {
         <div className={styles.chatSpace}>
           {chats.map((chat) => (
             <div
+              key={chat._id}
               className={classnames(styles.chat, {
                 [styles.focusedChat]: chat._id === currentChat?._id,
               })}
@@ -276,10 +280,12 @@ const ChatPage = () => {
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
-
                 <Message message={message}
                   />
                 ))}
+
+
+
               </div>
               <div className={styles.area}>
                 {currentChat && (
@@ -313,6 +319,7 @@ const ChatPage = () => {
         <h2 className={styles.usersTitle}>Users</h2>
         {userOfOrganizacionActual.map((user) => (
           <div
+            key={user._id}
             className={styles.usersRoot}
             onClick={() => console.log(user.userName)}
           >
