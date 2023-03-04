@@ -48,7 +48,7 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
   </code>
   </pre>
 	<li>Inicia el servidor(Backend):</li>
-	<pre><code>npm start</code></pre>
+	<pre><code>npm run start:dev</code></pre>
 	<li>Abre una nueva terminal y navega al directorio del cliente(Frontend):</li>
 	<li>Inicia el cliente:</li>
 	<pre><code>npm start</code></pre>
