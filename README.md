@@ -56,4 +56,4 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 </ol>
 
 <h2>Contacto</h2>
-Si tienes alguna pregunta o sugerencia sobre Skuadlack, por favor contáctanos a través de <b>admin@skuadlack.com</b>
+Si tienes alguna pregunta o sugerencia sobre Skuadlack, por favor contáctanos a través de <b>skuadlack@gmail.com</b>
