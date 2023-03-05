@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { CloudinaryContext } from "cloudinary-react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import { AiOutlineUpload } from "react-icons/ai";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { HiPhotograph } from "react-icons/hi";
 
 export const CloudinaryUpload = ({
   imageHandler,
@@ -45,8 +45,8 @@ export const CloudinaryUpload = ({
       formData.append("file", file);
       formData.append("upload_preset", "w6v9atp0");
 
-      // Hacemos una solicitud POST a la API de Cloudinary con el objeto FormData y recibimos una respuesta JSON que contiene la URL segura
-      // de la imagen cargada en Cloudinary
+      // Hacemos una solicitud POST a la API de Cloudinary con el objeto FormData y recibimos una respuesta JSON que contiene la....
+      //...security_url, la url de imagen cargada en Cloudinary
       const options = { method: "POST", body: formData };
       const response = await fetch(url, options);
       const json = await response.json();
@@ -67,7 +67,6 @@ export const CloudinaryUpload = ({
 
   // Esta función se activa cuando el usuario elimina una imagen de la lista de imágenes cargadas
   const handleImageRemove = (index) => {
-    // Creamos copias de las listas de imágenes cargadas y previsualizadas
     const newImages = [...images];
     const newPreviewImages = [...previewImages];
 
@@ -80,8 +79,12 @@ export const CloudinaryUpload = ({
     setPreviewImages(newPreviewImages);
     imageHandler(newImages);
   };
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Upload images
+    </Tooltip>
+  );
 
-  // Devolvemos el componente JSX que muestra la nube de Cloudinary y las imágenes cargadas y previsualizadas
   return (
     // Configuración de CloudinaryContext para usar la API de Cloudinary
     <CloudinaryContext
@@ -91,15 +94,20 @@ export const CloudinaryUpload = ({
       secure={true}
     >
       <div>
+          <OverlayTrigger
+          placement="right"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderTooltip}
+        >
         <Button
-          variant="dark"
-          size="sm"
+          variant="outline-dark"
+          size="md"
           style={{
             margin: "1rem",
           }}
         >
           <label htmlFor="image-upload">
-            <AiOutlineUpload />
+            <HiPhotograph style={{fontSize:'2rem'}}/>
           </label>
           <input
             type="file"
@@ -109,6 +117,8 @@ export const CloudinaryUpload = ({
             multiple
           />
         </Button>
+        </OverlayTrigger>
+
       </div>
 
       {stateShowImage && (
@@ -119,7 +129,7 @@ export const CloudinaryUpload = ({
             position: "absolute",
             padding: 0,
             borderRadius: "1rem",
-            bottom: 60,
+            bottom: 66  ,
             right: 130,
             display: "inline",
             overflowY: "hidden",
