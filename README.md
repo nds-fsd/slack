@@ -3,6 +3,8 @@ Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte 
 
 <ul>
 <li>React (Front-end)</li>
+<li>React-router-dom (Front-end)</li>
+<li>React-Hook-form (Front-end)</li>
 <li>Express (Back-end)</li>
 <li>MongoDB (Base de datos)</li>
 <li>Socket.io (Comunicación en tiempo real)</li>
