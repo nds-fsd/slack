@@ -8,12 +8,15 @@ const DeleteChat = (props) =>{
 
     //paso por props el chatId por que por el contexto parece que no funciona bien
     const {setRefreshContext,refreshContext} = useSkuadLackContext();
-    let chatId
-    props.currentChat && (chatId = props.currentChat._id)
+    const chatId = props.currentChat._id
+    let path
+    props.currentChat && props.currentChat.name 
+    ?(path="deleteChannel")
+    :(path="deleteChat")
 
     const handleOnClick = ()=>{
 
-        (chatId && fetchSupreme(`/deleteChat/${chatId}`,'DELETE',undefined,true,undefined)
+        (chatId && fetchSupreme(`/${path}/${chatId}`,'DELETE',undefined,true,undefined)
         .then((res)=>{
             setRefreshContext(!refreshContext)
             console.log('delete refresh', refreshContext)

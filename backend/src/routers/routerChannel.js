@@ -222,17 +222,9 @@ routerChannel.get("/userChannels?", jwtMiddleware, async (req, res) => {
 
     try {
         const allChannels = await Channel.find({ organizacion: idOrganizacion, user: idUser }).populate('user')
-
-        const allUsers = allChannels.map(channel => channel.user)
-        const channelIds = allChannels.map(channel => channel._id)
-  
-        const allUserNames = allUsers.map(user => Array.isArray(user) ? user.map(u => u.userName) : user.userName);
-
         const response = {
-            userNames: allUserNames,
             channels: allChannels,
-            channelIds: channelIds
-        }
+                }
 
         res.status(200).json(response);
 

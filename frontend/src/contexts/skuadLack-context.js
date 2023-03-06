@@ -21,8 +21,7 @@ export const SkuadLackContextProvider = (props) => {
     const [room, setRoom] = useState(idOrganizacionActual);
     const [userOfOrganizacionActual, setUserOfOrganizacionActual] = useState([])
     const [refreshContext, setRefreshContext] = useState(false)
-    const [channels, setChannels] = useState([])
-    const [channelIds, setChannelIds] = useState([])
+    const [channels, setChannels] = useState([]) 
 
     //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
     //componentes que consumen de el
@@ -59,11 +58,8 @@ export const SkuadLackContextProvider = (props) => {
 
             })
             fetchSupreme("/userChannels", "GET", undefined, true, `idOrganizacion=${idOrganizacionActual}&idUser=${idUser}`
-            ).then((res) => {
-                
-                setChannels(res.channels)
-                setChannelIds(res.channelIds)
-    
+            ).then((res) => {                
+                setChannels(res.channels)    
             });
 
     }, [idOrganizacionActual, refreshContext]);

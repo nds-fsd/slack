@@ -16,6 +16,7 @@ import NotificacionNuevoMensaje from "../../../Componentes/NotificacionNuevoMens
 import stringToColour from "../../../utils/stringToColour";
 import { MdOutlineMapsUgc } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
+import CreateNewChannel from "../../../Componentes/createNewChannel/createNewChannel";
 
 
 
@@ -33,7 +34,7 @@ const ChatPage = () => {
   const [showImage, setShowImage] = useState(false)
   const [cleanImageUpload, setCleanImageUpload] = useState(false)
   const [showModal, setShowModal] = useState(false)
-
+  const [showModalChannel, setShowModalChannel] = useState(false)
 
 
   const {
@@ -71,10 +72,10 @@ const ChatPage = () => {
       evt.preventDefault();
       //socket.emit('notification',{chat:currentChat._id, user:myUserName})
       //console.log('paso por emit de notification')  //AQUIIII
-      
-      if(currentChat.name){
+
+      if (currentChat.name) {
         fetchSupreme("/message", "POST", {
-          channel:currentChat._id,
+          channel: currentChat._id,
           text: messageBody,
         }).then(() => {
           setMessageBody("");
@@ -84,15 +85,17 @@ const ChatPage = () => {
         });
 
       }
-     if(!currentChat.name) {fetchSupreme("/message", "POST", {
-        chat:currentChat._id,
-        text: messageBody,
-      }).then(() => {
-        setMessageBody("");
-        setRefresh(true);
-        setShowImage(false)
-        setCleanImageUpload(true)
-      })}
+      if (!currentChat.name) {
+        fetchSupreme("/message", "POST", {
+          chat: currentChat._id,
+          text: messageBody,
+        }).then(() => {
+          setMessageBody("");
+          setRefresh(true);
+          setShowImage(false)
+          setCleanImageUpload(true)
+        })
+      }
       ;
       sendImages()
       const chatName = currentChat.name ? currentChat.name : currentChat
@@ -100,7 +103,6 @@ const ChatPage = () => {
         organizacion: organizacionActual.OrgName,
         idOrganizacion: idOrganizacionActual,
         chat: currentChat,
-        chatName:{name : chatName},
         text: messageBody,
         name: user.name,
         userName: myUserName,
@@ -199,7 +201,6 @@ const ChatPage = () => {
         name: data.name,
         idChat: data.chat,
         text: data.text,
-        chatName: data.chatName,
         organizacion: data.organizacion,
         idOrganizacion: data.idOrganizacion
       })
@@ -256,8 +257,43 @@ const ChatPage = () => {
           </div>
         ))}
       </div>
+
       <div className={styles.chatsRoot}>
         <h4>{organizacionActual.OrgName}</h4>
+        <h2 className={styles.chatsTitle}>
+          <div className={styles.chatCreateButton}>
+            <div>Channels</div>
+            <div>
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={() => (setShowModalChannel(true))} />
+              {showModalChannel && <CreateNewChannel showModal={showModalChannel} setShowModal={setShowModalChannel}/>}
+            </div>
+          </div>
+        </h2>
+        <div className={styles.chatSpace}>
+          {channels.map((channel) => (
+            <div
+              key={channel._id}
+              className={classnames(styles.chat, {
+                [styles.focusedChat]: channel._id === currentChat?._id,
+              })}
+              onClick={() => {
+                setCurrentChat(channel)
+                console.log('soy channel', channel)
+              }
+              }
+            >
+              {channel.name
+                ? channel.name
+                : channel.user.length === 1
+                  ? channel.user.map((u) => u.userName === myUserName && (<div>{myUserName} <span className={styles.span}>tú</span></div>))
+                  : channel.user.map((u) => u.userName)
+                    .filter((item) => item !== myUserName)
+                    .join(" | ")}
+              <DeleteChat currentChat={channel} />
+            </div>
+          ))}
+        </div>
+
         <h2 className={styles.chatsTitle}>
           <div className={styles.chatCreateButton}>
             <div>Chats</div>
@@ -274,37 +310,10 @@ const ChatPage = () => {
               className={classnames(styles.chat, {
                 [styles.focusedChat]: chat._id === currentChat?._id,
               })}
-              onClick={() => setCurrentChat(chat)}
-            >
-              {chat.name
-                ? chat.name
-                : chat.user.length === 1
-                  ? chat.user.map((u) => u.userName === myUserName && (<div>{myUserName} <span className={styles.span}>tú</span></div>))
-                  : chat.user.map((u) => u.userName)
-                    .filter((item) => item !== myUserName)
-                    .join(" | ")}
-              <DeleteChat currentChat={chat} />
-            </div>
-          ))}
-        </div>
-        <h2 className={styles.chatsTitle}>
-          <div className={styles.chatCreateButton}>
-            <div>Channels</div>
-            <div>
-              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={() => (setShowModal(true))} />
-              {showModal && <CreateNewChatWithUsers showModal={showModal} setShowModal={setShowModal} />}
-            </div>
-          </div>
-        </h2>
-        <div className={styles.chatSpace}>
-          {channels.map((chat) => (
-            <div
-              key={chat._id}
-              className={classnames(styles.chat, {
-                [styles.focusedChat]: chat._id === currentChat?._id,
-              })}
-              onClick={() => {setCurrentChat(chat)
-                console.log('soy chat name',chat.name)}
+              onClick={() => {
+                setCurrentChat(chat)
+                console.log('soy chat', chat)
+              }
               }
             >
               {chat.name
@@ -318,6 +327,7 @@ const ChatPage = () => {
             </div>
           ))}
         </div>
+
       </div>
 
 
@@ -327,7 +337,7 @@ const ChatPage = () => {
             <h5 className={styles.chatHeader}>
               <div className={styles.tittleChatHeader}>
                 {currentChat.name
-                  ? currentChat.name
+                  ? (<><button disabled className={styles.buttonChannel}>CH</button> {currentChat.name}</>)
                   : currentChat.user.length === 1
                     ? currentChat.user.map((u) => u.userName === myUserName && (
                       <div className={styles.tittleChatHeader}>
@@ -397,26 +407,46 @@ const ChatPage = () => {
         )}
       </div>
       <div className={styles.listUserRoot}>
+      {currentChat && currentChat.name && <h2 className={styles.usersTitle}>Users Channel</h2> } 
+      {currentChat && !currentChat.name && <h2 className={styles.usersTitle}>Users Organization</h2> }
+        {currentChat && currentChat.name
+        ? currentChat.user.map((user) => (
+            <div
+              key={user._id}
+              className={styles.usersRoot}
+              onClick={() => console.log(user.userName)}
+            >
+              <CircleAvatarUsers
+                className={styles.circleAvatarUsers}
+                name={user.userName}
+                id={user._id}
+                size={40}
+                color={stringToColour(user.name)}
+              />
+              {user.userName === myUserName
+                ? (<div>{myUserName} <span className={styles.span}>tú</span></div>)
+                : user.userName}
+            </div>
+          ))
 
-        <h2 className={styles.usersTitle}>Users</h2>
-        {userOfOrganizacionActual.map((user) => (
-          <div
-            key={user._id}
-            className={styles.usersRoot}
-            onClick={() => console.log(user.userName)}
-          >
-            <CircleAvatarUsers
-              className={styles.circleAvatarUsers}
-              name={user.userName}
-              id={user._id}
-              size={40}
-              color={stringToColour(user.name)}
-            />
-            {user.userName === myUserName
-              ? (<div>{myUserName} <span className={styles.span}>tú</span></div>)
-              : user.userName}
-          </div>
-        ))}
+          : userOfOrganizacionActual.map((user) => (
+            <div
+              key={user._id}
+              className={styles.usersRoot}
+              onClick={() => console.log(user.userName)}
+            >
+              <CircleAvatarUsers
+                className={styles.circleAvatarUsers}
+                name={user.userName}
+                id={user._id}
+                size={40}
+                color={stringToColour(user.name)}
+              />
+              {user.userName === myUserName
+                ? (<div>{myUserName} <span className={styles.span}>tú</span></div>)
+                : user.userName}
+            </div>
+          ))}
       </div>
     </div>
   );
