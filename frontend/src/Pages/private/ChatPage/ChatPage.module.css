@@ -19,8 +19,9 @@
 .chatsRoot h4 {
     color: white;
     border-bottom: 1px solid white;
-    padding-bottom: 1.8rem;
+  padding-bottom: 1rem;
     position: static;
+    margin-top: 1rem;
 }
 
 .orgsRoot {
@@ -56,6 +57,7 @@
 .usersTitle {
     color: white;
     border-bottom: 1px solid white;
+    margin-top: 0.9rem;
     padding-bottom: 10px;
 
 }
@@ -65,7 +67,7 @@
     background-color: #242A38;
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 302px;
     gap: 4px;
     border-left: 1px solid #0e1116;
 }
@@ -85,6 +87,7 @@
     transition: transform 0.2s ease-in-out;
     display: flex;
     justify-content: space-between;
+    max-width: 275px;
 }
 
 .chatSpace {
@@ -122,6 +125,7 @@
     color: white;
     flex: 1;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .chatHeader {
@@ -133,7 +137,16 @@
     justify-content: space-between;
     align-items: center;
 }
-
+.tittleChatHeader{
+    color: white;
+    display: flex;   
+    margin: 4px;    
+    align-items: center;
+    cursor:default; 
+}
+.tittleChatHeader span{
+    margin-left: 8px;
+}
 .divider {
     border-top: 1px solid white;
     background-color: #242A38;
@@ -142,8 +155,10 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-x: hidden;
     height: calc(100% - 50px);
+    
+    
 }
 
 .messages {
@@ -152,7 +167,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column-reverse;
-
+	word-wrap: break-word;
 }
 
 .area {
@@ -163,7 +178,7 @@
     max-height: 200px;
     font-size: 18px;
     color: white;
-    margin-bottom: 1.2rem;
+    margin-bottom: 2.9rem;
 }
 
 .messages>div {
@@ -186,11 +201,13 @@
     margin: 4px;
     border-bottom: 1px solid #0e1116;
     align-items: center;
+    cursor:default;
+    transition: transform 0.2s ease-in-out;
  
 }
 .usersRoot:hover{
     background-color: #3f485b;
-
+transform: scale(1.05);
 }
 
 .circleAvatarUsers:hover {
@@ -227,4 +244,22 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: #a8bbbf;
+}
+.span{
+    font-weight: lighter;
+    color: rgb(146, 143, 140);
+}
+.buttonChannel{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 40 / 2;
+    text-transform: uppercase;
+    margin-right: 10px;
 }

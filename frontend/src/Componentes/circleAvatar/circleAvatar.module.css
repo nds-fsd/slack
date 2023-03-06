@@ -1,5 +1,6 @@
 .circleOrg {
   transition: transform 0.2s ease-in-out;
+  border:none;
 }
 
 .circleOrg:hover {

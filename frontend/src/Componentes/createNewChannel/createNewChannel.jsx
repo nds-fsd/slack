@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useSkuadLackContext } from "../../contexts/skuadLack-context";
-import styles from "./createNewChatWithUsers.module.css";
+import styles from "./createNewChannel.module.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import fetchSupreme from "../../utils/apiWrapper";
 
-const CreateNewChatWithUsers = (props) => {
+const CreateNewChannel = (props) => {
 
   const [checkedState, setCheckedState] = useState({});
+  const [nameChannel, setNameChannel] = useState("")
+  
 
   const handleClose = () => {
     props.setShowModal(false);
@@ -48,19 +50,20 @@ const CreateNewChatWithUsers = (props) => {
     const body = {
       organizacion: idOrganizacionActual,
       idUser: trueKeys,
+      name: nameChannel,
     };
 
-    fetchSupreme("/createChatById", "POST", body, true, undefined).then(
+    fetchSupreme("/createChannelById", "POST", body, true, undefined).then(
       (res) => {
         setRefreshContext(!refreshContext);
         console.log(res);
         handleClose();
         setRefreshContext(!refreshContext)
         
-    })
-
+    })    
   }
-
+  const usersOrganizationWithoutMe = userOfOrganizacionActual.map((u) => u)
+  .filter((item) => item.userName !== myUserName)
   return (
     <div>
        <Modal
@@ -73,12 +76,13 @@ const CreateNewChatWithUsers = (props) => {
       >
         <div className={styles.bodyModal}>
           <Modal.Header>
-            <Modal.Title>Select the user name/s</Modal.Title>
+            <Modal.Title>select a channel name and user/s</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
+                <input onChange={(e)=>setNameChannel(e.target.value)}/>
               {userOfOrganizacionActual &&
-                userOfOrganizacionActual.map((e) => {
+                usersOrganizationWithoutMe.map((e) => {
                   //un array con objetos con las keys de cada user (userName, name, email...), la recorro para obtener los userName y pintarlos en un checkbox
 
                   //solo quiero los usuarios diferentes al mío
@@ -87,7 +91,7 @@ const CreateNewChatWithUsers = (props) => {
                     return (
                       <Form.Check
                         type="checkbox"
-                        label={e?.userName === myUserName ? `${myUserName} : tú`:e.userName}
+                        label={e.userName}
                         value={e._id}
                         key={e?._id}
                         onChange={handleChange}
@@ -105,7 +109,7 @@ const CreateNewChatWithUsers = (props) => {
               className={styles.buttonCreate}
               onClick={() => handleOnClick(checkedState)}
             >
-              Create Chat
+              Create Channel
             </Button>
           </div>
         </div>
@@ -114,4 +118,4 @@ const CreateNewChatWithUsers = (props) => {
   );
 };
 
-export default CreateNewChatWithUsers;
+export default CreateNewChannel;
