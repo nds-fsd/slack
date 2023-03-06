@@ -8,6 +8,7 @@ import routerChat from './routers/routerChat.js';
 import routerMessages from './routers/routerMessages.js';
 import routerPublicMessage from './routers/routerPublicMessage.js';
 import { SupremeSocket } from './socket/SupremeSocket.js';
+import routerChannel from './routers/routerChannel.js';
 
 dotenv.config();
 export const app = express();
@@ -20,6 +21,7 @@ app.use(routerOrg);
 app.use(routerChat);
 app.use(routerMessages);
 app.use(routerPublicMessage);
+app.use(routerChannel);
 // SupremeSocket();
 
 let port = process.env.PORT ?? 8080;
