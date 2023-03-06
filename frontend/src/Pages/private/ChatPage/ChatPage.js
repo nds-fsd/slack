@@ -424,6 +424,7 @@ const ChatPage = () => {
       <div className={styles.listUserRoot}>
       {currentChat && currentChat.name && <h2 className={styles.usersTitle}>Users Channel</h2> } 
       {currentChat && !currentChat.name && <h2 className={styles.usersTitle}>Users Organization</h2> }
+      {!currentChat  && <h2 className={styles.usersTitle}>Users Organization</h2> }
         {currentChat && currentChat.name
         ? currentChat.user.map((user) => (
             <div
