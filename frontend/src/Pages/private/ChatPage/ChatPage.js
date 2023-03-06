@@ -115,11 +115,23 @@ const ChatPage = () => {
     if (urls.length === 0) {
       return
     }
+
+
     const promises = urls.map((imageUrl) => {
-      return fetchSupreme("/message", "POST", {
-        chat: currentChat._id,
-        text: imageUrl,
-      })
+      let body
+      if (currentChat.name){
+        body={
+          channel: currentChat._id,
+          text:imageUrl
+        }
+      }
+      if (!currentChat.name){
+        body={
+          chat: currentChat._id,
+          text:imageUrl
+        }
+      }
+      return fetchSupreme("/message", "POST", body)
     })
     try {
       const resolvedPromises = await Promise.all(promises)
@@ -154,6 +166,9 @@ const ChatPage = () => {
 
         setMessages(res);
         setRefresh(false);
+        setShowImage(false);
+        setCleanImageUpload(true);
+        setUrls([])
       });
     } else {
       setMessages([]);
