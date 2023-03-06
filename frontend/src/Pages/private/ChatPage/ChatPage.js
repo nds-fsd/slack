@@ -29,7 +29,7 @@ const ChatPage = () => {
   const [messageBody, setMessageBody] = useState("");
   const [showNewMessage, setShowNewMessage] = useState(false);
   const [infoNotification, setInfoNotification] = useState('')
-  const [imagesUpload, setImagesUpload] =useState([])
+  const [imagesUpload, setImagesUpload] = useState([])
   const [showImage, setShowImage] = useState(false)
   const [cleanImageUpload, setCleanImageUpload] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -44,7 +44,7 @@ const ChatPage = () => {
     idOrganizacionActual,
     myUserName,
     organizacionActual,
-
+    channels,
     userOfOrganizacionActual
   } = useSkuadLackContext();
 
@@ -71,22 +71,36 @@ const ChatPage = () => {
       evt.preventDefault();
       //socket.emit('notification',{chat:currentChat._id, user:myUserName})
       //console.log('paso por emit de notification')  //AQUIIII
-      fetchSupreme("/message", "POST", {
-        chat: currentChat._id,
+      
+      if(currentChat.name){
+        fetchSupreme("/message", "POST", {
+          channel:currentChat._id,
+          text: messageBody,
+        }).then(() => {
+          setMessageBody("");
+          setRefresh(true);
+          setShowImage(false)
+          setCleanImageUpload(true)
+        });
+
+      }
+     if(!currentChat.name) {fetchSupreme("/message", "POST", {
+        chat:currentChat._id,
         text: messageBody,
       }).then(() => {
         setMessageBody("");
         setRefresh(true);
         setShowImage(false)
         setCleanImageUpload(true)
-      });
+      })}
+      ;
       sendImages()
       const chatName = currentChat.name ? currentChat.name : currentChat
       socket.emit('notification', {
         organizacion: organizacionActual.OrgName,
         idOrganizacion: idOrganizacionActual,
         chat: currentChat,
-        chatName: chatName,
+        chatName:{name : chatName},
         text: messageBody,
         name: user.name,
         userName: myUserName,
@@ -95,23 +109,23 @@ const ChatPage = () => {
     }
   };
 
-  const sendImages = async()=>{
-    if(urls.length===0){
+  const sendImages = async () => {
+    if (urls.length === 0) {
       return
     }
-   const promises =  urls.map( (imageUrl)=>{
-     return fetchSupreme("/message", "POST", {
+    const promises = urls.map((imageUrl) => {
+      return fetchSupreme("/message", "POST", {
         chat: currentChat._id,
         text: imageUrl,
-      })  
+      })
     })
-    try{
+    try {
       const resolvedPromises = await Promise.all(promises)
-      
-      if(resolvedPromises.length > 0){
+
+      if (resolvedPromises.length > 0) {
         setUrls([])
       }
-    }catch(e){
+    } catch (e) {
       console.error(e)
       return
     }
@@ -126,7 +140,25 @@ const ChatPage = () => {
   }, [chats, idOrganizacionActual]);
 
   useEffect(() => {
-    if (currentChat) {
+    if (currentChat && currentChat.name) {
+      fetchSupreme("/message", "GET", undefined, true, {
+        channel: currentChat._id,
+      }).then((res) => {
+        res.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateB - dateA;
+        });
+
+        setMessages(res);
+        setRefresh(false);
+      });
+    } else {
+      setMessages([]);
+    }
+
+
+    if (currentChat && !currentChat.name) {
       fetchSupreme("/message", "GET", undefined, true, {
         chat: currentChat._id,
       }).then((res) => {
@@ -148,7 +180,8 @@ const ChatPage = () => {
     if (currentChat) {
       joinChat(currentChat._id);
       onMessageReceived((newMessage) => {
-        if (newMessage.chat === currentChat._id) {
+        console.log("soy New MEssage ", newMessage)
+        if (newMessage.chat || newMessage.channel === currentChat._id) {
           setRefresh(true);
         }
       });
@@ -185,14 +218,14 @@ const ChatPage = () => {
 
 
 
-  const getUrlfromCloudinaryComponent = (url) =>{
+  const getUrlfromCloudinaryComponent = (url) => {
     setMessageBody('Envio de archivos cargados')
 
   }
 
   const getDatafromCloudinaryComponent = (state) => {
-      setUrls(urls.flat().concat(state));
-      setImagesUpload(urls)
+    setUrls(urls.flat().concat(state));
+    setImagesUpload(urls)
   }
 
 
@@ -254,31 +287,49 @@ const ChatPage = () => {
             </div>
           ))}
         </div>
+        <h2 className={styles.chatsTitle}>
+          <div className={styles.chatCreateButton}>
+            <div>Channels</div>
+            <div>
+              <MdOutlineMapsUgc className={styles.buttonCreateChat} onClick={() => (setShowModal(true))} />
+              {showModal && <CreateNewChatWithUsers showModal={showModal} setShowModal={setShowModal} />}
+            </div>
+          </div>
+        </h2>
+        <div className={styles.chatSpace}>
+          {channels.map((chat) => (
+            <div
+              key={chat._id}
+              className={classnames(styles.chat, {
+                [styles.focusedChat]: chat._id === currentChat?._id,
+              })}
+              onClick={() => {setCurrentChat(chat)
+                console.log('soy chat name',chat.name)}
+              }
+            >
+              {chat.name
+                ? chat.name
+                : chat.user.length === 1
+                  ? chat.user.map((u) => u.userName === myUserName && (<div>{myUserName} <span className={styles.span}>tú</span></div>))
+                  : chat.user.map((u) => u.userName)
+                    .filter((item) => item !== myUserName)
+                    .join(" | ")}
+              <DeleteChat currentChat={chat} />
+            </div>
+          ))}
+        </div>
       </div>
+
 
       <div className={styles.chatWindow}>
         {currentChat && (
           <>
             <h5 className={styles.chatHeader}>
               <div className={styles.tittleChatHeader}>
-              {currentChat.name
-                ? currentChat.name
-                : currentChat.user.length === 1
-                  ? currentChat.user.map((u) => u.userName === myUserName && (
-                    <div className={styles.tittleChatHeader}>
-                      <CircleAvatarUsers
-                        className={styles.circleAvatarUsers}
-                        name={u.userName}
-                        id={u._id}
-                        size={40}
-                        color={stringToColour(u.name)}
-                      />
-                      {myUserName} <span className={styles.span}>tú</span>
-                    </div>))
-                  : currentChat.user
-                    .map((u) => u)
-                    .filter((item) => item.userName !== myUserName)
-                    .map((u) => u &&
+                {currentChat.name
+                  ? currentChat.name
+                  : currentChat.user.length === 1
+                    ? currentChat.user.map((u) => u.userName === myUserName && (
                       <div className={styles.tittleChatHeader}>
                         <CircleAvatarUsers
                           className={styles.circleAvatarUsers}
@@ -287,9 +338,23 @@ const ChatPage = () => {
                           size={40}
                           color={stringToColour(u.name)}
                         />
-                        {u.userName}
-                      </div>)}
-                      </div>
+                        {myUserName} <span className={styles.span}>tú</span>
+                      </div>))
+                    : currentChat.user
+                      .map((u) => u)
+                      .filter((item) => item.userName !== myUserName)
+                      .map((u) => u &&
+                        <div className={styles.tittleChatHeader}>
+                          <CircleAvatarUsers
+                            className={styles.circleAvatarUsers}
+                            name={u.userName}
+                            id={u._id}
+                            size={40}
+                            color={stringToColour(u.name)}
+                          />
+                          {u.userName}
+                        </div>)}
+              </div>
               <DeleteChat currentChat={currentChat} />
             </h5>
 
@@ -297,7 +362,7 @@ const ChatPage = () => {
             <div className={styles.wrapper}>
               <div className={styles.messages} ref={messagesEndRef}>
                 {messages.map((message) => (
-                <Message message={message}
+                  <Message message={message}
                   />
                 ))}
 
@@ -309,7 +374,7 @@ const ChatPage = () => {
                   <AutoTextArea
                     placeholder="Write a message..."
                     value={messageBody}
-                    
+
                     onChange={handleMessageBody}
                     onKeyDown={handleSendMessage}
                   />
@@ -321,7 +386,7 @@ const ChatPage = () => {
                   setCloseUploadImages={setShowImage}
                   passDatafromCloudinary={getDatafromCloudinaryComponent}
                   stateShowImage={showImage}
-                  imageHandler={(arrayImagesUpload)=>{
+                  imageHandler={(arrayImagesUpload) => {
                     setImagesUpload(arrayImagesUpload)
                   }}
 

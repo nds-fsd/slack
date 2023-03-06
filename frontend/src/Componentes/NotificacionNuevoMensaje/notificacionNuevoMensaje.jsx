@@ -55,7 +55,7 @@ const NotificacionNuevoMensaje = (props) => {
                 </div>
                 <div>
                     <p className={styles.NotificacionNuevoMensaje}>Nuevo mensaje de {props.infoNotification.userName} <br />
-                        <span>{text}</span> <br /> en el chat {props.infoNotification.chatName.name ? props.infoNotification.chatName.name : props.infoNotification.chatName.user 
+                        <span>{text}</span> <br /> en el chat {props.infoNotification.chatName ? props.infoNotification.chatName : props.infoNotification.chatName.user 
                             .map((u) => u.userName)
                             .filter((item) => item !== myUserName)
                             .join(" | ")}</p>
