@@ -154,10 +154,11 @@ const ChatPage = () => {
   }, [chats, idOrganizacionActual]);
 
   useEffect(() => {
-    if (currentChat && currentChat.name) {
-      fetchSupreme("/message", "GET", undefined, true, {
-        channel: currentChat._id,
-      }).then((res) => {
+    if (currentChat) {
+      let query =currentChat.name
+      ?{channel: currentChat._id} 
+      :{chat: currentChat._id}
+      fetchSupreme("/message", "GET", undefined, true, query).then((res) => {
         res.sort((a, b) => {
           const dateA = new Date(a.date);
           const dateB = new Date(b.date);
@@ -175,22 +176,7 @@ const ChatPage = () => {
     }
 
 
-    if (currentChat && !currentChat.name) {
-      fetchSupreme("/message", "GET", undefined, true, {
-        chat: currentChat._id,
-      }).then((res) => {
-        res.sort((a, b) => {
-          const dateA = new Date(a.date);
-          const dateB = new Date(b.date);
-          return dateB - dateA;
-        });
 
-        setMessages(res);
-        setRefresh(false);
-      });
-    } else {
-      setMessages([]);
-    }
   }, [currentChat, refresh, idOrganizacionActual]);
 
   useEffect(() => {
