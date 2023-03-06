@@ -28,7 +28,7 @@ const NotificacionNuevoMensaje = (props) => {
         textTransform: 'uppercase',
     };
 
-        const text = props.infoNotification.text.length > 15 ? props.infoNotification.text.substr(0,15) + '...' : props.infoNotification.text
+        const text = props.infoNotification.text.length > 25 ? props.infoNotification.text.substr(0,15) + '...' : props.infoNotification.text
 
     return (
 

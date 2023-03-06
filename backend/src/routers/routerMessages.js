@@ -17,7 +17,7 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   });
 
   const messageCreate = await newMessage.save();
-  console.log('emiting message to',req.body.chat? req.body.chat : req.body.channel)
+  // console.log('emiting message to',req.body.chat? req.body.chat : req.body.channel)
   io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);
   //io.to(req.body.chat).emit('notification',messageCreate)
   return res.status(201).json(messageCreate)
