@@ -1,13 +1,23 @@
-<h1>Skuadlack</h1>
-Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte del bootcamp en Nuclio Digital School. La aplicación se construyó con las siguientes tecnologías:
+<h1>El origen</h1>
 
+
+Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte del bootcamp en Nuclio Digital School en el 2022-2023 por parte de alumnos que iniciaron el máster con cero o escasos conocimientos a nivel de programación. 
+
+<h1>Core Business </h1>
+SkuadLack es un clon con personalidad propia de Slack que permite la comunicación entre 
+organizaciones teniendo la posibilidad de crear chats independientes dentro de los usuarios de una organización o canales temáticos para diferentes usuarios.
+Mediante el sistema de notificaciones y envío de imágenes el usuario tiene las herramientas necesarias para una comunicación fluida y efectiva sin caer en elementos barrocos que pueden desviar la atención del foco principal.
+
+<h1>Principales librerías y tecnologías implementadas: </h1>
 <ul>
 <li>React (Front-end)</li>
 <li>React-router-dom (Front-end)</li>
 <li>React-Hook-form (Front-end)</li>
 <li>Express (Back-end)</li>
-<li>MongoDB (Base de datos)</li>
-<li>Socket.io (Comunicación en tiempo real)</li>
+<li>Mongoose (Base de datos)</li>
+<li>Socket (cliente y servidor)</li>
+<li>Mailgun (envío de mails en base a eventos)</li>
+<li>Cloudinary (gestión de imágenes)</li>
 <li>JWT (Autenticación y autorización)</li>
   </ul>
 
@@ -15,7 +25,7 @@ Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte 
 Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios comunicarse a través de diferentes canales de chat. Las principales características de la aplicación son:
 
 <ul>
-<li>Registro y inicio de sesión de usuarios</li>
+<li>Registro y inicio de sesión de usuarios con aviso por mail (si está dado de alta en mailgun)</li>
 <li>Creación de organizaciones</li>
 <li>Comunicación en tiempo real a través de sockets</li>
 <li>Envío de mensajes de texto y múltiples imágenes</li>
@@ -23,6 +33,13 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 </ul>
 <h2>Requisitos previos</h2>
 Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente:
+
+<h3>UI</h3>
+<img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
+<img src='./frontend/src/Assets/ChatPage.png' alt="ChatPage"/>
+
+
+
 
 <ul>
 	<li>Node.js</li>
