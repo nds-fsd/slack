@@ -11,15 +11,16 @@
     background-color: #242A38;
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 20%;
     gap: 4px;
     border-right: 1px solid #0e1116;
+
 }
 
 .chatsRoot h4 {
     color: white;
     border-bottom: 1px solid white;
-  padding-bottom: 1rem;
+    padding-bottom: 1rem;
     position: static;
     margin-top: 1rem;
 }
@@ -31,6 +32,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-width: 10%;
+
 }
 
 .listOrg {
@@ -67,7 +70,7 @@
     background-color: #242A38;
     display: flex;
     flex-direction: column;
-    width: 302px;
+    width: 20%;
     gap: 4px;
     border-left: 1px solid #0e1116;
 }
@@ -262,4 +265,12 @@ transform: scale(1.05);
     font-size: 40 / 2;
     text-transform: uppercase;
     margin-right: 10px;
+}
+@media (max-width: 1080px){
+    .chatsRoot{
+        width: 25%;
+    }
+    .listUserRoot {
+        width: 23%;
+    }
 }

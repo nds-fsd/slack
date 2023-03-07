@@ -24,16 +24,14 @@ export const CloudinaryUpload = ({
     }
   }, [stateShowImage]);
 
-  // Definimos la URL de la API de Cloudinary para cargar archivos(auto)
   const url = "https://api.cloudinary.com/v1_1/dnsy1t6dj/image/upload";
 
-  // Esta función se activa cuando el usuario carga una o varias imágenes en el componente
   const handleImageUpload = async (event) => {
+  // Obtenemos los archivos seleccionados
+  // Creamos dos arrays vacíos para almacenar las imágenes cargadas y las previsualizadas
     setCloseUploadImages(true);
-    // Obtenemos los archivos seleccionados
     const files = event.target.files;
 
-    // Creamos dos arrays vacíos para almacenar las imágenes cargadas y las previsualizadas
     const uploadedImages = [];
     const previewedImages = [];
 
@@ -120,7 +118,7 @@ export const CloudinaryUpload = ({
         </OverlayTrigger>
 
       </div>
-
+      
       {stateShowImage && (
         <div
           style={{
@@ -135,10 +133,13 @@ export const CloudinaryUpload = ({
             overflowY: "hidden",
           }}
         >
+
           {previewImages.map((image, index) => (
             <div
+            //Aqui montamos un array para previsualizar las imagenes que enviaremos
               key={index}
               style={{
+
                 position: "relative",
                 width: "8rem",
                 display: "inline",
@@ -157,6 +158,7 @@ export const CloudinaryUpload = ({
                 }}
               />
               <Button
+              //boton eliminar img
                 variant="danger"
                 style={{
                   position: "absolute",
