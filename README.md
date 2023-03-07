@@ -56,14 +56,14 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 <h2>Configuración</h2>
 
 <ol>
-	<li>Clona este repositorio en tu máquina local:</li>
+	<li>Clona este repositorio en tu máquina local:</li> </br>
 	<pre><code>git clone https://github.com/nds-fsd/slack.git</code></pre>
-	<li>Navega a Frontend y Backend del proyecto:</li>
+	<li>Navega a Frontend y Backend del proyecto:</li></br>
 	<pre><code>cd Frontend</code></pre>
   <pre><code>cd Backend</code></pre>
-	<li>Instala las dependencias:</li>
+	<li>Instala las dependencias:</li></br>
 	<pre><code>npm install</code></pre>
-	<li>Crea un archivo <code>.env</code> en la raíz del directorio del servidor y agrega las siguientes variables de entorno:</li>
+	<li>Crea un archivo <code>.env</code> en la raíz del directorio del servidor y agrega las siguientes variables de entorno:</li></br>
 	<pre>
   <code>
   PORT=3001
@@ -73,12 +73,12 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
   JWT_SECRET = []
   </code>
   </pre>
-	<li>Inicia el servidor(Backend):</li>
+	<li>Inicia el servidor(Backend):</li></br>
 	<pre><code>npm run start:dev</code></pre>
-	<li>Abre una nueva terminal y navega al directorio del cliente(Frontend):</li>
-	<li>Inicia el cliente:</li>
+	<li>Abre una nueva terminal y navega al directorio del cliente(Frontend):</li></br>
+	<li>Inicia el cliente:</li></br>
 	<pre><code>npm start</code></pre>
-	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li>
+	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li></br>
 </ol>
 
 <h2>Contacto</h2>
