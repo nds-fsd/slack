@@ -35,21 +35,25 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 
 <h1>UI</h1>
 <h3>Landing page:</h3>
-<p>Página inicial que permite, en otras cosas, realizar el login y registrarse en la web para poder acceder al contenido</p>
+<p>Página inicial que permite, en otras cosas, realizar el login y registrarse en la web para poder acceder al contenido.</p>
 <img src='./frontend/src/Assets/landingPage.png' alt="Landing page"/>
 <h3>Dashboard del usuario:</h3>
-<p>Permite ver todas las organizaciones a las que pertenece el usuario, unirse a otra, modificar sus datos de perfil o acceder al chat público</p>
+<p>Permite ver todas las organizaciones a las que pertenece el usuario, unirse a otra, modificar sus datos de perfil o acceder al chat público.</p>
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
 <h3>Chat Page:</h3>
 <p>Permite chatear con otros usuarios a nivel de chat entre uno o varios usuarios, así como la creación de canales o chats y la navegación por las diferentes entidades (chats, canales y organizaciones).</br>
-En esta página el usuario podrá recibir notificaciones de los otros chats o canales y acceder al contenido mediante la notificación</p>
+En esta página el usuario podrá recibir notificaciones de los otros chats o canales y acceder al contenido mediante la notificación.</p>
 <img src='./frontend/src/Assets/chatPage3.png' alt="chat page del usuario"/>
 <h3>Public Chat:</h3>
 <p>Permite chatear todos los usuarios de SkuadLack sin importar su organización. Permite un intercambio libre de conocimiento y opiniones:</p>
 <img src='./frontend/src/Assets/publicChat.png' alt="public chat"/>
 <h3>Perfil de usuario:</h3>
-<p>Permite cambiar los datos fundamentales del usuario</p>
+<p>Permite cambiar los datos fundamentales del usuario.</p>
 <img src='./frontend/src/Assets/perfilPage.png' alt="página del perfil"/>
+<h3>Admin:</h3>
+<p>La implementación cuenta con roles que permiten diferenciar los permisos. En este caso, el usuario es GLOBAL_ADMIN por lo que tiene acceso al panel de usuarios para cambiar cualquier dato que a nivel de negocio o soporte, sea necesario</p>
+<img src='./frontend/src/Assets/adminPage.png' alt="página del perfil"/>
+
 
 
 
