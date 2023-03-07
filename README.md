@@ -78,8 +78,18 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 	<li>Abre una nueva terminal y navega al directorio del cliente(Frontend):</li></br>
 	<li>Inicia el cliente:</li></br>
 	<pre><code>npm start</code></pre>
-	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li></br>
+	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li>
 </ol>
+
+<h1>Fundadores y principales accionistas</h1>
+<lu>
+<li>Jorge Cuesta</li>
+<li>Daniel Castro</li>
+<li>Nicolás García García</li>
+<li>Norma Boix</li>
+<li>Germán Cachafeiro Bamonde</li>
+
+</lu>
 
 <h2>Contacto</h2>
 Si tienes alguna pregunta o sugerencia sobre Skuadlack, por favor contáctanos a través de <b>skuadlack@gmail.com</b>
