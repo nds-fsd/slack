@@ -279,7 +279,7 @@ const ChatPage = () => {
               })}
               onClick={() => {
                 setCurrentChat(channel)
-                console.log('soy channel', channel)
+                setMessageBody("")
               }
               }
             >
@@ -313,7 +313,7 @@ const ChatPage = () => {
               })}
               onClick={() => {
                 setCurrentChat(chat)
-                console.log('soy chat', chat)
+                setMessageBody("")
               }
               }
             >
