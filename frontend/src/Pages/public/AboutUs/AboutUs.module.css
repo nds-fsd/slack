@@ -27,10 +27,12 @@
 .seccion1 h5 {
 
     display: flex;
-    margin-top: 40px;
+    margin-top: 50px;
     color: white;
     justify-content: center;
     align-content: center;
+    text-align: center;
+    
 }
 
 .seccion1 figcaption {
@@ -51,7 +53,7 @@
 
 ul {
 
-    margin-top: 45px;
+    margin-top: 25px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -118,7 +120,7 @@ figure img:hover {
     transform: rotateY(180deg);
     transform-style: preserve-3d;
 }
-span{
+.span{
     font-weight: bolder;
     color: rgb(146, 139, 139);
     font-size: 18px;

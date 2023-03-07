@@ -106,7 +106,7 @@ const EditUser = (props) => {
       >
         {!userToEdit && (
           <h1 className={styles.title}>
-            Perfil de <span>{user.userName}</span>
+            Perfil de <span className={styles.span}>{user.userName}</span>
           </h1>
         )}
         <h3>Nombre de usuario</h3>
