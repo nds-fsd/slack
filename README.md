@@ -44,6 +44,11 @@ En esta página el usuario podrá recibir notificaciones de los otros chats o ca
 <h3>Public Chat:</h3>
 <p>Permite chatear todos los usuarios de SkuadLack sin importar su organización. Permite un intercambio libre de conocimiento y opiniones:</p>
 <img src='./frontend/src/Assets/publicChat.png' alt="public chat"/>
+<h3>Perfil de usuario:</h3>
+<p>Permite cambiar los datos fundamentales del usuario</p>
+<img src='./frontend/src/Assets/perfilPage.png' alt="página del perfil"/>
+
+
 
 
 <h1>Puesta en marcha del proyecto:</h1>
