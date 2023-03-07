@@ -31,8 +31,7 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 <li>Envío de mensajes de texto y múltiples imágenes</li>
 <li>Notificaciones en tiempo real</li>
 </ul>
-<h2>Requisitos previos</h2>
-Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente:
+
 
 <h2>UI</h2>
 <h2>Dashboard del usuario:</h2>
@@ -42,9 +41,10 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 <p>Permite chatear con otros usuarios a nivel de chat entre uno o varios usuarios, así como la creación de canales o chats y la navegación por las diferentes entidades (chats, canales y organizaciones)</p>
 <img src='./frontend/src/Assets/chatPage2.png' alt="chat page del usuario"/>
 
+<h1>Puesta en marcha del proyecto:</h1>
 
-
-
+<h2>Requisitos previos</h2>
+Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente:
 <ul>
 	<li>Node.js</li>
   <li>MongoDB</li>
