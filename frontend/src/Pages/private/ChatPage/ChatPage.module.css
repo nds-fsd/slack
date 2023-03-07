@@ -90,7 +90,7 @@
     transition: transform 0.2s ease-in-out;
     display: flex;
     justify-content: space-between;
-    max-width: 275px;
+    max-width: 250px;
 }
 
 .chatSpace {
@@ -111,7 +111,7 @@
 
 .focusedChat {
     background: linear-gradient(to bottom right, #F54864, #F78361);
-    max-width: 275px;
+    max-width: 250px;
     transform: scale(1.1);
 
 }
