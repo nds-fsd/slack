@@ -21,7 +21,7 @@ Mediante el sistema de notificaciones y envío de imágenes el usuario tiene las
 <li>JWT (Autenticación y autorización)</li>
   </ul>
 
-<h2>Funcionalidades</h2>
+<h1>Funcionalidades</h1>
 Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios comunicarse a través de diferentes canales de chat. Las principales características de la aplicación son:
 
 <ul>
@@ -33,7 +33,7 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 </ul>
 
 
-<h2>UI</h2>
+<h1>UI</h1>
 <h2>Dashboard del usuario:</h2>
 <p>Permite ver todas las organizaciones a las que pertenece el usuario, unirse a otra, modificar sus datos de perfil o acceder al chat público</p>
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
