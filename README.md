@@ -21,18 +21,6 @@ Mediante el sistema de notificaciones y envío de imágenes el usuario tiene las
 <li>JWT (Autenticación y autorización)</li>
   </ul>
 
-<h1>Funcionalidades</h1>
-Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios comunicarse a través de diferentes canales de chat. Las principales características de la aplicación son:
-
-<ul>
-<li>Registro y inicio de sesión de usuarios con aviso por mail (si está dado de alta en mailgun)</li>
-<li>Creación de organizaciones</li>
-<li>Comunicación en tiempo real a través de sockets</li>
-<li>Envío de mensajes de texto y múltiples imágenes</li>
-<li>Notificaciones en tiempo real</li>
-</ul>
-
-
 <h1>UI</h1>
 <h3>Landing page:</h3>
 <p>Página inicial que permite, en otras cosas, realizar el login y registrarse en la web para poder acceder al contenido.</p>
@@ -53,8 +41,6 @@ En esta página el usuario podrá recibir notificaciones de los otros chats o ca
 <h3>Admin:</h3>
 <p>La implementación cuenta con roles que permiten diferenciar los permisos. En este caso, el usuario es GLOBAL_ADMIN por lo que tiene acceso al panel de usuarios para cambiar cualquier dato que a nivel de negocio o soporte, sea necesario</p>
 <img src='./frontend/src/Assets/adminPage.png' alt="página del perfil"/>
-
-
 
 
 
@@ -82,9 +68,9 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
   <code>
   PORT=3001
   TEST_PORT=3002
-  MAILGUN_KEY= 3f86ea7d225b0e397af7e946978cc7b0-ca9eeb88-ae4cd758
-  MONGO_URL = mongodb+srv://SkuadLack:tOBlTJq3tFofFwPa@skuadlack.zvlzpow.mongodb.net/?retryWrites=true&w=majority
-  JWT_SECRET = 'caracol'
+  MAILGUN_KEY= []
+  MONGO_URL = []
+  JWT_SECRET = []
   </code>
   </pre>
 	<li>Inicia el servidor(Backend):</li>
