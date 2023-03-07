@@ -34,6 +34,9 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 
 
 <h1>UI</h1>
+<h3>Landing page:</h3>
+<p>Página inicial que permite, en otras cosas, realizar el login y registrarse en la web para poder acceder al contenido</p>
+<img src='./frontend/src/Assets/landingPage.png' alt="Landing page"/>
 <h3>Dashboard del usuario:</h3>
 <p>Permite ver todas las organizaciones a las que pertenece el usuario, unirse a otra, modificar sus datos de perfil o acceder al chat público</p>
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
