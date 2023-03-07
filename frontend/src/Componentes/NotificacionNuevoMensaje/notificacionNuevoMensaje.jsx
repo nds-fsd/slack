@@ -28,7 +28,7 @@ const NotificacionNuevoMensaje = (props) => {
         textTransform: 'uppercase',
     };
 
-        const text = props.infoNotification.text.length > 15 ? props.infoNotification.text.substr(0,15) + '...' : props.infoNotification.text
+        const text = props.infoNotification.text.length > 25 ? props.infoNotification.text.substr(0,15) + '...' : props.infoNotification.text
 
     return (
 
@@ -55,10 +55,12 @@ const NotificacionNuevoMensaje = (props) => {
                 </div>
                 <div>
                     <p className={styles.NotificacionNuevoMensaje}>Nuevo mensaje de {props.infoNotification.userName} <br />
-                        <span>{text}</span> <br /> en el chat {props.infoNotification.chatName.name ? props.infoNotification.chatName.name : props.infoNotification.chatName.user 
+                        <span>{text}</span> <br /> en {props.infoNotification.chat.name 
+                        ? `el channel ${props.infoNotification.chat.name}` 
+                        : `el chat ${props.infoNotification.chat.user 
                             .map((u) => u.userName)
                             .filter((item) => item !== myUserName)
-                            .join(" | ")}</p>
+                            .join(" | ")}`}</p>
                 </div>
             </div>
         </div>
