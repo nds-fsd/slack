@@ -38,8 +38,9 @@ Skuadlack es una aplicación de chat en tiempo real que permite a los usuarios c
 <p>Permite ver todas las organizaciones a las que pertenece el usuario, unirse a otra, modificar sus datos de perfil o acceder al chat público</p>
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
 <h3>Chat Page:</h3>
-<p>Permite chatear con otros usuarios a nivel de chat entre uno o varios usuarios, así como la creación de canales o chats y la navegación por las diferentes entidades (chats, canales y organizaciones)</p>
-<img src='./frontend/src/Assets/chatPage2.png' alt="chat page del usuario"/>
+<p>Permite chatear con otros usuarios a nivel de chat entre uno o varios usuarios, así como la creación de canales o chats y la navegación por las diferentes entidades (chats, canales y organizaciones).</br>
+En esta página el usuario podrá recibir notificaciones de los otros chats o canales y acceder al contenido mediante la notificación</p>
+<img src='./frontend/src/Assets/chatPage3.png' alt="chat page del usuario"/>
 <h3>Public Chat:</h3>
 <p>Permite chatear todos los usuarios de SkuadLack sin importar su organización. Permite un intercambio libre de conocimiento y opiniones:</p>
 <img src='./frontend/src/Assets/publicChat.png' alt="public chat"/>
