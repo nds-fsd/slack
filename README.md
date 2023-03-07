@@ -36,7 +36,7 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 
 <h3>UI</h3>
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
-<img src='./frontend/src/Assets/ChatPage.png' alt="ChatPage"/>
+<img src='./frontend/src/Assets/ChatPage.png' alt="chatPage"/>
 
 
 
