@@ -5,7 +5,7 @@ Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte 
 
 <h1>Core Business </h1>
 SkuadLack es un clon con personalidad propia de Slack que permite la comunicación entre 
-organizaciones teniendo la posibilidad de crear chats independientes dentro de los usuarios de una organización o canales temáticos para diferentes usuarios.
+organizaciones teniendo la posibilidad de crear chats independientes dentro de los usuarios de una organización o canales temáticos para diferentes usuarios.</br>
 Mediante el sistema de notificaciones y envío de imágenes el usuario tiene las herramientas necesarias para una comunicación fluida y efectiva sin caer en elementos barrocos que pueden desviar la atención del foco principal.
 
 <h1>Principales librerías y tecnologías implementadas: </h1>
