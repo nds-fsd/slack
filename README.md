@@ -40,7 +40,7 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 <img src='./frontend/src/Assets/LUPPage.png' alt="Landing user page"/>
 <h2>Chat Page:</h2>
 <p>Permite chatear con otros usuarios a nivel de chat entre uno o varios usuarios, así como la creación de canales o chats y la navegación por las diferentes entidades (chats, canales y organizaciones)</p>
-<img src='./frontend/src/Assets/ChatPage.png' alt="chatPage"/>
+<img src='./frontend/src/Assets/ChatPage.png' alt="chat page del usuario"/>
 
 
 
