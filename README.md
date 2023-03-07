@@ -1,7 +1,7 @@
 <h1>El origen</h1>
 
 
-Skuadlack es una aplicación web de chat en tiempo real desarrollada como parte del bootcamp en Nuclio Digital School en el 2022-2023 por parte de alumnos que iniciaron el máster con cero o escasos conocimientos a nivel de programación. 
+Skuadlack es una aplicación web de chat en tiempo real desarrollada durante el BootCamp en Nuclio Digital School en el 2022-2023 por parte de alumnos que iniciaron el máster con cero o escasos conocimientos a nivel de programación. 
 
 <h1>Core Business </h1>
 SkuadLack es un clon con personalidad propia de Slack que permite la comunicación entre 
