@@ -8,8 +8,6 @@ import { Link, useParams } from 'react-router-dom';
 import fetchSupreme from '../../../utils/apiWrapper';
 import ModalRollOrg from '../../../Componentes/Modal/modalRollOrg/modalRollOrg'
 import { ButtonCopied } from '../../../Componentes/buttonCopied/buttonCopy';
-import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
-
 
 
 const LandingUserPage = () => {
