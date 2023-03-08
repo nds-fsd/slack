@@ -1,5 +1,6 @@
 .button{
     margin: 6px;
+    margin-right: 0px;
     border:none;
     transition: transform 0.2s ease-in-out;
 }
