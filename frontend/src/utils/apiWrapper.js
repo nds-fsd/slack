@@ -50,7 +50,7 @@ const fetchSupreme = (path, method = 'GET', body, isToken, query) => {
       return parsedResponse;
     })
     .catch((error) => {
-      console.log(error)
+   
 
       return error
      

@@ -45,14 +45,12 @@ const SkuadlackPage = () => {
     const mensajeBienvenida = ({from, message, sala }) =>{
       sala=room
 //      setRoom(room)
-      console.log( `este es el mensaje de bienvenida ${message} desde el ${from}`)
     }
   }, [room]);
 
 
   const InfoDelSocket = (data) =>{
      
-    console.log('respuesta del BE', data)
     setMessage([...message, {dataMessage: data.message, from: data.from, room:room}])
 
   }
@@ -65,7 +63,6 @@ const SkuadlackPage = () => {
 
 
   const onSubmit = (data) =>{
-    console.log('Data Onsubmit: ', data)
     socket.emit('chat', {message: data.message, room: room, from: user.userName})
     setMessage([...message,{from: 'Yo', dataMessage: data.message, room:room} ])
    
@@ -86,8 +83,7 @@ const SkuadlackPage = () => {
   //     return null
   //     })
   // }
-  console.log('quiero saber nombre org y sale...', room);
-  console.log('mensajes', message)
+
   return (
     <PageStyle>
       <div className='barrasuperior'>

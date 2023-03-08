@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 const secret = process.env.JWT_SECRET;
-
 const generateJWT = (user) => {
   const today = new Date();
   const expirationDate = new Date();

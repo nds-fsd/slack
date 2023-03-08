@@ -10,6 +10,7 @@ import ModalRollOrg from '../../../Componentes/Modal/modalRollOrg/modalRollOrg'
 import { ButtonCopied } from '../../../Componentes/buttonCopied/buttonCopy';
 
 
+
 const LandingUserPage = () => {
     const params = useParams()
     const [user, setUser] = useState("")
