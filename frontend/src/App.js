@@ -19,6 +19,8 @@ import ChatPage from './Pages/private/ChatPage/ChatPage';
 import { SocketContextProvider } from './contexts/useSocket';
 import RolePermiss from './Componentes/rolePermiss/rolePermiss';
 import PublicChat from './Componentes/public-chat/public-chat';
+import ListOrgBootstrap from './Componentes/listOrgBootstrap/listOrgBootstrap';
+import ListChannelsBootstrap from './Componentes/listChannelsBootstrap/listChannelsBootstrap';
 
 
 //react router dom está en la clase de React Router. Webpack y Eslint --> minuto 01:13:00
@@ -45,6 +47,16 @@ function App() {
             <Route path="/users" element={
               <RolePermiss permission={'GLOBAL_ADMIN'}>
                 <ListUserBootstrap />
+              </RolePermiss>}>
+            </Route>
+            <Route path="/organizations" element={
+              <RolePermiss permission={'GLOBAL_ADMIN'}>
+                <ListOrgBootstrap />
+              </RolePermiss>}>
+            </Route>
+            <Route path="/channels" element={
+              <RolePermiss permission={'GLOBAL_ADMIN'}>
+                <ListChannelsBootstrap />
               </RolePermiss>}>
             </Route>
             <Route path="/skuadlack/:id" element={
