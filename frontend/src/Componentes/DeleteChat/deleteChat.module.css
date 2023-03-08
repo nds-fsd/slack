@@ -6,3 +6,24 @@
   cursor:pointer;
   transform: scale(1.2);
 }
+
+
+.containerModal{
+  backdrop-filter: blur(2px);
+ 
+  
+}
+.bodyModal{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #242A38;
+    color: white;  
+}
+
+.button{
+  background: linear-gradient(to bottom right, #F54864, #F78361);
+  border:none;
+  
+}
