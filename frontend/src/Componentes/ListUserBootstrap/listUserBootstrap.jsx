@@ -31,14 +31,14 @@ const ListUsersBootstrap = () => {
             }
         };
         */
-        fetchSupreme(`/user/${datosUser._id}`, 'DELETE',undefined, true, undefined)
-        
-        /*
-        fetch(url, options)
-            .then((res) => {
-                res.json();
-            })
-        */
+        fetchSupreme(`/user/${datosUser._id}`, 'DELETE', undefined, true, undefined)
+
+            /*
+            fetch(url, options)
+                .then((res) => {
+                    res.json();
+                })
+            */
 
             .then(() => {
                 setRefresh(true);
@@ -52,17 +52,17 @@ const ListUsersBootstrap = () => {
     useEffect(() => {
         if (refresh) {
             // const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
-            fetchSupreme('/user', 'GET', undefined, true,undefined)
-            /*
-            fetch(`${URL_API}/user`, {
-                headers: {
-                    authorization: `Bearer ${getUserToken()}`
-                }
-            })
-                .then((response) => {
-                    return response.json();
+            fetchSupreme('/user', 'GET', undefined, true, undefined)
+                /*
+                fetch(`${URL_API}/user`, {
+                    headers: {
+                        authorization: `Bearer ${getUserToken()}`
+                    }
                 })
-            */
+                    .then((response) => {
+                        return response.json();
+                    })
+                */
                 .then((res) => {
                     setList(res);
                     setRefresh(false);
@@ -74,54 +74,57 @@ const ListUsersBootstrap = () => {
     //console.log('lista usuarios', list)
 
     return (
-        <div className={styles.listadoTablaBootstrap}>
-            <Table className={styles.tablaDark} size="sm" bordered hover variant="dark">
-                <thead>
-                    <tr>
-                        <th>Num</th>
-                        <th>Id</th>
-                        <th>Nombre de usuario</th>
-                        <th>Email</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th className={styles.thBotones}>View</th>
-                        <th className={styles.thBotones}>Editar</th>
-                        <th className={styles.thBotones}>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {list && list.map((datosUser, index) => (
-
-                        <tr key={datosUser._id + '_list_user'}>
-                            <td> {index + 1}</td>
-                            <td> {datosUser._id}</td>
-                            <td> {datosUser.userName}</td>
-                            <td> {datosUser.email}</td>
-                            <td> {datosUser.name}</td>
-                            <td> {datosUser.lastName}</td>
-                            <td className={styles.botones}><Button id={styles.botonEditar}
-                                onClick={() => navigate(`../LUP/${datosUser._id}`)}>View</Button>{/* nuevo boton para mostrar landingPageUser*/}                            </td>
-                            <td className={styles.botones}><Button id={styles.botonEditar} onClick={() => {
-                                setOpenModal(true)
-                                setHandleId(datosUser._id)
-
-                            }} variant="light" className={styles.butEdit}>Editar</Button>
-
-                            </td>
-
-                            <td className={styles.botones}><Button id={styles.botonEliminar} variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
+        <>
+            <h1 className={styles.title}>Users</h1>
+            <div className={styles.listadoTablaBootstrap}>
+                <Table className={styles.tablaDark} size="sm" bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>Num</th>
+                            <th>Id</th>
+                            <th>Nombre de usuario</th>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th className={styles.thBotones}>View</th>
+                            <th className={styles.thBotones}>Editar</th>
+                            <th className={styles.thBotones}>Eliminar</th>
                         </tr>
+                    </thead>
+                    <tbody>
 
-                    ))}
-                 
-                    <ModalEditUser userId={handleId} setRefresh={setRefresh} setOpenModal={setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
+                        {list && list.map((datosUser, index) => (
+
+                            <tr key={datosUser._id + '_list_user'}>
+                                <td> {index + 1}</td>
+                                <td> {datosUser._id}</td>
+                                <td> {datosUser.userName}</td>
+                                <td> {datosUser.email}</td>
+                                <td> {datosUser.name}</td>
+                                <td> {datosUser.lastName}</td>
+                                <td className={styles.botones}><Button id={styles.botonEditar}
+                                    onClick={() => navigate(`../LUP/${datosUser._id}`)}>View</Button>{/* nuevo boton para mostrar landingPageUser*/}                            </td>
+                                <td className={styles.botones}><Button id={styles.botonEditar} onClick={() => {
+                                    setOpenModal(true)
+                                    setHandleId(datosUser._id)
+
+                                }} variant="light" className={styles.butEdit}>Editar</Button>
+
+                                </td>
+
+                                <td className={styles.botones}><Button id={styles.botonEliminar} variant="danger" onClick={() => deleteUser(datosUser)} className={styles.butEliminar}>Eliminar</Button></td>
+                            </tr>
+
+                        ))}
+
+                        <ModalEditUser userId={handleId} setRefresh={setRefresh} setOpenModal={setOpenModal} open={openModal} onClose={() => setOpenModal(false)}></ModalEditUser>
 
 
-                </tbody>
+                    </tbody>
 
-            </Table>
-        </div>
+                </Table>
+            </div>
+        </>
     )
 }
 

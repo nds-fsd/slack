@@ -14,7 +14,7 @@
 }
 
 .tablaDark{
-    margin-top:8rem;
+    margin-top:2rem;
 }
 
 #botonEditar {
@@ -45,5 +45,12 @@
 }
 body{
     background-color:#242A38 ;
+
+}
+.title{
+    display: flex;
+    padding-top: 100px;
+    color:white;
+    justify-content: center;
 
 }
