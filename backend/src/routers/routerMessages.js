@@ -3,6 +3,10 @@ import Messages from "../Schemas/message.js";
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 const routerMessages = express.Router();
 import {io} from '../index.js';
+import Chat from "../Schemas/chat.js";
+import Channel from "../Schemas/channel.js";
+import Organizacion from "../Schemas/organizacion.js";
+
 
 routerMessages.post('/message', jwtMiddleware, async (req, res) => {
 
@@ -19,6 +23,22 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   const messageCreate = await newMessage.save();
   // console.log('emiting message to',req.body.chat? req.body.chat : req.body.channel)
   io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);
+
+  console.log(messageCreate);
+  
+  const chatOrChannel = req.body.chat ? await Chat.findById(req.body.chat).populate("organizacion").exec() : await Channel.findById(req.body.channel).populate("organizacion").exec();
+  console.log("chat or channel", chatOrChannel);
+  io.to(chatOrChannel.user).emit("reply2", {
+    
+      organizacion: chatOrChannel.organizacion.OrgName,
+      idOrganizacion: chatOrChannel.organizacion._id,
+      chat: chatOrChannel,
+      text: req.body.text,
+      name: req.jwtPayload.name,
+      userName: req.jwtPayload.userName,
+      idUser: req.jwtPayload.id
+    
+  });
   //io.to(req.body.chat).emit('notification',messageCreate)
   return res.status(201).json(messageCreate)
 

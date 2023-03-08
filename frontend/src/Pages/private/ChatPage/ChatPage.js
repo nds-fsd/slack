@@ -46,8 +46,13 @@ const ChatPage = () => {
     myUserName,
     organizacionActual,
     channels,
-    userOfOrganizacionActual
+    userOfOrganizacionActual,
+    chatIds,
+    
   } = useSkuadLackContext();
+
+  console.log('chatIds', chatIds)
+  console.log('chatIds', channels)
 
   const setTimerNewMessage = (data) => {
     //objetivo: No quiero ver la notificación si ya estoy en el chat que se emite el mensaje
@@ -183,7 +188,7 @@ const ChatPage = () => {
     if (currentChat) {
       joinChat(currentChat._id);
       onMessageReceived((newMessage) => {
-        console.log("soy New MEssage ", newMessage)
+        
         if (newMessage.chat || newMessage.channel === currentChat._id) {
           setRefresh(true);
         }
@@ -194,7 +199,7 @@ const ChatPage = () => {
   useEffect(() => {
 
     const chatReply = (data) => {
-      console.log('data de la respuesta', data)
+      
 
       setInfoNotification({
         chat: data.chat,
@@ -206,7 +211,6 @@ const ChatPage = () => {
         idOrganizacion: data.idOrganizacion
       })
 
-      console.log('info Notificacion', infoNotification)
 
       const { chat } = data
       setTimerNewMessage(chat)
@@ -217,7 +221,6 @@ const ChatPage = () => {
       socket.off('reply2', chatReply)
     }
   })
-
 
 
   const getUrlfromCloudinaryComponent = (url) => {
