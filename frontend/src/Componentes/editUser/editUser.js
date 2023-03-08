@@ -5,6 +5,7 @@ import { patchToMongo } from "../../utils/fetchToMongo";
 import styles from "./editUser.module.css";
 import { getUserToken, removeSession } from "../../utils/localStorageUtils";
 import fetchSupreme from "../../utils/apiWrapper";
+import { hasPermission } from "../../utils/rolePermissUtils";
 
 const EditUser = (props) => {
   // Varuiables y estados
@@ -59,8 +60,6 @@ const EditUser = (props) => {
     //patchToMongo(`user/${user._id}`, data)
     fetchSupreme(`/user/${user._id}`, "PATCH", data, true, undefined).then(
       (dataServer) => {
-        alert(`el usuario ${dataServer.userName} ha sido modificado.`);
-
         // navigate(`/user/${dataServer._id}`)
         //setTriger(!triger)
         //(!userToEdit && navigate(`../LUP/${dataServer._id}`));
@@ -72,59 +71,42 @@ const EditUser = (props) => {
         if (userToEdit) {
           props.setRefresh(true);
           props.setOpenModal(false);
-        } else {
-          navigate(`../LUP/${dataServer._id}`);
         }
+        if (hasPermission('GLOBAL_ADMIN')) {
+          navigate('/users')
+        }
+        if (hasPermission('USER')) {
+          setTriger(!triger)
+        };
+
         //(userToEdit && props.setRefresh(true));
         //(userToEdit && props.setOpenModal(false));
       }
     );
   };
   const deleteUser = () => {
-    /*
-    const URL_API =
-      window.location.hostname === "https://skuadlack.netlify.app"
-        ? "https://skuadlack.up.railway.app"
-        : "http://localhost:3001";
-
-        const url = `${URL_API}/user/`  + (userToEdit ? userToEdit : params.id);
-        const options = {
-            method: "DELETE",
-            mode: "cors",
-            headers: {
-                authorization:`Bearer ${getUserToken()}`
-            }
-        };
-        */
-    fetchSupreme(
-      `/user/${userToEdit ? userToEdit : params.id}`,
-      "DELETE",
-      undefined,
-      true
-    )
-      //fetch(url, options)
-      .then((res) => {
-        res.json();
-      })
-      .then(() => {
-        alert(`Usuario ${user.userName} eliminado.`);
-        removeSession()(
-          //si userEdit tiene datos quiere decir que estoy editando desde el admin, si no es que estoy a nivel usuario/cliente
-          userToEdit ? props.setRefresh(true) : navigate("/")
-        );
-        userToEdit && props.setOpenModal(false);
-      });
+    fetchSupreme(`/user/${params.id}`, "DELETE", undefined, true).then(
+      () => {
+        if (hasPermission('USER')) {
+          removeSession();
+          navigate('/')     
+        }
+        if (hasPermission('GLOBAL_ADMIN')) {
+          navigate('/users')
+        }
+      }
+    );
   };
 
   return (
     <div className={userToEdit ? styles.contenedor : styles.contenedorRegister}>
       <form
         className={userToEdit ? styles.card : styles.cardRegister}
-        onSubmit={handleSubmit(onDataSubmit2)}
+
       >
         {!userToEdit && (
           <h1 className={styles.title}>
-            Perfil de <span>{user.userName}</span>
+            Perfil de <span className={styles.span}>{user.userName}</span>
           </h1>
         )}
         <h3>Nombre de usuario</h3>
@@ -184,15 +166,16 @@ const EditUser = (props) => {
         <br />
         <div>
           <button
+            onClick={handleSubmit(onDataSubmit2)}
             className={
               userToEdit ? styles.buttonGuardar : styles.buttonGuardarRegister
             }
-            type="submit"
+
           >
             Guardar
           </button>
           {!userToEdit && (
-            <button className={styles.botonEliminar} onClick={deleteUser}>
+            <button type='button' className={styles.botonEliminar} onClick={deleteUser}>
               Eliminar
             </button>
           )}

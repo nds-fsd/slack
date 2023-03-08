@@ -72,11 +72,9 @@ const InfoStyle= styled.div`
 
 h2{
   font-size: 3rem;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   padding: 0;
   margin: 0;
   width: 100%;
-  text-shadow: 1px 1px #fff;
   color: #E75462;
 }
 .icono{

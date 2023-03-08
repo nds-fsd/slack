@@ -3,9 +3,13 @@ import styles from "./Message.module.css";
 import {format} from 'date-fns';
 import { getUserSession } from "../../../../utils/localStorageUtils";
 import CircleAvatar from "../../../../Componentes/circleAvatar/circleAvatar";
+import CircleAvatarUsers from "../../../../Componentes/circleAvatar/circleAvatarUsers/circleAvatarUsers";
 
 const Message = (props) =>{
+
 	const { message} = props;
+
+	// por defecto es un string 
 	const sessionUser = getUserSession();
 
 	const stringToColour = function(str) {
@@ -23,7 +27,7 @@ const Message = (props) =>{
 	return (
 		<div className={styles.message}>
 			<div className={styles.messageAvatar}>
-				<CircleAvatar name={message.user.name} size={40} color={stringToColour(message.user.name)}/>
+				<CircleAvatarUsers name={message.user.userName}  id={message.user._id} size={40} color={stringToColour(message.user.name)}/>
 			</div>
 			<div className={styles.messageBody}>
 				<div className={styles.messageHeader}>
@@ -33,7 +37,10 @@ const Message = (props) =>{
 					</div>
 				</div>
 				<div>
-					{message.text}
+					{message.text.includes('res.cloudinary.com')
+					?<a href={message.text} target='_blank'><img src={message.text} style={{height: '100px', width: '100px'}} alt="" /></a> 
+					:message.text	
+				}
 				</div>
 			
 			</div>

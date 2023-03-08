@@ -8,8 +8,6 @@ import { Link, useParams } from 'react-router-dom';
 import fetchSupreme from '../../../utils/apiWrapper';
 import ModalRollOrg from '../../../Componentes/Modal/modalRollOrg/modalRollOrg'
 import { ButtonCopied } from '../../../Componentes/buttonCopied/buttonCopy';
-import { v4 as uuidv4 } from "uuid"; //sugerido por ChatGTP como una biblioteca para generar claves únicas para el .map
-
 
 
 const LandingUserPage = () => {
@@ -22,21 +20,6 @@ const LandingUserPage = () => {
 
     useEffect(() => {
         fetchSupreme(`/userOrg/${params.id}`, 'GET', undefined, true, undefined)  
-            
-        /*
-            const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
-            fetch(`${URL_API}/user/` + params.id,
-                {
-                    headers: {
-                        authorization: `Bearer ${getUserToken()}`
-                    }
-                })
-            
-                .then((res) => {
-                    return res.json();
-                })
-        */
-
             .then((res) => {
                 setUser(res.user);
                 setOrganizacion(res.organizacion);

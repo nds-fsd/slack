@@ -9,42 +9,46 @@ import Button from "react-bootstrap/esm/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { MdAccountBox, MdOutlineLogout } from "react-icons/md";
 import { getUserSession, getUserToken, removeSession } from "../../utils/localStorageUtils.js";
+import { hasPermission } from "../../utils/rolePermissUtils.js";
+import CircleAvatarPerfil from "../circleAvatar/circleAvatarPerfil/circleAvatarPerfil.js";
+import stringToColour from "../../utils/stringToColour.js";
 
 
 export const BarraNav = () => {
   const navigate = useNavigate();
-   
+
 
   return (
     <NavBarStyle>
-        <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
-          <Container fluid>
-            <img
-              className="logoimg"
-              src={require("../../Assets/Png  logo.png")}
-              alt=""
-            />
-            <Navbar.Brand href={getUserToken()? `/LUP/${getUserSession().id}`: `/`}>
-              <h1>SkuadLack</h1>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-md`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-md`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                  SkuadLack
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
+      <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
+        <Container fluid>
+          <img
+            className="logoimg"
+            src={require("../../Assets/Png  logo.png")}
+            alt=""
+          />
+          <Navbar.Brand href={getUserToken() ? `/LUP/${getUserSession().id}` : `/`}>
+            <h1>SkuadLack</h1>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand-md`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-md`}
+            placement="end"
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
+                SkuadLack
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
                 {!getUserToken() && (
                   <Nav.Link as={Link} to="/">
                     <p>Home Page</p>
                   </Nav.Link>
                 )}
+                {!getUserToken()  &&
                   <NavDropdown
                     title="About Us"
                     id={`offcanvasNavbarDropdown-expand-md`}
@@ -59,16 +63,6 @@ export const BarraNav = () => {
                       </Nav.Link>
                     </NavDropdown.Item>
 
-                    <NavDropdown.Item href="#action3">
-                      <Nav.Link
-                        className="dropdownlinks"
-                        as={Link}
-                        to="/infoSlack"
-                      >
-                        Porque SkuadLack?
-                      </Nav.Link>
-                    </NavDropdown.Item>
-
                     <NavDropdown.Item href="#action2">
                       <Nav.Link
                         className="dropdownlinks"
@@ -80,61 +74,98 @@ export const BarraNav = () => {
                     </NavDropdown.Item>
 
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">FAQS</NavDropdown.Item>
                     <NavDropdown.Item href="#action5">
                       <Nav.Link
-                          className="dropdownlinks"
-                          as={Link}
-                          to="/contactUs"
-                        >
+                        className="dropdownlinks"
+                        as={Link}
+                        to="/contactUs"
+                      >
                         Contact Us!
                       </Nav.Link>
                     </NavDropdown.Item>
-                  </NavDropdown>
+                  </NavDropdown>}
 
-                  {!getUserToken() && (
-                    <>
-                      <Nav.Link as={Link} to="/user">
-                        <Button variant="success">Regístrate</Button>
-                      </Nav.Link>
+                {!getUserToken() && (
+                  <>
+                    <Nav.Link as={Link} to="/user">
+                      <Button variant="success">Regístrate</Button>
+                    </Nav.Link>
 
-                      <Nav.Link as={Link} to="/login">
-                        <Button variant="primary">
-                          <MdAccountBox className="a" />
-                          Log In
-                        </Button>
-                      </Nav.Link>
-                    </>
-                  )}
+                    <Nav.Link as={Link} to="/login">
+                      <Button variant="primary">
+                        <MdAccountBox className="a" />
+                        Log In
+                      </Button>
+                    </Nav.Link>
+                  </>
+                )}
 
-                  {getUserToken() && (
-                    <>
-                      <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
-                        <Button variant="dark">Dashboard</Button>
-                      </Nav.Link>
-                      <Nav.Link as={Link} to="/users">
-                        <Button variant="warning">Admin Mode</Button>
-                      </Nav.Link>
+                {getUserToken() && (
+                  <>
 
-                      <Nav.Link>
-                        <Button
-                          variant="danger"
-                          onClick={() => {
-                            removeSession();
-                            navigate("/");
-                          }}
-                        >
-                          Logout <MdOutlineLogout className="a" />
-                        </Button>
-                      </Nav.Link>
+                    {hasPermission('GLOBAL_ADMIN') &&
+                      <NavDropdown
+                        title="Admin Mode"
+                        id={`offcanvasNavbarDropdown-expand-md`}
+                      >
+                        <NavDropdown.Item >
+                          <Nav.Link className="dropdownlinks" as={Link} to="/users">
+                            Users
+                          </Nav.Link>
+                        </NavDropdown.Item>
 
-                    </>
-                  )}
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
+                        <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to="/organizations">
+                            Organizations
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to="/channels">
+                            Channels
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                      </NavDropdown>}
+
+                    <CircleAvatarPerfil
+                      name={getUserSession().userName}
+                      id={getUserSession().id}
+                      size={40}
+                      color={stringToColour(getUserSession().name)}></CircleAvatarPerfil>
+                    <NavDropdown align={{ lg: 'end' }} id={`offcanvasNavbarDropdown-expand-md`} >
+                    {!hasPermission('GLOBAL_ADMIN') &&
+                    <NavDropdown.Item>
+                    <Nav.Link className="dropdownlinks"  as={Link} to={`/LUP/${getUserSession().id}`}>
+                      Dashboard
+                    </Nav.Link>
+                    </NavDropdown.Item>}
+                      <NavDropdown.Item>
+                        <Nav.Link className="dropdownlinks" >
+                          <div
+                            variant="danger"
+                            onClick={() => {
+                              removeSession();
+                              navigate("/");
+                            }}
+                          >
+                            Logout <MdOutlineLogout className="a" />
+                          </div>
+                        </Nav.Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to={`/user/${getUserSession().id}`}>
+                            {getUserSession().userName}
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                    </NavDropdown>
+
+                  </>
+                )}
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
     </NavBarStyle>
   );
 };
@@ -171,6 +202,10 @@ const NavBarStyle = styled.div`
   }
   #offcanvasNavbarDropdown-expand-md {
     padding-top: 0.9rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  #offcanvasNavbarDropdown-expand-md:hover{
+    transform: scale(1.1);
   }
   .offcanvas-body {
     margin-top: 0.3rem;
@@ -179,4 +214,5 @@ const NavBarStyle = styled.div`
     color: #686461;
     font-weight: bolder;
   }
+
 `;

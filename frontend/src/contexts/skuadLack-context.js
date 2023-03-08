@@ -3,14 +3,12 @@ import { useParams } from "react-router-dom"
 import fetchSupreme from "../utils/apiWrapper"
 import { getUserSession, } from "../utils/localStorageUtils"
 
-
-
 export const SkuadLackContext = createContext()
 
 export const SkuadLackContextProvider = (props) => {
     // Creamos todas las variables de estado que necesitemos y funciones
     const params = useParams()
-    const idOrganizacionActual = params.id
+    const [idOrganizacionActual, setIdOrganizacionActual] = useState(params.id) 
     const idUser = getUserSession().id;
     const [user, setUser] = useState("")
     const [myOrganizaciones, setMyOrganizaciones] = useState([]);
@@ -19,8 +17,11 @@ export const SkuadLackContextProvider = (props) => {
     const [chatIds, setChatIds] = useState([''])
     const [myUserName, setMyUserName] = useState("");
     const [organizacionActual, setorganizacionActual] = useState("")
-    const [chatId, setChatId] =useState('');
+    const [chatId, setChatId] = useState('');
     const [room, setRoom] = useState(idOrganizacionActual);
+    const [userOfOrganizacionActual, setUserOfOrganizacionActual] = useState([])
+    const [refreshContext, setRefreshContext] = useState(false)
+    const [channels, setChannels] = useState([]) 
 
     //preparamos todas las request necesarias para dejar el contexto preparado y que este todo disponible para todos los
     //componentes que consumen de el
@@ -47,10 +48,23 @@ export const SkuadLackContextProvider = (props) => {
                 setorganizacionActual(res)
                 setChatId('')
                 setRoom(res._id)
-                
+
             })
 
-    }, [idOrganizacionActual]);
+        fetchSupreme(`/organizacionUsers/${idOrganizacionActual}`, "GET", undefined, true, undefined)
+            .then((res) => {
+                setUserOfOrganizacionActual(res)
+               
+
+            })
+            fetchSupreme("/userChannels", "GET", undefined, true, `idOrganizacion=${idOrganizacionActual}&idUser=${idUser}`
+            ).then((res) => {                
+                setChannels(res.channels)    
+            });
+
+    }, [idOrganizacionActual, refreshContext]);
+
+
 
     //pasamos por value las variables a "compartir".
     const value = {
@@ -66,7 +80,14 @@ export const SkuadLackContextProvider = (props) => {
         setChatId,
         chatId,
         room,
-        setRoom
+        setRoom,
+        userOfOrganizacionActual,
+        setChats,
+        setRefreshContext,
+        refreshContext,
+        setIdOrganizacionActual,
+        channels
+        
     };
 
     return (

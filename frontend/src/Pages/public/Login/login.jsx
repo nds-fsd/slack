@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchSupreme from "../../../utils/apiWrapper";
 import { setUserSession } from "../../../utils/localStorageUtils";
+import { hasPermission } from "../../../utils/rolePermissUtils";
 import styles from "./login.module.css"
 
 const Login = () => {
@@ -48,10 +49,19 @@ const Login = () => {
 
         if (res.token) {
           setUserSession(res)
+         if(hasPermission('GLOBAL_ADMIN')){
+          navigate('/users')
+         }else{
           navigate(`/LUP/${res.user.id}`)
+         }           
         }
       })
   };
+    const handleKeyPress = (event) => {
+      if (event.key === 'Enter') {
+        sendLogin();
+      }
+    };
 
   return (
     <div className={styles.contenedor}>
@@ -65,10 +75,10 @@ const Login = () => {
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
         <label htmlFor="password">password</label>
         <div className={styles.password}>
-        <input type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        <input type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} placeholder="Password" />
         <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
         </div>
-        <button className={styles.botonLogin} onClick={() => sendLogin()}>Login</button>
+        <button type="submit" className={styles.botonLogin} onClick={() => sendLogin()}>Login</button>
       </div>
     </div>
   );

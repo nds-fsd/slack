@@ -3,6 +3,7 @@ import Organizacion from "../Schemas/organizacion.js";
 import { validateOrgName } from '../Middlewares/orgName.js';
 import { jwtMiddleware } from '../Middlewares/jwtMiddleware.js';
 import User from '../Schemas/user.js';
+import { globalAdminPermissionMiddleware } from '../Middlewares/permissionMiddleware.js';
 const routerOrg = express.Router();
 
 routerOrg.get('/organizacion',async(req,res)=>{
@@ -16,7 +17,7 @@ routerOrg.get('/organizacion',async(req,res)=>{
 
 // app.use(validateOrgName);
 
-routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
+routerOrg.post('/organizacion',validateOrgName,jwtMiddleware, async(req,res)=> {
     const body = req.body;
     const data = {
       OrgName: body.OrgName,
@@ -53,7 +54,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
     try {
       const organizacion = new Organizacion(data);
       const idUser= req.jwtPayload.id;
-      console.log('id usuario que está logueado',idUser);
+      //console.log('id usuario que está logueado',idUser);
 
       //Fundamental el await!!!
       const user = await User.findById(idUser)
@@ -83,7 +84,7 @@ routerOrg.post('/organizacion',validateOrgName, async(req,res)=> {
   })
   */
   
-routerOrg.get('/organizacion/:id', async (req,res)=>{
+routerOrg.get('/organizacion/:id',jwtMiddleware, async (req,res)=>{
     const id = req.params.id
     try{
     const organizacion = await Organizacion.findById(id) /* no tiene sentido al cambiar el schema de usuario.populate({
@@ -94,31 +95,31 @@ routerOrg.get('/organizacion/:id', async (req,res)=>{
     if (organizacion){
         res.status(200).json(organizacion)
     }else{
-        res.status(404).send('No existe este usuario')
+        res.status(404).send('No existe esta organización')
     }}catch(error){
         res.status(500).json(error)
     }
 });
 
   //Para obtener los usuarios de una organización sin devolver la contraseña
-routerOrg.get('/organizacionUsers/:id', async (req,res)=>{
+routerOrg.get('/organizacionUsers/:id',jwtMiddleware, async (req,res)=>{
   const idOrg = req.params.id
 
   try{
   const organizacion = await Organizacion.findById(idOrg).populate('user')
 
-    console.log('organizacion', organizacion)
+    //console.log('organizacion', organizacion)
 
     const usersNoPassword = organizacion.user
 
 
-    console.log('users', usersNoPassword)
+    //console.log('users', usersNoPassword)
     
     //método para devolver las keys que queramos cuando los objetos están anidados en un array
     const users = usersNoPassword.map(({_id, name, userName, email, lastName}) => ({_id, name,userName, email, lastName}));
     
     
-    console.log('cleanUsers', users)
+    //console.log('cleanUsers', users)
 
   if (organizacion){
       res.status(200).json(users)
@@ -130,7 +131,7 @@ routerOrg.get('/organizacionUsers/:id', async (req,res)=>{
 });
 
 
-routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
+routerOrg.patch('/organizacion/:id',validateOrgName,jwtMiddleware, async(req,res)=>{
     try{
         const organizacionModified = await Organizacion.findByIdAndUpdate(req.params.id, req.body);
         if(organizacionModified){
@@ -143,7 +144,7 @@ routerOrg.patch('/organizacion/:id',validateOrgName, async(req,res)=>{
     }
 });
 
-routerOrg.delete('/organizacion/:id', async(req,res)=>{
+routerOrg.delete('/organizacion/:id',jwtMiddleware,globalAdminPermissionMiddleware, async(req,res)=>{
   const id = req.params.id;
 
   try {

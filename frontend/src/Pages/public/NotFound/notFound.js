@@ -6,7 +6,7 @@ const NotFound = () => {
         <>
         
             <div className={styles.card}>
-                <img src={notFound} alt="" /><br/>
+                <img src={notFound} /><br/>
                 <h3>Ups!! algo ha fallado.</h3>
             </div>
         </>

@@ -30,7 +30,7 @@
     
 }
 
-.title span{
+.title .span{
     color:#E65262;  
 }
 
@@ -156,7 +156,7 @@
 
 @media screen and (max-width:1490px){
     .card{
-     
+    
         width: 40vw;
     }
 

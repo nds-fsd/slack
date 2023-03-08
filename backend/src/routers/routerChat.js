@@ -1,6 +1,7 @@
 import express from "express";
 import Chat from "../Schemas/chat.js";
 import User from "../Schemas/user.js";
+import Message from "../Schemas/message.js";
 const routerChat = express.Router();
 import { jwtMiddleware } from "../Middlewares/jwtMiddleware.js";
 
@@ -133,8 +134,15 @@ routerChat.patch("/addUserChat/:idChat", jwtMiddleware, async (req, res) => {
 routerChat.delete("/deleteChat/:idChat", jwtMiddleware, async (req, res) => {
   const idChat = req.params.idChat;
 
+
   try {
+    
+    //Para borrar los mensajes que están asociados a los chats
+    const messageDeletes = await Message.deleteMany({chat:idChat})
+
     const chatDelete = await Chat.findByIdAndDelete(idChat);
+
+    //const messagesDelete = await Message.deleteMany({chat:idChat})
     res.status(204).json("Chat eliminado");
   } catch (error) {
     res.status(500).json(error);

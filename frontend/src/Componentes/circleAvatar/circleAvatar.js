@@ -2,16 +2,18 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSkuadLackContext } from "../../contexts/skuadLack-context"
+import styles from './circleAvatar.module.css'
 
-function CircleAvatar({ name, color, size, id }) {
+function CircleAvatar({ name, color, size, id, path }) {
   // Extraer las dos primeras letras del nombre
 
-  const {setChatId } = useSkuadLackContext()
+  const {setChatId, setIdOrganizacionActual } = useSkuadLackContext()
 
   const initials = name
     .split(' ')
     .map(word => word[0])
     .join('')
+    .slice(0,2)
     .toUpperCase();
 
   // Estilos CSS para el círculo
@@ -32,7 +34,7 @@ function CircleAvatar({ name, color, size, id }) {
 
   return (
   
-  <Button as={Link} to={`/skuadlack/${id}`} style={circleStyle}>{initials}</Button>
+  <Button onClick= {()=>setIdOrganizacionActual(id)} as={Link} to={path + id} className ={styles.circleOrg} style={circleStyle}>{initials}</Button>
   )
 }
 

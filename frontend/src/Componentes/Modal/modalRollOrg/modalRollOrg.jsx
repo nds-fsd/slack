@@ -34,17 +34,17 @@ const ModalRollOrg = (props) => {
 
             <Modal className={styles.modal} show={show} onHide={handleClose}>
                 <div className={styles.container}>
-                <Modal.Header  >
-                    <Modal.Title>Únete a una organización</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Pega el código en el siguiente apartado</Modal.Body>
-                <input className={styles.inputId} onChange={(e) => setIdOrg(e.target.value)}></input>
-                
-                <div className={styles.footer}>
-                    <Button variant="secondary" onClick={makePost}>
-                        Unirme
-                    </Button>
-                </div>
+                    <Modal.Header  >
+                        <Modal.Title>Únete a una organización</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Pega el código en el siguiente apartado</Modal.Body>
+                    <input className={styles.inputId} onChange={(e) => setIdOrg(e.target.value)}></input>
+
+                    <div className={styles.footer}>
+                        <Button variant="secondary" onClick={makePost}>
+                            Unirme
+                        </Button>
+                    </div>
                 </div>
             </Modal>
         </>

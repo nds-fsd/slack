@@ -8,7 +8,7 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
 
   const idUser = req.jwtPayload.id;           //recogemos del payload del token el id y lo guardamos en una variable
   if (!req.body.text) return res.status(404).json({ message: "No hay mensaje" })
-  if (!req.body.chat) return res.status(404).json({ message: "No hay chat" });
+  
 
   const newMessage = new Messages({
     ...req.body,
@@ -17,8 +17,9 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   });
 
   const messageCreate = await newMessage.save();
-  console.log('emiting message to',req.body.chat)
-  io.to(req.body.chat).emit("message", messageCreate);
+  // console.log('emiting message to',req.body.chat? req.body.chat : req.body.channel)
+  io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);
+  //io.to(req.body.chat).emit('notification',messageCreate)
   return res.status(201).json(messageCreate)
 
 });
