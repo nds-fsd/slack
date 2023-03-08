@@ -46,8 +46,13 @@ const ChatPage = () => {
     myUserName,
     organizacionActual,
     channels,
-    userOfOrganizacionActual
+    userOfOrganizacionActual,
+    chatIds,
+    
   } = useSkuadLackContext();
+
+  console.log('chatIds', chatIds)
+  console.log('chatIds', channels)
 
   const setTimerNewMessage = (data) => {
     //objetivo: No quiero ver la notificación si ya estoy en el chat que se emite el mensaje
