@@ -48,41 +48,42 @@ export const BarraNav = () => {
                     <p>Home Page</p>
                   </Nav.Link>
                 )}
-                <NavDropdown
-                  title="About Us"
-                  id={`offcanvasNavbarDropdown-expand-md`}
-                >
-                  <NavDropdown.Item href="#action4">
-                    <Nav.Link
-                      className="dropdownlinks"
-                      as={Link}
-                      to="/infoSlack"
-                    >
-                      Que es SkuadLack?
-                    </Nav.Link>
-                  </NavDropdown.Item>
+                {!getUserToken()  &&
+                  <NavDropdown
+                    title="About Us"
+                    id={`offcanvasNavbarDropdown-expand-md`}
+                  >
+                    <NavDropdown.Item href="#action4">
+                      <Nav.Link
+                        className="dropdownlinks"
+                        as={Link}
+                        to="/infoSlack"
+                      >
+                        Que es SkuadLack?
+                      </Nav.Link>
+                    </NavDropdown.Item>
 
-                  <NavDropdown.Item href="#action2">
-                    <Nav.Link
-                      className="dropdownlinks"
-                      as={Link}
-                      to="/organizacion"
-                    >
-                      Crear Organizacion
-                    </Nav.Link>
-                  </NavDropdown.Item>
+                    <NavDropdown.Item href="#action2">
+                      <Nav.Link
+                        className="dropdownlinks"
+                        as={Link}
+                        to="/organizacion"
+                      >
+                        Crear Organizacion
+                      </Nav.Link>
+                    </NavDropdown.Item>
 
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    <Nav.Link
-                      className="dropdownlinks"
-                      as={Link}
-                      to="/contactUs"
-                    >
-                      Contact Us!
-                    </Nav.Link>
-                  </NavDropdown.Item>
-                </NavDropdown>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action5">
+                      <Nav.Link
+                        className="dropdownlinks"
+                        as={Link}
+                        to="/contactUs"
+                      >
+                        Contact Us!
+                      </Nav.Link>
+                    </NavDropdown.Item>
+                  </NavDropdown>}
 
                 {!getUserToken() && (
                   <>
@@ -100,33 +101,65 @@ export const BarraNav = () => {
                 )}
 
                 {getUserToken() && (
-                  <>{!hasPermission('GLOBAL_ADMIN') &&
-                    <Nav.Link as={Link} to={`/LUP/${getUserSession().id}`}>
-                      <Button variant="dark">Dashboard</Button>
-                    </Nav.Link>}
-                    {hasPermission('GLOBAL_ADMIN') &&
-                      <Nav.Link as={Link} to="/users">
-                        <Button variant="warning">Admin Mode</Button>
-                      </Nav.Link>}
+                  <>
 
-                    <Nav.Link>
-                      <Button
-                        variant="danger"
-                        onClick={() => {
-                          removeSession();
-                          navigate("/");
-                        }}
+                    {hasPermission('GLOBAL_ADMIN') &&
+                      <NavDropdown
+                        title="Admin Mode"
+                        id={`offcanvasNavbarDropdown-expand-md`}
                       >
-                        Logout <MdOutlineLogout className="a" />
-                      </Button>
-                    </Nav.Link>
+                        <NavDropdown.Item >
+                          <Nav.Link className="dropdownlinks" as={Link} to="/users">
+                            Users
+                          </Nav.Link>
+                        </NavDropdown.Item>
+
+                        <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to="/organizations">
+                            Organizations
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to="/channels">
+                            Channels
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                      </NavDropdown>}
+
                     <CircleAvatarPerfil
                       name={getUserSession().userName}
                       id={getUserSession().id}
                       size={40}
                       color={stringToColour(getUserSession().name)}></CircleAvatarPerfil>
+                    <NavDropdown align={{ lg: 'end' }} id={`offcanvasNavbarDropdown-expand-md`} >
+                    {!hasPermission('GLOBAL_ADMIN') &&
+                    <NavDropdown.Item>
+                    <Nav.Link className="dropdownlinks"  as={Link} to={`/LUP/${getUserSession().id}`}>
+                      Dashboard
+                    </Nav.Link>
+                    </NavDropdown.Item>}
+                      <NavDropdown.Item>
+                        <Nav.Link className="dropdownlinks" >
+                          <div
+                            variant="danger"
+                            onClick={() => {
+                              removeSession();
+                              navigate("/");
+                            }}
+                          >
+                            Logout <MdOutlineLogout className="a" />
+                          </div>
+                        </Nav.Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
+                          <Nav.Link className="dropdownlinks" as={Link} to={`/user/${getUserSession().id}`}>
+                            {getUserSession().userName}
+                          </Nav.Link>
+                        </NavDropdown.Item>
+                    </NavDropdown>
 
-                    </>
+                  </>
                 )}
               </Nav>
             </Offcanvas.Body>
@@ -169,6 +202,10 @@ const NavBarStyle = styled.div`
   }
   #offcanvasNavbarDropdown-expand-md {
     padding-top: 0.9rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  #offcanvasNavbarDropdown-expand-md:hover{
+    transform: scale(1.1);
   }
   .offcanvas-body {
     margin-top: 0.3rem;
@@ -177,4 +214,5 @@ const NavBarStyle = styled.div`
     color: #686461;
     font-weight: bolder;
   }
+
 `;
