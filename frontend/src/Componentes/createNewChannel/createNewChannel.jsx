@@ -79,8 +79,8 @@ const CreateNewChannel = (props) => {
             <Modal.Title>select a channel name and user/s</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
-                <input onChange={(e)=>setNameChannel(e.target.value)}/>
+            <Form onSubmit={()=>handleOnClick(checkedState)}>
+                <input  onChange={(e)=>setNameChannel(e.target.value)}/>
               {userOfOrganizacionActual &&
                 usersOrganizationWithoutMe.map((e) => {
                   //un array con objetos con las keys de cada user (userName, name, email...), la recorro para obtener los userName y pintarlos en un checkbox
