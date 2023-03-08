@@ -65,7 +65,7 @@ const AboutUs = () => {
                 <figcaption>
                 <p>Germán Cachafeiro<br/> Bamonde <br />
                   alias <span className={styles.span}>Yermany</span><br />
-                  <a href="https://www.linkedin.com/in/germ%C3%A1n-cachafeiro-bamonde/" target='_blank'>LinkedIn</a> <br/>
+                  <a href="https://www.linkedin.com/in/gercaba/" target='_blank'>LinkedIn</a> <br/>
                   <a href="https://github.com/gercaba" target='_blank'>GitHub</a>
                   </p>
                 </figcaption>
