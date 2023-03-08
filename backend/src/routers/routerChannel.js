@@ -47,7 +47,7 @@ routerChannel.post("/createChannelById", jwtMiddleware, async (req, res) => {
 
 routerChannel.get("/allChannels", jwtMiddleware, async (req, res) => {
     try {
-        const allChannels = await Channel.find().populate('user');
+        const allChannels = await Channel.find().populate('organizacion').populate('user');
         res.status(200).json(allChannels);
     } catch (error) {
         res.status(500).json(error);
