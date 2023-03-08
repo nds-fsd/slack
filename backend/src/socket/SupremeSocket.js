@@ -36,7 +36,7 @@ export const SupremeSocket = (server) => {
     //Para emitir a todos menos al que envío el socket
     socket.on("notification", (data) => {
       console.log(data);
-      socket.to(data.body.chat? data.body.chat : data.body.channel).emit("reply2", data);
+      socket.broadcast.emit("reply2", data);
     });
 
   });
