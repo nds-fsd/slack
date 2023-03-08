@@ -48,8 +48,6 @@ const CreateOrganization = () => {
         fetchSupreme("/userToOrganizacion","POST", body,true,null)
         .then((res) => {
 
-            console.log('Response',res)
-            console.log('getUserSession',getUserSession().id)
 
             navigate(`/LUP/${getUserSession().id}`)
             //aqui entiendo que cuando se cree el homepage de user habra que

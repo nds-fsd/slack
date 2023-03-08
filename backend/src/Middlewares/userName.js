@@ -1,7 +1,6 @@
 import express from "express";
 
 const validateUserName = (req, res, next) => {
-    console.log('Request Type:', req.method);
     const user = req.body;
     
     if (user.name === undefined || user.name.length === 0) {
