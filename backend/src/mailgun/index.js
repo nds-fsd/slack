@@ -21,8 +21,7 @@ const data = {
       })
 };
 mg.messages().send(data, function (error, body) {
-	console.log('error mailgun',error)
-  console.log('body mailgun',body)
+
 });
 }; 
 
