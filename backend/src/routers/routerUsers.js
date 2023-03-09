@@ -204,7 +204,10 @@ routerUsers.post('/login', async (req, res) => {
 })
 
 routerUsers.patch('/user/:id', validateUserName, jwtMiddleware, async (req, res) => {
+
     try {
+        const userNameExist = await User.findOne({ userName: req.body.userName })
+        if (userNameExist) return res.status(400).json({ userName: "El nombre de usuario ya existe" }) // Comprobar que el userName no existe
         const userModified = await User.findByIdAndUpdate(req.params.id, req.body);
         if (userModified) {
             res.status(200).json(userModified)

@@ -16,6 +16,7 @@ const EditUser = (props) => {
     setValue,
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
   const [triger, setTriger] = useState(null);
@@ -52,8 +53,15 @@ const EditUser = (props) => {
         if (hasPermission('USER')) {
           setTriger(!triger)
         };
+
       }
-    );
+
+    )
+      .catch((error) => {
+        Object.keys(error).forEach((key) => {
+          setError(key, { type: "backend", message: error[key] })
+        })
+      })
   };
   const deleteUser = () => {
     fetchSupreme(`/user/${params.id}`, "DELETE", undefined, true).then(
@@ -96,7 +104,7 @@ const EditUser = (props) => {
           "Tu nombre de usuario debe tener mínimo 5 carácteres"}
         {errors.userName?.type === "maxLength" &&
           "Tu nombre de usuario debe tener máximo 20 carácteres"}
-
+        {errors.userName?.type === "backend" && errors.userName.message + ' ❗❗'}
         <h3>E-mail</h3>
         <input
           placeholder="Nuevo email."
