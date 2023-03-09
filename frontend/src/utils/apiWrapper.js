@@ -49,12 +49,7 @@ const fetchSupreme = (path, method = 'GET', body, isToken, query) => {
       }
       return parsedResponse;
     })
-    .catch((error) => {
-   
 
-      return error
-     
-    });
 };
 
 export default fetchSupreme;
