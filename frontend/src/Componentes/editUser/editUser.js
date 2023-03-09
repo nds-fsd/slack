@@ -22,8 +22,6 @@ const EditUser = (props) => {
   const userToEdit = props.userId;
 
   useEffect(() => {
-    //const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app": "http://localhost:3001";
-
     fetchSupreme(
       `/user/${userToEdit ? userToEdit : params.id}`,
       "GET",
@@ -31,21 +29,6 @@ const EditUser = (props) => {
       true,
       undefined
     )
-      /*
-        fetch(`${URL_API}/user/` + (userToEdit ? userToEdit : params.id),     
-        {
-            headers:{
-                authorization:`Bearer ${getUserToken()}`
-            }
-        }) //REVISAR QUE FUNCIONA LA EDICIÓN
-   
-
-            .then((res) => {
-                return res.json();
-        
-            })
-    */
-
       .then((res) => {
         setUser(res);
 
@@ -57,17 +40,8 @@ const EditUser = (props) => {
   }, [triger, userToEdit]);
 
   const onDataSubmit2 = (data) => {
-    //patchToMongo(`user/${user._id}`, data)
     fetchSupreme(`/user/${user._id}`, "PATCH", data, true, undefined).then(
       (dataServer) => {
-        // navigate(`/user/${dataServer._id}`)
-        //setTriger(!triger)
-        //(!userToEdit && navigate(`../LUP/${dataServer._id}`));
-
-        //No nos funciona la binaria, no entendemos por qué
-        //(userToEdit &&  props.setOpenModal(false))
-        //(userToEdit ? (props.setRefresh(true) &&  props.setOpenModal(false) ): navigate(`../LUP/${dataServer._id}`));
-
         if (userToEdit) {
           props.setRefresh(true);
           props.setOpenModal(false);
@@ -78,9 +52,6 @@ const EditUser = (props) => {
         if (hasPermission('USER')) {
           setTriger(!triger)
         };
-
-        //(userToEdit && props.setRefresh(true));
-        //(userToEdit && props.setOpenModal(false));
       }
     );
   };
@@ -89,7 +60,7 @@ const EditUser = (props) => {
       () => {
         if (hasPermission('USER')) {
           removeSession();
-          navigate('/')     
+          navigate('/')
         }
         if (hasPermission('GLOBAL_ADMIN')) {
           navigate('/users')
