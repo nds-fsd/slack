@@ -79,7 +79,10 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 	<pre><code>npm start</code></pre>
 	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li>
 </ol>
+
+
 <h1>Explicación del componente CloudinaryUpload</h1>
+
 <p>Este código es para un componente React que permite cargar imágenes en Cloudinary. La idea principal es que el usuario seleccione una o varias imágenes para cargarlas a través de la API de Cloudinary. Después de cargar las imágenes, se muestran en una lista y se pueden eliminar individualmente</p>
 <h2>El componente utiliza los siguientes elementos de React:</h2>
 <lu>
@@ -94,6 +97,19 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 	<li>La función <b>handleImageRemove</b> se ejecuta cuando el usuario elimina una imagen de la lista de imágenes cargadas. La función actualiza los estados images y previewImages con las nuevas listas de imágenes cargadas y previsualizadas</li>
 </lu>
 <h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/frontend/src/Componentes/CloudinaryUpload/CloudinaryUpload.js</h4>
+
+
+<h1>Explicación del componente SupremeSocket</h1>
+
+<p>El componente <b>SupremeSocket</b> es una función que crea un servidor de sockets utilizando la biblioteca <b>socket.io</b>. Este servidor de sockets maneja eventos de conexión y desconexión de sockets, y también incluye lógica para la autenticación de usuarios utilizando tokens JWT.</p>
+
+<p>El servidor de sockets se configura con opciones CORS. Además, el servidor de sockets utiliza un middleware para <b>verificar la autenticación</b> de los usuarios que intentan conectarse <b>mediante el token JWT</b> proporcionado en el objeto <b>handshake.auth</b> del socket.</p>
+
+<p>Una vez que un usuario se conecta con éxito al servidor de sockets, se unirá automáticamente a su propia sala utilizando su ID de usuario, y podrá unirse a otras salas de chat utilizando el evento <b>join-room.</b> Además, el servidor de sockets maneja el evento notification para enviar notificaciones a todos los sockets, excepto al que envió la notificación.
+
+<h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/backend/src/socket/SupremeSocket.js</h4>
+
+
 
 <h1>Fundadores y principales accionistas</h1>
 <lu>
