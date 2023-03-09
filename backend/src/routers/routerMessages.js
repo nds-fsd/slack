@@ -24,6 +24,7 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);  
   const chatOrChannel = req.body.chat ? await Chat.findById(req.body.chat).populate("organizacion").populate("user").exec() : await Channel.findById(req.body.channel).populate("organizacion").populate("user").exec();
   const userReceived = chatOrChannel.user.map((e)=> e.id)
+  console.log('usertoReceived',chatOrChannel)
   io.to(userReceived).emit("reply2", {
     
       organizacion: chatOrChannel.organizacion.OrgName,
