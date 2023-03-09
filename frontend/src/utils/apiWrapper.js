@@ -37,7 +37,9 @@ const fetchSupreme = (path, method = 'GET', body, isToken, query) => {
   return fetch(URL, options)
     .then((responseObject) => {
       response = responseObject;
-
+      if(responseObject.status === 204){
+        return response
+      }
       if (responseObject.status === 401) {
         return { authError: true };
       }

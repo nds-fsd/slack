@@ -53,7 +53,6 @@ const CreateNewChatWithUsers = (props) => {
     fetchSupreme("/createChatById", "POST", body, true, undefined).then(
       (res) => {
         setRefreshContext(!refreshContext);
-        console.log(res);
         handleClose();
         setRefreshContext(!refreshContext)
         

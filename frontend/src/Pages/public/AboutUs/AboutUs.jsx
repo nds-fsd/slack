@@ -77,7 +77,7 @@ const AboutUs = () => {
                 <figcaption>
                 <p>Norma Boix<br />
                   alias <span className={styles.span}>Normi</span><br />
-                  <a href="https://www.linkedin.com" target='_blank'>LinkedIn</a> <br/>
+                  <a href="https://www.linkedin.com/in/normaboix/" target='_blank'>LinkedIn</a> <br/>
                   <a href="https://github.com" target='_blank'>GitHub</a>
                   </p>
                 </figcaption>

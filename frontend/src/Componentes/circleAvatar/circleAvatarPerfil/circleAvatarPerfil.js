@@ -31,7 +31,7 @@ function CircleAvatarPerfil({ name, color, size, id,}) {
 
   return (
   
-  <Button as={Link} to={`user/${id}`} className={styles.button} style={circleStyle}>{initials}</Button>
+  <Button as={Link} to={`LUP/${id}`} className={styles.button} style={circleStyle}>{initials}</Button>
   )
 }
 

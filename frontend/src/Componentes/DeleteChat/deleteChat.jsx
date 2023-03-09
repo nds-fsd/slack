@@ -27,7 +27,6 @@ const DeleteChat = (props) => {
       ).then((res) => {
         setRefreshContext(!refreshContext);
         setShow(false);
-        console.log("delete refresh", refreshContext);
       });
   };
 
