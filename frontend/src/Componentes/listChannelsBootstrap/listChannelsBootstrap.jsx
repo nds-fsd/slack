@@ -9,10 +9,6 @@ import fetchSupreme from "../../utils/apiWrapper";
 const ListChannelsBootstrap = () => {
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(true);
-    const getViewDate = (data) => {
-        data = new Date();
-        return data.toLocaleDateString()
-    }
 
     const deleteChannel = (data) => {
         fetchSupreme(`/deleteChannel/${data._id}`, 'DELETE', undefined, true, undefined)
@@ -57,7 +53,7 @@ const ListChannelsBootstrap = () => {
                                 <td> {data.organizacion.OrgName}</td>
                                 <td> {data.name}</td>
                                 <td> {data.user.map((e) => e.userName).join(" | ")}</td>
-                                <td> {getViewDate(data.createdAt)}</td>
+                                <td> {new Date(data.createdAt).toLocaleDateString()}</td>
                                 <td className={styles.botones}><Button id={styles.botonEliminar} variant="danger" onClick={() => deleteChannel(data)} className={styles.butEliminar}>Eliminar</Button></td>
                             </tr>
                         ))}
