@@ -1,6 +1,5 @@
 <h1>El origen</h1>
 
-
 Skuadlack es una aplicación web de chat en tiempo real desarrollada durante el BootCamp en Nuclio Digital School en el 2022-2023 por parte de alumnos que iniciaron el máster con cero o escasos conocimientos a nivel de programación. 
 
 <h1>Core Business </h1>
@@ -105,6 +104,7 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 <li>Germán Cachafeiro Bamonde</li>
 
 </lu>
+
 
 <h2>Contacto</h2>
 Si tienes alguna pregunta o sugerencia sobre Skuadlack, por favor contáctanos a través de <b>skuadlack@gmail.com</b>
