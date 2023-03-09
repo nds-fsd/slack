@@ -51,8 +51,8 @@ const ChatPage = () => {
     
   } = useSkuadLackContext();
 
-  console.log('chatIds', chatIds)
-  console.log('chatIds', channels)
+  // console.log('chatIds', chatIds)
+  // console.log('chatIds', channels)
 
   const setTimerNewMessage = (data) => {
     //objetivo: No quiero ver la notificación si ya estoy en el chat que se emite el mensaje
@@ -75,8 +75,6 @@ const ChatPage = () => {
   const handleSendMessage = (evt) => {
     if (evt.keyCode === 13 && !evt.shiftKey) {
       evt.preventDefault();
-      //socket.emit('notification',{chat:currentChat._id, user:myUserName})
-      //console.log('paso por emit de notification')  //AQUIIII
 
       if (currentChat.name) {
         fetchSupreme("/message", "POST", {
@@ -104,15 +102,6 @@ const ChatPage = () => {
       ;
       sendImages()
       const chatName = currentChat.name ? currentChat.name : currentChat
-      socket.emit('notification', {
-        organizacion: organizacionActual.OrgName,
-        idOrganizacion: idOrganizacionActual,
-        chat: currentChat,
-        text: messageBody,
-        name: user.name,
-        userName: myUserName,
-        idUser: idUser
-      })
     }
   };
 

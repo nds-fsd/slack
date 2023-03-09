@@ -4,7 +4,7 @@ import Nico from '../../../Assets/Nico.jpg';
 import Dani from '../../../Assets/daninueva.jfif';
 import Jorge from '../../../Assets/Jorge.jpeg';
 import German from '../../../Assets/german1.jpeg';
-import Norma from '../../../Assets/Norma.png';
+import Norma from '../../../Assets/Norma.jpeg';
 
 const AboutUs = () => {
   return (
