@@ -21,7 +21,6 @@ const Register = () => {
             navigate(`/LUP/${res.user.id}`)
         })
         .catch((error)=>{
-            console.log('error', error)
             Object.keys(error).forEach((key)=>{
                 setError(key, {type: "backend", message: error[key]})
             })
