@@ -132,12 +132,12 @@ routerUsers.post('/register', validateUserName, async (req, res) => {
     try {
 
         const emailExist = await User.findOne({ email: req.body.email })
-        const userNameExist = await User.findOne({ email: req.body.userName })
+        const userNameExist = await User.findOne({ userName: req.body.userName })
 
-        if (!req.body.email) return res.status(404).json({ message: "No hay email" }) // Validar que viene un mail en el body
+        if (!req.body.email) return res.status(404).json({ email: "No hay email" }) // Validar que viene un mail en el body
 
-        if (emailExist) return res.status(400).json({ message: "El email ya existe" }) // Comprobar que el mail no existe
-        if (userNameExist) return res.status(400).json({ message: "El nombre de usuario ya existe" }) // Comprobar que el userName no existe
+        if (emailExist) return res.status(400).json({ email: "El email ya existe" }) // Comprobar que el mail no existe
+        if (userNameExist) return res.status(400).json({ userName: "El nombre de usuario ya existe" }) // Comprobar que el userName no existe
 
         const user = new User(req.body)
 
