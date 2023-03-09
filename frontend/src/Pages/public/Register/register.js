@@ -9,28 +9,24 @@ import { setUserSession } from "../../../utils/localStorageUtils";
 const Register = () => {
     const [show, setShow] = useState(false)
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit,setError, formState: { errors } } = useForm()
     const switchShow = () => setShow(!show);
     const onDataSubmit2 = (data) => {
 
         fetchSupreme("/register","POST",data,false,null)
         
         .then((res) => {
+
             setUserSession(res)
             navigate(`/LUP/${res.user.id}`)
         })
-}
-
-/*
-        postToMongo("register", data)
-            .then((dataServer) => {
-                const user = dataServer.user
-                // console.log("soy token", user.userToken)
-                setUserSession(dataServer)
-                alert(`el usuario ${user.name} ha sido creado.`)
-                navigate(`/LUP/${user.id}`)
+        .catch((error)=>{
+            console.log('error', error)
+            Object.keys(error).forEach((key)=>{
+                setError(key, {type: "backend", message: error[key]})
             })
-*/
+        })
+}
     
     return (
         <div className={styles.contenedor}>
@@ -44,10 +40,14 @@ const Register = () => {
                 {errors.userName?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.userName?.type === "minLength" && "Tu nombre de usuario debe tener mínimo 2 carácteres"}
                 {errors.userName?.type === "maxLength" && "Tu nombre de usuario debe tener máximo 20 carácteres"}
+                {errors.userName?.type === "backend" && errors.userName.message + ' ❗❗'}
+
                 <h3>Email</h3>
                 <input placeholder='email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} />
                 {errors.email?.type === "required" && <span>❌campo obligatorio❗❗</span>}
                 {errors.email?.type === "pattern" && "Comprueba que sea una direccion de mail válida"}
+                {errors.email?.type === "backend" && errors.email.message + ' ❗❗'}
+
                 <h3>Nombre</h3>
                 <input placeholder='Nombre' {...register("name", { required: true, minLength: 3, maxLength: 20 })} />
                 {errors.name?.type === "required" && <span>❌campo obligatorio❗❗</span>}
