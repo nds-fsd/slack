@@ -21,14 +21,11 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
   });
 
   const messageCreate = await newMessage.save();
-  // console.log('emiting message to',req.body.chat? req.body.chat : req.body.channel)
-  io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);
+  io.to(req.body.chat? req.body.chat : req.body.channel).emit("reply", messageCreate);  
+  const chatOrChannel = req.body.chat ? await Chat.findById(req.body.chat).populate("organizacion").populate("user").exec() : await Channel.findById(req.body.channel).populate("organizacion").populate("user").exec();
+  const userReceived = chatOrChannel.user.map((e)=> e.userName)
 
-  console.log(messageCreate);
-  
-  const chatOrChannel = req.body.chat ? await Chat.findById(req.body.chat).populate("organizacion").exec() : await Channel.findById(req.body.channel).populate("organizacion").exec();
-  console.log("chat or channel", chatOrChannel);
-  io.to(chatOrChannel.user).emit("reply2", {
+  io.to(userReceived).emit("reply2", {
     
       organizacion: chatOrChannel.organizacion.OrgName,
       idOrganizacion: chatOrChannel.organizacion._id,
@@ -39,7 +36,6 @@ routerMessages.post('/message', jwtMiddleware, async (req, res) => {
       idUser: req.jwtPayload.id
     
   });
-  //io.to(req.body.chat).emit('notification',messageCreate)
   return res.status(201).json(messageCreate)
 
 });

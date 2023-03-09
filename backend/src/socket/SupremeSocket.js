@@ -29,18 +29,15 @@ export const SupremeSocket = (server) => {
 
     socket.emit("connected", "You are now connected");
 
-    socket.join(socket.user._id);
-
+    socket.join(socket.user.userName);
+      console.log(`${socket.user.name} joined en su propia sala ${socket.user.userName}`)
     socket.on("join-room", (chatId) => {
       socket.join(chatId);
       console.log(`User ${socket.user.name} has joined room ${chatId}`);
     });
 
     //Para emitir a todos menos al que envío el socket
-    socket.on("notification", (data) => {
-      console.log(data);
-      socket.broadcast.emit("reply2", data);
-    });
+
 
   });
 
