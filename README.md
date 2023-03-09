@@ -80,6 +80,21 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 	<pre><code>npm start</code></pre>
 	<li>Abre tu navegador web y navega a <code>http://localhost:3000</code> para ver la aplicación.</li>
 </ol>
+<h1>Explicación del componente CloudinaryUpload</h1>
+<p>Este código es para un componente React que permite cargar imágenes en Cloudinary. La idea principal es que el usuario seleccione una o varias imágenes para cargarlas a través de la API de Cloudinary. Después de cargar las imágenes, se muestran en una lista y se pueden eliminar individualmente</p>
+<h2>El componente utiliza los siguientes elementos de React:</h2>
+<lu>
+<li>useEffect: para controlar el estado del componente cuando el usuario cierra la ventana de carga de imágenes.</li>
+<li>useState: para definir los estados del componente: images para almacenar las imágenes cargadas en Cloudinary y previewImages para almacenar las imágenes previsualizadas antes de cargarlas</li>
+<li>CloudinaryContext: para configurar la conexión con la API de Cloudinary</li>
+<li>Button, OverlayTrigger, Tooltip: para mostrar un botón que permite al usuario cargar las imágenes y un mensaje de ayuda cuando el usuario pasa el cursor sobre el botón.</li>
+</lu>
+<h2>Funciones</h2>
+<lu>
+	<li>La función <b>handleImageUpload</b> se ejecuta cuando el usuario carga una imagen. La función utiliza fetch para hacer una solicitud POST a la API de Cloudinary con la imagen cargada. La respuesta JSON de Cloudinary contiene la URL segura de la imagen cargada. La función agrega la URL a los estados images y uploadedImages, y crea una URL local para la previsualización de la imagen cargada.</li>
+	<li>La función <b>handleImageRemove</b> se ejecuta cuando el usuario elimina una imagen de la lista de imágenes cargadas. La función actualiza los estados images y previewImages con las nuevas listas de imágenes cargadas y previsualizadas</li>
+</lu>
+<h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/frontend/src/Componentes/CloudinaryUpload/CloudinaryUpload.js</h4>
 
 <h1>Fundadores y principales accionistas</h1>
 <lu>
