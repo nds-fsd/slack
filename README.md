@@ -104,8 +104,10 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 <p>El componente <b>SupremeSocket</b> es una función que crea un servidor de sockets utilizando la biblioteca <b>socket.io</b>. Este servidor de sockets maneja eventos de conexión y desconexión de sockets, y también incluye lógica para la autenticación de usuarios utilizando tokens JWT.</p>
 
 <p>El servidor de sockets se configura con opciones CORS. Además, el servidor de sockets utiliza un middleware para <b>verificar la autenticación</b> de los usuarios que intentan conectarse <b>mediante el token JWT</b> proporcionado en el objeto <b>handshake.auth</b> del socket.</p>
+<img src='./frontend/src/Assets/soket1.png' alt="socket"/>
 
 <p>Una vez que un usuario se conecta con éxito al servidor de sockets, se unirá automáticamente a su propia sala utilizando su ID de usuario, y podrá unirse a otras salas de chat utilizando el evento <b>join-room.</b> Además, el servidor de sockets maneja el evento notification para enviar notificaciones a todos los sockets, excepto al que envió la notificación.
+<img src='./frontend/src/Assets/soket2.png' alt="socket2"/>
 
 <h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/backend/src/socket/SupremeSocket.js</h4>
 
