@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const sendMailWelcome = (user,email) =>{
+export const sendMailWelcome = (user,email)=>{
 const api_key= process.env.MAILGUN_KEY;
 const DOMAIN = 'sandbox6f777db466114c708700235bbf225112.mailgun.org';
 const mg = mailgun({apiKey: api_key, domain: DOMAIN});
