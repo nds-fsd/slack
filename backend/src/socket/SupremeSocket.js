@@ -29,8 +29,8 @@ export const SupremeSocket = (server) => {
 
     socket.emit("connected", "You are now connected");
 
-    socket.join(socket.user.userName);
-      console.log(`${socket.user.name} joined en su propia sala ${socket.user.userName}`)
+    socket.join(socket.user.id);
+      console.log(`${socket.user.name} joined en su propia sala ${socket.user.id}`)
     socket.on("join-room", (chatId) => {
       socket.join(chatId);
       console.log(`User ${socket.user.name} has joined room ${chatId}`);
