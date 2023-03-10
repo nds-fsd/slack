@@ -101,12 +101,18 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 
 <h1>Explicación del componente SupremeSocket</h1>
 
-<p>El componente <b>SupremeSocket</b> es una función que crea un servidor de sockets utilizando la biblioteca <b>socket.io</b>. Este servidor de sockets maneja eventos de conexión y desconexión de sockets, y también incluye lógica para la autenticación de usuarios utilizando <b>tokens JWT.</b></p>
+<p>El componente <b>SupremeSocket</b> es una función que crea un servidor de sockets utilizando la biblioteca <b>socket.io</b>. Este servidor maneja diferentes eventos como conexión y desconexión de sockets</p>
 
-<p>El servidor de sockets se configura con opciones <b>CORS</b>. Además, el servidor de sockets utiliza un <b>middleware para verificar la autenticación</b> de los usuarios que intentan conectarse <b>mediante el token JWT</b> proporcionado en el objeto <b>handshake.auth</b> del socket. Si el <b>usuario está autenticado, se agrega una propiedad 'user' al objeto socket</b> que contiene información del usuario.</p>
+<p>Se configura con opciones <b>CORS</b>. Además, el servidor de sockets utiliza un <b>middleware para verificar la autenticación</b> de los usuarios que intentan conectarse <b>mediante el token JWT</b> proporcionado en el objeto <b>handshake.auth</b> del socket. Si el <b>usuario está autenticado, se agrega una propiedad 'user' al objeto socket</b> que contiene información del usuario.</p>
+
 <img src='./frontend/src/Assets/soket1.png' alt="socket"/>
 
-<p>Cuando un cliente se conecta al servidor de sockets, se emite un mensaje <b>"connected"</b> al cliente que indica que está conectado. Luego, el cliente se une a su propia sala usando el ID del usuario, y se emite un mensaje <b>"join"</b> al servidor para que el cliente se una a una sala de chat específica cuando se envía el evento <b>"join-room"</b>. Finalmente, el código incluye un evento <b>'disconnect'</b> que se activa cuando el cliente se desconecta del servidor de sockets.</p>
+<p>Cuando un cliente se Logea en la aplicación adquiere una conexión socket y una sala propia <b>basada en su ID</b>. Al acceder a una organización se crea un evento <b>"join-room"</b>, en el cual el servidor utilizará la función <b>'join'</b> del socket, para crear una conexión con la sala (utilizando la ID de la misma), de esta manera <b>cualquier evento bajo esta ID<b> será bidireccional.
+
+
+	
+Finalmente, el código incluye un evento <b>'disconnect'</b> que se activa cuando el cliente se desconecta del servidor de sockets.</p>
+
 <img src='./frontend/src/Assets/soket2.png' alt="socket2"/>
 
 <h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/backend/src/socket/SupremeSocket.js</h4>
