@@ -63,3 +63,10 @@
     border: none;
     margin-left: 0.3rem;
 }
+.error{
+    color: white;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
+    text-align: center;
+
+}
