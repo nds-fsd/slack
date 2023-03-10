@@ -107,13 +107,13 @@ Para ejecutar Skuadlack en tu máquina local, debes tener instalado lo siguiente
 
 <img src='./frontend/src/Assets/soket1.png' alt="socket"/>
 
-<p>Cuando un cliente se Logea en la aplicación adquiere una conexión socket y una sala propia <b>basada en su ID</b>. Al acceder a una organización se crea un evento <b>"join-room"</b>, en el cual el servidor utilizará la función <b>'join'</b> del socket, para crear una conexión con la sala (utilizando la ID de la misma), de esta manera <b>cualquier evento bajo esta ID<b> será bidireccional.
+<p>Cuando un cliente se Logea en la aplicación adquiere una conexión socket y una sala propia <b>basada en su ID</b>. Al acceder a una organización se crea un evento <b>"join-room"</b>, en el cual el servidor utilizará la función <b>'join'</b> del socket, para crear una conexión con la sala (utilizando la ID de la misma), de esta manera <b>cualquier evento bajo esta ID</b> será bidireccional.
 
-
+<img src='./frontend/src/Assets/soket2.png' alt="socket2"/>
 	
 Finalmente, el código incluye un evento <b>'disconnect'</b> que se activa cuando el cliente se desconecta del servidor de sockets.</p>
 
-<img src='./frontend/src/Assets/soket2.png' alt="socket2"/>
+<img src='./frontend/src/Assets/socket3.png' alt="socket3"/>
 
 <h4>Link al componente: https://github.com/nds-fsd/slack/blob/main/backend/src/socket/SupremeSocket.js</h4>
 
