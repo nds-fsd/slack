@@ -32,9 +32,7 @@ const Login = () => {
         }
       }).catch((error) => {
         Object.keys(error).forEach((key) => {
-          setData(error)
-          console.log('soy el error',data)
-        })
+          setData(error)        })
       })
   };
 
@@ -54,14 +52,12 @@ const Login = () => {
       </div>
 
       <div className={styles.formulario}>
-        <label htmlFor="email">email</label>
         <input id="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-        {data && (<p className={styles.error}>{data.error.email}</p>)} 
-        <label htmlFor="password">password</label>
+        {data && data.error.email && (<p className={styles.error}>{data.error.email}</p>)}
         <div className={styles.password}>
           <input id="password" type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} placeholder="Password" />
           <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
-          {data && (<p className={styles.error}>{data.error.password}</p>)}
+          {data && data.error.password && (<p className={styles.error}>{data.error.password}</p>)}
         </div>
         <button type="submit" className={styles.botonLogin} onClick={() => sendLogin()}>Login</button>
       </div>
