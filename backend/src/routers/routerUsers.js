@@ -178,12 +178,12 @@ routerUsers.post('/login', async (req, res) => {
         .then((foundUser) => {
             // * Validate user email is already registered
             if (!foundUser) {
-                return res.status(400).json({ error: { email: "User not found, please Register" } })
+                return res.status(400).json({ error: { email: "El email no está registrado, por favor regístrese" } })
             }
             // * Validate password with bcrypt library
             if (!foundUser.comparePassword(password)) {
                 // if (foundUser.password !== password) {
-                return res.status(400).json({ error: { password: "Invalid Password" } })
+                return res.status(400).json({ error: { password: "La contraseña no es correcta" } })
             }
             // * if everything is ok, return the new token and user data
             sendMailWelcome(foundUser.name, foundUser.email)

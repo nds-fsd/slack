@@ -9,59 +9,42 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [show, setShow] = useState(false)
-
+  const [data, setData] = useState("")
   const switchShow = () => setShow(!show);
 
   const navigate = useNavigate()
   // fetch login
   const sendLogin = () => {
-    
-    const bodyLogin ={
+    const bodyLogin = {
       email,
       password
     }
-    
-    fetchSupreme('/login','POST',bodyLogin,false,undefined)
-    
-    /*
-    const URL_API = window.location.hostname === "https://skuadlack.netlify.app" ? "https://skuadlack.up.railway.app":"http://localhost:3001"
-    fetch(`${URL_API}/login`, {
-      method: 'POST',
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
-  
-      .then((response) => {
-        return response.json();
 
-      })
-       */
-       
+    fetchSupreme('/login', 'POST', bodyLogin, false, undefined)
       .then((res) => {
-
-        console.log('Response del Login',res)
-
         if (res.token) {
           setUserSession(res)
-         if(hasPermission('GLOBAL_ADMIN')){
-          navigate('/users')
-         }else{
-          navigate(`/LUP/${res.user.id}`)
-         }           
+          if (hasPermission('GLOBAL_ADMIN')) {
+            navigate('/users')
+          } else {
+            navigate(`/LUP/${res.user.id}`)
+          }
         }
+      }).catch((error) => {
+        Object.keys(error).forEach((key) => {
+          setData(error)
+          console.log('soy el error',data)
+        })
       })
   };
-    const handleKeyPress = (event) => {
-      if (event.key === 'Enter') {
-        sendLogin();
-      }
-    };
+
+
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      sendLogin();
+    }
+  };
 
   return (
     <div className={styles.contenedor}>
@@ -72,11 +55,13 @@ const Login = () => {
 
       <div className={styles.formulario}>
         <label htmlFor="email">email</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+        <input id="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+        {data && (<p className={styles.error}>{data.error.email}</p>)} 
         <label htmlFor="password">password</label>
         <div className={styles.password}>
-        <input type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} placeholder="Password" />
-        <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
+          <input id="password" type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleKeyPress} placeholder="Password" />
+          <button type="button" onClick={switchShow}>{show ? '🔒' : '👁️‍🗨️'}</button>
+          {data && (<p className={styles.error}>{data.error.password}</p>)}
         </div>
         <button type="submit" className={styles.botonLogin} onClick={() => sendLogin()}>Login</button>
       </div>
