@@ -12,15 +12,17 @@ import { getUserSession, getUserToken, removeSession } from "../../utils/localSt
 import { hasPermission } from "../../utils/rolePermissUtils.js";
 import CircleAvatarPerfil from "../circleAvatar/circleAvatarPerfil/circleAvatarPerfil.js";
 import stringToColour from "../../utils/stringToColour.js";
+import { useState } from "react";
 
 
 export const BarraNav = () => {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false)
 
 
   return (
     <NavBarStyle>
-      <Navbar key="lg" variant="dark" expand="lg" className="mb-3">
+      <Navbar key="lg" variant="dark" expanded={expanded} expand="lg" className="mb-3">
         <Container fluid>
           <img
             className="logoimg"
@@ -30,13 +32,13 @@ export const BarraNav = () => {
           <Navbar.Brand href={getUserToken() ? `/LUP/${getUserSession().id}` : `/`}>
             <h1>SkuadLack</h1>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
+          <Navbar.Toggle  onClick={()=> setExpanded(true)} aria-controls={`offcanvasNavbar-expand-md`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md`}
             placement="end"
           >
-            <Offcanvas.Header closeButton>
+            <Offcanvas.Header closeButton onHide={()=> setExpanded(false)} >
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
                 SkuadLack
               </Offcanvas.Title>
@@ -44,7 +46,7 @@ export const BarraNav = () => {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {!getUserToken() && (
-                  <Nav.Link as={Link} to="/">
+                  <Nav.Link onClick={()=>setExpanded(false)} as={Link} to="/">
                     <p>Home Page</p>
                   </Nav.Link>
                 )}
@@ -58,6 +60,7 @@ export const BarraNav = () => {
                         className="dropdownlinks"
                         as={Link}
                         to="/infoSlack"
+                        onClick={()=>setExpanded(false)}
                       >
                         Que es SkuadLack?
                       </Nav.Link>
@@ -68,6 +71,7 @@ export const BarraNav = () => {
                         className="dropdownlinks"
                         as={Link}
                         to="/organizacion"
+                        onClick={()=>setExpanded(false)}
                       >
                         Crear Organizacion
                       </Nav.Link>
@@ -79,6 +83,7 @@ export const BarraNav = () => {
                         className="dropdownlinks"
                         as={Link}
                         to="/contactUs"
+                        onClick={()=>setExpanded(false)}
                       >
                         Contact Us!
                       </Nav.Link>
@@ -87,11 +92,11 @@ export const BarraNav = () => {
 
                 {!getUserToken() && (
                   <>
-                    <Nav.Link as={Link} to="/user">
+                    <Nav.Link onClick={()=>setExpanded(false)} as={Link} to="/user">
                       <Button variant="success">Regístrate</Button>
                     </Nav.Link>
 
-                    <Nav.Link as={Link} to="/login">
+                    <Nav.Link onClick={()=>setExpanded(false)} as={Link} to="/login">
                       <Button variant="primary">
                         <MdAccountBox className="a" />
                         Log In
@@ -109,37 +114,42 @@ export const BarraNav = () => {
                         id={`offcanvasNavbarDropdown-expand-md`}
                       >
                         <NavDropdown.Item >
-                          <Nav.Link className="dropdownlinks" as={Link} to="/users">
+                          <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks" as={Link} to="/users">
                             Users
                           </Nav.Link>
                         </NavDropdown.Item>
 
                         <NavDropdown.Item>
-                          <Nav.Link className="dropdownlinks" as={Link} to="/organizations">
+                          <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks" as={Link} to="/organizations">
                             Organizations
                           </Nav.Link>
                         </NavDropdown.Item>
                         <NavDropdown.Item>
-                          <Nav.Link className="dropdownlinks" as={Link} to="/channels">
+                          <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks" as={Link} to="/channels">
                             Channels
                           </Nav.Link>
                         </NavDropdown.Item>
                       </NavDropdown>}
+                  <Nav.Link  onClick={()=>setExpanded(false)}>
+                  <CircleAvatarPerfil
+                   
+                   name={getUserSession().userName}
+                   id={getUserSession().id}
+                   size={40}
+                   color={stringToColour(getUserSession().name)}></CircleAvatarPerfil>
 
-                    <CircleAvatarPerfil
-                      name={getUserSession().userName}
-                      id={getUserSession().id}
-                      size={40}
-                      color={stringToColour(getUserSession().name)}></CircleAvatarPerfil>
+
+                  </Nav.Link>
+
                     <NavDropdown align={{ lg: 'end' }} id={`offcanvasNavbarDropdown-expand-md`} >
                     {!hasPermission('GLOBAL_ADMIN') &&
                     <NavDropdown.Item>
-                    <Nav.Link className="dropdownlinks"  as={Link} to={`/LUP/${getUserSession().id}`}>
+                    <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks"  as={Link} to={`/LUP/${getUserSession().id}`}>
                       Dashboard
                     </Nav.Link>
                     </NavDropdown.Item>}
                       <NavDropdown.Item>
-                        <Nav.Link className="dropdownlinks" >
+                        <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks" >
                           <div
                             variant="danger"
                             onClick={() => {
@@ -153,7 +163,7 @@ export const BarraNav = () => {
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item>
-                          <Nav.Link className="dropdownlinks" as={Link} to={`/user/${getUserSession().id}`}>
+                          <Nav.Link onClick={()=>setExpanded(false)} className="dropdownlinks" as={Link} to={`/user/${getUserSession().id}`}>
                             {getUserSession().userName}
                           </Nav.Link>
                         </NavDropdown.Item>
